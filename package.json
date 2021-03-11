@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "next": "10.0.8",
+    "promise-path": "^1.4.0",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "xml-js": "^1.6.11"
   }
 }
