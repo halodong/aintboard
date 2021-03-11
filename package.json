@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3002",
     "build": "next build",
     "start": "next start"
   },
@@ -12,6 +12,7 @@
     "promise-path": "^1.4.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "swr": "^0.5.2",
     "xml-js": "^1.6.11"
   }
 }
