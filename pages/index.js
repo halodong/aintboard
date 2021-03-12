@@ -1,20 +1,60 @@
+import { useState } from 'react'
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import { isEmpty } from 'lodash'
 
+import Paginate from './../components/Paginate'
+import styles from '../styles/Home.module.css'
 import useSWR from 'swr';
 import fetcher from '@/util/fetch';
 
 export default function Home() {
-  const { data, error } = useSWR('/api/bg-items?itemName=throne', fetcher)
+  const { data } = useSWR('/api/bg-items?itemName=throne', fetcher)
+  const [dataFromPaginate, setDataFromPaginate] = useState(null);
+  const [bgPerPage] = useState(10);
 
-  console.log(12, data)
+  const renderUserList = () => {
+    if (isEmpty(data.items) || isEmpty(data.items[0])) {
+      return false
+    }
+    return dataFromPaginate
+      ? dataFromPaginate.map((bg, i) => (
+          <div key={i}>
+            {bg.name[0]._attributes.value}
+          </div>
+        ))
+      : data.items[0].item.map((bg, i) => {
+        if (i < bgPerPage) {
+            return (
+              <div key={i}>
+                {bg.name[0]._attributes.value}
+              </div>
+            );
+          } else {
+            return null;
+          }
+      });
+  }
+
+  const updateDataFromPaginate = data => {
+    setDataFromPaginate(data)
+  }
 
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>Ain't Board</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      {data?.items ? (
+        <Paginate
+          data={data.items[0].item}
+          setData={updateDataFromPaginate}
+          itemsPerPage={bgPerPage}
+        />
+      ) : null}
+
+      {data?.items && renderUserList()}
     </div>
   )
 }
