@@ -25,3 +25,9 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 # Backend
 
 For backend we are using Next Connect through NextJS API Routes
+
+All routes should be tested
+
+To test all files run `yarn test`
+
+To test a single file run `yarn test <relative path>`
