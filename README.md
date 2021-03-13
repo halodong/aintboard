@@ -22,6 +22,6 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-# Mongo Migrations
+# Backend
 
-The solution for running migrations I find is to run the migrations locally while connected to Mongo Atlas (staging/prod)
+For backend we are using Next Connect through NextJS API Routes

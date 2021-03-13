@@ -5,11 +5,15 @@
   "scripts": {
     "dev": "next dev -p 3002",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "cross-env NODE_ENV=test ENV=test yarn mocha --require @babel/register"
   },
   "dependencies": {
     "lodash": "^4.17.21",
+    "mongodb": "^3.6.4",
+    "nanoid": "^3.1.21",
     "next": "10.0.8",
+    "next-connect": "^0.10.0",
     "promise-path": "^1.4.0",
     "prop-types": "^15.7.2",
     "react": "17.0.1",
@@ -17,5 +21,43 @@
     "styled-components": "^5.2.1",
     "swr": "^0.5.2",
     "xml-js": "^1.6.11"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-react-jsx": "^7.12.17",
+    "@babel/preset-env": "^7.13.10",
+    "@babel/preset-react": "^7.12.13",
+    "@babel/register": "^7.13.8",
+    "babel": "^6.23.0",
+    "babel-plugin-root-import": "^6.6.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "body-parser": "^1.19.0",
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.22.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-plugin-flowtype": "^5.3.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-react": "^0.0.4",
+    "husky": "^4.3.8",
+    "lint-staged": "^10.5.4",
+    "mocha": "^8.3.2",
+    "prettier": "^2.2.1",
+    "pretty-quick": "^3.1.0",
+    "stylelint": "^13.12.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged && lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "yarn eslint --no-ignore"
+    ],
+    "*.scss": "stylelint --syntax=scss --fix"
   }
 }
