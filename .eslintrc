@@ -1,0 +1,46 @@
+{
+  "plugins": ["react", "jsx-a11y"],
+  "extends": ["react-app", "prettier"],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true
+  },
+  "rules": {
+    "no-const-assign": "error",
+    "import/no-anonymous-default-export": "error",
+    "import/dynamic-import-chunkname": "error",
+    "import/order": [
+      "error",
+      { "newlines-between": "always", "alphabetize": { "order": "asc" } }
+    ],
+    "import/no-duplicates": "error",
+    "import/no-cycle": "error",
+    "react-hooks/exhaustive-deps": [
+      "error",
+      { "additionalHooks": "useCustomCompareMemo" }
+    ],
+    "jsx-a11y/alt-text": [
+      2,
+      {
+        "elements": ["img", "object", "area", "input[type=\"image\"]"],
+        "img": ["Image"],
+        "object": ["Object"],
+        "area": ["Area"],
+        "input[type=\"image\"]": ["InputImage"]
+      }
+    ],
+    "import/no-restricted-paths": [
+      "error",
+      {
+        "zones": [
+          {
+            "target": "./src/design-system",
+            "from": "./src",
+            "except": ["./design-system"]
+          }
+        ]
+      }
+    ]
+  }
+}
