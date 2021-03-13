@@ -10,5 +10,13 @@
     ],
     ["@babel/preset-react"]
   ],
-  "plugins": ["babel-plugin-root-import"]
+  "plugins": [
+    "babel-plugin-root-import",
+    [
+      "@babel/plugin-transform-react-jsx",
+      {
+        "runtime": "automatic"
+      }
+    ]
+  ]
 }
