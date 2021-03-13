@@ -1,4 +1,4 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient } from "mongodb";
 
 /**
  * Global is used here to maintain a cached connection across hot reloads
@@ -11,22 +11,31 @@ global.mongo = global.mongo || {};
 let indexesCreated = false;
 export async function createIndexes(db) {
   await Promise.all([
-    db.collection('reviews').createIndex({ createdAt: -1 }),
-    db.collection('users').createIndex({ email: 1 }, { unique: true }),
+    db.collection("reviews").createIndex({ createdAt: -1 }),
+    db.collection("users").createIndex({ email: 1 }, { unique: true }),
   ]);
+
   indexesCreated = true;
 }
 
-export default async function database(req, _ , next) {
+export default async function database(req, _, next) {
   if (!global.mongo.client) {
-    global.mongo.client = new MongoClient(process.env.MONGODB_URI, {
+    let mongodbUri =
+      process.env.ENV === "test"
+        ? process.env.TEST_MONGODB_URI
+        : process.env.MONGODB_URI;
+
+    global.mongo.client = new MongoClient(mongodbUri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
     await global.mongo.client.connect();
   }
+
   req.dbClient = global.mongo.client;
   req.db = global.mongo.client.db(process.env.DB_NAME);
+
   if (!indexesCreated) await createIndexes(req.db);
+
   return next();
 }

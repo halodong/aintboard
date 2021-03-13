@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from 'react'
-import propTypes from 'prop-types'
-import { isEmpty } from 'lodash'
+import { isEmpty } from "lodash";
+import propTypes from "prop-types";
+import { useState, useEffect, useRef } from "react";
 
 //Styles
 import {
@@ -8,23 +8,14 @@ import {
   PageNumber,
   ArrowContainer,
   NumberWrap,
-} from './../styles/paginate';
-
-//Font Awesome
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import {
-//   faAngleLeft,
-//   faAngleDoubleLeft,
-//   faAngleRight,
-//   faAngleDoubleRight,
-// } from '@fortawesome/free-solid-svg-icons';
+} from "./../styles/paginate";
 
 const Paginate = (props) => {
-  const [totalPages, setTotalPages] = useState(null)
-  const [dataStartingIndex, setDataStartingIndex] = useState(null)
-  const [currentClickedNumber, setCurrentClickedNumberState] = useState(1)
-  const [pageData, setPageData] = useState(null)
-  const prevData  = useRef()
+  const [totalPages, setTotalPages] = useState(null);
+  const [dataStartingIndex, setDataStartingIndex] = useState(null);
+  const [currentClickedNumber, setCurrentClickedNumberState] = useState(1);
+  const [pageData, setPageData] = useState(null);
+  const prevData = useRef();
 
   const determineNumberOfPages = () => {
     const { data, itemsPerPage } = props;
@@ -41,72 +32,59 @@ const Paginate = (props) => {
 
     chunkArray.forEach((chunk, i) => {
       paginatedDataObject[i + 1] = chunk;
-    })
+    });
 
-    setTotalPages(chunkArray.length)
-    setDataStartingIndex(itemsPerPage)
-    setPageData(paginatedDataObject)
-  }
+    setTotalPages(chunkArray.length);
+    setDataStartingIndex(itemsPerPage);
+    setPageData(paginatedDataObject);
+  };
 
   const setCurrentClickedNumber = (e) => {
     const { target } = e;
-    setCurrentClickedNumberState(parseInt(target.innerText))
+    setCurrentClickedNumberState(parseInt(target.innerText));
   };
 
   const moveToLastPage = () => {
-    setCurrentClickedNumberState(totalPages)
+    setCurrentClickedNumberState(totalPages);
   };
 
   const moveToFirstPage = () => {
-    setCurrentClickedNumberState(1)
+    setCurrentClickedNumberState(1);
   };
 
   const moveOnePageForward = () => {
     if (dataStartingIndex) {
-      setDataStartingIndex(null)
-      setCurrentClickedNumber(2)
+      setDataStartingIndex(null);
+      setCurrentClickedNumber(2);
     } else {
-      setCurrentClickedNumberState(currentClickedNumber + 1 > totalPages
-        ? totalPages
-        : currentClickedNumber + 1)
+      setCurrentClickedNumberState(
+        currentClickedNumber + 1 > totalPages
+          ? totalPages
+          : currentClickedNumber + 1
+      );
     }
-  }
+  };
 
   const moveOnePageBackward = () => {
-    setCurrentClickedNumberState(urrentClickedNumber - 1 < 1
-      ? 1
-      : currentClickedNumber - 1)
+    setCurrentClickedNumberState(
+      currentClickedNumber - 1 < 1 ? 1 : currentClickedNumber - 1
+    );
   };
 
   useEffect(() => {
     if (props.data !== prevData.current) {
-      prevData.current = props.data
-      determineNumberOfPages()
+      prevData.current = props.data;
+      determineNumberOfPages();
     }
-  }, [props.data])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.data]);
 
   useEffect(() => {
     if (!isEmpty(pageData)) {
-      props.setData(pageData[currentClickedNumber])
+      props.setData(pageData[currentClickedNumber]);
     }
-  }, [currentClickedNumber])
-
-  // componentDidMount() {
-  //   this.determineNumberOfPages();
-  // }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   const { data, setData } = this.props;
-  //   const { currentClickedNumber, pageData } = this.state;
-
-  //   if (data !== prevProps.data) {
-  //     this.determineNumberOfPages();
-  //   }
-
-  //   if (currentClickedNumber !== prevState.currentClickedNumber) {
-  //     setData(pageData[currentClickedNumber]);
-  //   }
-  // }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentClickedNumber]);
 
   const pageNumberRender = () => {
     let pages = [];
@@ -124,7 +102,7 @@ const Paginate = (props) => {
       );
     }
     return pages;
-  }
+  };
 
   return (
     <div>
@@ -132,12 +110,8 @@ const Paginate = (props) => {
         <ArrowContainer>
           {currentClickedNumber > 1 ? (
             <div>
-              <span onClick={moveToFirstPage}>
-                &lt;
-              </span>
-              <span onClick={moveOnePageBackward}>
-                &lt;
-              </span>
+              <span onClick={moveToFirstPage}>&lt;</span>
+              <span onClick={moveOnePageBackward}>&lt;</span>
             </div>
           ) : (
             <div />
@@ -147,12 +121,8 @@ const Paginate = (props) => {
         <ArrowContainer>
           {currentClickedNumber !== totalPages ? (
             <div>
-              <span onClick={moveOnePageForward}>
-                &lt;
-              </span>
-              <span onClick={moveToLastPage}>
-                &gt;
-              </span>
+              <span onClick={moveOnePageForward}>&lt;</span>
+              <span onClick={moveToLastPage}>&gt;</span>
             </div>
           ) : (
             <div></div>
@@ -161,7 +131,7 @@ const Paginate = (props) => {
       </PageNumberContainer>
     </div>
   );
-}
+};
 
 export default Paginate;
 

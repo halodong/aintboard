@@ -1,11 +1,11 @@
 {
-    "compilerOptions": {
-      "baseUrl": ".",
-      "paths": {
-        "@/components/*": ["components/*"],
-        "@/util/*": ["util/*"],
-        "@/middlewares/*": ["middlewares/*"],
-        "@/db/*": ["db/*"],
-      }
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": ["components/*"],
+      "@/util/*": ["util/*"],
+      "@/middlewares/*": ["middlewares/*"],
+      "@/db/*": ["db/*"]
     }
   }
+}
