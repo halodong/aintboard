@@ -1,6 +1,9 @@
 import { nanoid } from "nanoid";
 
-export async function insertReview(db, { userId, bgId, reviewText }) {
+export async function insertReview(
+  db,
+  { userId, bgId, reviewText, reviewStatusId }
+) {
   return db
     .collection("reviews")
     .insertOne({
@@ -8,6 +11,7 @@ export async function insertReview(db, { userId, bgId, reviewText }) {
       userId,
       bgId,
       reviewText,
+      reviewStatusId,
       createdAt: new Date(),
     })
     .then(({ ops }) => ops[0]);

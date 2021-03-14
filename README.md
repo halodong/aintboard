@@ -2,10 +2,12 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+First, run the development server in this order:
 
 ```bash
+docker-compose up -d
 yarn dev
+yarn migrate:up
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -31,3 +33,9 @@ All routes should be tested
 To test all files run `yarn test`
 
 To test a single file run `yarn test <relative path>`
+
+# Migrations
+
+To create migrations you to have migrate-mongo installed globally
+
+To create a migration run `migrate-mongo create <file_name>`
