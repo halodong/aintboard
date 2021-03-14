@@ -1,5 +1,6 @@
 let chai = require("chai");
 let chaiHttp = require("chai-http");
+require("dotenv").config();
 
 chai.use(chaiHttp);
 
@@ -9,7 +10,7 @@ describe("Reviews", () => {
   describe("/POST reviews", () => {
     it("it should make a new review", (done) => {
       chai
-        .request("http://localhost:3002")
+        .request(process.env.LOCAL_URL)
         .post("/api/reviews")
         .send({
           userId: 1,

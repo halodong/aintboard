@@ -9,6 +9,7 @@
     "test": "cross-env NODE_ENV=test ENV=test yarn mocha --require @babel/register"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "lodash": "^4.17.21",
     "mongodb": "^3.6.4",
     "nanoid": "^3.1.21",
