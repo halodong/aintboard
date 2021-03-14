@@ -16,10 +16,12 @@ describe("Reviews", () => {
           userId: 1,
           bgId: 121,
           reviewText: "3123123",
+          reviewStatusId: 1,
         })
         .end((err, res) => {
           expect(res.status).to.equal(200);
           expect(res.body.review.reviewText).to.equal("3123123");
+          expect(res.body.review.reviewStatusId).to.equal(1);
           done();
         });
     });

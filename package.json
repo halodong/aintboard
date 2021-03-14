@@ -6,7 +6,9 @@
     "dev": "next dev -p 3002",
     "build": "next build",
     "start": "next start",
-    "test": "cross-env NODE_ENV=test ENV=test yarn mocha --require @babel/register"
+    "test": "cross-env NODE_ENV=test ENV=test yarn mocha --require @babel/register",
+    "migrate:up": "migrate-mongo up",
+    "migrate:down": "migrate-mongo down"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
