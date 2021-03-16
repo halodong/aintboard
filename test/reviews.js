@@ -21,8 +21,8 @@ describe("Reviews", () => {
         .end((err, res) => {
           if (err) done();
           expect(res.status).to.equal(200);
-          expect(res.body.review.reviewText).to.equal("3123123");
-          expect(res.body.review.reviewStatusId).to.equal(1);
+          expect(res.body.response.data.review.reviewText).to.equal("3123123");
+          expect(res.body.response.data.review.reviewStatusId).to.equal(1);
           done();
         });
     });
