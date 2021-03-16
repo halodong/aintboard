@@ -1,18 +1,28 @@
 import { nanoid } from "nanoid";
 
+import { getFailedResponse, getSuccessResponse } from "~/util/apiResponse";
+
 export async function insertReview(
   db,
   { userId, bgId, reviewText, reviewStatusId }
 ) {
-  return db
-    .collection("reviews")
-    .insertOne({
+  try {
+    const review = await db.collection("reviews").insertOne({
       _id: nanoid(12),
       userId,
       bgId,
       reviewText,
       reviewStatusId,
       createdAt: new Date(),
-    })
-    .then(({ ops }) => ops[0]);
+    });
+
+    return getSuccessResponse({
+      message: "Review added",
+      data: {
+        review: review.ops[0],
+      },
+    });
+  } catch (err) {
+    return getFailedResponse(err, "db/reviews.js");
+  }
 }

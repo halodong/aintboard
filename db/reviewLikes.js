@@ -32,6 +32,7 @@ export async function likeReview(db, { userId, reviewId }) {
     } else {
       return getSuccessResponse({
         totalLikes,
+        message: "Like added",
       });
     }
   } catch (err) {

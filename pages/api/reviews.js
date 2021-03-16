@@ -17,7 +17,7 @@ handler.post(async (req, res) => {
     reviewStatusId,
   });
 
-  return res.json({ review });
+  return res.json(review);
 });
 
 export default handler;
