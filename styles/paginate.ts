@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const PageNumberContainer = styled.div`
   width: 100%;
@@ -15,7 +15,7 @@ export const NumberWrap = styled.div`
   overflow: auto;
 `;
 
-export const PageNumber = styled.p`
+export const PageNumber = styled.p<PageNumberProps>`
   height: 100%;
   font-size: 0.75em;
   margin: 0;
@@ -31,13 +31,17 @@ export const PageNumber = styled.p`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: ${props => (props.isClicked ? `#819595` : '')};
-  border-radius: ${props => (props.isClicked ? `50%` : '')};
+  background: ${(props) => (props.isClicked ? `#819595` : "")};
+  border-radius: ${(props) => (props.isClicked ? `50%` : "")};
   &:hover {
     color: darkblue;
     transition: 0.3s;
   }
 `;
+
+type PageNumberProps = {
+  isClicked: boolean;
+};
 
 export const ArrowContainer = styled.div`
   margin-right: 12px;
