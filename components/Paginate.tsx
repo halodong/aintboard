@@ -1,32 +1,37 @@
 import { isEmpty } from "lodash";
-import propTypes from "prop-types";
 import { useState, useEffect, useRef } from "react";
 
-//Styles
 import {
-  PageNumberContainer,
-  PageNumber,
   ArrowContainer,
   NumberWrap,
-} from "./../styles/paginate";
+  PageNumber,
+  PageNumberContainer,
+} from "~/styles/paginate";
 
-const Paginate = (props) => {
-  const [totalPages, setTotalPages] = useState(null);
-  const [dataStartingIndex, setDataStartingIndex] = useState(null);
+import { BggBoardgameData } from "~/types/types";
+
+const Paginate = (props: Props) => {
+  const [totalPages, setTotalPages] = useState<number>(0);
+  const [dataStartingIndex, setDataStartingIndex] = useState<number | null>(
+    null
+  );
   const [currentClickedNumber, setCurrentClickedNumberState] = useState(1);
-  const [pageData, setPageData] = useState(null);
-  const prevData = useRef();
+  const [pageData, setPageData] = useState<BggBoardgameData[][] | null>(null);
+  const prevData = useRef<BggBoardgameData[]>();
 
   const determineNumberOfPages = () => {
     const { data, itemsPerPage } = props;
-    let paginatedDataObject = {};
+    let paginatedDataObject = [] as BggBoardgameData[][];
 
     let index = 0;
     let dataLength = data.length;
-    let chunkArray = [];
+    let chunkArray = [] as BggBoardgameData[][];
 
     for (index = 0; index < dataLength; index += itemsPerPage) {
-      let newChunk = data.slice(index, index + itemsPerPage);
+      let newChunk: BggBoardgameData[] = data.slice(
+        index,
+        index + itemsPerPage
+      );
       chunkArray.push(newChunk);
     }
 
@@ -39,13 +44,16 @@ const Paginate = (props) => {
     setPageData(paginatedDataObject);
   };
 
-  const setCurrentClickedNumber = (e) => {
+  const setCurrentClickedNumber = (
+    e: React.MouseEvent<HTMLParagraphElement, MouseEvent>
+  ) => {
     const { target } = e;
-    setCurrentClickedNumberState(parseInt(target.innerText));
+    let input = target as HTMLInputElement;
+    setCurrentClickedNumberState(parseInt(input.innerText));
   };
 
   const moveToLastPage = () => {
-    setCurrentClickedNumberState(totalPages);
+    setCurrentClickedNumberState(totalPages || 0);
   };
 
   const moveToFirstPage = () => {
@@ -55,12 +63,11 @@ const Paginate = (props) => {
   const moveOnePageForward = () => {
     if (dataStartingIndex) {
       setDataStartingIndex(null);
-      setCurrentClickedNumber(2);
+      setCurrentClickedNumberState(2);
     } else {
+      let pages = totalPages || 0;
       setCurrentClickedNumberState(
-        currentClickedNumber + 1 > totalPages
-          ? totalPages
-          : currentClickedNumber + 1
+        currentClickedNumber + 1 > pages ? pages : currentClickedNumber + 1
       );
     }
   };
@@ -80,7 +87,7 @@ const Paginate = (props) => {
   }, [props.data]);
 
   useEffect(() => {
-    if (!isEmpty(pageData)) {
+    if (!isEmpty(pageData) && pageData !== null) {
       props.setData(pageData[currentClickedNumber]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -91,7 +98,7 @@ const Paginate = (props) => {
     for (let i = 1; i < totalPages + 1; i++) {
       pages.push(
         <PageNumber
-          onClick={(e) => {
+          onClick={(e: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
             setCurrentClickedNumber(e);
           }}
           isClicked={currentClickedNumber === i ? true : false}
@@ -121,7 +128,7 @@ const Paginate = (props) => {
         <ArrowContainer>
           {currentClickedNumber !== totalPages ? (
             <div>
-              <span onClick={moveOnePageForward}>&lt;</span>
+              <span onClick={moveOnePageForward}>&gt;</span>
               <span onClick={moveToLastPage}>&gt;</span>
             </div>
           ) : (
@@ -133,10 +140,10 @@ const Paginate = (props) => {
   );
 };
 
-export default Paginate;
-
-Paginate.propTypes = {
-  data: propTypes.array.isRequired,
-  setData: propTypes.func.isRequired,
-  itemsPerPage: propTypes.number.isRequired,
+type Props = {
+  data: BggBoardgameData[];
+  setData: (data: BggBoardgameData[]) => void;
+  itemsPerPage: number;
 };
+
+export default Paginate;
