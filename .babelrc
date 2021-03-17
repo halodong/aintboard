@@ -8,10 +8,17 @@
         }
       }
     ],
-    ["@babel/preset-react"]
+    ["@babel/preset-react"],
+    ["@babel/preset-typescript"]
   ],
   "plugins": [
-    "babel-plugin-root-import",
+    [
+      "babel-plugin-root-import",
+      {
+        "rootPathPrefix": "~",
+        "rootPathSuffix": "."
+      }
+    ],
     [
       "@babel/plugin-transform-react-jsx",
       {
