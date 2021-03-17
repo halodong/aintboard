@@ -1,4 +1,4 @@
-import { isMatch } from "lodash";
+// import { isMatch } from "lodash";
 import nc from "next-connect";
 
 import { all } from "~/middlewares/index";
@@ -21,7 +21,7 @@ handler.post(async (req, res) => {
       userPassword = user.password;
 
     const compare = await bcrypt.compare(password, userPassword);
-    if (compare && isMatch) {
+    if (compare) {
       //JWT Payload
       const payload = {
         id: userId,
@@ -32,7 +32,7 @@ handler.post(async (req, res) => {
         payload,
         process.env.TOKEN_SECRET,
         {
-          expiresIn: 31556926, // 1 year in seconds
+          expiresIn: 900, // 15 minutes in seconds
         },
         (err, token) => {
           res.status(200).json({
