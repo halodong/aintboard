@@ -11,8 +11,10 @@
     "migrate:down": "migrate-mongo down"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "@types/lodash": "^4.14.168",
     "dotenv": "^8.2.0",
+    "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
     "mongodb": "^3.6.4",
     "nanoid": "^3.1.21",
