@@ -1,4 +1,3 @@
-// import { isMatch } from "lodash";
 import nc from "next-connect";
 
 import { all } from "~/middlewares/index";
