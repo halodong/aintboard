@@ -1,3 +1,4 @@
+import { isMatch } from "lodash";
 import nc from "next-connect";
 
 import { all } from "~/middlewares/index";
@@ -19,15 +20,14 @@ handler.post(async (req, res) => {
       userEmail = user.email,
       userPassword = user.password;
 
-    /* Check and compare password */
-    bcrypt.compare(password, userPassword).then((isMatch) => {
+    const compare = await bcrypt.compare(password, userPassword);
+    if (compare) {
       if (isMatch) {
         //JWT Payload
         const payload = {
           id: userId,
           email: userEmail,
         };
-
         // Sign token
         jwt.sign(
           payload,
@@ -39,19 +39,16 @@ handler.post(async (req, res) => {
             res.status(200).json({
               success: true,
               token: "Bearer " + token,
+              data: {
+                message: "Login Successful",
+              },
             });
           }
         );
-
-        return res.json({
-          data: {
-            message: "Login Successful",
-          },
-        });
-      } else {
-        res.status(400).json({ status: "error", error: "Password incorrect" });
       }
-    });
+    } else {
+      res.status(400).json({ status: "error", error: "Password incorrect" });
+    }
   }
 });
 
