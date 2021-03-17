@@ -21,31 +21,29 @@ handler.post(async (req, res) => {
       userPassword = user.password;
 
     const compare = await bcrypt.compare(password, userPassword);
-    if (compare) {
-      if (isMatch) {
-        //JWT Payload
-        const payload = {
-          id: userId,
-          email: userEmail,
-        };
-        // Sign token
-        jwt.sign(
-          payload,
-          process.env.TOKEN_SECRET,
-          {
-            expiresIn: 31556926, // 1 year in seconds
-          },
-          (err, token) => {
-            res.status(200).json({
-              success: true,
-              token: "Bearer " + token,
-              data: {
-                message: "Login Successful",
-              },
-            });
-          }
-        );
-      }
+    if (compare && isMatch) {
+      //JWT Payload
+      const payload = {
+        id: userId,
+        email: userEmail,
+      };
+      // Sign token
+      jwt.sign(
+        payload,
+        process.env.TOKEN_SECRET,
+        {
+          expiresIn: 31556926, // 1 year in seconds
+        },
+        (err, token) => {
+          res.status(200).json({
+            success: true,
+            token: "Bearer " + token,
+            data: {
+              message: "Login Successful",
+            },
+          });
+        }
+      );
     } else {
       res.status(400).json({ status: "error", error: "Password incorrect" });
     }
