@@ -4,7 +4,7 @@ import { getFailedResponse, getSuccessResponse } from "~/util/apiResponse";
 
 export async function insertReview(
   db,
-  { userId, bgId, reviewText, reviewStatusId }
+  { userId, bgId, reviewText, reviewStatusId, reviewType }
 ) {
   try {
     const review = await db.collection("reviews").insertOne({
@@ -13,6 +13,7 @@ export async function insertReview(
       bgId,
       reviewText,
       reviewStatusId,
+      reviewType,
       createdAt: new Date(),
     });
 
