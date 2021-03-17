@@ -1,11 +1,12 @@
 import { nanoid } from "nanoid";
 
-export async function insertUser(db, { userName, email, password }) {
+export async function insertUser(db, { firstName, lastName, email, password }) {
   return db
     .collection("users")
     .insertOne({
       _id: nanoid(12),
-      userName,
+      firstName,
+      lastName,
       email,
       password,
     })
