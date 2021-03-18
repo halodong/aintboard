@@ -28,7 +28,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 For backend we are using Next Connect through NextJS API Routes
 
-All routes should be tested
+All routes should be tested. `yarn dev` should be running to be able to run tests
 
 To test all files run `yarn test`
 
