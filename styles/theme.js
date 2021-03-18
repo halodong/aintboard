@@ -18,9 +18,12 @@ export const theme = {
     lg: "1200px",
   },
   fonts: {
-    rubik: "Rubik",
-    quicksand: "Quicksand",
-    gameFont: "Press Start 2P",
+    rubikReg: "Rubik-Regular",
+    rubikBold: "Rubik-Bold",
+    rubikLight: "Rubik-Light",
+    quicksandReg: "Quicksand-Regular",
+    quicksandBold: "Quicksand-Bold",
+    gameFont: "PressStart",
   },
   fontSizes: {
     xs: "0.75rem", //12px

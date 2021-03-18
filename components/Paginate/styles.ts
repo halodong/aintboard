@@ -16,6 +16,7 @@ export const NumberWrap = styled.div`
 `;
 
 export const PageNumber = styled.p<PageNumberProps>`
+  font-family: ${(props) => props.theme.fonts.gameFont}, sans-serif;
   height: 100%;
   font-size: 0.75em;
   margin: 0;

@@ -1,4 +1,5 @@
-import "./../styles/globals.css";
+import "./../fonts/fonts.css";
+
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { theme } from "~/styles/theme";
 
