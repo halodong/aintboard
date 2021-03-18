@@ -4,7 +4,7 @@ import Head from "next/head";
 import { useState } from "react";
 import useSWR from "swr";
 
-import Paginate from "~/components/Paginate";
+import Paginate from "~/components/Paginate/Paginate";
 
 import { BggBoardgameApiData, BggBoardgameData } from "~/types/types";
 

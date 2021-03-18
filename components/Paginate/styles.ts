@@ -31,7 +31,8 @@ export const PageNumber = styled.p<PageNumberProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: ${(props) => (props.isClicked ? `#819595` : "")};
+  background: ${(props) =>
+    props.isClicked ? props.theme.colors.darkGreen : ""};
   border-radius: ${(props) => (props.isClicked ? `50%` : "")};
   &:hover {
     color: darkblue;
