@@ -16,6 +16,7 @@ export const NumberWrap = styled.div`
 `;
 
 export const PageNumber = styled.p<PageNumberProps>`
+  font-family: ${(props) => props.theme.fonts.gameFont}, sans-serif;
   height: 100%;
   font-size: 0.75em;
   margin: 0;
@@ -31,7 +32,8 @@ export const PageNumber = styled.p<PageNumberProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: ${(props) => (props.isClicked ? `#819595` : "")};
+  background: ${(props) =>
+    props.isClicked ? props.theme.colors.darkGreen : ""};
   border-radius: ${(props) => (props.isClicked ? `50%` : "")};
   &:hover {
     color: darkblue;

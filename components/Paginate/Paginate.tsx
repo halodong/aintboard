@@ -6,7 +6,7 @@ import {
   NumberWrap,
   PageNumber,
   PageNumberContainer,
-} from "~/styles/paginate";
+} from "./styles";
 
 import { BggBoardgameData } from "~/types/types";
 
@@ -98,7 +98,7 @@ const Paginate = (props: Props) => {
     for (let i = 1; i < totalPages + 1; i++) {
       pages.push(
         <PageNumber
-          onClick={(e: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
+          onClick={(e) => {
             setCurrentClickedNumber(e);
           }}
           isClicked={currentClickedNumber === i ? true : false}
