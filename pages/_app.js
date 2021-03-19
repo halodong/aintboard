@@ -6,6 +6,7 @@ import { theme } from "~/styles/theme";
 const GlobalStyle = createGlobalStyle`
   html,
   body {
+    width: 100%;
     padding: 0;
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
