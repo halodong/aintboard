@@ -33,4 +33,10 @@ export const theme = {
     xl: "1.25rem", //20px
     xxl: "2.25rem", //36px
   },
+  border: {
+    "10px": "0.625rem",
+  },
+  spacing: {
+    "50px": "3.125rem",
+  },
 };
