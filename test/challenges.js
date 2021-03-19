@@ -7,17 +7,17 @@ chai.use(chaiHttp);
 let expect = chai.expect;
 
 describe("Create Challenge", () => {
-  describe("/POST /api/createChallenge", () => {
+  describe("/POST /api/challenges", () => {
     it("it should create a challenge", (done) => {
       chai
         .request(process.env.LOCAL_URL)
-        .post("/api/createChallenge")
+        .post("/api/challenges")
         .send({
           challengeName: "Score 170 VP in a 4-Player match in Brass Lancashire",
           bgId: 1,
           bgName: "Glendell",
           bgYear: "2021",
-          powerUpAmount: "+4",
+          powerUpAmount: 2,
         })
         .end((err, res) => {
           if (err) done();

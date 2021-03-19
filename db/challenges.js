@@ -1,12 +1,12 @@
 import { nanoid } from "nanoid";
 import { getFailedResponse, getSuccessResponse } from "~/util/apiResponse";
 
-export const createChallenge = async (
+export const insertChallenge = async (
   db,
   { challengeName, bgId, bgName, bgYear, powerUpAmount }
 ) => {
   try {
-    const challenge = await db.collection("create_challenge").insertOne({
+    const challenge = await db.collection("challenges").insertOne({
       _id: nanoid(12),
       challengeName,
       bgId,
@@ -23,6 +23,6 @@ export const createChallenge = async (
       },
     });
   } catch (err) {
-    return getFailedResponse(err, "db/createChallenge.js");
+    return getFailedResponse(err, "db/challenges.js");
   }
 };
