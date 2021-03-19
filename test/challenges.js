@@ -28,5 +28,24 @@ describe("Create Challenge", () => {
 
       done();
     });
+
+    it("it should display all the challenges", (done) => {
+      chai
+        .request(process.env.LOCAL_URL)
+        .get("/api/challenges")
+        .send()
+        .end((err, res) => {
+          if (err) done();
+
+          expect(res.status).to.equal(200);
+          expect(res.body.success).to.equal(true);
+          expect(res.body.response.message).to.equal(
+            "Display all the challenges"
+          );
+          expect(res.body.response.data.challenge).to.be.an("array");
+        });
+
+      done();
+    });
   });
 });

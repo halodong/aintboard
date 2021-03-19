@@ -1,6 +1,6 @@
 import nc from "next-connect";
 
-import { insertChallenge } from "~/db/challenges";
+import { getAllChallenges, insertChallenge } from "~/db/challenges";
 import { all } from "~/middlewares/index";
 
 const handler = nc();
@@ -17,6 +17,12 @@ handler.post(async (req, res) => {
     bgYear,
     powerUpAmount,
   });
+
+  return res.json(challenge);
+});
+
+handler.get(async (req, res) => {
+  const challenge = await getAllChallenges(req.db);
 
   return res.json(challenge);
 });
