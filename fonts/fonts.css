@@ -24,6 +24,11 @@
 }
 
 @font-face {
+  font-family: "Quicksand-Light";
+  src: url("./Quicksand-Light.ttf") format("truetype");
+}
+
+@font-face {
   font-family: "PressStart";
   src: url("./PressStart2P-Regular.ttf") format("truetype");
 }
