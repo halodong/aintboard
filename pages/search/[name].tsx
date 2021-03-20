@@ -1,10 +1,11 @@
 import fetcher from "~/util/fetch";
 import { isEmpty } from "lodash";
 import Head from "next/head";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import useSWR from "swr";
 
 import Paginate from "~/components/Paginate/Paginate";
+import Header from "~/components/Header";
 
 import { BggBoardgameApiData, BggBoardgameData } from "~/types/types";
 
@@ -13,12 +14,13 @@ const Search = ({ query }: Props) => {
     `/api/bg-items?itemName=${query.name}`,
     fetcher
   );
+
   const [dataFromPaginate, setDataFromPaginate] = useState<
     BggBoardgameData[] | null
   >(null);
   const [bgPerPage] = useState(10);
 
-  const renderUserList = () => {
+  const renderUserList = useMemo(() => {
     if (isEmpty(bgData?.items) || isEmpty(bgData?.items[0])) {
       return false;
     }
@@ -34,7 +36,7 @@ const Search = ({ query }: Props) => {
             return null;
           }
         });
-  };
+  }, [dataFromPaginate, bgData, bgPerPage]);
 
   const updateDataFromPaginate = (data: BggBoardgameData[]) => {
     setDataFromPaginate(data);
@@ -47,6 +49,8 @@ const Search = ({ query }: Props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <Header />
+
       {bgData?.items ? (
         <Paginate
           data={bgData.items[0].item}
@@ -55,7 +59,7 @@ const Search = ({ query }: Props) => {
         />
       ) : null}
 
-      {bgData?.items && renderUserList()}
+      {bgData?.items && renderUserList}
     </div>
   );
 };

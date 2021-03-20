@@ -19,20 +19,22 @@ export const HeaderWrapper = styled.div`
     z-index: 1;
   }
 
-  .trees-1 {
-    left: 0;
-    top: 6rem;
-  }
+  .homepage-bg-container {
+    .trees-1 {
+      left: 0;
+      top: 6rem;
+    }
 
-  .trees-2 {
-    right: 0;
-    top: 6.5rem;
-  }
+    .trees-2 {
+      right: 0;
+      top: 6.5rem;
+    }
 
-  .tent {
-    left: 15rem;
-    top: 16.5rem;
-    width: 15rem;
+    .tent {
+      left: 15rem;
+      top: 16.5rem;
+      width: 15rem;
+    }
   }
 `;
 

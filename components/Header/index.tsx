@@ -12,7 +12,7 @@ import Link from "next/link";
 import { Formik, Form } from "formik";
 import { useRouter } from "next/router";
 
-export default function Header() {
+export default function Header({ homepage }: Props) {
   const router = useRouter();
 
   return (
@@ -57,9 +57,13 @@ export default function Header() {
         </div>
       </SearchContainer>
 
-      <TreesGroup1 className="trees-1" />
-      <TreesGroup2 className="trees-2" />
-      <Tent className="tent" />
+      {homepage && (
+        <div className="homepage-bg-container">
+          <TreesGroup1 className="trees-1" />
+          <TreesGroup2 className="trees-2" />
+          <Tent className="tent" />
+        </div>
+      )}
 
       <Tagline>
         Interactive Boardgame <br /> Community
@@ -67,3 +71,7 @@ export default function Header() {
     </HeaderWrapper>
   );
 }
+
+type Props = {
+  homepage?: boolean;
+};
