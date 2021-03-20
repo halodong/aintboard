@@ -3,15 +3,19 @@ import { isEmpty } from "lodash";
 import Head from "next/head";
 import { useState, useMemo } from "react";
 import useSWR from "swr";
+import { useRouter } from "next/router";
 
 import Paginate from "~/components/Paginate/Paginate";
 import Header from "~/components/Header";
 
 import { BggBoardgameApiData, BggBoardgameData } from "~/types/types";
 
-const Search = ({ query }: Props) => {
+const Search = () => {
+  const router = useRouter();
+  const { name } = router.query;
+
   const { data: bgData } = useSWR<BggBoardgameApiData>(
-    `/api/bg-items?itemName=${query.name}`,
+    `/api/bg-items?itemName=${name}`,
     fetcher
   );
 
@@ -62,16 +66,6 @@ const Search = ({ query }: Props) => {
       {bgData?.items && renderUserList}
     </div>
   );
-};
-
-Search.getInitialProps = ({ query }: Props) => {
-  return { query };
-};
-
-type Props = {
-  query: {
-    name: string;
-  };
 };
 
 export default Search;
