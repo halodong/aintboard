@@ -29,14 +29,14 @@ export const insertChallenge = async (
 
 export const getAllChallenges = async (db) => {
   try {
-    const challenge = await db.collection("challenges").find({});
+    const challenges = await db.collection("challenges").find({});
 
-    const allChallenge = await challenge.toArray();
+    const allChallenge = await challenges.toArray();
 
     return getSuccessResponse({
       message: "Display all the challenges",
       data: {
-        challenge: allChallenge,
+        challenges: allChallenge,
       },
     });
   } catch (err) {
