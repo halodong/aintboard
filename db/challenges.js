@@ -26,3 +26,20 @@ export const insertChallenge = async (
     return getFailedResponse(err, "db/challenges.js");
   }
 };
+
+export const getAllChallenges = async (db) => {
+  try {
+    const challenges = await db.collection("challenges").find({});
+
+    const allChallenge = await challenges.toArray();
+
+    return getSuccessResponse({
+      message: "Display all the challenges",
+      data: {
+        challenges: allChallenge,
+      },
+    });
+  } catch (err) {
+    return getFailedResponse(err, "db/challenges.js");
+  }
+};
