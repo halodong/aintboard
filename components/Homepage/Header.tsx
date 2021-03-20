@@ -5,18 +5,16 @@ import {
   SearchContainer,
   Tagline,
 } from "./styled";
-import {
-  WhiteLogo,
-  TreesGroup1,
-  TreesGroup2,
-  Tent,
-  Search,
-} from "~/assets/img";
+import { WhiteLogo, TreesGroup1, TreesGroup2, Tent } from "~/assets/img";
 import Button from "~/components/Button";
 import Input from "~/components/Input";
 import Link from "next/link";
+import { Formik, Form } from "formik";
+import { useRouter } from "next/router";
 
 export default function Header() {
+  const router = useRouter();
+
   return (
     <HeaderWrapper>
       <NavBarContent>
@@ -28,11 +26,24 @@ export default function Header() {
       </NavBarContent>
 
       <SearchContainer>
-        <Input
-          minWidth="30rem"
-          placeholder="Find a boardgame"
-          rightIcon={<Search className="search-icon" />}
-        />
+        <Formik
+          initialValues={{
+            searchInput: "",
+          }}
+          onSubmit={(values) => {
+            router.push(`/search/${values.searchInput}`);
+          }}
+        >
+          <Form>
+            <Input
+              name="searchInput"
+              minWidth="30rem"
+              placeholder="Find a boardgame"
+              rightIcon="search"
+              showRightIcon
+            />
+          </Form>
+        </Formik>
         <div className="links">
           <Link href="/">
             <a>Reviews</a>
