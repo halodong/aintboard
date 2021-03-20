@@ -35,13 +35,13 @@ export default function Header() {
         />
         <div className="links">
           <Link href="/">
-            <a>Events</a>
+            <a>Reviews</a>
           </Link>
           <Link href="/">
-            <a>FAQs</a>
+            <a>Online Battles</a>
           </Link>
           <Link href="/">
-            <a>About Us</a>
+            <a>Challenges</a>
           </Link>
         </div>
       </SearchContainer>
