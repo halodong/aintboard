@@ -10,6 +10,7 @@ export const ButtonStyled = styled.button<ButtonStyledProps>`
   padding: 0.5rem;
   outline: none;
   border: none;
+  cursor: pointer;
 `;
 
 type ButtonStyledProps = {
