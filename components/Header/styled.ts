@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-export const HeaderWrapper = styled.div`
+export const HeaderWrapper = styled.div<HeaderWrappepProps>`
   width: 100%;
   background-color: ${(props) => props.theme.colors.dark};
-  min-height: 29rem;
+  min-height: ${(props) => (props.isSearchPage ? "23rem" : "29rem")};
   overflow: hidden;
   position: relative;
 
@@ -38,6 +38,10 @@ export const HeaderWrapper = styled.div`
   }
 `;
 
+type HeaderWrappepProps = {
+  isSearchPage?: boolean;
+};
+
 export const NavBarContent = styled.div`
   margin: ${(props) => props.theme.spacing["50px"]};
   display: flex;
@@ -66,7 +70,7 @@ export const SearchContainer = styled.div`
   }
 `;
 
-export const Tagline = styled.h1`
+const baseTaglineStyles = styled.h1`
   color: ${(props) => props.theme.colors.white};
   font-family: ${(props) => props.theme.fonts.rubikBold};
   font-size: 1.75rem;
@@ -75,4 +79,24 @@ export const Tagline = styled.h1`
   z-index: 20;
   text-align: center;
   margin-top: 4rem;
+`;
+
+export const Tagline = styled(baseTaglineStyles)<TaglineProps>`
+  ${(props) =>
+    !props.homepage &&
+    `
+    position: absolute;
+    font-size: 1rem;
+    top: 6rem;
+    margin: 0;
+    left: 3.4rem;
+  `}
+`;
+
+type TaglineProps = {
+  homepage?: boolean;
+};
+
+export const LookingForText = styled(baseTaglineStyles)`
+  margin-top: 3rem;
 `;

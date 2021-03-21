@@ -4,6 +4,7 @@ import {
   NavBarContent,
   SearchContainer,
   Tagline,
+  LookingForText,
 } from "./styled";
 import { WhiteLogo, TreesGroup1, TreesGroup2, Tent } from "~/assets/img";
 import Button from "~/components/Button";
@@ -12,13 +13,18 @@ import Link from "next/link";
 import { Formik, Form } from "formik";
 import { useRouter } from "next/router";
 
-export default function Header({ homepage }: Props) {
+export default function Header({ homepage, isSearchPage = false }: Props) {
   const router = useRouter();
+  const { name } = router.query;
 
   return (
-    <HeaderWrapper>
+    <HeaderWrapper isSearchPage={isSearchPage}>
       <NavBarContent>
-        <WhiteLogo />
+        <Link href="/">
+          <a>
+            <WhiteLogo />
+          </a>
+        </Link>
         <NavBarButtons>
           <Button bg="white">Login</Button>
           <Button bg="lightYellow">Join us!</Button>
@@ -65,13 +71,16 @@ export default function Header({ homepage }: Props) {
         </div>
       )}
 
-      <Tagline>
+      <Tagline homepage={homepage}>
         Interactive Boardgame <br /> Community
       </Tagline>
+
+      {isSearchPage && <LookingForText>Looking for "{name}"</LookingForText>}
     </HeaderWrapper>
   );
 }
 
 type Props = {
   homepage?: boolean;
+  isSearchPage?: boolean;
 };
