@@ -29,7 +29,7 @@ export const insertChallenge = async (
 
 export const getAllChallenges = async (db) => {
   try {
-    const challenges = await db.collection("challenges").find({});
+    const challenges = await db.collection("challenges").find();
 
     const allChallenge = await challenges.toArray();
 
@@ -37,6 +37,25 @@ export const getAllChallenges = async (db) => {
       message: "Display all the challenges",
       data: {
         challenges: allChallenge,
+      },
+    });
+  } catch (err) {
+    return getFailedResponse(err, "db/challenges.js");
+  }
+};
+
+export const filterChallenges = async (db, { filter, field }) => {
+  try {
+    const challenges = await db
+      .collection("challenges")
+      .find({ [filter]: field });
+
+    const filteredChallenges = await challenges.toArray();
+
+    return getSuccessResponse({
+      message: "Filtered Challenges",
+      data: {
+        challenges: filteredChallenges,
       },
     });
   } catch (err) {
