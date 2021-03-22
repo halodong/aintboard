@@ -1,4 +1,3 @@
-const { should } = require("chai");
 let chai = require("chai");
 let chaiHttp = require("chai-http");
 require("dotenv").config();
@@ -29,7 +28,11 @@ describe("Create Challenge", () => {
 
       done();
     });
+  });
+});
 
+describe("Display all the challenges", () => {
+  describe("/GET /api/challenges", () => {
     it("it should display all the challenges", (done) => {
       chai
         .request(process.env.LOCAL_URL)
@@ -47,7 +50,11 @@ describe("Create Challenge", () => {
 
       done();
     });
+  });
+});
 
+describe("Filter the challenges", () => {
+  describe("/GET /api/challenge/filter/field", () => {
     it("it should filter the challenges by bgId", (done) => {
       chai
         .request(process.env.LOCAL_URL)

@@ -3,7 +3,7 @@ import nc from "next-connect";
 import { filterChallenges } from "~/db/challenges";
 import { all } from "~/middlewares";
 
-const handler = nc({ attachParams: true });
+const handler = nc();
 
 handler.use(all);
 
