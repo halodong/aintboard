@@ -1,3 +1,4 @@
+const { should } = require("chai");
 let chai = require("chai");
 let chaiHttp = require("chai-http");
 require("dotenv").config();
@@ -42,7 +43,54 @@ describe("Create Challenge", () => {
           expect(res.body.response.message).to.equal(
             "Display all the challenges"
           );
-          expect(res.body.response.data.challenge).to.be.an("array");
+        });
+
+      done();
+    });
+
+    it("it should filter the challenges by bgId", (done) => {
+      chai
+        .request(process.env.LOCAL_URL)
+        .get("/api/challenge/bgId/2")
+        .send()
+        .end((err, res) => {
+          if (err) done();
+
+          expect(res.status).to.equal(200);
+          expect(res.body.success).to.equal(true);
+          expect(res.body.response.message).to.equal("Filtered Challenges");
+        });
+
+      done();
+    });
+
+    it("it should filter the challenges by bgYear", (done) => {
+      chai
+        .request(process.env.LOCAL_URL)
+        .get("/api/challenge/bgYear/2021")
+        .send()
+        .end((err, res) => {
+          if (err) done();
+
+          expect(res.status).to.equal(200);
+          expect(res.body.success).to.equal(true);
+          expect(res.body.response.message).to.equal("Filtered Challenges");
+        });
+
+      done();
+    });
+
+    it("it should filter the challenges by powerUpAmount", (done) => {
+      chai
+        .request(process.env.LOCAL_URL)
+        .get("/api/challenge/powerUpAmount/4")
+        .send()
+        .end((err, res) => {
+          if (err) done();
+
+          expect(res.status).to.equal(200);
+          expect(res.body.success).to.equal(true);
+          expect(res.body.response.message).to.equal("Filtered Challenges");
         });
 
       done();
