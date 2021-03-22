@@ -1,3 +1,4 @@
+const { assert } = require("chai");
 let chai = require("chai");
 let chaiHttp = require("chai-http");
 require("dotenv").config();
@@ -66,6 +67,9 @@ describe("Filter the challenges", () => {
           expect(res.status).to.equal(200);
           expect(res.body.success).to.equal(true);
           expect(res.body.response.message).to.equal("Filtered Challenges");
+          expect(
+            res.body.response.data.challenges.map((e) => e.bgId)
+          ).to.include(2);
         });
 
       done();
@@ -82,6 +86,9 @@ describe("Filter the challenges", () => {
           expect(res.status).to.equal(200);
           expect(res.body.success).to.equal(true);
           expect(res.body.response.message).to.equal("Filtered Challenges");
+          expect(
+            res.body.response.data.challenges.map((e) => e.bgYear)
+          ).to.include(2021);
         });
 
       done();
@@ -98,6 +105,9 @@ describe("Filter the challenges", () => {
           expect(res.status).to.equal(200);
           expect(res.body.success).to.equal(true);
           expect(res.body.response.message).to.equal("Filtered Challenges");
+          expect(
+            res.body.response.data.challenges.map((e) => e.powerUpAmount)
+          ).to.include(4);
         });
 
       done();
