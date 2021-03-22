@@ -11,7 +11,7 @@ handler.post(async (req, res) => {
   const {
     battleName,
     boardGameName,
-    bggId,
+    bgId,
     details,
     eventStartDate,
     eventEndDate,
@@ -20,7 +20,7 @@ handler.post(async (req, res) => {
   const battle = await insertBattle(req.db, {
     battleName,
     boardGameName,
-    bggId,
+    bgId,
     details,
     eventStartDate,
     eventEndDate,

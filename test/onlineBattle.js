@@ -14,7 +14,7 @@ describe("Create Online Battle /POST /api/online-battles", () => {
       .send({
         battleName: "Battle of the legends",
         boardGameName: "Boardie",
-        bggId: 54321,
+        bgId: 54321,
         details: "This is a battle for the legends",
         eventStartDate: "4-05-2021",
         eventEndDate: "5-05-2021",
@@ -24,7 +24,7 @@ describe("Create Online Battle /POST /api/online-battles", () => {
         expect(res.status).to.equal(200);
         expect(res.body.battle.battleName).to.equal("Battle of the legends");
         expect(res.body.battle.boardGameName).to.equal("Boardie");
-        expect(res.body.battle.bggId).to.equal(54321);
+        expect(res.body.battle.bgId).to.equal(54321);
         expect(res.body.battle.details).to.equal(
           "This is a battle for the legends"
         );

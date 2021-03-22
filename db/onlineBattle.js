@@ -2,7 +2,7 @@ import { nanoid } from "nanoid";
 
 export async function insertBattle(
   db,
-  { battleName, boardGameName, bggId, details, eventStartDate, eventEndDate }
+  { battleName, boardGameName, bgId, details, eventStartDate, eventEndDate }
 ) {
   return db
     .collection("online_battle")
@@ -10,7 +10,7 @@ export async function insertBattle(
       _id: nanoid(12),
       battleName,
       boardGameName,
-      bggId,
+      bgId,
       details,
       eventStartDate,
       eventEndDate,
