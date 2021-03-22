@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const HeaderWrapper = styled.div<HeaderWrappepProps>`
   width: 100%;
   background-color: ${(props) => props.theme.colors.dark};
-  min-height: ${(props) => (props.isSearchPage ? "23rem" : "29rem")};
+  min-height: ${(props) => (props.isSearchPage ? "23rem" : "35rem")};
   overflow: hidden;
   position: relative;
 
@@ -34,6 +34,14 @@ export const HeaderWrapper = styled.div<HeaderWrappepProps>`
       left: 15rem;
       top: 16.5rem;
       width: 15rem;
+    }
+
+    .ground {
+      height: 2rem;
+      background-color: ${(props) => props.theme.colors.dark};
+      width: 100%;
+      position: absolute;
+      top: 29rem;
     }
   }
 `;
@@ -68,6 +76,10 @@ export const SearchContainer = styled.div`
       padding: 0 3rem;
     }
   }
+
+  input {
+    font-family: ${(props) => props.theme.fonts.quicksandReg};
+  }
 `;
 
 const baseTaglineStyles = styled.h1`
@@ -76,7 +88,7 @@ const baseTaglineStyles = styled.h1`
   font-size: 1.75rem;
   text-transform: uppercase;
   position: relative;
-  z-index: 20;
+  z-index: 5;
   text-align: center;
   margin-top: 4rem;
 `;
@@ -100,3 +112,12 @@ type TaglineProps = {
 export const LookingForText = styled(baseTaglineStyles)`
   margin-top: 3rem;
 `;
+
+export const customSelectStyles = {
+  container: (provided: object) => ({
+    ...provided,
+    width: "38rem",
+    margin: "0 auto",
+    fontFamily: "Quicksand-Regular",
+  }),
+};

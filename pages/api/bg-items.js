@@ -17,7 +17,8 @@ async function retryItems(itemName, retries = 2) {
 }
 
 async function downloadItems(itemName) {
-  const url = `https://www.boardgamegeek.com/xmlapi2/search?query=${itemName}&type=boardgame`;
+  const converted = itemName.replace(/:\s*/g, " ");
+  const url = `https://www.boardgamegeek.com/xmlapi2/search?query=${converted}&type=boardgame`;
 
   try {
     const response = await fetch(url);

@@ -8,6 +8,10 @@ export type BggBoardgameApiDataItem = {
 
 export type BggBoardgameData = {
   name: BggNameArray[];
+  _attributes: {
+    id: string;
+    type: string;
+  };
 };
 
 export type BggNameArray = {

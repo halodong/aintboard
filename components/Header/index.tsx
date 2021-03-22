@@ -5,17 +5,60 @@ import {
   SearchContainer,
   Tagline,
   LookingForText,
+  customSelectStyles,
 } from "./styled";
+import { useState } from "react";
 import { WhiteLogo, TreesGroup1, TreesGroup2, Tent } from "~/assets/img";
 import Button from "~/components/Button";
-import Input from "~/components/Input";
 import Link from "next/link";
-import { Formik, Form } from "formik";
 import { useRouter } from "next/router";
+import { InputActionMeta, ValueType, ActionMeta } from "react-select";
+import AsyncSelect from "react-select/async";
+import fetcher from "~/util/fetch";
+import { BggBoardgameApiData } from "~/types/types";
 
 export default function Header({ homepage, isSearchPage = false }: Props) {
   const router = useRouter();
   const { name } = router.query;
+  const [inputText, setInputText] = useState("");
+  const [defaultOptions, setDefaultOptions] = useState<Options[]>([]);
+
+  const onInputChange = async (text: string, params: InputActionMeta) => {
+    if (params.action === "input-change" || params.action === "set-value") {
+      setInputText(text);
+    }
+
+    if (params.action === "menu-close") {
+      let options = await getOptions(inputText);
+      setDefaultOptions(options);
+    }
+  };
+
+  const onSelectChange = (
+    value: ValueType<any, boolean>,
+    action: ActionMeta<any>
+  ) => {
+    if (action.action === "select-option") {
+      router.push(`/boardgame/${value?.value}`);
+    }
+  };
+
+  const getOptions = async (inputValue: string) => {
+    if (inputValue.length > 2) {
+      let options: BggBoardgameApiData = await fetcher(
+        `/api/bg-items?itemName=${inputValue}`
+      );
+
+      return options?.items[0].item?.slice(0, 8).map((bg) => {
+        return {
+          value: bg._attributes.id,
+          label: bg.name[0]._attributes.value,
+        };
+      });
+    }
+
+    return [];
+  };
 
   return (
     <HeaderWrapper isSearchPage={isSearchPage}>
@@ -32,24 +75,19 @@ export default function Header({ homepage, isSearchPage = false }: Props) {
       </NavBarContent>
 
       <SearchContainer>
-        <Formik
-          initialValues={{
-            searchInput: "",
-          }}
-          onSubmit={(values) => {
-            router.push(`/search/${values.searchInput}`);
-          }}
-        >
-          <Form>
-            <Input
-              name="searchInput"
-              minWidth="30rem"
-              placeholder="Find a boardgame"
-              rightIcon="search"
-              showRightIcon
-            />
-          </Form>
-        </Formik>
+        <AsyncSelect
+          id="search-select"
+          inputId="search-select"
+          cacheOptions
+          loadOptions={getOptions}
+          defaultOptions={defaultOptions}
+          onInputChange={onInputChange}
+          onChange={onSelectChange}
+          inputValue={inputText}
+          onBlur={() => {}}
+          placeholder="Find a boardgame"
+          styles={customSelectStyles}
+        />
         <div className="links">
           <Link href="/">
             <a>Reviews</a>
@@ -68,6 +106,7 @@ export default function Header({ homepage, isSearchPage = false }: Props) {
           <TreesGroup1 className="trees-1" />
           <TreesGroup2 className="trees-2" />
           <Tent className="tent" />
+          <div className="ground"></div>
         </div>
       )}
 
@@ -83,4 +122,9 @@ export default function Header({ homepage, isSearchPage = false }: Props) {
 type Props = {
   homepage?: boolean;
   isSearchPage?: boolean;
+};
+
+type Options = {
+  value: string;
+  label: string;
 };
