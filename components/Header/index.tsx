@@ -89,15 +89,9 @@ export default function Header({ homepage, isSearchPage = false }: Props) {
           styles={customSelectStyles}
         />
         <div className="links">
-          <Link href="/">
-            <a>Reviews</a>
-          </Link>
-          <Link href="/">
-            <a>Online Battles</a>
-          </Link>
-          <Link href="/">
-            <a>Challenges</a>
-          </Link>
+          <Link href="/">Reviews</Link>
+          <Link href="/">Online Battles</Link>
+          <Link href="/">Challenges</Link>
         </div>
       </SearchContainer>
 
