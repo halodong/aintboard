@@ -1,5 +1,6 @@
 let chai = require("chai");
 let chaiHttp = require("chai-http");
+const { beforeEach } = require("mocha");
 require("dotenv").config();
 
 chai.use(chaiHttp);
@@ -14,10 +15,10 @@ describe("Create Challenge", () => {
         .post("/api/challenges")
         .send({
           challengeName: "Score 170 VP in a 4-Player match in Brass Lancashire",
-          bgId: 1,
-          bgName: "Glendell",
-          bgYear: "2021",
-          powerUpAmount: 2,
+          bgId: 2,
+          bgName: "Chess",
+          bgYear: 2018,
+          powerUpAmount: 4,
         })
         .end((err, res) => {
           if (err) done();
@@ -77,7 +78,7 @@ describe("Filter the challenges", () => {
     it("it should filter the challenges by bgYear", (done) => {
       chai
         .request(process.env.LOCAL_URL)
-        .get("/api/challenge/bgYear/2021")
+        .get("/api/challenge/bgYear/2018")
         .send()
         .end((err, res) => {
           if (err) done();
@@ -87,7 +88,7 @@ describe("Filter the challenges", () => {
           expect(res.body.response.message).to.equal("Filtered Challenges");
           expect(
             res.body.response.data.challenges.map((e) => e.bgYear)
-          ).to.include(2021);
+          ).to.include(2018);
         });
 
       done();
