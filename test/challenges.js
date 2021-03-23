@@ -1,6 +1,5 @@
 let chai = require("chai");
 let chaiHttp = require("chai-http");
-const { beforeEach } = require("mocha");
 require("dotenv").config();
 
 chai.use(chaiHttp);
