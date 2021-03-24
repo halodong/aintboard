@@ -9,12 +9,6 @@ export const ReviewCardContainer = styled.div`
   border-radius: 10px;
   overflow: hidden;
   position: relative;
-
-  .dice {
-    position: absolute;
-    bottom: 0.5rem;
-    left: 0.5rem;
-  }
 `;
 
 export const BgImgWrapper = styled.div`
@@ -67,5 +61,36 @@ export const ReviewContent = styled.div`
   p {
     font-size: 0.7rem;
     text-align: center;
+  }
+`;
+
+export const Bottom = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+
+  .dice {
+    margin-left: 0.5rem;
+  }
+`;
+
+export const BottomRight = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-right: 1rem;
+
+  h6 {
+    margin: 0;
+    text-align: right;
+  }
+
+  .socials {
+    svg {
+      width: 1rem;
+    }
+
+    span {
+      font-size: 0.6rem;
+    }
   }
 `;

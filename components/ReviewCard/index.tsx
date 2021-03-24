@@ -5,8 +5,10 @@ import {
   Username,
   ReviewDate,
   ReviewContent,
+  Bottom,
+  BottomRight,
 } from "./styled";
-import { UserMale, Dice } from "~/assets/img";
+import { UserMale, Dice, Comment, HeartLike } from "~/assets/img";
 
 export const ReviewCard = () => {
   return (
@@ -32,7 +34,18 @@ export const ReviewCard = () => {
         </p>
       </ReviewContent>
 
-      <Dice className="dice" />
+      <Bottom>
+        <Dice className="dice" />
+
+        <BottomRight>
+          <h6>Strategy</h6>
+
+          <div className="socials">
+            <Comment /> <span>100</span>
+            <HeartLike /> <span>102</span>
+          </div>
+        </BottomRight>
+      </Bottom>
     </ReviewCardContainer>
   );
 };
