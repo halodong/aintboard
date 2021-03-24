@@ -4,6 +4,7 @@ const convert = require("xml-js");
 async function retryItems(itemName, retries = 2) {
   const response = await downloadItems(itemName);
   if (response.message) {
+    // response.message could be an error here
     if (retries > 0) {
       return retryItems(itemName, retries - 1);
     } else {
