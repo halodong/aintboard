@@ -31,13 +31,13 @@ describe("Insert user challenges", () => {
               "challengeId",
               "_id"
             );
-            expect(res.body.response.data.userWithPowerUps).to.be.a("number");
+            expect(res.body.response.data.userWithPowerUps).to.be.an("object");
           }
 
           const alreadyAchieveChallenge = res.body.response.message;
 
           if (alreadyAchieveChallenge === "User has achieved this challenge") {
-            expect(res.body.response.data.userWithPowerUps).to.be.a("number");
+            expect(res.body.response.data.userWithPowerUps).to.be.an("object");
           }
         });
 
