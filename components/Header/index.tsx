@@ -7,32 +7,19 @@ import {
   LookingForText,
   customSelectStyles,
 } from "./styled";
-import { useState } from "react";
 import { WhiteLogo, TreesGroup1, TreesGroup2, Tent } from "~/assets/img";
 import Button from "~/components/Button";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { InputActionMeta, ValueType, ActionMeta } from "react-select";
+import { ValueType, ActionMeta } from "react-select";
 import AsyncSelect from "react-select/async";
 import fetcher from "~/util/fetch";
 import { BggBoardgameApiData } from "~/types/types";
+import debounce from "debounce-promise";
 
 export default function Header({ homepage, isSearchPage = false }: Props) {
   const router = useRouter();
   const { name } = router.query;
-  const [inputText, setInputText] = useState("");
-  const [defaultOptions, setDefaultOptions] = useState<Options[]>([]);
-
-  const onInputChange = async (text: string, params: InputActionMeta) => {
-    if (params.action === "input-change" || params.action === "set-value") {
-      setInputText(text);
-    }
-
-    if (params.action === "menu-close") {
-      let options = await getOptions(inputText);
-      setDefaultOptions(options);
-    }
-  };
 
   const onSelectChange = (
     value: ValueType<any, boolean>,
@@ -79,11 +66,8 @@ export default function Header({ homepage, isSearchPage = false }: Props) {
           id="search-select"
           inputId="search-select"
           cacheOptions
-          loadOptions={getOptions}
-          defaultOptions={defaultOptions}
-          onInputChange={onInputChange}
+          loadOptions={debounce(getOptions, 500)}
           onChange={onSelectChange}
-          inputValue={inputText}
           onBlur={() => {}}
           placeholder="Find a boardgame"
           styles={customSelectStyles}
