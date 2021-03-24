@@ -33,7 +33,7 @@ export async function insertValidEntry(
       message,
       googleLink,
       verifiedStatus,
-      createdAat: new Date(),
+      createdAt: new Date(),
     })
     .then(({ ops }) => ops[0]);
 }
