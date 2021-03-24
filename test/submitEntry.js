@@ -6,11 +6,11 @@ chai.use(chaiHttp);
 
 let expect = chai.expect;
 
-describe("Submit Valid Entry /POST /api/submit-entry", () => {
+describe("Submit Valid Entry /POST /api/online-battles/entry", () => {
   it("A user should submit a valid entry", (done) => {
     chai
       .request(process.env.LOCAL_URL)
-      .post("/api/submit-entry")
+      .post("/api/online-battles/entry")
       .send({
         battleId: 123,
         score: 456,
@@ -21,7 +21,6 @@ describe("Submit Valid Entry /POST /api/submit-entry", () => {
       .end((err, res) => {
         if (err) done();
         expect(res.status).to.equal(200);
-        console.log(res.body);
         expect(res.body.entry.battleId).to.equal(123);
         expect(res.body.entry.score).to.equal(456);
         expect(res.body.entry.message).to.equal("Successfully Joined!");
