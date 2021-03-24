@@ -35,6 +35,7 @@ export const ReviewCardWrapper = styled.div`
   z-index: 10;
   display: flex;
   width: 57%;
+  max-width: 52rem;
   margin: 9rem auto 13rem;
   flex-wrap: wrap;
   justify-content: space-around;

@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const ReviewCardContainer = styled.div`
   width: 26%;
+  max-width: 13.25rem;
   height: 20.6rem;
   background-color: ${(props) => props.theme.colors.lightYellow};
   margin-bottom: 2rem;
