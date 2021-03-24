@@ -24,21 +24,28 @@ export const insertUserChallenges = async (
       });
 
       await user.findOneAndUpdate({ _id: userId }, { $inc: { powerups } });
-      const userWithPowerUps = await user.findOne({ _id: userId });
+      const userWithPowerUps = await user.findOne(
+        { _id: userId },
+        { fields: { password: 0 } }
+      );
 
       return getSuccessResponse({
         message: "User achieves a challenge",
         data: {
           challenge: achieveChallenge.ops[0],
-          userWithPowerUps: userWithPowerUps.powerups,
+          userWithPowerUps: userWithPowerUps,
         },
       });
     } else {
-      const userWithPowerUps = await user.findOne({ _id: userId });
+      const userWithPowerUps = await user.findOne(
+        { _id: userId },
+        { fields: { password: 0 } }
+      );
+
       return getSuccessResponse({
         message: "User has achieved this challenge",
         data: {
-          userWithPowerUps: userWithPowerUps.powerups,
+          userWithPowerUps: userWithPowerUps,
         },
       });
     }
