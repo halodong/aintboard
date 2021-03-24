@@ -9,6 +9,7 @@ export async function insertUser(db, { firstName, lastName, email, password }) {
       lastName,
       email,
       password,
+      powerups: 0,
     })
     .then(({ ops }) => ops[0]);
 }
