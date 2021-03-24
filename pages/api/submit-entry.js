@@ -8,7 +8,13 @@ const handler = nc();
 handler.use(all);
 
 handler.post(async (req, res) => {
-  const { battleId, score, message, googleLink, verifiedStatus } = req.body;
+  const {
+    battleId,
+    score,
+    message,
+    googleLink,
+    verifiedStatus = "pending",
+  } = req.body;
 
   const entry = await insertValidEntry(req.db, {
     battleId,
