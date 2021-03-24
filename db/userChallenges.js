@@ -8,7 +8,7 @@ export const insertUserChallenges = async (
     const user = await db.collection("users");
     const challenge = await db.collection("user_challenges");
 
-    const exist_challengeId = await challenge
+    const challengeIdCount = await challenge
       .find({
         userId,
         challengeId,
@@ -16,7 +16,7 @@ export const insertUserChallenges = async (
       .count();
 
     // Check if challengeId is exist
-    if (exist_challengeId === 0) {
+    if (challengeIdCount === 0) {
       // if not insert userId and ChallengeId
       const achieveChallenge = await challenge.insertOne({
         userId,
@@ -24,21 +24,21 @@ export const insertUserChallenges = async (
       });
 
       await user.findOneAndUpdate({ _id: userId }, { $inc: { powerups } });
-      const totalPowerups = await user.findOne({ _id: userId });
+      const userWithPowerUps = await user.findOne({ _id: userId });
 
       return getSuccessResponse({
         message: "User achieves a challenge",
         data: {
           challenge: achieveChallenge.ops[0],
-          totalPowerups: totalPowerups.powerups,
+          userWithPowerUps: userWithPowerUps.powerups,
         },
       });
     } else {
-      const totalPowerups = await user.findOne({ _id: userId });
+      const userWithPowerUps = await user.findOne({ _id: userId });
       return getSuccessResponse({
-        message: "Already succeed in achieving this challenge",
+        message: "User has achieved this challenge",
         data: {
-          totalPowerups: totalPowerups.powerups,
+          userWithPowerUps: userWithPowerUps.powerups,
         },
       });
     }

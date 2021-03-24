@@ -1,6 +1,6 @@
 import nc from "next-connect";
 
-import { insertUserChallenges } from "~/db/userChallenges";
+import { insertUserChallenges } from "../../../db/userChallenges";
 import { all } from "~/middlewares";
 
 const handler = nc();

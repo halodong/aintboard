@@ -7,7 +7,7 @@ chai.use(chaiHttp);
 let expect = chai.expect;
 
 describe("Insert user challenges", () => {
-  describe("/POST /api/user-challenges", () => {
+  describe("/POST /api/user/challenge", () => {
     it("it should be able to achieve a challenge", (done) => {
       const userId = "XDSCA_14NyvN";
       const challengeId = 10;
@@ -15,7 +15,7 @@ describe("Insert user challenges", () => {
       chai
         .request(process.env.LOCAL_URL)
         .post(
-          `/api/user-challenges?userId=${userId}&challengeId=${challengeId}&powerups=${powerups}`
+          `/api/user/challenge?userId=${userId}&challengeId=${challengeId}&powerups=${powerups}`
         )
         .send()
         .end((err, res) => {
