@@ -11,8 +11,13 @@ export const InputContainer = styled.div<InputContainerProps>`
     z-index: 1;
     right: 1rem;
     top: 0.7rem;
+    cursor: pointer;
   }
 `;
+
+type InputContainerProps = {
+  minWidth: string;
+};
 
 export const InputStyled = styled.input`
   background-color: ${(props) => props.theme.colors.white};
@@ -34,7 +39,3 @@ export const InputStyled = styled.input`
     font-family: ${(props) => props.theme.fonts.quicksandLight};
   }
 `;
-
-type InputContainerProps = {
-  minWidth: string;
-};
