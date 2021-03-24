@@ -37,10 +37,7 @@ describe("Insert user challenges", () => {
 
           const alreadyAchieveChallenge = res.body.response.message;
 
-          if (
-            alreadyAchieveChallenge ===
-            '"Already succeed in achieving this challenge"'
-          ) {
+          if (alreadyAchieveChallenge === "User has achieved this challenge") {
             expect(res.body.response.data.totalPowerups).to.be.a("number");
           }
         });
