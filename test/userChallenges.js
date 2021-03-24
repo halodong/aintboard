@@ -9,15 +9,14 @@ let expect = chai.expect;
 describe("Insert user challenges", () => {
   describe("/POST /api/user/challenge", () => {
     it("it should be able to achieve a challenge", (done) => {
-      const userId = "XDSCA_14NyvN";
-      const challengeId = 10;
-      const powerups = 4;
       chai
         .request(process.env.LOCAL_URL)
-        .post(
-          `/api/user/challenge?userId=${userId}&challengeId=${challengeId}&powerups=${powerups}`
-        )
-        .send()
+        .post("/api/user/challenge")
+        .send({
+          userId: "XDSCA_14NyvN",
+          challengeId: 2,
+          powerups: 4,
+        })
         .end((err, res) => {
           if (err) done();
 
@@ -32,13 +31,13 @@ describe("Insert user challenges", () => {
               "challengeId",
               "_id"
             );
-            expect(res.body.response.data.totalPowerups).to.be.a("number");
+            expect(res.body.response.data.userWithPowerUps).to.be.a("number");
           }
 
           const alreadyAchieveChallenge = res.body.response.message;
 
           if (alreadyAchieveChallenge === "User has achieved this challenge") {
-            expect(res.body.response.data.totalPowerups).to.be.a("number");
+            expect(res.body.response.data.userWithPowerUps).to.be.a("number");
           }
         });
 
