@@ -13,6 +13,7 @@
   "dependencies": {
     "@types/lodash": "^4.14.168",
     "bcrypt": "^5.0.1",
+    "debounce-promise": "^3.1.2",
     "dotenv": "^8.2.0",
     "formik": "^2.2.6",
     "jsonwebtoken": "^8.5.1",
@@ -54,7 +55,6 @@
     "chai": "^4.3.4",
     "chai-http": "^4.3.0",
     "cross-env": "^7.0.3",
-    "debounce-promise": "^3.1.2",
     "eslint": "^7.22.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-config-react-app": "^6.0.0",
