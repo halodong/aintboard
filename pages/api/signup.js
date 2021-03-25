@@ -9,7 +9,7 @@ const bcrypt = require("bcrypt");
 handler.use(all);
 
 handler.post(async (req, res) => {
-  const { firstName, lastName, email } = req.body;
+  const { firstName, lastName, email, role = "guest", username } = req.body;
 
   // hash the password
   const salt = await bcrypt.genSalt(10);
@@ -20,6 +20,8 @@ handler.post(async (req, res) => {
     lastName,
     email,
     password,
+    role,
+    username,
   });
 
   return res.json({ user });
