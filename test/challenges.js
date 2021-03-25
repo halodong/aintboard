@@ -6,7 +6,7 @@ chai.use(chaiHttp);
 
 let expect = chai.expect;
 
-describe("Create Challenge", () => {
+describe("Challenge routes", () => {
   describe("/POST /api/challenges", () => {
     it("it should create a challenge", (done) => {
       chai
@@ -24,14 +24,12 @@ describe("Create Challenge", () => {
           expect(res.status).to.equal(200);
           expect(res.body.success).to.equal(true);
           expect(res.body.response.message).to.equal("Challenge created");
-        });
 
-      done();
+          done();
+        });
     });
   });
-});
 
-describe("Display all the challenges", () => {
   describe("/GET /api/challenges", () => {
     it("it should display all the challenges", (done) => {
       chai
@@ -46,14 +44,12 @@ describe("Display all the challenges", () => {
           expect(res.body.response.message).to.equal(
             "Display all the challenges"
           );
-        });
 
-      done();
+          done();
+        });
     });
   });
-});
 
-describe("Filter the challenges", () => {
   describe("/GET /api/challenge/filter/field", () => {
     it("it should filter the challenges by bgId", (done) => {
       chai
