@@ -6,6 +6,8 @@ import {
   Tagline,
   LookingForText,
   customSelectStyles,
+  GameFont,
+  ChallengesTagline,
 } from "./styled";
 import { WhiteLogo, TreesGroup1, TreesGroup2, Tent } from "~/assets/img";
 import Button from "~/components/Button";
@@ -16,8 +18,13 @@ import AsyncSelect from "react-select/async";
 import fetcher from "~/util/fetch";
 import { BggBoardgameApiData } from "~/types/types";
 import debounce from "debounce-promise";
+import Filter from "~/components/Filter";
 
-export default function Header({ homepage, isSearchPage = false }: Props) {
+export default function Header({
+  homepage,
+  isSearchPage = false,
+  isChallengesPage = false,
+}: Props) {
   const router = useRouter();
   const { name } = router.query;
 
@@ -48,7 +55,10 @@ export default function Header({ homepage, isSearchPage = false }: Props) {
   };
 
   return (
-    <HeaderWrapper isSearchPage={isSearchPage}>
+    <HeaderWrapper
+      isSearchPage={isSearchPage}
+      isChallengePage={isChallengesPage}
+    >
       <NavBarContent>
         <Link href="/">
           <a>
@@ -93,6 +103,14 @@ export default function Header({ homepage, isSearchPage = false }: Props) {
       </Tagline>
 
       {isSearchPage && <LookingForText>Looking for "{name}"</LookingForText>}
+      {isChallengesPage && <GameFont>Challenges</GameFont>}
+      {isChallengesPage && (
+        <ChallengesTagline>
+          Achieve challenge to get PowerUps!
+        </ChallengesTagline>
+      )}
+
+      {isChallengesPage && <Filter />}
     </HeaderWrapper>
   );
 }
@@ -100,6 +118,7 @@ export default function Header({ homepage, isSearchPage = false }: Props) {
 type Props = {
   homepage?: boolean;
   isSearchPage?: boolean;
+  isChallengesPage?: boolean;
 };
 
 type Options = {
