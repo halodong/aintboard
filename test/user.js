@@ -6,7 +6,7 @@ chai.use(chaiHttp);
 
 let expect = chai.expect;
 
-describe("Signup /POST /api/signup", () => {
+describe("User routes", () => {
   before(async () => {
     let database = await db();
 
