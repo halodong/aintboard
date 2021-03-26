@@ -4,16 +4,18 @@ import { insertUser } from "~/db/user";
 import { all } from "~/middlewares/index";
 
 const handler = nc();
-const bcrypt = require("bcrypt");
 
 handler.use(all);
 
 handler.post(async (req, res) => {
-  const { firstName, lastName, email, role = "guest", username } = req.body;
-
-  // hash the password
-  const salt = await bcrypt.genSalt(10);
-  const password = await bcrypt.hash(req.body.password, salt);
+  const {
+    firstName,
+    lastName,
+    email,
+    role = "guest",
+    username,
+    password,
+  } = req.body;
 
   const user = await insertUser(req.db, {
     firstName,
