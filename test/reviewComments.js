@@ -20,7 +20,7 @@ describe("Review Comments", () => {
     await dbHandler.closeDatabase();
   });
 
-  it("it should comment a review", async () => {
+  it("should comment a review", async () => {
     let res = await commentReview(db, {
       userId: 1,
       reviewId: 1,
