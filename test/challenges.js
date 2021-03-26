@@ -17,16 +17,6 @@ describe("Challenge routes", () => {
     } catch (e) {
       throw e;
     }
-
-    // user = await insertUser(db, {
-    //   _id: nanoid(12),
-    //   firstNam: "faith",
-    //   lastName: "test",
-    //   email: "faith.morante@aintboard.app",
-    //   password: "1234",
-    //   role: "guest",
-    //   username: "faithm",
-    // });
   });
 
   after(async () => {
