@@ -1,13 +1,12 @@
 import { insertUserChallenges } from "../db/userChallenges";
 import { insertUser } from "../db/user";
 import { nanoid } from "nanoid";
-let chai = require("chai");
-let expect = chai.expect;
+const chai = require("chai");
+const expect = chai.expect;
 const dbHandler = require("./db-handler");
 
 describe("User challenges", () => {
-  let user;
-  let db;
+  let user, db;
   before(async () => {
     try {
       db = await dbHandler.connect();
