@@ -1,8 +1,13 @@
-export const getFailedResponse = (error, fileName) => {
+export const getFailedResponse = (
+  error,
+  fileName,
+  message = "Something went wrong"
+) => {
   return {
     success: false,
     error,
     fileName,
+    message,
   };
 };
 

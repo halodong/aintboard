@@ -60,7 +60,6 @@ describe("Review Likes", () => {
     expect(totalLikes).to.be.a("number");
 
     if (totalLikes % 10 === 0) {
-      // eslint-disable-next-line no-unused-expressions
       expect(res.response.message).to.exist;
       expect(totalLikes).to.be.equal(10);
     }

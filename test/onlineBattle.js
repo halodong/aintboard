@@ -2,9 +2,8 @@ import { insertBattle, insertValidEntry } from "../db/onlineBattle";
 import { insertUser } from "../db/user";
 import { nanoid } from "nanoid";
 const dbHandler = require("./db-handler");
-let chai = require("chai");
-
-let expect = chai.expect;
+const chai = require("chai");
+const expect = chai.expect;
 
 describe("Online Battles", () => {
   let user;

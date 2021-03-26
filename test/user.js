@@ -1,63 +1,54 @@
-import db from "./db";
-let chai = require("chai");
-let chaiHttp = require("chai-http");
-
-chai.use(chaiHttp);
-
-let expect = chai.expect;
+import { authenticateUser, insertUser } from "../db/user";
+const dbHandler = require("./db-handler");
+const chai = require("chai");
+const expect = chai.expect;
 
 describe("User routes", () => {
-  before(async () => {
-    let database = await db();
+  let db;
+  const password = "password";
+  const email = "brad@traversymedia.com";
 
+  before(async () => {
     try {
-      await database.db.dropDatabase();
+      db = await dbHandler.connect();
+      await dbHandler.clearDatabase();
     } catch (e) {
       throw e;
     }
-
-    database.client.close();
   });
 
-  it("it should add a new user", (done) => {
-    chai
-      .request(process.env.LOCAL_URL)
-      .post("/api/signup")
-      .send({
-        firstName: "Brad",
-        lastName: "Traversy",
-        username: "bt",
-        email: "brad@traversymedia.com",
-        password: "traversymedia",
-      })
-      .end((err, res) => {
-        if (err) done();
-
-        expect(res.status).to.equal(200);
-        expect(res.body.user.firstName).to.equal("Brad");
-        expect(res.body.user.lastName).to.equal("Traversy");
-        expect(res.body.user.email).to.equal("brad@traversymedia.com");
-        expect(res.body.user.username).to.equal("bt");
-        expect(res.body.user.role).to.equal("guest");
-
-        done();
-      });
+  after(async () => {
+    await dbHandler.clearDatabase();
+    await dbHandler.closeDatabase();
   });
 
-  it("it should log user into the app", (done) => {
-    chai
-      .request(process.env.LOCAL_URL)
-      .post("/api/login")
-      .send({
-        email: "brad@traversymedia.com",
-        password: "traversymedia",
-      })
-      .end((err, res) => {
-        if (err) done();
-        expect(res.status).to.equal(200);
-        expect(res.body.success).to.equal(true);
-        expect(res.body.data.message).to.equal("Login Successful");
-        done();
-      });
+  it("should add a new user", async () => {
+    let res = await insertUser(db, {
+      firstName: "Brad",
+      lastName: "Traversy",
+      username: "bt",
+      email,
+      password,
+    });
+
+    expect(res.success).to.equal(true);
+    expect(res.response.data.user._id).to.be.a("string");
+    expect(res.response.data.user.firstName).to.equal("Brad");
+    expect(res.response.data.user.lastName).to.equal("Traversy");
+    expect(res.response.data.user.email).to.equal("brad@traversymedia.com");
+    expect(res.response.data.user.username).to.equal("bt");
+    expect(res.response.data.user.role).to.equal("guest");
+  });
+
+  it("should log user into the app", async () => {
+    let res = await authenticateUser(db, {
+      email,
+      password,
+    });
+
+    expect(res.success).to.equal(true);
+    expect(res.response.message).to.equal("Login Successful");
+    expect(res.response.data.token).to.exist;
+    expect(res.response.data.token).to.be.a("string");
   });
 });
