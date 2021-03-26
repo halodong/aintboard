@@ -35,21 +35,31 @@ describe("Online Battles", () => {
   });
 
   it("should create an online battle", async () => {
+    const eventStartDate = new Date(2021, 5, 4).toLocaleString();
+    const eventEndDate = new Date(2021, 5, 6).toLocaleString();
+
     let res = await insertBattle(db, {
       battleName: "Battle of the legends",
       boardGameName: "Boardie",
       bgId: 54321,
       details: "This is a battle for the legends",
-      eventStartDate: "4-05-2021",
-      eventEndDate: "5-05-2021",
+      eventStartDate,
+      eventEndDate,
     });
 
-    expect(res.battleName).to.equal("Battle of the legends");
-    expect(res.boardGameName).to.equal("Boardie");
-    expect(res.bgId).to.equal(54321);
-    expect(res.details).to.equal("This is a battle for the legends");
-    expect(res.eventStartDate).to.equal("4-05-2021");
-    expect(res.eventEndDate).to.equal("5-05-2021");
+    expect(res.success).to.equal(true);
+    expect(res.response.data.onlineBattle.battleName).to.equal(
+      "Battle of the legends"
+    );
+    expect(res.response.data.onlineBattle.boardGameName).to.equal("Boardie");
+    expect(res.response.data.onlineBattle.bgId).to.equal(54321);
+    expect(res.response.data.onlineBattle.details).to.equal(
+      "This is a battle for the legends"
+    );
+    expect(res.response.data.onlineBattle.eventStartDate).to.equal(
+      eventStartDate
+    );
+    expect(res.response.data.onlineBattle.eventEndDate).to.equal(eventEndDate);
   });
 
   it("should submit a valid entry", async () => {
@@ -62,11 +72,12 @@ describe("Online Battles", () => {
       verifiedStatus: "approved",
     });
 
-    expect(res.userId).to.equal(user._id);
-    expect(res.battleId).to.equal(123);
-    expect(res.score).to.equal(456);
-    expect(res.message).to.equal("Successfully Joined!");
-    expect(res.googleLink).to.equal("https://battles.com");
-    expect(res.verifiedStatus).to.equal("approved");
+    expect(res.success).to.equal(true);
+    expect(res.response.data.entry.userId).to.equal(user._id);
+    expect(res.response.data.entry.battleId).to.equal(123);
+    expect(res.response.data.entry.score).to.equal(456);
+    expect(res.response.data.entry.message).to.equal("Successfully Joined!");
+    expect(res.response.data.entry.googleLink).to.equal("https://battles.com");
+    expect(res.response.data.entry.verifiedStatus).to.equal("approved");
   });
 });
