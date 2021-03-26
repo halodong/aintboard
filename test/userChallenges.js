@@ -28,6 +28,7 @@ describe("User challenges", () => {
   });
 
   after(async () => {
+    await dbHandler.clearDatabase();
     await dbHandler.closeDatabase();
   });
 

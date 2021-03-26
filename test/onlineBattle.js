@@ -30,6 +30,7 @@ describe("Online Battles", () => {
   });
 
   after(async () => {
+    await dbHandler.clearDatabase();
     await dbHandler.closeDatabase();
   });
 
