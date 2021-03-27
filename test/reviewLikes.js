@@ -15,7 +15,7 @@ describe("Review Likes", () => {
       throw e;
     }
 
-    user = await insertUser(db, {
+    let userData = await insertUser(db, {
       _id: nanoid(12),
       firstNam: "faith",
       lastName: "test",
@@ -24,6 +24,8 @@ describe("Review Likes", () => {
       role: "guest",
       username: "faithm",
     });
+
+    user = userData.response.data.user;
   });
 
   afterEach(async () => {
