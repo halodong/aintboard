@@ -1,4 +1,4 @@
-import { insertReview } from "../db/reviews";
+import { insertReview, getReviews } from "../db/reviews";
 const chai = require("chai");
 const expect = chai.expect;
 const dbHandler = require("./db-handler");
@@ -52,5 +52,31 @@ describe("Reviews", () => {
     expect(res.response.data.review.reviewText).to.equal("3123123");
     expect(res.response.data.review.reviewStatusId).to.equal(1);
     expect(res.response.data.review.reviewType).to.equal("strategy");
+  });
+
+  it("should get all reviews", async () => {
+    let res = await getReviews(db, { first: null });
+
+    expect(res.success).to.equal(true);
+    expect(res.response.message).to.equal("Reviews retrieved");
+    expect(res.response.data.reviews).to.be.an("array");
+  });
+
+  it("should get first reviews", async () => {
+    let res = await getReviews(db, { first: 1 });
+
+    expect(res.success).to.equal(true);
+    expect(res.response.message).to.equal("1 Review retrieved");
+    expect(res.response.data.reviews).to.be.an("array");
+    expect(res.response.data.reviews).to.have.length(1);
+  });
+
+  it("should get first 2 reviews", async () => {
+    let res = await getReviews(db, { first: 2 });
+
+    expect(res.success).to.equal(true);
+    expect(res.response.message).to.equal("2 Reviews retrieved");
+    expect(res.response.data.reviews).to.be.an("array");
+    expect(res.response.data.reviews).to.have.length(2);
   });
 });
