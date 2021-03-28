@@ -101,8 +101,3 @@ type Props = {
   homepage?: boolean;
   isSearchPage?: boolean;
 };
-
-type Options = {
-  value: string;
-  label: string;
-};

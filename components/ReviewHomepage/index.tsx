@@ -1,12 +1,13 @@
-import { Maze, WaterLeft, WaterRight } from "~/assets/img";
+import { Maze, WaterRight } from "~/assets/img";
 import { ReviewContainer, ReviewCardWrapper } from "./styled";
 import { ReviewCard } from "~/components/ReviewCard";
+import WaterLeftSvg from "~/assets/img/water-left.svg";
 
 const ReviewHomepage = () => {
   return (
     <ReviewContainer>
       <Maze className="maze" />
-      <WaterLeft className="water-left" />
+      <WaterLeftSvg className="water-left" />
       <WaterRight className="water-right" />
 
       <ReviewCardWrapper>
