@@ -13,10 +13,50 @@ export const InputContainer = styled.div<InputContainerProps>`
     top: 0.7rem;
     cursor: pointer;
   }
+
+  .float-label-input {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 350px;
+  }
+
+  .float-label-input .Active {
+    transform: translate(0, 0.5rem) scale(0.7);
+  }
+
+  .float-label-input input {
+    width: 100%;
+    height: 3rem;
+    outline: 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    padding-top: 2rem;
+    padding-left: 1rem;
+  }
+
+  .float-label-input label {
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0 12px;
+    color: #999;
+    pointer-events: none;
+    position: absolute;
+    transform: translate(0, 1rem) scale(1);
+    transform-origin: top left;
+    transition: all 0.2s ease-out;
+  }
+
+  .float-label-input:focus-within label {
+    transform: translate(0, 0.5rem) scale(0.7);
+  }
 `;
 
 type InputContainerProps = {
-  minWidth: string;
+  minWidth?: string;
 };
 
 export const InputStyled = styled.input`

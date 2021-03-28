@@ -47,6 +47,7 @@ declare module "styled-components" {
     spacing: {
       "50px": string;
       md: string;
+      lg: string;
     };
   }
 }
@@ -95,5 +96,6 @@ export const theme: DefaultTheme = {
   spacing: {
     "50px": "3.125rem",
     md: "1.5rem",
+    lg: "3.5rem",
   },
 };
