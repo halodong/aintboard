@@ -9,7 +9,8 @@
       }
     ],
     ["@babel/preset-react"],
-    ["@babel/preset-typescript"]
+    ["@babel/preset-typescript"],
+    "next/babel"
   ],
   "plugins": [
     [
@@ -29,6 +30,13 @@
       "babel-plugin-styled-components",
       {
         "ssr": true
+      }
+    ],
+    "inline-react-svg",
+    [
+      "lodash",
+      {
+        "id": ["lodash"]
       }
     ]
   ]
