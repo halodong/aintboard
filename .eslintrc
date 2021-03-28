@@ -1,15 +1,18 @@
 {
-  "plugins": ["react", "jsx-a11y"],
+  "plugins": ["react", "jsx-a11y", "chai-friendly"],
   "extends": ["react-app", "prettier"],
   "env": {
     "browser": true,
     "es6": true,
-    "jest": true
+    "jest": true,
+    "mocha": true
   },
   "rules": {
     "no-const-assign": "error",
     "import/no-anonymous-default-export": "error",
     "import/dynamic-import-chunkname": "error",
+    "no-unused-expressions": 0,
+    "chai-friendly/no-unused-expressions": 2,
     "react-hooks/exhaustive-deps": [
       "error",
       { "additionalHooks": "useCustomCompareMemo" }
