@@ -39,4 +39,25 @@ export const ReviewCardWrapper = styled.div`
   margin: 9rem auto 13rem;
   flex-wrap: wrap;
   justify-content: space-around;
+
+  .mainButtonContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 26%;
+    height: 20.6rem;
+
+    button {
+      position: relative;
+      max-width: 13.25rem;
+      height: 9rem;
+      background-color: ${(props) => props.theme.colors.lightYellow};
+      border-radius: 10px;
+      border: 2px solid ${(props) => props.theme.colors.black};
+      font-family: ${(props) => props.theme.fonts.rubikReg};
+      font-size: 1rem;
+      cursor: pointer;
+      outline: none;
+    }
+  }
 `;
