@@ -5,7 +5,7 @@ const chai = require("chai");
 const expect = chai.expect;
 
 describe("Champions", () => {
-  let champion, db;
+  let db;
 
   before(async () => {
     try {
@@ -29,8 +29,8 @@ describe("Champions", () => {
     });
 
     expect(res.success).to.equal(true);
-    expect(res.response.data.champion.userId).to.equal(987);
-    expect(res.response.data.chanpion.trophyType).to.equal("Gold");
-    expect(res.response.data.champion.battleId).to.equal(45679);
+    expect(res.response.data.userTrophy.userId).to.equal(987);
+    expect(res.response.data.userTrophy.trophyType).to.equal("gold");
+    expect(res.response.data.userTrophy.battleId).to.equal(45679);
   });
 });
