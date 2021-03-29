@@ -33,7 +33,10 @@ export default async function database(req, _, next) {
   }
 
   req.dbClient = global.mongo.client;
-  req.db = global.mongo.client.db(process.env.DB_NAME);
+
+  let mongodbName =
+    process.env.ENV === "test" ? process.env.DB_NAME_TEST : process.env.DB_NAME;
+  req.db = global.mongo.client.db(mongodbName);
 
   if (!indexesCreated) await createIndexes(req.db);
 

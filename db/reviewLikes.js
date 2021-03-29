@@ -20,7 +20,7 @@ export async function likeReview(db, { userId, reviewId }) {
       let usersRes = await db
         .collection("users")
         .findOneAndUpdate(
-          { id: userId },
+          { _id: userId },
           { $inc: { stars: 1 } },
           { returnOriginal: false }
         );

@@ -26,7 +26,7 @@ export const insertUserChallenges = async (
       await user.findOneAndUpdate({ _id: userId }, { $inc: { powerups } });
       const userWithPowerUps = await user.findOne(
         { _id: userId },
-        { fields: { password: 0 } }
+        { projection: { password: 0 } }
       );
 
       return getSuccessResponse({
@@ -39,7 +39,7 @@ export const insertUserChallenges = async (
     } else {
       const userWithPowerUps = await user.findOne(
         { _id: userId },
-        { fields: { password: 0 } }
+        { projection: { password: 0 } }
       );
 
       return getSuccessResponse({

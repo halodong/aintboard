@@ -123,8 +123,3 @@ type Props = {
   isSearchPage?: boolean;
   isChallengesPage?: boolean;
 };
-
-type Options = {
-  value: string;
-  label: string;
-};
