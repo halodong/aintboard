@@ -31,8 +31,9 @@ export const InputContainer = styled.div<InputContainerProps>`
     outline: 0;
     border: 1px solid #ddd;
     border-radius: 4px;
-    background: #fff;
-    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    background: ${(props) => props.theme.colors.inputDark};
+    font-family: ${(props) => props.theme.fonts.quicksandReg};
     font-size: 1rem;
     padding-top: 2rem;
     padding-left: 1rem;
@@ -40,9 +41,9 @@ export const InputContainer = styled.div<InputContainerProps>`
 
   .float-label-input label {
     font-size: 1rem;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: ${(props) => props.theme.fonts.quicksandReg};
     padding: 0 12px;
-    color: #999;
+    color: ${(props) => props.theme.colors.lightGray};
     pointer-events: none;
     position: absolute;
     transform: translate(0, 1rem) scale(1);

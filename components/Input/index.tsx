@@ -10,14 +10,13 @@ export default function Input({
   rightIcon,
   showRightIcon,
   label,
+  type = "text",
 }: Props) {
   const [field, meta] = useField(name);
   const { setFieldValue, submitForm } = useFormikContext();
   const [isActive, setIsActive] = useState(false);
-  const [value, setValue] = useState("");
 
   const handleTextChange = (text: string) => {
-    console.log(33, text);
     setFieldValue(name, text);
 
     if (text !== "") {
@@ -46,6 +45,7 @@ export default function Input({
             {...field}
             {...meta}
             onChange={(e) => handleTextChange(e.target.value)}
+            type={type}
           ></InputStyled>
           <label htmlFor={name} className={isActive ? "Active" : ""}>
             {label}
@@ -57,6 +57,7 @@ export default function Input({
           placeholder={placeholder}
           {...field}
           {...meta}
+          type={type}
         ></InputStyled>
       )}
     </InputContainer>
@@ -70,4 +71,5 @@ type Props = {
   rightIcon?: "search";
   showRightIcon?: boolean;
   label?: string;
+  type?: string;
 };

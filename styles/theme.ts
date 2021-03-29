@@ -7,6 +7,7 @@ declare module "styled-components" {
       [key: string]: string;
       white: string;
       black: string;
+      inputDark: string;
       lightGray: string;
       dark: string;
       lightYellow: string;
@@ -47,6 +48,7 @@ declare module "styled-components" {
     spacing: {
       "50px": string;
       md: string;
+      md2: string;
       lg: string;
     };
   }
@@ -56,6 +58,7 @@ export const theme: DefaultTheme = {
   colors: {
     white: "#FFFFFF",
     black: "#000000",
+    inputDark: "#2B2B2B",
     lightGray: "#AFA5A5",
     dark: "#353535",
     lightYellow: "#FAFAEB",
@@ -96,6 +99,7 @@ export const theme: DefaultTheme = {
   spacing: {
     "50px": "3.125rem",
     md: "1.5rem",
+    md2: "2rem",
     lg: "3.5rem",
   },
 };

@@ -21,6 +21,6 @@ export const ModalHeader = styled.div`
 
 export const ModalContent = styled.div`
   background-color: ${(props) => props.theme.colors.darkGreen};
-  padding: 1rem;
+  padding: ${(props) => props.theme.spacing.md2};
   color: white;
 `;

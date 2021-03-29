@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-export const MainLabel = styled.h6`
-  font-size: 0.8rem;
-  margin: 0 0 1rem 0;
+export const InputContainer = styled.div<InputContainerProps>`
+  margin-bottom: ${(props) =>
+    props.marginbottom ? props.marginbottom : "1.5rem"};
 `;
+
+type InputContainerProps = {
+  marginbottom?: string;
+};
