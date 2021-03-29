@@ -6,13 +6,11 @@ export const ChallengesCardWrapper = styled.div`
   height: 15rem;
   width: 30rem;
   display: flex;
-  justify-content: center;
   border-radius: ${(props) => props.theme.border["10px"]};
 `;
 
 export const PowerUpIcon = styled.div`
-  width: 80%;
-
+  width: 55%;
   & img {
     border-top-left-radius: ${(props) => props.theme.border["10px"]};
     border-bottom-left-radius: ${(props) => props.theme.border["10px"]};
@@ -25,6 +23,7 @@ export const PowerUpAmount = styled.div`
   font-family: ${(props) => props.theme.fonts.gameFont};
   font-size: ${(props) => props.theme.fontSizes.xs};
   position: absolute;
+  left: 33%;
   margin-top: 1rem;
   display: flex;
   align-items: center;
@@ -40,7 +39,6 @@ export const ChallengeName = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-
   & p {
     text-align: center;
   }
