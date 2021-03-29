@@ -31,9 +31,16 @@ export const OptionContainer = styled.div`
   z-index: 1;
   background-color: ${(props) => props.theme.colors.white};
   padding: 1rem;
+  height: 20rem;
+  overflow-y: auto;
   width: 100%;
   border-radius: ${(props) => props.theme.border["10px"]};
   position: absolute;
+
+  scrollbar-width: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const Option = styled.div`

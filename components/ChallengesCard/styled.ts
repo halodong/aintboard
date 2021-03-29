@@ -11,7 +11,7 @@ export const ChallengesCardWrapper = styled.div`
 
 export const PowerUpIcon = styled.div`
   width: 70%;
-  & img {
+  img {
     border-top-left-radius: ${(props) => props.theme.border["10px"]};
     border-bottom-left-radius: ${(props) => props.theme.border["10px"]};
     height: 100%;

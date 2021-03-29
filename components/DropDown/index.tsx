@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import {
   DropDownWrapper,
   DropDownMenu,
@@ -7,7 +7,7 @@ import {
   Option,
 } from "./styled";
 
-import DownArrow from "~/assets/img/DownArrow";
+import DownArrow from "~/assets/img/downarrow.svg";
 
 import useOutsideClick from "./useOutsideClick";
 
@@ -27,7 +27,48 @@ const DropDown = ({ placeHolder, isName = false }: Props) => {
     setIsOpen(false);
   };
 
-  const options = ["chess1", "chess2", "chess3", "chess4"];
+  const options = [
+    "chess1",
+    "chess2",
+    "chess3",
+    "chess4",
+    "chess1",
+    "chess2",
+    "chess3",
+    "chess4",
+    "chess1",
+    "chess2",
+    "chess3",
+    "chess4",
+    "chess1",
+    "chess2",
+    "chess3",
+    "chess4",
+    "chess1",
+    "chess2",
+    "chess3",
+    "chess4",
+    "chess1",
+    "chess2",
+    "chess3",
+    "chess4",
+    "chess1",
+    "chess2",
+    "chess3",
+    "chess4",
+    "chess1",
+    "chess2",
+    "chess3",
+    "chess4",
+    "chess1",
+    "chess2",
+    "chess3",
+    "chess4",
+    "chess1",
+    "chess2",
+    "chess3",
+    "chess4",
+  ];
 
   return (
     <DropDownWrapper isName={isName}>
