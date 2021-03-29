@@ -7,6 +7,8 @@ import {
   Option,
 } from "./styled";
 
+import DownArrow from "~/assets/img/DownArrow";
+
 import useOutsideClick from "./useOutsideClick";
 
 const DropDown = ({ placeHolder, isName = false }: Props) => {
@@ -31,6 +33,7 @@ const DropDown = ({ placeHolder, isName = false }: Props) => {
     <DropDownWrapper isName={isName}>
       <DropDownMenu onClick={toggle}>
         <Select>{selectedValue}</Select>
+        <DownArrow />
       </DropDownMenu>
 
       {isOpen && (

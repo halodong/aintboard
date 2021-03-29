@@ -103,10 +103,13 @@ export default function Header({
       </Tagline>
 
       {isSearchPage && <LookingForText>Looking for "{name}"</LookingForText>}
-      {isChallengesPage && <GameFont>Challenges</GameFont>}
+
+      {isChallengesPage && <Tent className="tent" />}
+
+      {isChallengesPage && <GameFont>CHALLENGES</GameFont>}
       {isChallengesPage && (
         <ChallengesTagline>
-          Achieve challenge to get PowerUps!
+          Achieve challenges to get PowerUps!
         </ChallengesTagline>
       )}
 

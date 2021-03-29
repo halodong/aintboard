@@ -12,6 +12,9 @@ type DropDownWrapperProps = {
 export const DropDownMenu = styled.div`
   background-color: ${(props) => props.theme.colors.white};
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 1rem;
   width: 100%;
   border-radius: ${(props) => props.theme.border["10px"]};

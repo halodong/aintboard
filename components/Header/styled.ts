@@ -17,6 +17,7 @@ export const HeaderWrapper = styled.div<HeaderWrappepProps>`
 
   .tent {
     z-index: 1;
+    bottom: 0;
   }
 
   .homepage-bg-container {
@@ -131,4 +132,5 @@ export const GameFont = styled.h1`
 `;
 export const ChallengesTagline = styled(baseTaglineStyles)`
   margin-top: 2rem;
+  text-transform: none;
 `;
