@@ -5,23 +5,30 @@ import {
   ChallengeName,
 } from "./styled";
 
-const ChallengesCard = () => {
+import PlayButton from "~/assets/img/playbutton.svg";
+
+const ChallengesCard = ({ puAmount }: Props) => {
   return (
     <ChallengesCardWrapper>
       <PowerUpIcon>
         <img
-          src="https://webstockreview.net/images/mario-clipart-powerup-15.png"
+          src="https://cf.geekdo-images.com/0BsjJY9MTlx9DRrlkeE69w__original/img/6AJktf34S4ypVI75ecsfmkDicgA=/0x0/filters:format(jpeg)/pic5482020.jpg"
           alt=""
         />
       </PowerUpIcon>
 
-      <PowerUpAmount>4</PowerUpAmount>
+      <PowerUpAmount>+{puAmount}UP</PowerUpAmount>
 
       <ChallengeName>
-        Score 170 VP in a 4-Player match in Brass Lancashire
+        <p>Score 170 VP in a 4-Player match in Brass Lancashire</p>
+        <PlayButton className="play" />
       </ChallengeName>
     </ChallengesCardWrapper>
   );
+};
+
+type Props = {
+  puAmount?: number;
 };
 
 export default ChallengesCard;
