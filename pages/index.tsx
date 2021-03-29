@@ -1,8 +1,19 @@
+import fetcher from "~/util/fetch";
+import useSWR from "swr";
+
 import Head from "next/head";
 import Header from "~/components/Header";
 import ReviewHomepage from "~/components/ReviewHomepage";
 
-export default function Home() {
+import { ReviewApiResponse } from "~/types/types";
+
+export default function Home({ reviews }: Props) {
+  const { data: reviewData } = useSWR<ReviewApiResponse>(
+    "/api/reviews?first=5",
+    fetcher,
+    { initialData: reviews }
+  );
+
   return (
     <div>
       <Head>
@@ -15,4 +26,20 @@ export default function Home() {
       <ReviewHomepage />
     </div>
   );
+}
+
+type Props = {
+  reviews: ReviewApiResponse;
+};
+
+export async function getStaticProps() {
+  const reviews = await fetcher(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/reviews?first=5`
+  );
+
+  return {
+    props: {
+      reviews,
+    },
+  };
 }
