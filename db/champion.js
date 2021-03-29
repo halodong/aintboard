@@ -12,12 +12,12 @@ export async function insertChampion(db, { userId, trophyType, battleId }) {
     });
 
     return getSuccessResponse({
-      message: "Champion Added",
+      message: `User won ${trophyType} trophy`,
       data: {
-        review: champion.ops[0],
+        userTrophy: champion.ops[0],
       },
     });
   } catch (err) {
-    return getFailedResponse(err, "db/champion.js");
+    return getFailedResponse(err, "db/champion.js", "Can't insert champion");
   }
 }

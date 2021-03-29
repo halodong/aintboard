@@ -5,8 +5,7 @@ const chai = require("chai");
 const expect = chai.expect;
 
 describe("Champions", () => {
-  let champion;
-  let db;
+  let champion, db;
 
   before(async () => {
     try {
@@ -15,13 +14,6 @@ describe("Champions", () => {
     } catch (e) {
       throw e;
     }
-
-    champion = await insertChampion(db, {
-      _id: nanoid(12),
-      userId: 234,
-      trophyType: "Gold",
-      battleId: 12345,
-    });
   });
 
   after(async () => {
@@ -32,7 +24,7 @@ describe("Champions", () => {
   it("should add a champion", async () => {
     let res = await insertChampion(db, {
       userId: 987,
-      trophyType: "Gold",
+      trophyType: "gold",
       battleId: 45679,
     });
 
