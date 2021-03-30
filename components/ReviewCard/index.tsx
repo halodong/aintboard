@@ -1,14 +1,16 @@
 import {
   ReviewCardContainer,
   BgImgWrapper,
-  UserWrapper,
   Username,
   ReviewDate,
   ReviewContent,
   Bottom,
   BottomRight,
 } from "./styled";
-import { UserMale, Dice, Comment, HeartLike } from "~/assets/img";
+import { UserMale, Dice } from "~/assets/img";
+import CommentIcon from "~/assets/img/comment.svg";
+import HeartLikeIcon from "~/assets/img/heart-like.svg";
+import { UserWrapper } from "~/components/Avatar/styled";
 
 export const ReviewCard = () => {
   return (
@@ -41,8 +43,8 @@ export const ReviewCard = () => {
           <h6>Strategy</h6>
 
           <div className="socials">
-            <Comment /> <span>100</span>
-            <HeartLike /> <span>102</span>
+            <CommentIcon /> <span>100</span>
+            <HeartLikeIcon /> <span>102</span>
           </div>
         </BottomRight>
       </Bottom>

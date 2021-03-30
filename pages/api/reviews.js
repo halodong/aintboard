@@ -1,6 +1,6 @@
 import nc from "next-connect";
 
-import { insertReview } from "~/db/reviews";
+import { insertReview, getReviews } from "~/db/reviews";
 import { all } from "~/middlewares/index";
 
 const handler = nc();
@@ -25,6 +25,16 @@ handler.post(async (req, res) => {
   });
 
   return res.json(review);
+});
+
+handler.get(async (req, res) => {
+  const { first = null } = req.query;
+
+  const reviews = await getReviews(req.db, {
+    first: parseInt(first),
+  });
+
+  return res.json(reviews);
 });
 
 export default handler;
