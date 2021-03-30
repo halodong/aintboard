@@ -52,38 +52,6 @@ type HeaderWrappepProps = {
   isChallengePage?: boolean;
 };
 
-export const NavBarContent = styled.div`
-  padding: ${(props) => props.theme.spacing["50px"]};
-  display: flex;
-  justify-content: space-between;
-`;
-
-export const NavBarButtons = styled.div`
-  width: 21.5rem;
-  display: flex;
-  justify-content: space-between;
-`;
-
-export const SearchContainer = styled.div`
-  width: 100%;
-  text-align: center;
-  z-index: 10;
-  position: relative;
-
-  .links {
-    margin-top: ${(props) => props.theme.spacing.md};
-
-    a {
-      color: ${(props) => props.theme.colors.white};
-      padding: 0 3rem;
-    }
-  }
-
-  input {
-    font-family: ${(props) => props.theme.fonts.quicksandReg};
-  }
-`;
-
 const baseTaglineStyles = styled.h1`
   color: ${(props) => props.theme.colors.white};
   font-family: ${(props) => props.theme.fonts.rubikBold};
@@ -114,15 +82,6 @@ type TaglineProps = {
 export const LookingForText = styled(baseTaglineStyles)`
   margin-top: 3rem;
 `;
-
-export const customSelectStyles = {
-  container: (provided: object) => ({
-    ...provided,
-    width: "38rem",
-    margin: "0 auto",
-    fontFamily: "Quicksand-Regular",
-  }),
-};
 
 export const GameFont = styled.h1`
   font-family: ${(props) => props.theme.fonts.gameFont};
