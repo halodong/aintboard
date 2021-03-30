@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   HeaderWrapper,
   NavBarButtons,
@@ -6,20 +7,30 @@ import {
   Tagline,
   LookingForText,
   customSelectStyles,
+  GameFont,
+  ChallengesTagline,
 } from "./styled";
 import { WhiteLogo, TreesGroup1, TreesGroup2, Tent } from "~/assets/img";
 import Button from "~/components/Button";
+import Modal from "~/components/Modal";
+import JoinUsForm from "~/components/JoinUsForm";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ValueType, ActionMeta } from "react-select";
 import AsyncSelect from "react-select/async";
 import fetcher from "~/util/fetch";
-import { BggBoardgameApiData } from "~/types/types";
 import debounce from "debounce-promise";
+import { BggBoardgameApiData } from "~/types/types";
+import Filter from "~/components/Filter";
 
-export default function Header({ homepage, isSearchPage = false }: Props) {
+export default function Header({
+  homepage,
+  isSearchPage = false,
+  isChallengesPage = false,
+}: Props) {
   const router = useRouter();
   const { name } = router.query;
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const onSelectChange = (
     value: ValueType<any, boolean>,
@@ -48,7 +59,10 @@ export default function Header({ homepage, isSearchPage = false }: Props) {
   };
 
   return (
-    <HeaderWrapper isSearchPage={isSearchPage}>
+    <HeaderWrapper
+      isSearchPage={isSearchPage}
+      isChallengePage={isChallengesPage}
+    >
       <NavBarContent>
         <Link href="/">
           <a>
@@ -56,10 +70,22 @@ export default function Header({ homepage, isSearchPage = false }: Props) {
           </a>
         </Link>
         <NavBarButtons>
-          <Button bg="white">Login</Button>
-          <Button bg="lightYellow">Join us!</Button>
+          <Button bg="white" onClick={() => {}}>
+            Login
+          </Button>
+          <Button bg="lightYellow" onClick={() => setModalIsOpen(true)}>
+            Join us!
+          </Button>
         </NavBarButtons>
       </NavBarContent>
+
+      <Modal
+        isOpen={modalIsOpen}
+        closeModal={() => setModalIsOpen(false)}
+        headerLabel="Join Us"
+      >
+        <JoinUsForm />
+      </Modal>
 
       <SearchContainer>
         <AsyncSelect
@@ -93,6 +119,17 @@ export default function Header({ homepage, isSearchPage = false }: Props) {
       </Tagline>
 
       {isSearchPage && <LookingForText>Looking for "{name}"</LookingForText>}
+
+      {isChallengesPage && <Tent className="tent" />}
+
+      {isChallengesPage && <GameFont>CHALLENGES</GameFont>}
+      {isChallengesPage && (
+        <ChallengesTagline>
+          Achieve challenges to get PowerUps!
+        </ChallengesTagline>
+      )}
+
+      {isChallengesPage && <Filter />}
     </HeaderWrapper>
   );
 }
@@ -100,4 +137,5 @@ export default function Header({ homepage, isSearchPage = false }: Props) {
 type Props = {
   homepage?: boolean;
   isSearchPage?: boolean;
+  isChallengesPage?: boolean;
 };

@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const HeaderWrapper = styled.div<HeaderWrappepProps>`
   width: 100%;
   background-color: ${(props) => props.theme.colors.dark};
-  min-height: ${(props) => (props.isSearchPage ? "23rem" : "35rem")};
-  overflow: hidden;
+  min-height: ${(props) =>
+    props.isSearchPage || props.isChallengePage ? "23rem" : "35rem"};
   position: relative;
 
   .trees-1,
@@ -17,6 +17,7 @@ export const HeaderWrapper = styled.div<HeaderWrappepProps>`
 
   .tent {
     z-index: 1;
+    bottom: 0;
   }
 
   .homepage-bg-container {
@@ -48,10 +49,11 @@ export const HeaderWrapper = styled.div<HeaderWrappepProps>`
 
 type HeaderWrappepProps = {
   isSearchPage?: boolean;
+  isChallengePage?: boolean;
 };
 
 export const NavBarContent = styled.div`
-  margin: ${(props) => props.theme.spacing["50px"]};
+  padding: ${(props) => props.theme.spacing["50px"]};
   display: flex;
   justify-content: space-between;
 `;
@@ -121,3 +123,14 @@ export const customSelectStyles = {
     fontFamily: "Quicksand-Regular",
   }),
 };
+
+export const GameFont = styled.h1`
+  font-family: ${(props) => props.theme.fonts.gameFont};
+  color: ${(props) => props.theme.colors.white};
+  text-align: center;
+  margin-top: 2rem;
+`;
+export const ChallengesTagline = styled(baseTaglineStyles)`
+  margin-top: 2rem;
+  text-transform: none;
+`;
