@@ -6,13 +6,15 @@ import {
   ReviewContent,
   Bottom,
   BottomRight,
+  BottomWrapper,
 } from "./styled";
 import { UserMale, Dice } from "~/assets/img";
 import CommentIcon from "~/assets/img/comment.svg";
 import HeartLikeIcon from "~/assets/img/heart-like.svg";
 import { UserWrapper } from "~/components/Avatar/styled";
-
 import { ReviewData } from "~/types/types";
+
+import dayjs from "dayjs";
 
 export const ReviewCard = ({ data }: Props) => {
   return (
@@ -28,28 +30,26 @@ export const ReviewCard = ({ data }: Props) => {
         <UserMale className="icon" />
       </UserWrapper>
 
-      <Username></Username>
-      <ReviewDate>Mar 3, 2021</ReviewDate>
+      <Username>{data.users._id}</Username>
+      <ReviewDate>{dayjs(data.createdAt).format("MMM DD YYYY")}</ReviewDate>
       <ReviewContent>
-        <p>
-          “Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.... sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua
-        </p>
+        <p>{data.reviewText}</p>
       </ReviewContent>
 
-      <Bottom>
-        <Dice className="dice" />
+      <BottomWrapper>
+        <Bottom>
+          <Dice className="dice" />
 
-        <BottomRight>
-          <h6>Strategy</h6>
+          <BottomRight>
+            <h6>Strategy</h6>
 
-          <div className="socials">
-            <CommentIcon /> <span>100</span>
-            <HeartLikeIcon /> <span>102</span>
-          </div>
-        </BottomRight>
-      </Bottom>
+            <div className="socials">
+              <CommentIcon /> <span>100</span>
+              <HeartLikeIcon /> <span>102</span>
+            </div>
+          </BottomRight>
+        </Bottom>
+      </BottomWrapper>
     </ReviewCardContainer>
   );
 };

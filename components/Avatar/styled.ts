@@ -9,6 +9,7 @@ export const UserWrapper = styled.div`
   background-color: ${(props) => props.theme.colors.white};
   margin: -1.5rem auto 0;
   overflow: hidden;
+  transition: 500ms ease all;
 
   .icon {
     width: 100%;

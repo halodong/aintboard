@@ -28,6 +28,19 @@ export type ReviewData = {
   reviewStatusId: number;
   reviewType: string;
   createdAt: string;
+  users: UserData;
+};
+
+export type UserData = {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  role: string;
+  username: string;
+  powerups: number;
+  starts: number;
 };
 
 export type BggBoardgameApiData = {
