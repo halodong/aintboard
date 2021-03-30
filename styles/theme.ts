@@ -68,6 +68,7 @@ export const theme: DefaultTheme = {
     lighterGreen: "#A6D5AE",
     mediumGreen: "#76AAA4",
     mediumRed: "#BB6B6B",
+    errorRed: "#f15156",
   },
   breakpoints: {
     xs: "360px",

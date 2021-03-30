@@ -9,6 +9,7 @@ export const UserWrapper = styled.div`
   background-color: ${(props) => props.theme.colors.white};
   margin: -1.5rem auto 0;
   overflow: hidden;
+  cursor: pointer;
 
   .icon {
     width: 100%;
@@ -21,4 +22,9 @@ export const UserWrapper = styled.div`
     width: 5rem;
     height: 5rem;
   }
+`;
+
+export const AvatarWrapper = styled.div`
+  display: flex;
+  margin: 2rem;
 `;

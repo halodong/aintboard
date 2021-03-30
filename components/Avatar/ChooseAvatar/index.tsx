@@ -1,7 +1,10 @@
 import Label from "~/components/Label";
-import { UserWrapper } from "~/components/Avatar/styled";
+import { UserWrapper, AvatarWrapper } from "~/components/Avatar/styled";
 
-// import BoyIcon from '~/assets/img/user/boy.svg';
+import GirlAvatar from "~/assets/img/GirlAvatar";
+import BoyAvatar from "~/assets/img/BoyAvatar";
+import AlpacaAvatar from "~/assets/img/AlpacaAvatar";
+import KnightAvatar from "~/assets/img/KnightAvatar";
 import { ChooseAvatarContainer } from "./styled";
 
 const ChooseAvatar = () => {
@@ -9,7 +12,20 @@ const ChooseAvatar = () => {
     <ChooseAvatarContainer>
       <Label>Choose an avatar</Label>
 
-      <UserWrapper>{/* <BoyIcon className="icon" /> */}</UserWrapper>
+      <AvatarWrapper>
+        <UserWrapper>
+          <GirlAvatar className="icon" />
+        </UserWrapper>
+        <UserWrapper>
+          <BoyAvatar className="icon" />
+        </UserWrapper>
+        <UserWrapper>
+          <AlpacaAvatar className="icon" />
+        </UserWrapper>
+        <UserWrapper>
+          <KnightAvatar className="icon" />
+        </UserWrapper>
+      </AvatarWrapper>
     </ChooseAvatarContainer>
   );
 };
