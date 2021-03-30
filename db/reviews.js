@@ -31,11 +31,30 @@ export async function insertReview(
 export async function getReviews(db, { first }) {
   try {
     let reviews = null;
+    const lookup = {
+      $lookup: {
+        from: "users",
+        let: { userId: "$userId" },
+        pipeline: [
+          {
+            $match: {
+              $expr: {
+                $and: [{ $eq: ["$$userId", "$_id"] }],
+              },
+            },
+          },
+          { $project: { password: 0 } },
+        ],
+        as: "users",
+      },
+    };
 
     if (first) {
-      reviews = await db.collection("reviews").aggregate([{ $limit: first }]);
+      reviews = await db
+        .collection("reviews")
+        .aggregate([{ $limit: first }, lookup]);
     } else {
-      reviews = await db.collection("reviews").find();
+      reviews = await db.collection("reviews").aggregate([lookup]);
     }
 
     const reviewArray = await reviews.toArray();

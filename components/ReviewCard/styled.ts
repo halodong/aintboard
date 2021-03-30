@@ -1,5 +1,30 @@
 import styled from "styled-components";
 
+export const BgImgWrapper = styled.div`
+  height: 6.5rem;
+  overflow: hidden;
+  transition: 500ms ease all;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+
+export const ReviewContent = styled.div`
+  position: relative;
+  max-height: 5.5rem;
+  overflow: hidden;
+  padding: 0 1rem;
+  transition: 500ms ease all;
+
+  p {
+    font-size: 0.7rem;
+    text-align: center;
+  }
+`;
+
 export const ReviewCardContainer = styled.div`
   width: 26%;
   max-width: 13.25rem;
@@ -10,33 +35,16 @@ export const ReviewCardContainer = styled.div`
   border-radius: 10px;
   overflow: hidden;
   position: relative;
-`;
+  cursor: pointer;
 
-export const BgImgWrapper = styled.div`
-  height: 6.5rem;
-  overflow: hidden;
+  &:hover {
+    ${BgImgWrapper} {
+      height: 3rem;
+    }
 
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-`;
-
-export const UserWrapper = styled.div`
-  position: relative;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  border: 1px solid ${(props) => props.theme.colors.black};
-  background-color: ${(props) => props.theme.colors.white};
-  margin: -1.5rem auto 0;
-  overflow: hidden;
-
-  .icon {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+    ${ReviewContent} {
+      max-height: 10rem;
+    }
   }
 `;
 
@@ -53,32 +61,22 @@ export const ReviewDate = styled.div`
   margin: 0;
 `;
 
-export const ReviewContent = styled.div`
-  position: relative;
-  max-height: 5.5rem;
-  overflow: hidden;
+export const BottomWrapper = styled.div`
+  position: absolute;
+  bottom: 0.5rem;
+  width: 100%;
   padding: 0 1rem;
-
-  p {
-    font-size: 0.7rem;
-    text-align: center;
-  }
 `;
 
 export const Bottom = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 1.5rem;
-
-  .dice {
-    margin-left: 0.5rem;
-  }
 `;
 
 export const BottomRight = styled.div`
   display: flex;
   flex-direction: column;
-  margin-right: 1rem;
 
   h6 {
     margin: 0;
