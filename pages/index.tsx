@@ -23,7 +23,7 @@ export default function Home({ reviews }: Props) {
 
       <Header homepage />
 
-      <ReviewHomepage />
+      <ReviewHomepage reviews={reviewData} />
     </div>
   );
 }

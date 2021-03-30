@@ -33,9 +33,28 @@ export async function getReviews(db, { first }) {
     let reviews = null;
 
     if (first) {
-      reviews = await db.collection("reviews").aggregate([{ $limit: first }]);
+      reviews = await db.collection("reviews").aggregate([
+        { $limit: first },
+        {
+          $lookup: {
+            from: "users",
+            localField: "userId",
+            foreignField: "_id",
+            as: "users",
+          },
+        },
+      ]);
     } else {
-      reviews = await db.collection("reviews").find();
+      reviews = await db.collection("reviews").aggregate([
+        {
+          $lookup: {
+            from: "users",
+            localField: "userId",
+            foreignField: "_id",
+            as: "users",
+          },
+        },
+      ]);
     }
 
     const reviewArray = await reviews.toArray();

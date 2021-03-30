@@ -10,7 +10,9 @@ import {
 } from "./styled";
 import { UserMale, Dice, Comment, HeartLike } from "~/assets/img";
 
-export const ReviewCard = () => {
+import { ReviewData } from "~/types/types";
+
+export const ReviewCard = ({ data }: Props) => {
   return (
     <ReviewCardContainer>
       <BgImgWrapper>
@@ -24,7 +26,7 @@ export const ReviewCard = () => {
         <UserMale className="icon" />
       </UserWrapper>
 
-      <Username>Username1</Username>
+      <Username></Username>
       <ReviewDate>Mar 3, 2021</ReviewDate>
       <ReviewContent>
         <p>
@@ -48,4 +50,8 @@ export const ReviewCard = () => {
       </Bottom>
     </ReviewCardContainer>
   );
+};
+
+type Props = {
+  data: ReviewData;
 };
