@@ -16,7 +16,7 @@ const Navbar = () => {
   const [navbar, setNavbar] = useState(false);
 
   const showNavbar = () =>
-    window.scrollY >= 200 ? setNavbar(true) : setNavbar(false);
+    window.scrollY >= 100 ? setNavbar(true) : setNavbar(false);
 
   useEffect(() => {
     window.addEventListener("scroll", showNavbar);
@@ -34,7 +34,7 @@ const Navbar = () => {
           </a>
         </Link>
 
-        {navbar && <Searchbar />}
+        {navbar && <Searchbar scrolling={navbar} />}
 
         <NavBarButtons>
           <Button bg="white" onClick={() => {}}>

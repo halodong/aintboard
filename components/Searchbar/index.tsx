@@ -9,7 +9,7 @@ import fetcher from "~/util/fetch";
 import debounce from "debounce-promise";
 import { BggBoardgameApiData } from "~/types/types";
 
-const Searchbar = () => {
+const Searchbar = ({ scrolling = false }: Props) => {
   const router = useRouter();
 
   const onSelectChange = (
@@ -49,13 +49,21 @@ const Searchbar = () => {
         placeholder="Find a boardgame"
         styles={customSelectStyles}
       />
-      <div className="links">
-        <Link href="/">Reviews</Link>
-        <Link href="/">Online Battles</Link>
-        <Link href="/">Challenges</Link>
-      </div>
+
+      {!scrolling && (
+        <div className="links">
+          <Link href="/">Reviews</Link>
+          <Link href="/">Online Battles</Link>
+          <Link href="/challenges">Challenges</Link>
+          <Link href="/">Game Nights</Link>
+        </div>
+      )}
     </SearchBarContainer>
   );
+};
+
+type Props = {
+  scrolling: boolean;
 };
 
 export default Searchbar;
