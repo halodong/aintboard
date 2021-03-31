@@ -17,7 +17,7 @@ export const HeaderWrapper = styled.div<HeaderWrappepProps>`
 
   .tent {
     z-index: 1;
-    bottom: 0;
+    bottom: -2px;
   }
 
   .homepage-bg-container {
