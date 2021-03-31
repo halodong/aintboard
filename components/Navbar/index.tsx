@@ -15,13 +15,8 @@ const Navbar = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [navbar, setNavbar] = useState(false);
 
-  const showNavbar = () => {
-    if (window.scrollY >= 200) {
-      setNavbar(true);
-    } else {
-      setNavbar(false);
-    }
-  };
+  const showNavbar = () =>
+    window.scrollY >= 200 ? setNavbar(true) : setNavbar(false);
 
   useEffect(() => {
     window.addEventListener("scroll", showNavbar);

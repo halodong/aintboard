@@ -27,7 +27,7 @@ const ChallengesPage = () => {
       >
         <ChallengesCardContainer>
           {cards.items.map((i, index) => (
-            <ChallengesCard puAmount={index} />
+            <ChallengesCard puAmount={index} key={index} />
           ))}
         </ChallengesCardContainer>
       </InfiniteScroll>

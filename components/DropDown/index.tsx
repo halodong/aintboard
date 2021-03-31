@@ -7,6 +7,8 @@ const DropDown = ({ placeHolder, isName = false }: Props) => {
     <DropDownContainer isName={isName}>
       <Select
         className="select"
+        id="search-select"
+        inputId="search-select"
         placeholder={placeHolder}
         isClearable={true}
         isSearchable={false}

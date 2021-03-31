@@ -6,7 +6,7 @@ export const NavbarContainer = styled.nav<NavbarContainerprops>`
   display: flex;
   align-items: center;
   padding: 0 ${(props) => props.theme.spacing.lg};
-  position: ${(props) => (props.isFixed ? "fixed" : null)};
+  position: ${(props) => (props.isFixed ? "fixed" : "static")};
   width: 100%;
   z-index: 9999;
 
