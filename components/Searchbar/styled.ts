@@ -16,11 +16,17 @@ export const SearchBarContainer = styled.div`
   align-items: center;
 
   .links {
+    width: 40%;
     margin-top: ${(props) => props.theme.spacing.md};
+    display: flex;
+    justify-content: space-between;
 
     a {
+      padding: 0.625rem ${(props) => props.theme.spacing.md};
       color: ${(props) => props.theme.colors.white};
-      padding: 0 3rem;
+      background-color: ${(props) => props.theme.colors.dark};
+      border: 2px solid white;
+      border-radius: ${(props) => props.theme.border["10px"]};
     }
   }
 `;
