@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import Modal from "~/components/Modal";
 import JoinUsForm from "~/components/JoinUsForm";
+import LoginForm from "~/components/LoginForm";
 
 import Searchbar from "~/components/Searchbar";
 
@@ -13,6 +14,7 @@ import Button from "~/components/Button";
 
 const Navbar = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [whichModal, setWhichModal] = useState(0);
   const [navbar, setNavbar] = useState(false);
 
   const showNavbar = () =>
@@ -24,6 +26,19 @@ const Navbar = () => {
       window.removeEventListener("scroll", showNavbar);
     };
   }, [navbar]);
+
+  const cta = [
+    {
+      id: 1,
+      name: "Login",
+      bg: "white",
+    },
+    {
+      id: 2,
+      name: "Join Us!",
+      bg: "lightYellow",
+    },
+  ];
 
   return (
     <NavbarWrapper>
@@ -37,21 +52,30 @@ const Navbar = () => {
         {navbar && <Searchbar scrolling={navbar} />}
 
         <NavBarButtons>
-          <Button bg="white" onClick={() => {}}>
-            Login
-          </Button>
-          <Button bg="lightYellow" onClick={() => setModalIsOpen(true)}>
-            Join us!
-          </Button>
+          {cta.map((btn) => (
+            <Button
+              key={btn.id}
+              bg={btn.bg}
+              onClick={() => {
+                setModalIsOpen(true);
+                setWhichModal(btn.id);
+              }}
+            >
+              {btn.name}
+            </Button>
+          ))}
         </NavBarButtons>
 
-        <Modal
-          isOpen={modalIsOpen}
-          closeModal={() => setModalIsOpen(false)}
-          headerLabel="Join Us"
-        >
-          <JoinUsForm />
-        </Modal>
+        {cta.map((mdl) => (
+          <Modal
+            key={mdl.id}
+            isOpen={modalIsOpen}
+            closeModal={() => setModalIsOpen(false)}
+            headerLabel={whichModal === 1 ? "Login" : "Join Us!"}
+          >
+            {whichModal === 1 ? <LoginForm /> : <JoinUsForm />}
+          </Modal>
+        ))}
       </NavbarContainer>
     </NavbarWrapper>
   );
