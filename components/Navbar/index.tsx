@@ -32,13 +32,11 @@ const Navbar = () => {
       id: 1,
       name: "Login",
       bg: "white",
-      label: "Welcome",
     },
     {
       id: 2,
       name: "Join Us!",
       bg: "lightYellow",
-      label: "Join Us",
     },
   ];
 
@@ -73,7 +71,7 @@ const Navbar = () => {
             key={mdl.id}
             isOpen={modalIsOpen}
             closeModal={() => setModalIsOpen(false)}
-            headerLabel={mdl.label}
+            headerLabel={whichModal === 1 ? "Login" : "Join Us!"}
           >
             {whichModal === 1 ? <LoginForm /> : <JoinUsForm />}
           </Modal>

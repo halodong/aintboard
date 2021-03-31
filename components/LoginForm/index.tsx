@@ -16,7 +16,7 @@ const LoginForm = () => {
       onSubmit={() => {}}
     >
       <Form>
-        <Label>Welcome</Label>
+        <Label>Welcome!</Label>
 
         <InputContainer>
           <Input name="usernameEmail" label="Username/Email" />
