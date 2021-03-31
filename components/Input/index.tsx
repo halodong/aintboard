@@ -12,6 +12,7 @@ export default function Input({
   showRightIcon,
   label,
   type = "text",
+  onChange,
 }: Props) {
   const [field, meta] = useField(name);
   const { setFieldValue, submitForm } = useFormikContext();
@@ -29,7 +30,11 @@ export default function Input({
   };
 
   return (
-    <InputContainer minWidth={minWidth} missingFields={missingFields}>
+    <InputContainer
+      minWidth={minWidth}
+      missingFields={missingFields}
+      onChange={onChange}
+    >
       {showRightIcon && rightIcon === "search" && (
         <SearchIcon
           className="search-icon"
@@ -74,5 +79,5 @@ type Props = {
   showRightIcon?: boolean;
   label?: string;
   type?: string;
-  onBlur?: () => void;
+  onChange?: () => void;
 };
