@@ -42,6 +42,7 @@ const ModalComponent = ({
       style={customStyles}
       closeTimeoutMS={500}
       shouldCloseOnOverlayClick={false}
+      htmlOpenClassName="ReactModal__Html--open"
     >
       <ModalHeader>
         <h3>{headerLabel}</h3>
