@@ -27,6 +27,7 @@ export default function Header({
   homepage,
   isSearchPage = false,
   isChallengesPage = false,
+  tagline,
 }: Props) {
   const router = useRouter();
   const { name } = router.query;
@@ -115,7 +116,14 @@ export default function Header({
       )}
 
       <Tagline homepage={homepage}>
-        Interactive Boardgame <br /> Community
+        {tagline ? (
+          tagline
+        ) : (
+          <>
+            {" "}
+            Interactive Boardgame <br /> Community{" "}
+          </>
+        )}
       </Tagline>
 
       {isSearchPage && <LookingForText>Looking for "{name}"</LookingForText>}
@@ -138,4 +146,5 @@ type Props = {
   homepage?: boolean;
   isSearchPage?: boolean;
   isChallengesPage?: boolean;
+  tagline?: string;
 };
