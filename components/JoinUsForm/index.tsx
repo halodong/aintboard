@@ -4,9 +4,26 @@ import Input from "./../Input";
 import Label from "./../Label";
 import ChooseAvatar from "~/components/Avatar/ChooseAvatar";
 import Button from "~/components/Button/";
-import { InputContainer, ErrorMessage } from "./styled";
+import { InputContainer, ErrorMessage, SignupButton } from "./styled";
+import { useState } from "react";
 
 const JoinUsForm = () => {
+  const [missingFields, setMissingFields] = useState({
+    username: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    passwordConfirmation: "",
+  });
+
+  // const [touchedUsername, setTouchedUsername] = useState(false);
+  // const [touchedFirstname, setTouchedFirstname] = useState(false);
+  // const [touchedLastname, setTouchedLastname] = useState(false);
+  // const [touchedEmail, setTouchedEmail] = useState(false);
+  // const [touchedPassword, setTouchedPassword] = useState(false);
+  // const [touchedConfirm, setTouchedConfirm] = useState(false);
+
   const SignupSchema = Yup.object().shape({
     username: Yup.string()
       .min(4, "Too Short!")
@@ -24,106 +41,128 @@ const JoinUsForm = () => {
       .required("Lastname Required"),
 
     email: Yup.string().email("Invalid email").required("Email Required"),
+
+    password: Yup.string().required("Password is required"),
+
+    passwordConfirmation: Yup.string()
+      .required("Confirm Password")
+      .oneOf([Yup.ref("password"), null], "Passwords must match"),
   });
+
   return (
-    <>
-      <Formik
-        enableReinitialize
-        initialValues={{
-          username: "",
-          firstName: "",
-          lastName: "",
-          email: "",
-          password: "",
-        }}
-        validationSchema={SignupSchema}
-        onSubmit={(values) => {
-          console.log(values);
-        }}
-      >
-        {({ errors, touched }) => (
-          <Form>
-            <Label>Please fill up and submit.</Label>
+    <Formik
+      enableReinitialize
+      initialValues={{
+        username: "",
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        passwordConfirmation: "",
+      }}
+      validationSchema={SignupSchema}
+      validateOnBlur={true}
+      onSubmit={(values) => {}}
+    >
+      {({ errors, touched }) => (
+        <Form>
+          <Label>Please fill up and submit.</Label>
 
-            <InputContainer>
-              <Input name="username" label="Username" />
-              {errors.username && touched.username && (
-                <ErrorMessage>
-                  <ul>{errors.username}</ul>
-                </ErrorMessage>
-              )}
-            </InputContainer>
+          <InputContainer>
+            {errors.username && touched.username && (
+              <ErrorMessage>{errors.username}</ErrorMessage>
+            )}
+            <Input
+              name="username"
+              label="Username"
+              missingFields={missingFields.username}
+            />
+          </InputContainer>
 
-            <InputContainer>
-              <Input name="firstName" label="First Name" />
-              {errors.firstName && touched.firstName && (
-                <ErrorMessage>
-                  <ul>{errors.firstName}</ul>
-                </ErrorMessage>
-              )}
-            </InputContainer>
+          <InputContainer>
+            {errors.firstName && touched.firstName && (
+              <ErrorMessage>{errors.firstName}</ErrorMessage>
+            )}
+            <Input
+              name="firstName"
+              label="First Name"
+              missingFields={missingFields.firstName}
+            />
+          </InputContainer>
 
-            <InputContainer>
-              <Input name="lastName" label="Last Name" />
-              {errors.lastName && touched.lastName && (
-                <ErrorMessage>
-                  <ul>{errors.lastName}</ul>
-                </ErrorMessage>
-              )}
-            </InputContainer>
+          <InputContainer>
+            {errors.lastName && touched.lastName && (
+              <ErrorMessage>{errors.lastName}</ErrorMessage>
+            )}
+            <Input
+              name="lastName"
+              label="Last Name"
+              missingFields={missingFields.lastName}
+            />
+          </InputContainer>
 
-            <InputContainer>
-              <Input name="email" label="Email" type="email" />
-              {errors.email && touched.email && (
-                <ErrorMessage>
-                  <ul>{errors.email}</ul>
-                </ErrorMessage>
-              )}
-            </InputContainer>
+          {console.log(touched)}
 
-            <InputContainer marginbottom="0">
-              <Input name="password" label="Password" type="password" />
-            </InputContainer>
+          <InputContainer>
+            {errors.email && touched.email && (
+              <ErrorMessage>{errors.email}</ErrorMessage>
+            )}
+            <Input
+              name="email"
+              label="Email"
+              type="email"
+              missingFields={missingFields.email}
+            />
+          </InputContainer>
 
-            <ChooseAvatar />
+          <InputContainer>
+            {errors.password && touched.password && (
+              <ErrorMessage>{errors.password}</ErrorMessage>
+            )}
+            <Input
+              name="password"
+              label="Password"
+              type="password"
+              missingFields={missingFields.password}
+            />
+          </InputContainer>
 
+          <InputContainer marginbottom="0">
+            {errors.passwordConfirmation && touched.passwordConfirmation && (
+              <ErrorMessage>{errors.passwordConfirmation}</ErrorMessage>
+            )}
+            <Input
+              name="passwordConfirmation"
+              label="Confirm Password"
+              type="password"
+              missingFields={missingFields.passwordConfirmation}
+            />
+          </InputContainer>
+
+          <ChooseAvatar />
+
+          <SignupButton>
             <Button
               bg="lightYellow"
-              onClick={() => console.log("Welcome Home")}
+              onClick={() => {
+                setMissingFields({
+                  username: errors.username || "",
+                  firstName: errors.firstName || "",
+                  lastName: errors.lastName || "",
+                  email: errors.email || "",
+                  password: errors.password || "",
+                  passwordConfirmation: errors.passwordConfirmation || "",
+                });
+                console.log(errors);
+              }}
             >
               Join
             </Button>
-          </Form>
-        )}
-      </Formik>
-    </>
+          </SignupButton>
+        </Form>
+      )}
+    </Formik>
   );
 };
 
 export default JoinUsForm;
-
-// <Form>
-//           <Label>Please fill up and submit.</Label>
-
-//           <InputContainer>
-//             <Input name="username" label="Username" />
-//           </InputContainer>
-
-//           <InputContainer>
-//             <Input name="firstName" label="First Name" />
-//           </InputContainer>
-
-//           <InputContainer>
-//             <Input name="lastName" label="Last Name" />
-//           </InputContainer>
-
-//           <InputContainer>
-//             <Input name="email" label="Email" type="email" />
-//           </InputContainer>
-
-//           <InputContainer marginbottom="0">
-//             <Input name="password" label="Password" type="password" />
-//           </InputContainer>
-
-//           <ChooseAvatar />
-//         </Form>

@@ -5,6 +5,8 @@ import GirlAvatar from "~/assets/img/GirlAvatar";
 import BoyAvatar from "~/assets/img/BoyAvatar";
 import AlpacaAvatar from "~/assets/img/AlpacaAvatar";
 import KnightAvatar from "~/assets/img/KnightAvatar";
+import DragonAvatar from "~/assets/img/dragon";
+import WizardAvatar from "~/assets/img/wizardAvatar";
 import { ChooseAvatarContainer } from "./styled";
 
 const ChooseAvatar = () => {
@@ -24,6 +26,13 @@ const ChooseAvatar = () => {
         </UserWrapper>
         <UserWrapper>
           <KnightAvatar className="icon" />
+        </UserWrapper>
+
+        <UserWrapper className="special-icon">
+          <DragonAvatar className="icon" />
+        </UserWrapper>
+        <UserWrapper className="special-icon">
+          <WizardAvatar className="icon" />
         </UserWrapper>
       </AvatarWrapper>
     </ChooseAvatarContainer>

@@ -7,10 +7,16 @@ export const InputContainer = styled.div<InputContainerProps>`
 `;
 
 export const ErrorMessage = styled.div`
+  display: flex;
+  justify-content: flex-end;
   color: ${theme.colors.errorRed};
-  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 `;
 
+export const SignupButton = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 type InputContainerProps = {
   marginbottom?: string;
 };
