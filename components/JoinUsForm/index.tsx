@@ -17,13 +17,6 @@ const JoinUsForm = () => {
     passwordConfirmation: "",
   });
 
-  // const [touchedUsername, setTouchedUsername] = useState(false);
-  // const [touchedFirstname, setTouchedFirstname] = useState(false);
-  // const [touchedLastname, setTouchedLastname] = useState(false);
-  // const [touchedEmail, setTouchedEmail] = useState(false);
-  // const [touchedPassword, setTouchedPassword] = useState(false);
-  // const [touchedConfirm, setTouchedConfirm] = useState(false);
-
   const SignupSchema = Yup.object().shape({
     username: Yup.string()
       .min(4, "Too Short!")
