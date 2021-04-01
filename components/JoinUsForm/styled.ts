@@ -11,6 +11,7 @@ export const ErrorMessage = styled.div`
   justify-content: flex-end;
   color: ${theme.colors.errorRed};
   margin-bottom: 0.5rem;
+  font-size: 0.8rem;
 `;
 
 export const SignupButton = styled.div`
