@@ -5,6 +5,7 @@ import { useField, useFormikContext } from "formik";
 
 export default function Input({
   minWidth,
+  missingFields,
   placeholder,
   name,
   rightIcon,
@@ -28,7 +29,7 @@ export default function Input({
   };
 
   return (
-    <InputContainer minWidth={minWidth}>
+    <InputContainer minWidth={minWidth} missingFields={missingFields}>
       {showRightIcon && rightIcon === "search" && (
         <SearchIcon
           className="search-icon"
@@ -65,6 +66,7 @@ export default function Input({
 }
 
 type Props = {
+  missingFields: string;
   name: string;
   minWidth?: string;
   placeholder?: string;

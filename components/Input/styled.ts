@@ -29,7 +29,7 @@ export const InputContainer = styled.div<InputContainerProps>`
     width: 100%;
     height: 3rem;
     outline: 0;
-    border: 1px solid #ddd;
+    border: 1px solid ${(props) => (props.missingFields ? "#fc5c5c" : "#ddd")};
     border-radius: 4px;
     color: white;
     background: ${(props) => props.theme.colors.inputDark};
@@ -58,6 +58,7 @@ export const InputContainer = styled.div<InputContainerProps>`
 
 type InputContainerProps = {
   minWidth?: string;
+  missingFields: string;
 };
 
 export const InputStyled = styled.input`

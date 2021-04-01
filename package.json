@@ -32,7 +32,8 @@
     "react-select": "^4.3.0",
     "styled-components": "^5.2.1",
     "swr": "^0.5.2",
-    "xml-js": "^1.6.11"
+    "xml-js": "^1.6.11",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "@babel/plugin-transform-react-jsx": "^7.12.17",
