@@ -16,7 +16,7 @@ export const SearchBarContainer = styled.div`
   align-items: center;
 
   .links {
-    width: 40%;
+    width: 40rem;
     margin-top: ${(props) => props.theme.spacing.md};
     display: flex;
     justify-content: space-between;
