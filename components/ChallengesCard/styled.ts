@@ -16,6 +16,7 @@ export const PowerUpIcon = styled.div`
     border-bottom-left-radius: ${(props) => props.theme.border["10px"]};
     height: 100%;
     width: 100%;
+    object-fit: cover;
   }
 `;
 

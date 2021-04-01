@@ -1,7 +1,7 @@
 import Header from "~/components/Header";
 import ChallengesPage from "~/components/ChallengesPage";
 
-const challenges = () => {
+const Challenges = () => {
   return (
     <div>
       <Header isChallengesPage />
@@ -10,4 +10,4 @@ const challenges = () => {
   );
 };
 
-export default challenges;
+export default Challenges;
