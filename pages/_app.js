@@ -30,10 +30,25 @@ const GlobalStyle = createGlobalStyle`
 
   .ReactModal__Overlay--after-open{
       opacity: 1;
+      background: rgba(0, 0, 0, 0.5) !important;
   }
 
   .ReactModal__Overlay--before-close{
       opacity: 0;
+  }
+
+  .ReactModal__Body--open {
+    position: static;
+    overflow-y: scroll;
+  }
+
+  .ReactModal__Html--open {
+    overflow-y: hidden;
+  }
+
+  .ReactModalPortal {
+    position: fixed;
+    z-index: 9999 !important;
   }
 `;
 
