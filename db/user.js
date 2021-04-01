@@ -67,12 +67,15 @@ export async function authenticateUser(db, { email, password }) {
 
         // Sign token
         const jwtToken = await jwt.sign(payload, process.env.TOKEN_SECRET, {
-          expiresIn: 900, // 15 minutes in seconds
+          expiresIn: 3600, // 1 hour
         });
+
+        delete user.password;
 
         return getSuccessResponse({
           message: "Login Successful",
           data: {
+            user: user,
             token: jwtToken,
           },
         });

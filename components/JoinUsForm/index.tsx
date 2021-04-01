@@ -60,7 +60,7 @@ const JoinUsForm = () => {
             <Input
               name="username"
               label="Username"
-              missingFields={errors.username || ""}
+              error={errors.username || ""}
             />
           </InputContainer>
 
@@ -71,7 +71,7 @@ const JoinUsForm = () => {
             <Input
               name="firstName"
               label="First Name"
-              missingFields={errors.firstName || ""}
+              error={errors.firstName || ""}
             />
           </InputContainer>
 
@@ -82,7 +82,7 @@ const JoinUsForm = () => {
             <Input
               name="lastName"
               label="Last Name"
-              missingFields={errors.lastName || ""}
+              error={errors.lastName || ""}
             />
           </InputContainer>
 
@@ -94,7 +94,7 @@ const JoinUsForm = () => {
               name="email"
               label="Email"
               type="email"
-              missingFields={errors.email || ""}
+              error={errors.email || ""}
             />
           </InputContainer>
 
@@ -106,7 +106,7 @@ const JoinUsForm = () => {
               name="password"
               label="Password"
               type="password"
-              missingFields={errors.password || ""}
+              error={errors.password || ""}
             />
           </InputContainer>
 
@@ -118,7 +118,7 @@ const JoinUsForm = () => {
               name="passwordConfirmation"
               label="Confirm Password"
               type="password"
-              missingFields={errors.passwordConfirmation || ""}
+              error={errors.passwordConfirmation || ""}
             />
           </InputContainer>
 
