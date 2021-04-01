@@ -5,16 +5,8 @@ import Label from "./../Label";
 import ChooseAvatar from "~/components/Avatar/ChooseAvatar";
 import Button from "~/components/Button/";
 import { InputContainer, ErrorMessage, SignupButton } from "./styled";
-import { useState } from "react";
 
 const JoinUsForm = () => {
-  const [username, setUsername] = useState("");
-  const [firstname, setFirstname] = useState("");
-  const [lastName, setLastname] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirmation, setPasswordConfirmation] = useState("");
-
   const SignupSchema = Yup.object().shape({
     username: Yup.string()
       .min(3, "Too Short!")
@@ -33,14 +25,15 @@ const JoinUsForm = () => {
 
     email: Yup.string().email("Invalid email").required("Email Required"),
 
-    password: Yup.string().required("Password is required"),
+    password: Yup.string()
+      .min(8, "Password must have at least 8 characters")
+      .required("Password is required"),
 
     passwordConfirmation: Yup.string()
       .required("Confirm Password")
       .oneOf([Yup.ref("password"), null], "Passwords must match"),
   });
 
-  console.log(firstname);
   return (
     <Formik
       enableReinitialize
@@ -67,8 +60,7 @@ const JoinUsForm = () => {
             <Input
               name="username"
               label="Username"
-              missingFields={username}
-              onChange={() => setUsername(errors.username || "")}
+              missingFields={errors.username || ""}
             />
           </InputContainer>
 
@@ -79,8 +71,7 @@ const JoinUsForm = () => {
             <Input
               name="firstName"
               label="First Name"
-              missingFields={firstname}
-              onChange={() => setFirstname(errors.firstName || "")}
+              missingFields={errors.firstName || ""}
             />
           </InputContainer>
 
@@ -91,8 +82,7 @@ const JoinUsForm = () => {
             <Input
               name="lastName"
               label="Last Name"
-              missingFields={lastName}
-              onChange={() => setLastname(errors.lastName || "")}
+              missingFields={errors.lastName || ""}
             />
           </InputContainer>
 
@@ -104,8 +94,7 @@ const JoinUsForm = () => {
               name="email"
               label="Email"
               type="email"
-              missingFields={email}
-              onChange={() => setEmail(errors.email || "")}
+              missingFields={errors.email || ""}
             />
           </InputContainer>
 
@@ -117,8 +106,7 @@ const JoinUsForm = () => {
               name="password"
               label="Password"
               type="password"
-              missingFields={password}
-              onChange={() => setPassword(errors.password || "")}
+              missingFields={errors.password || ""}
             />
           </InputContainer>
 
@@ -130,25 +118,14 @@ const JoinUsForm = () => {
               name="passwordConfirmation"
               label="Confirm Password"
               type="password"
-              missingFields={passwordConfirmation}
-              onChange={() => setPasswordConfirmation(errors.password || "")}
+              missingFields={errors.passwordConfirmation || ""}
             />
           </InputContainer>
 
           <ChooseAvatar />
 
           <SignupButton>
-            <Button
-              bg="lightYellow"
-              onClick={() => {
-                setUsername(errors.username || "");
-                setFirstname(errors.firstName || "");
-                setLastname(errors.lastName || "");
-                setEmail(errors.email || "");
-                setPassword(errors.password || "");
-                setPasswordConfirmation(errors.password || "");
-              }}
-            >
+            <Button bg="lightYellow" onClick={() => {}}>
               Join
             </Button>
           </SignupButton>

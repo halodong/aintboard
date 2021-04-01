@@ -15,7 +15,7 @@ export const ErrorMessage = styled.div`
 
 export const SignupButton = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
 `;
 type InputContainerProps = {
   marginbottom?: string;

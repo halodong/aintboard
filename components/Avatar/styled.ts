@@ -19,6 +19,7 @@ export const UserWrapper = styled.div`
 
   &.special-icon {
     position: relative;
+    cursor: auto;
 
     &:after {
       content: "";
