@@ -13,6 +13,8 @@ import Filter from "~/components/Filter";
 import Navbar from "~/components/Navbar";
 import Searchbar from "~/components/Searchbar";
 
+import { UserCookies } from "~/types/types";
+
 export default function Header({
   homepage,
   isSearchPage = false,

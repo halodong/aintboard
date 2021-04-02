@@ -1,5 +1,6 @@
 import "./../fonts/fonts.css";
 
+import { Toast } from "~/components/Toast";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { theme } from "~/styles/theme";
 
@@ -48,7 +49,7 @@ const GlobalStyle = createGlobalStyle`
 
   .ReactModalPortal {
     position: fixed;
-    z-index: 9999 !important;
+    z-index: 99 !important;
   }
 `;
 
@@ -56,6 +57,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
+      <Toast />
       <Component {...pageProps} />
     </ThemeProvider>
   );

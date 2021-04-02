@@ -10,10 +10,20 @@ export async function insertUser(
   { firstName, lastName, email, password, role = "guest", username }
 ) {
   try {
-    const checkUser = await db.collection("users").findOne({ email: email });
+    const checkEmail = await db.collection("users").findOne({ email });
 
-    if (checkUser) {
+    if (checkEmail) {
       return getFailedResponse("error", "db/user.js", "Email already exists");
+    }
+
+    const checkUsername = await db.collection("users").findOne({ username });
+
+    if (checkUsername) {
+      return getFailedResponse(
+        "error",
+        "db/user.js",
+        "Username already exists"
+      );
     }
 
     // hash the password
@@ -43,9 +53,11 @@ export async function insertUser(
   }
 }
 
-export async function authenticateUser(db, { email, password }) {
+export async function authenticateUser(db, { email, username, password }) {
   try {
-    const user = await db.collection("users").findOne({ email: email });
+    const user = await db
+      .collection("users")
+      .findOne({ $or: [{ email }, { username }] });
 
     if (!user) {
       return getFailedResponse("error", "db/user.js", "Email is wrong");
@@ -53,7 +65,6 @@ export async function authenticateUser(db, { email, password }) {
 
     if (user) {
       const userId = user._id,
-        userEmail = user.email,
         userPassword = user.password;
 
       const compare = await bcrypt.compare(password, userPassword);
@@ -62,17 +73,19 @@ export async function authenticateUser(db, { email, password }) {
         //JWT Payload
         const payload = {
           id: userId,
-          email: userEmail,
         };
 
         // Sign token
         const jwtToken = await jwt.sign(payload, process.env.TOKEN_SECRET, {
-          expiresIn: 900, // 15 minutes in seconds
+          expiresIn: process.env.TOKEN_EXPIRY,
         });
+
+        delete user.password;
 
         return getSuccessResponse({
           message: "Login Successful",
           data: {
+            user: user,
             token: jwtToken,
           },
         });

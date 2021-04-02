@@ -1,21 +1,28 @@
 import React, { useState, useEffect } from "react";
-
 import Link from "next/link";
 
 import Modal from "~/components/Modal";
 import JoinUsForm from "~/components/JoinUsForm";
 import LoginForm from "~/components/LoginForm";
-
 import Searchbar from "~/components/Searchbar";
-
-import { NavbarContainer, NavBarButtons, NavbarWrapper } from "./styled";
-import WhiteLogo from "~/assets/img/white-logo.svg";
 import Button from "~/components/Button";
+
+import {
+  NavbarContainer,
+  NavBarButtons,
+  NavbarWrapper,
+  MenuIcon,
+} from "./styled";
+import WhiteLogo from "~/assets/img/white-logo.svg";
+
+import useCurrentUser from "~/hooks/useCurrentUser";
 
 const Navbar = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [whichModal, setWhichModal] = useState(0);
   const [navbar, setNavbar] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
+  const user = useCurrentUser();
 
   const showNavbar = () =>
     window.scrollY >= 100 ? setNavbar(true) : setNavbar(false);
@@ -51,29 +58,42 @@ const Navbar = () => {
 
         {navbar && <Searchbar scrolling={navbar} />}
 
-        <NavBarButtons>
-          {cta.map((btn) => (
-            <Button
-              key={btn.id}
-              bg={btn.bg}
-              onClick={() => {
-                setModalIsOpen(true);
-                setWhichModal(btn.id);
-              }}
-            >
-              {btn.name}
-            </Button>
-          ))}
-        </NavBarButtons>
+        {!user?.accessToken ? (
+          <NavBarButtons>
+            {cta.map((btn) => (
+              <Button
+                key={btn.id}
+                bg={btn.bg}
+                onClick={() => {
+                  setModalIsOpen(true);
+                  setWhichModal(btn.id);
+                }}
+              >
+                {btn.name}
+              </Button>
+            ))}
+          </NavBarButtons>
+        ) : (
+          <MenuIcon onClick={() => setOpenMenu(!openMenu)} openMenu={openMenu}>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </MenuIcon>
+        )}
 
         {cta.map((mdl) => (
           <Modal
-            key={mdl.id}
+            key={`${mdl.name}-${mdl.id}`}
             isOpen={modalIsOpen}
             closeModal={() => setModalIsOpen(false)}
             headerLabel={whichModal === 1 ? "Login" : "Join Us!"}
           >
-            {whichModal === 1 ? <LoginForm /> : <JoinUsForm />}
+            {whichModal === 1 ? (
+              <LoginForm closeModal={() => setModalIsOpen(false)} />
+            ) : (
+              <JoinUsForm closeModal={() => setModalIsOpen(false)} />
+            )}
           </Modal>
         ))}
       </NavbarContainer>

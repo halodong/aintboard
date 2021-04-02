@@ -9,13 +9,13 @@ handler.use(all);
 
 handler.post(async (req, res) => {
   const {
-    firstName,
-    lastName,
+    firstName = "",
+    lastName = "",
     email,
     role = "guest",
     username,
     password,
-  } = req.body;
+  } = JSON.parse(req.body);
 
   const user = await insertUser(req.db, {
     firstName,
@@ -26,7 +26,7 @@ handler.post(async (req, res) => {
     username,
   });
 
-  return res.json({ user });
+  return res.json(user);
 });
 
 export default handler;
