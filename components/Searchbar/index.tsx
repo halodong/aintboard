@@ -63,7 +63,7 @@ const Searchbar = ({ scrolling = false }: Props) => {
 };
 
 type Props = {
-  scrolling: boolean;
+  scrolling?: boolean;
 };
 
 export default Searchbar;
