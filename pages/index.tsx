@@ -14,6 +14,10 @@ export default function Home({ reviews }: Props) {
     { initialData: reviews }
   );
 
+  if (typeof window === "undefined") {
+    return <></>;
+  }
+
   return (
     <div>
       <Head>
@@ -32,7 +36,7 @@ type Props = {
   reviews: ReviewApiResponse;
 };
 
-export async function getStaticProps() {
+export const getStaticProps = async () => {
   const reviews = await fetcher(
     `${process.env.NEXT_PUBLIC_API_URL}/api/reviews?first=5`
   );
@@ -42,4 +46,4 @@ export async function getStaticProps() {
       reviews,
     },
   };
-}
+};

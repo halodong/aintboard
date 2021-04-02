@@ -66,7 +66,7 @@ export default function Input({
 }
 
 type Props = {
-  error: string;
+  error?: string;
   name: string;
   minWidth?: string;
   placeholder?: string;

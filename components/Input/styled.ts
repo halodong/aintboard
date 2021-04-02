@@ -58,7 +58,7 @@ export const InputContainer = styled.div<InputContainerProps>`
 
 type InputContainerProps = {
   minWidth?: string;
-  error: string;
+  error?: string;
 };
 
 export const InputStyled = styled.input`

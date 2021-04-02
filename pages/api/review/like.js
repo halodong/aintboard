@@ -1,11 +1,11 @@
 import nc from "next-connect";
 
 import { likeReview } from "~/db/reviewLikes";
-import { all } from "~/middlewares/index";
+import { all, verifyToken } from "~/middlewares/index";
 
 const handler = nc();
 
-handler.use(all);
+handler.use(all).use(verifyToken);
 
 handler.post(async (req, res) => {
   const { userId, reviewId } = req.body;
@@ -14,6 +14,9 @@ handler.post(async (req, res) => {
     userId,
     reviewId,
   });
+
+  // this token is from refreshing token in verifyToken
+  reviewLike.token = req.jwtToken;
 
   return res.json(reviewLike);
 });
