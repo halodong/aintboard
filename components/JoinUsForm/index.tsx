@@ -1,10 +1,39 @@
 import { Formik, Form } from "formik";
+import * as Yup from "yup";
 import Input from "./../Input";
 import Label from "./../Label";
 import ChooseAvatar from "~/components/Avatar/ChooseAvatar";
-import { InputContainer } from "./styled";
+import Button from "~/components/Button/";
+import { InputContainer, ErrorMessage, SignupButton } from "./styled";
 
 const JoinUsForm = () => {
+  const SignupSchema = Yup.object().shape({
+    username: Yup.string()
+      .min(3, "Too Short!")
+      .max(55, "Too Long!")
+      .required("Username Required"),
+
+    firstName: Yup.string()
+      .min(3, "Too Short!")
+      .max(55, "Too Long!")
+      .required("Firstname Required"),
+
+    lastName: Yup.string()
+      .min(3, "Too Short!")
+      .max(55, "Too Long!")
+      .required("Lastname Required"),
+
+    email: Yup.string().email("Invalid email").required("Email Required"),
+
+    password: Yup.string()
+      .min(8, "Password must have at least 8 characters")
+      .required("Password is required"),
+
+    passwordConfirmation: Yup.string()
+      .required("Confirm Password")
+      .oneOf([Yup.ref("password"), null], "Passwords must match"),
+  });
+
   return (
     <Formik
       enableReinitialize
@@ -14,34 +43,94 @@ const JoinUsForm = () => {
         lastName: "",
         email: "",
         password: "",
+        passwordConfirmation: "",
       }}
-      onSubmit={() => {}}
+      validationSchema={SignupSchema}
+      validateOnBlur={true}
+      onSubmit={(values) => {}}
     >
-      <Form>
-        <Label>Please fill up and submit.</Label>
+      {({ errors, touched }) => (
+        <Form>
+          <Label>Please fill up and submit.</Label>
 
-        <InputContainer>
-          <Input name="username" label="Username" />
-        </InputContainer>
+          <InputContainer>
+            {errors.username && touched.username && (
+              <ErrorMessage>{errors.username}</ErrorMessage>
+            )}
+            <Input
+              name="username"
+              label="Username"
+              missingFields={errors.username || ""}
+            />
+          </InputContainer>
 
-        <InputContainer>
-          <Input name="firstName" label="First Name" />
-        </InputContainer>
+          <InputContainer>
+            {errors.firstName && touched.firstName && (
+              <ErrorMessage>{errors.firstName}</ErrorMessage>
+            )}
+            <Input
+              name="firstName"
+              label="First Name"
+              missingFields={errors.firstName || ""}
+            />
+          </InputContainer>
 
-        <InputContainer>
-          <Input name="lastName" label="Last Name" />
-        </InputContainer>
+          <InputContainer>
+            {errors.lastName && touched.lastName && (
+              <ErrorMessage>{errors.lastName}</ErrorMessage>
+            )}
+            <Input
+              name="lastName"
+              label="Last Name"
+              missingFields={errors.lastName || ""}
+            />
+          </InputContainer>
 
-        <InputContainer>
-          <Input name="email" label="Email" type="email" />
-        </InputContainer>
+          <InputContainer>
+            {errors.email && touched.email && (
+              <ErrorMessage>{errors.email}</ErrorMessage>
+            )}
+            <Input
+              name="email"
+              label="Email"
+              type="email"
+              missingFields={errors.email || ""}
+            />
+          </InputContainer>
 
-        <InputContainer marginbottom="0">
-          <Input name="password" label="Password" type="password" />
-        </InputContainer>
+          <InputContainer>
+            {errors.password && touched.password && (
+              <ErrorMessage>{errors.password}</ErrorMessage>
+            )}
+            <Input
+              name="password"
+              label="Password"
+              type="password"
+              missingFields={errors.password || ""}
+            />
+          </InputContainer>
 
-        <ChooseAvatar />
-      </Form>
+          <InputContainer marginbottom="0">
+            {errors.passwordConfirmation && touched.passwordConfirmation && (
+              <ErrorMessage>{errors.passwordConfirmation}</ErrorMessage>
+            )}
+            <Input
+              name="passwordConfirmation"
+              label="Confirm Password"
+              type="password"
+              missingFields={errors.passwordConfirmation || ""}
+            />
+          </InputContainer>
+
+          <ChooseAvatar />
+
+          <SignupButton>
+            <Button bg="lightYellow" onClick={() => {}}>
+              Join
+            </Button>
+          </SignupButton>
+        </Form>
+      )}
     </Formik>
   );
 };

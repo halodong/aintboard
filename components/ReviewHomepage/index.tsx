@@ -3,7 +3,9 @@ import { ReviewContainer, ReviewCardWrapper } from "./styled";
 import { ReviewCard } from "~/components/ReviewCard";
 import WaterLeftSvg from "~/assets/img/water-left.svg";
 
-const ReviewHomepage = () => {
+import { ReviewApiResponse } from "~/types/types";
+
+const ReviewHomepage = ({ reviews }: Props) => {
   return (
     <ReviewContainer>
       <Maze className="maze" />
@@ -11,11 +13,9 @@ const ReviewHomepage = () => {
       <WaterRight className="water-right" />
 
       <ReviewCardWrapper>
-        <ReviewCard />
-        <ReviewCard />
-        <ReviewCard />
-        <ReviewCard />
-        <ReviewCard />
+        {reviews?.response?.data?.reviews?.map((r) => (
+          <ReviewCard key={r._id} data={r} />
+        ))}
         <div className="mainButtonContainer">
           <button>See more Reviews</button>
           <button>Make a Review</button>
@@ -23,6 +23,10 @@ const ReviewHomepage = () => {
       </ReviewCardWrapper>
     </ReviewContainer>
   );
+};
+
+type Props = {
+  reviews?: ReviewApiResponse;
 };
 
 export default ReviewHomepage;
