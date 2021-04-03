@@ -1,6 +1,7 @@
 import { Formik, Form } from "formik";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 import Input from "~/components/Common/Input";
 import Label from "~/components/Common/Label";
@@ -18,26 +19,21 @@ const LoginForm = ({ closeModal }: Props) => {
       }}
       onSubmit={async (values, { resetForm }) => {
         try {
-          const response = await fetch("/api/login/", {
-            method: "POST",
-            body: JSON.stringify({
-              username: values.usernameEmail,
-              email: values.usernameEmail,
-              password: values.password,
-            }),
+          const userResponse = await axios.post("/api/login/", {
+            username: values.usernameEmail,
+            email: values.usernameEmail,
+            password: values.password,
           });
 
-          const userResponse = await response.json();
-
-          if (!userResponse.success) {
-            toast.error(userResponse.message);
+          if (!userResponse.data.success) {
+            toast.error(userResponse.data.message);
             return;
           }
 
-          Cookies.set("access_token", userResponse.response.data.token);
+          Cookies.set("access_token", userResponse.data.response.data.token);
           Cookies.set(
             "user_data",
-            JSON.stringify(userResponse.response.data.user)
+            JSON.stringify(userResponse.data.response.data.user)
           );
 
           closeModal();

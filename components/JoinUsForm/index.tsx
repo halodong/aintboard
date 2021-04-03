@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 import Input from "../Common/Input";
 import Label from "../Common/Label";
@@ -48,20 +49,15 @@ const JoinUsForm = ({ closeModal }: Props) => {
         }
 
         try {
-          const response = await fetch("/api/signup/", {
-            method: "POST",
-            body: JSON.stringify({
-              username: values.username,
-              email: values.email,
-              password: values.password,
-              avatar,
-            }),
+          const userResponse = await axios.post("/api/signup", {
+            username: values.username,
+            email: values.email,
+            password: values.password,
+            avatar,
           });
 
-          const userResponse = await response.json();
-
-          if (!userResponse.success) {
-            toast.error(userResponse.message);
+          if (!userResponse.data.success) {
+            toast.error(userResponse.data.message);
             return;
           }
 
