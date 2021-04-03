@@ -5,7 +5,7 @@ import { ChallengesPageWrapper, ChallengesCardContainer } from "./styled";
 import ChallengesCard from "~/components/Challenges/ChallengesCard";
 
 const ChallengesPage = () => {
-  const [cards, setCards] = useState<CardArray>({
+  const [cards, setCards] = useState({
     items: Array.from({ length: 9 }),
   });
 
@@ -26,17 +26,13 @@ const ChallengesPage = () => {
         loader={<h3>Loading...</h3>}
       >
         <ChallengesCardContainer>
-          {cards.items.map((i: number) => (
-            <ChallengesCard puAmount={i} key={i} />
+          {cards.items.map((_, index) => (
+            <ChallengesCard puAmount={index} key={index} />
           ))}
         </ChallengesCardContainer>
       </InfiniteScroll>
     </ChallengesPageWrapper>
   );
-};
-
-type CardArray = {
-  items: number[];
 };
 
 export default ChallengesPage;

@@ -17,6 +17,7 @@ declare module "styled-components" {
       lighterGreen: string;
       mediumGreen: string;
       mediumRed: string;
+      paleGray: string;
     };
     breakpoints: {
       xs: string;
@@ -60,6 +61,7 @@ export const theme: DefaultTheme = {
     black: "#000000",
     inputDark: "#2B2B2B",
     lightGray: "#AFA5A5",
+    paleGray: "#CECECE",
     dark: "#353535",
     lightYellow: "#FAFAEB",
     darkGreen: "#234C4C",

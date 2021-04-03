@@ -50,6 +50,7 @@ export const MenuIcon = styled.div<MenuIconProps>`
   -o-transition: .5s ease-in-out;
   transition: .5s ease-in-out;
   cursor: pointer;
+  z-index: 999999;
 
   span {
     display: block;

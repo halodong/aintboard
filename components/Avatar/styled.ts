@@ -1,5 +1,8 @@
 import styled from "styled-components";
-import { CHOOSE_AVATAR_COMPONENT } from "~/util/constants";
+import {
+  REVIEWS_HOMEPAGE_COMPONENT,
+  SIDEBAR_COMPONENT,
+} from "~/util/constants";
 
 export const UserWrapper = styled.div<UserWrapperProps>`
   position: relative;
@@ -12,7 +15,11 @@ export const UserWrapper = styled.div<UserWrapperProps>`
       : `1px solid ${props.theme.colors.black}`};
   background-color: ${(props) => props.theme.colors.white};
   margin: ${(props) =>
-    props.from === CHOOSE_AVATAR_COMPONENT ? "0 auto" : " -1.5rem auto 0"};
+    props.from === REVIEWS_HOMEPAGE_COMPONENT
+      ? "-1.5rem auto 0"
+      : props.from === SIDEBAR_COMPONENT
+      ? 0
+      : "0 auto"};
   overflow: hidden;
   transition: 300ms ease all;
   cursor: pointer;

@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import {
   ReviewCardContainer,
   BgImgWrapper,
@@ -8,13 +9,10 @@ import {
   BottomRight,
   BottomWrapper,
 } from "./styled";
-import { UserMale, Dice } from "~/assets/img";
-import CommentIcon from "~/assets/img/comment.svg";
-import HeartLikeIcon from "~/assets/img/heart-like.svg";
-import { UserWrapper } from "~/components/Avatar/styled";
-import { ReviewData } from "~/types/types";
-
-import dayjs from "dayjs";
+import { UserMale, Dice, CommentIcon, HeartLikeIcon } from "assets/img";
+import { UserWrapper } from "components/Avatar/styled";
+import { ReviewData } from "types/types";
+import { REVIEWS_HOMEPAGE_COMPONENT } from "~/util/constants";
 
 export const ReviewCard = ({ data }: Props) => {
   return (
@@ -26,7 +24,7 @@ export const ReviewCard = ({ data }: Props) => {
         />
       </BgImgWrapper>
 
-      <UserWrapper>
+      <UserWrapper from={REVIEWS_HOMEPAGE_COMPONENT}>
         <UserMale className="icon" />
       </UserWrapper>
 

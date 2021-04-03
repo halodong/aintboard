@@ -6,6 +6,7 @@ import JoinUsForm from "~/components/JoinUsForm";
 import LoginForm from "~/components/LoginForm";
 import Searchbar from "~/components/Searchbar";
 import Button from "~/components/Common/Button";
+import Sidebar from "~/components/Common/Sidebar";
 
 import {
   NavbarContainer,
@@ -81,6 +82,8 @@ const Navbar = () => {
             <span></span>
           </MenuIcon>
         )}
+
+        <Sidebar menuOpen={openMenu} closeMenu={() => setOpenMenu(false)} />
 
         {cta.map((mdl) => (
           <Modal
