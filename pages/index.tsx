@@ -4,6 +4,7 @@ import useSWR from "swr";
 import Head from "next/head";
 import Header from "~/components/Header";
 import ReviewHomepage from "~/components/Reviews/ReviewHomepage";
+import ChallengesHomepage from "~/components/Challenges/ChallengesHomepage";
 
 import { ReviewApiResponse } from "~/types/types";
 
@@ -28,6 +29,7 @@ export default function Home({ reviews }: Props) {
       <Header homepage />
 
       <ReviewHomepage reviews={reviewData} />
+      <ChallengesHomepage />
     </div>
   );
 }
