@@ -12,5 +12,5 @@ type Props = {
   bg: string;
   children: React.ReactNode;
   onClick?: () => void;
-  type?: string;
+  type?: "button" | "submit" | "reset" | undefined;
 };

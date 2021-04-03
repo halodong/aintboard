@@ -1,6 +1,6 @@
 import { FilterWrapper, Text } from "./styled";
 
-import DropDown from "~/components/DropDown";
+import DropDown from "~/components/Common/DropDown";
 
 const Filter = () => {
   return (

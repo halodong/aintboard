@@ -1,10 +1,11 @@
 import styled, { css } from "styled-components";
 
-export const NavbarContainer = styled.nav<NavbarContainerprops>`
+export const NavbarContainer = styled.nav<NavbarContainerProps>`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: ${(props) => props.theme.colors.dark};
   height: 8rem;
-  display: flex;
-  align-items: center;
   padding: 0 ${(props) => props.theme.spacing.lg};
   position: ${(props) => (props.isFixed ? "fixed" : "static")};
   width: 100%;
@@ -14,14 +15,15 @@ export const NavbarContainer = styled.nav<NavbarContainerprops>`
   transition: all 0.5s ease-out;
 
   .logo {
-    flex: 1;
+    width: 14.25rem;
+    flex: none;
   }
 `;
 export const NavbarWrapper = styled.div`
   height: 8rem;
 `;
 
-type NavbarContainerprops = {
+type NavbarContainerProps = {
   isFixed?: boolean;
 };
 
@@ -39,7 +41,6 @@ export const MenuIcon = styled.div<MenuIconProps>`
   width: 2rem;
   height: 2rem;
   position: relative;
-  margin: 0 auto;
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
   -o-transform: rotate(0deg);
@@ -49,6 +50,7 @@ export const MenuIcon = styled.div<MenuIconProps>`
   -o-transition: .5s ease-in-out;
   transition: .5s ease-in-out;
   cursor: pointer;
+  z-index: 999999;
 
   span {
     display: block;

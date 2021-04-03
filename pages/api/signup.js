@@ -15,6 +15,7 @@ handler.post(async (req, res) => {
     role = "guest",
     username,
     password,
+    avatar,
   } = JSON.parse(req.body);
 
   const user = await insertUser(req.db, {
@@ -24,6 +25,7 @@ handler.post(async (req, res) => {
     password,
     role,
     username,
+    avatar,
   });
 
   return res.json(user);

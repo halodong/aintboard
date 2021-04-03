@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import { ChallengesPageWrapper, ChallengesCardContainer } from "./styled";
-import ChallengesCard from "~/components/ChallengesCard";
+import ChallengesCard from "~/components/Challenges/ChallengesCard";
 
 const ChallengesPage = () => {
   const [cards, setCards] = useState({
@@ -26,7 +26,7 @@ const ChallengesPage = () => {
         loader={<h3>Loading...</h3>}
       >
         <ChallengesCardContainer>
-          {cards.items.map((i, index) => (
+          {cards.items.map((_, index) => (
             <ChallengesCard puAmount={index} key={index} />
           ))}
         </ChallengesCardContainer>

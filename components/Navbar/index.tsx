@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 
-import Modal from "~/components/Modal";
+import Modal from "~/components/Common/Modal";
 import JoinUsForm from "~/components/JoinUsForm";
 import LoginForm from "~/components/LoginForm";
 import Searchbar from "~/components/Searchbar";
-import Button from "~/components/Button";
+import Button from "~/components/Common/Button";
+import Sidebar from "~/components/Common/Sidebar";
 
 import {
   NavbarContainer,
@@ -81,6 +82,8 @@ const Navbar = () => {
             <span></span>
           </MenuIcon>
         )}
+
+        <Sidebar menuOpen={openMenu} closeMenu={() => setOpenMenu(false)} />
 
         {cta.map((mdl) => (
           <Modal

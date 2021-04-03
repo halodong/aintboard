@@ -1,6 +1,6 @@
 import { Maze, WaterRight } from "~/assets/img";
 import { ReviewContainer, ReviewCardWrapper } from "./styled";
-import { ReviewCard } from "~/components/ReviewCard";
+import { ReviewCard } from "~/components/Reviews/ReviewCard";
 import WaterLeftSvg from "~/assets/img/water-left.svg";
 
 import { ReviewApiResponse } from "~/types/types";

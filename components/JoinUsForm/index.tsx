@@ -3,10 +3,10 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 
-import Input from "./../Input";
-import Label from "./../Label";
+import Input from "../Common/Input";
+import Label from "../Common/Label";
 import ChooseAvatar from "~/components/Avatar/ChooseAvatar";
-import Button from "~/components/Button/";
+import Button from "~/components/Common/Button";
 
 import { InputContainer, ErrorMessage, SignupButton } from "./styled";
 
@@ -54,6 +54,7 @@ const JoinUsForm = ({ closeModal }: Props) => {
               username: values.username,
               email: values.email,
               password: values.password,
+              avatar,
             }),
           });
 
