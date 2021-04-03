@@ -71,3 +71,9 @@ export const OnlineBattlesSection = styled.div`
 export const OnlineBattleCardWrapper = styled.div`
   margin: 3rem 0;
 `;
+
+export const NoReviews = styled.h5`
+  color: ${(props) => props.theme.colors.lightGreen};
+  font-family: ${(props) => props.theme.fonts.rubikBold};
+  font-size: 1rem;
+`;

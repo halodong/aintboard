@@ -1,5 +1,4 @@
 import React from "react";
-import useSWR from "swr";
 
 import {
   BoardGamaPageWrapper,
@@ -13,6 +12,7 @@ import {
   ChallengesSection,
   OnlineBattleCardWrapper,
   OnlineBattlesSection,
+  NoReviews,
 } from "./styled";
 
 import CardButton from "~/components/CardButton";
@@ -42,9 +42,13 @@ const BoardGamePage = ({ reviews }: Props) => {
         <ReviewsSection>
           <H1Rubik>REVIEWS</H1Rubik>
           <ReviewsCardWrapper>
-            {reviews?.response?.data?.reviews?.map((r) => (
-              <ReviewCard key={r._id} data={r} />
-            ))}
+            {reviews?.response?.data?.reviews.length > 0 ? (
+              reviews?.response?.data?.reviews?.map((r) => (
+                <ReviewCard key={r._id} data={r} />
+              ))
+            ) : (
+              <NoReviews>No Reviews Yet</NoReviews>
+            )}
           </ReviewsCardWrapper>
         </ReviewsSection>
 

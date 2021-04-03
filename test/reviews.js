@@ -79,4 +79,18 @@ describe("Reviews", () => {
     expect(res.response.data.reviews).to.be.an("array");
     expect(res.response.data.reviews).to.have.length(2);
   });
+
+  it("should get reviews with bgId: 121 with first param", async () => {
+    let res = await getReviews(db, { first: 4, filter: "bgId", field: 121 });
+
+    expect(res.success).to.equal(true);
+    expect(res.response.data.reviews).to.be.an("array");
+  });
+
+  it("should get reviews with bgId: 121 without first param", async () => {
+    let res = await getReviews(db, { filter: "bgId", field: 121 });
+
+    expect(res.success).to.equal(true);
+    expect(res.response.data.reviews).to.be.an("array");
+  });
 });

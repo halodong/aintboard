@@ -47,7 +47,7 @@ export async function getStaticProps({ params }: Params) {
   );
 
   const reviews = await fetcher(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/reviews?first=4`
+    `${process.env.NEXT_PUBLIC_API_URL}/api/reviews?first=4&filter=bgId&field=${bgId}`
   );
 
   return {
