@@ -1,5 +1,5 @@
 import React from "react";
-import ChallengeCard from "~/components/ChallengesCard";
+import ChallengeCard from "~/components/Challenges/ChallengesCard";
 import {
   GameFont,
   Wrapper,

@@ -16,10 +16,10 @@ import {
 } from "./styled";
 
 import CardButton from "~/components/CardButton";
-import Button from "~/components/Button";
-import ChallengesCard from "~/components/ChallengesCard";
+import Button from "~/components/Common/Button";
+import ChallengesCard from "~/components/Challenges/ChallengesCard";
 import OnlineBattleCard from "~/components/OnlineBattleCard";
-import { ReviewCard } from "~/components/ReviewCard";
+import { ReviewCard } from "~/components/Reviews/ReviewCard";
 
 import { ReviewApiResponse } from "~/types/types";
 import fetcher from "~/util/fetch";
