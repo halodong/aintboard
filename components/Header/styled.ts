@@ -4,7 +4,9 @@ export const HeaderWrapper = styled.div<HeaderWrappepProps>`
   width: 100%;
   background-color: ${(props) => props.theme.colors.dark};
   min-height: ${(props) =>
-    props.isSearchPage || props.isChallengePage ? "23rem" : "35rem"};
+    props.isSearchPage || props.isChallengePage || props.isBoardGamePage
+      ? "30rem"
+      : "35rem"};
   position: relative;
 
   .trees-1,
@@ -23,12 +25,12 @@ export const HeaderWrapper = styled.div<HeaderWrappepProps>`
   .homepage-bg-container {
     .trees-1 {
       left: 0;
-      top: 6rem;
+      top: 5.8rem;
     }
 
     .trees-2 {
       right: 0;
-      top: 6.5rem;
+      top: 6.3rem;
     }
 
     .tent {
@@ -42,14 +44,21 @@ export const HeaderWrapper = styled.div<HeaderWrappepProps>`
       background-color: ${(props) => props.theme.colors.dark};
       width: 100%;
       position: absolute;
+      bottom: 0;
+      ${(props) =>
+        props.homepage &&
+        `
       top: 29rem;
+      `}
     }
   }
 `;
 
 type HeaderWrappepProps = {
+  homepage?: boolean;
   isSearchPage?: boolean;
   isChallengePage?: boolean;
+  isBoardGamePage?: boolean;
 };
 
 const baseTaglineStyles = styled.h1`
@@ -91,5 +100,9 @@ export const GameFont = styled.h1`
 `;
 export const ChallengesTagline = styled(baseTaglineStyles)`
   margin-top: 2rem;
+  text-transform: none;
+`;
+
+export const BoardGameName = styled(baseTaglineStyles)`
   text-transform: none;
 `;

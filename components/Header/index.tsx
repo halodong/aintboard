@@ -6,6 +6,7 @@ import {
   LookingForText,
   GameFont,
   ChallengesTagline,
+  BoardGameName,
 } from "./styled";
 import { TreesGroup1, TreesGroup2, Tent } from "~/assets/img";
 
@@ -20,20 +21,24 @@ export default function Header({
   isSearchPage = false,
   isChallengesPage = false,
   tagline,
+  isBoardGamePage = false,
+  children,
 }: Props) {
   const router = useRouter();
   const { name } = router.query;
 
   return (
     <HeaderWrapper
+      homepage={homepage}
       isSearchPage={isSearchPage}
       isChallengePage={isChallengesPage}
+      isBoardGamePage={isBoardGamePage}
     >
       <Navbar />
 
       <Searchbar />
 
-      {homepage && (
+      {(homepage || isBoardGamePage) && (
         <div className="homepage-bg-container">
           <TreesGroup1 className="trees-1" />
           <TreesGroup2 className="trees-2" />
@@ -65,6 +70,8 @@ export default function Header({
       )}
 
       {isChallengesPage && <Filter />}
+
+      {isBoardGamePage && <BoardGameName>{children}</BoardGameName>}
     </HeaderWrapper>
   );
 }
@@ -74,4 +81,6 @@ type Props = {
   isSearchPage?: boolean;
   isChallengesPage?: boolean;
   tagline?: string;
+  isBoardGamePage?: boolean;
+  children?: any;
 };

@@ -26,11 +26,10 @@ export const ReviewContent = styled.div`
 `;
 
 export const ReviewCardContainer = styled.div`
-  width: 26%;
+  width: 100%;
   max-width: 13.25rem;
   height: 20.6rem;
   background-color: ${(props) => props.theme.colors.lightYellow};
-  margin-bottom: 2rem;
   border: 2px solid ${(props) => props.theme.colors.black};
   border-radius: 10px;
   overflow: hidden;

@@ -38,7 +38,8 @@ export const ReviewCardWrapper = styled.div`
   max-width: 52rem;
   margin: 9rem auto 13rem;
   flex-wrap: wrap;
-  justify-content: space-around;
+  gap: 3rem;
+  justify-content: center;
 
   .mainButtonContainer {
     display: flex;
