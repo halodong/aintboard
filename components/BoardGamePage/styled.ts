@@ -27,10 +27,17 @@ export const ReviewsSection = styled.div`
   align-items: center;
 `;
 
-export const H1Rubik = styled.h1`
-  font-family: ${(props) => props.theme.fonts.rubikBold};
+export const Title = styled.h1<TitleProps>`
+  font-family: ${(props) =>
+    props.isGameFont
+      ? props.theme.fonts.gameFont
+      : props.theme.fonts.rubikBold};
   color: ${(props) => props.theme.colors.white};
 `;
+
+type TitleProps = {
+  isGameFont?: boolean;
+};
 
 export const ReviewsCardWrapper = styled.div`
   display: flex;
@@ -46,11 +53,6 @@ export const ChallengesSection = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 2rem 0;
-`;
-
-export const H1GameFont = styled.h2`
-  font-family: ${(props) => props.theme.fonts.gameFont};
-  color: ${(props) => props.theme.colors.white};
 `;
 
 export const ChallengesCardWrapper = styled.div`

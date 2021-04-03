@@ -7,8 +7,7 @@ import {
   RightSide,
   ReviewsSection,
   ReviewsCardWrapper,
-  H1GameFont,
-  H1Rubik,
+  Title,
   ChallengesCardWrapper,
   ChallengesSection,
   OnlineBattleCardWrapper,
@@ -48,7 +47,7 @@ const BoardGamePage = ({ reviews }: Props) => {
       </LeftSide>
       <RightSide>
         <ReviewsSection>
-          <H1Rubik>REVIEWS</H1Rubik>
+          <Title>REVIEWS</Title>
           <ReviewsCardWrapper>
             {reviewData?.response?.data?.reviews?.map((r) => (
               <ReviewCard key={r._id} data={r} />
@@ -57,7 +56,7 @@ const BoardGamePage = ({ reviews }: Props) => {
         </ReviewsSection>
 
         <ChallengesSection>
-          <H1GameFont>CHALLENGES</H1GameFont>
+          <Title isGameFont>CHALLENGES</Title>
           <ChallengesCardWrapper>
             <ChallengesCard />
             <ChallengesCard />
@@ -68,7 +67,7 @@ const BoardGamePage = ({ reviews }: Props) => {
         </ChallengesSection>
 
         <OnlineBattlesSection>
-          <H1GameFont>ONLINE BATTLES</H1GameFont>
+          <Title isGameFont>ONLINE BATTLES</Title>
           <OnlineBattleCardWrapper>
             <OnlineBattleCard />
           </OnlineBattleCardWrapper>
