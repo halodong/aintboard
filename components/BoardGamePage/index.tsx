@@ -1,5 +1,4 @@
 import React from "react";
-import useSWR from "swr";
 
 import {
   BoardGamaPageWrapper,
@@ -13,6 +12,7 @@ import {
   ChallengesSection,
   OnlineBattleCardWrapper,
   OnlineBattlesSection,
+  NoReviews,
 } from "./styled";
 
 import CardButton from "~/components/CardButton";
@@ -21,7 +21,7 @@ import ChallengesCard from "~/components/Challenges/ChallengesCard";
 import OnlineBattleCard from "~/components/OnlineBattleCard";
 import { ReviewCard } from "~/components/Reviews/ReviewCard";
 
-import { ReviewApiResponse } from "~/types/types";
+import { ReviewApiResponse, BggBoardgameData } from "~/types/types";
 
 const cardButton = [
   { id: 1, title: "Follow this boardgame" },
@@ -30,7 +30,7 @@ const cardButton = [
   { id: 4, title: "Create an Online Battle" },
 ];
 
-const BoardGamePage = ({ reviews }: Props) => {
+const BoardGamePage = ({ reviews, bgItem }: Props) => {
   return (
     <BoardGamaPageWrapper>
       <LeftSide>
@@ -42,9 +42,17 @@ const BoardGamePage = ({ reviews }: Props) => {
         <ReviewsSection>
           <H1Rubik>REVIEWS</H1Rubik>
           <ReviewsCardWrapper>
-            {reviews?.response?.data?.reviews?.map((r) => (
-              <ReviewCard key={r._id} data={r} />
-            ))}
+            {reviews?.response?.data?.reviews.length > 0 ? (
+              reviews?.response?.data?.reviews?.map((r) => (
+                <ReviewCard
+                  key={r._id}
+                  data={r}
+                  bgImg={bgItem?.image?.[0]._text?.[0] || ""}
+                />
+              ))
+            ) : (
+              <NoReviews>No Reviews Yet</NoReviews>
+            )}
           </ReviewsCardWrapper>
         </ReviewsSection>
 
@@ -75,6 +83,7 @@ const BoardGamePage = ({ reviews }: Props) => {
 
 type Props = {
   reviews: ReviewApiResponse;
+  bgItem: BggBoardgameData;
 };
 
 export default BoardGamePage;

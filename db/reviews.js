@@ -28,9 +28,12 @@ export async function insertReview(
   }
 }
 
-export async function getReviews(db, { first }) {
+export async function getReviews(db, { first, filter, field }) {
   try {
     let reviews = null;
+    first = first ? parseInt(first) : null;
+
+    //get users data who made the review
     const lookup = {
       $lookup: {
         from: "users",
@@ -49,14 +52,31 @@ export async function getReviews(db, { first }) {
       },
     };
 
-    if (first) {
+    if (filter && field) {
+      field = filter === "bgId" ? parseInt(field) : field;
+
+      let aggregate = [
+        {
+          $match: {
+            [filter]: field,
+          },
+        },
+        lookup,
+      ];
+
+      if (first) {
+        //with limit
+        aggregate.push({ $limit: first });
+      }
+
+      reviews = await db.collection("reviews").aggregate(aggregate);
+    } else if (first) {
       reviews = await db
         .collection("reviews")
         .aggregate([{ $limit: first }, lookup]);
     } else {
       reviews = await db.collection("reviews").aggregate([lookup]);
     }
-
     const reviewArray = await reviews.toArray();
 
     return getSuccessResponse({

@@ -28,10 +28,12 @@ handler.post(async (req, res) => {
 });
 
 handler.get(async (req, res) => {
-  const { first = null } = req.query;
+  const { first = null, filter = null, field = null } = req.query;
 
   const reviews = await getReviews(req.db, {
-    first: parseInt(first),
+    first,
+    filter,
+    field,
   });
 
   return res.json(reviews);
