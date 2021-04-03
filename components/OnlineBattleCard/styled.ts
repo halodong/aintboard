@@ -16,7 +16,9 @@ export const OnlineBattleCardWrapper = styled.div`
 `;
 
 export const BattleImage = styled.div`
+  position: relative;
   width: 40%;
+
   img {
     border-top-left-radius: ${(props) => props.theme.border["10px"]};
     border-bottom-left-radius: ${(props) => props.theme.border["10px"]};
