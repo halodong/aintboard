@@ -22,7 +22,6 @@ import OnlineBattleCard from "~/components/OnlineBattleCard";
 import { ReviewCard } from "~/components/Reviews/ReviewCard";
 
 import { ReviewApiResponse } from "~/types/types";
-import fetcher from "~/util/fetch";
 
 const cardButton = [
   { id: 1, title: "Follow this boardgame" },
@@ -32,13 +31,6 @@ const cardButton = [
 ];
 
 const BoardGamePage = ({ reviews }: Props) => {
-  // Dummy Data
-  const { data: reviewData } = useSWR<ReviewApiResponse>(
-    "/api/reviews?first=4",
-    fetcher,
-    { initialData: reviews }
-  );
-
   return (
     <BoardGamaPageWrapper>
       <LeftSide>
@@ -50,7 +42,7 @@ const BoardGamePage = ({ reviews }: Props) => {
         <ReviewsSection>
           <H1Rubik>REVIEWS</H1Rubik>
           <ReviewsCardWrapper>
-            {reviewData?.response?.data?.reviews?.map((r) => (
+            {reviews?.response?.data?.reviews?.map((r) => (
               <ReviewCard key={r._id} data={r} />
             ))}
           </ReviewsCardWrapper>
@@ -84,17 +76,5 @@ const BoardGamePage = ({ reviews }: Props) => {
 type Props = {
   reviews: ReviewApiResponse;
 };
-
-export async function getStaticProps() {
-  const reviews = await fetcher(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/reviews?first=5`
-  );
-
-  return {
-    props: {
-      reviews,
-    },
-  };
-}
 
 export default BoardGamePage;
