@@ -1,12 +1,12 @@
 const { fetch } = require("promise-path");
 const convert = require("xml-js");
 
-async function retryItems(itemName, retries = 2) {
-  const response = await downloadItems(itemName);
+async function retryItem(bgId, retries = 2) {
+  const response = await downloadItem(bgId);
   if (response.message) {
     // response.message could be an error here
     if (retries > 0) {
-      return retryItems(itemName, retries - 1);
+      return retryItem(bgId, retries - 1);
     } else {
       return {
         items: [],
@@ -17,9 +17,8 @@ async function retryItems(itemName, retries = 2) {
   }
 }
 
-async function downloadItems(itemName) {
-  const converted = itemName.replace(/:\s*/g, " ");
-  const url = `https://www.boardgamegeek.com/xmlapi2/search?query=${converted}&type=boardgame`;
+async function downloadItem(bgId) {
+  const url = `https://www.boardgamegeek.com/xmlapi2/thing?id=${bgId}`;
 
   try {
     const response = await fetch(url);
@@ -31,12 +30,12 @@ async function downloadItems(itemName) {
     });
     return collection;
   } catch (ex) {
-    console.log("Error fetching bg items:", ex, ex.stack);
+    console.log("Error fetching bg data:", ex, ex.stack);
   }
 }
 
 const collect = async (req, res) => {
-  const collection = await retryItems(req.query.itemName);
+  const collection = await retryItem(req.query.bgId);
 
   res.status(200).json(collection);
 };
