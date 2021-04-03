@@ -2,33 +2,34 @@ import Header from "~/components/Header";
 import BoardGamePage from "~/components/BoardGamePage";
 import fetcher from "~/util/fetch";
 
-import { ReviewApiResponse, BggBoardgameApiData } from "~/types/types";
+import { ReviewApiResponse, BggBoardgameData } from "~/types/types";
 
 const BoardgamePage = ({ reviews, bgData }: Props) => {
+  const bgItem = bgData?.items?.[0]?.item?.[0] || null;
+
   return (
     <div>
       <Header isBoardGamePage>
         {/* primary name */}
-        {bgData?.items?.[0]?.item?.[0]?.name?.[0]?._attributes?.value}
+        {bgItem?.name?.[0]?._attributes?.value}
         {/* secondary name wrapped in parenthesis */}
-        {bgData?.items?.[0]?.item?.[0]?.name?.[1] ? (
+        {bgItem?.name?.[1] ? (
           <>
-            <br />({bgData?.items?.[0]?.item?.[0]?.name?.[1]._attributes?.value}
-            )
+            <br />({bgItem?.name?.[1]._attributes?.value})
           </>
         ) : (
           ""
         )}
       </Header>
 
-      <BoardGamePage reviews={reviews} />
+      <BoardGamePage reviews={reviews} bgItem={bgItem} />
     </div>
   );
 };
 
 type Props = {
   reviews: ReviewApiResponse;
-  bgData: BggBoardgameApiData;
+  bgData: BggBoardgameData;
 };
 
 export default BoardgamePage;

@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import { isEmpty } from "lodash";
 import {
   ReviewCardContainer,
   BgImgWrapper,
@@ -14,13 +15,17 @@ import { UserWrapper } from "components/Avatar/styled";
 import { ReviewData } from "types/types";
 import { REVIEWS_HOMEPAGE_COMPONENT } from "~/util/constants";
 
-export const ReviewCard = ({ data }: Props) => {
+export const ReviewCard = ({ data, bgImg }: Props) => {
   return (
     <ReviewCardContainer>
       <BgImgWrapper>
         <img
           alt="boardgame"
-          src="https://cf.geekdo-images.com/0BsjJY9MTlx9DRrlkeE69w__original/img/6AJktf34S4ypVI75ecsfmkDicgA=/0x0/filters:format(jpeg)/pic5482020.jpg"
+          src={
+            !isEmpty(bgImg)
+              ? bgImg
+              : "https://cf.geekdo-images.com/0BsjJY9MTlx9DRrlkeE69w__original/img/6AJktf34S4ypVI75ecsfmkDicgA=/0x0/filters:format(jpeg)/pic5482020.jpg"
+          }
         />
       </BgImgWrapper>
 
@@ -54,4 +59,5 @@ export const ReviewCard = ({ data }: Props) => {
 
 type Props = {
   data: ReviewData;
+  bgImg?: string;
 };

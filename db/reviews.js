@@ -55,29 +55,18 @@ export async function getReviews(db, { first, filter, field }) {
     if (filter && field) {
       field = filter === "bgId" ? parseInt(field) : field;
 
-      let aggregate = [];
+      let aggregate = [
+        {
+          $match: {
+            [filter]: field,
+          },
+        },
+        lookup,
+      ];
 
       if (first) {
         //with limit
-        aggregate = [
-          {
-            $match: {
-              [filter]: field,
-            },
-          },
-          { $limit: first },
-          lookup,
-        ];
-      } else {
-        //without limit
-        aggregate = [
-          {
-            $match: {
-              [filter]: field,
-            },
-          },
-          lookup,
-        ];
+        aggregate.push({ $limit: first });
       }
 
       reviews = await db.collection("reviews").aggregate(aggregate);

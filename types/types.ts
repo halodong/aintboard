@@ -57,6 +57,11 @@ export type BggBoardgameData = {
     id: string;
     type: string;
   };
+  image: BggImageArray[];
+};
+
+export type BggImageArray = {
+  _text: string[];
 };
 
 export type BggNameArray = {
