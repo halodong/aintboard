@@ -1,13 +1,14 @@
 import styled from "styled-components";
 
 export const BgImgWrapper = styled.div`
+  position: relative;
   height: 6.5rem;
+  width: 100%;
+  max-height: 6.5rem;
   overflow: hidden;
   transition: 500ms ease all;
 
   img {
-    width: 100%;
-    height: 100%;
     object-fit: cover;
   }
 `;

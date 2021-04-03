@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
-import { isEmpty } from "lodash";
+import Image from "next/image";
+
 import {
   ReviewCardContainer,
   BgImgWrapper,
@@ -19,13 +20,13 @@ export const ReviewCard = ({ data, bgImg }: Props) => {
   return (
     <ReviewCardContainer>
       <BgImgWrapper>
-        <img
+        <Image
           alt="boardgame"
           src={
-            !isEmpty(bgImg)
-              ? bgImg
-              : "https://cf.geekdo-images.com/0BsjJY9MTlx9DRrlkeE69w__original/img/6AJktf34S4ypVI75ecsfmkDicgA=/0x0/filters:format(jpeg)/pic5482020.jpg"
+            bgImg ||
+            "https://cf.geekdo-images.com/0BsjJY9MTlx9DRrlkeE69w__original/img/6AJktf34S4ypVI75ecsfmkDicgA=/0x0/filters:format(jpeg)/pic5482020.jpg"
           }
+          layout="fill"
         />
       </BgImgWrapper>
 
