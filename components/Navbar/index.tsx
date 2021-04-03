@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 
-import Modal from "~/components/Modal";
+import Modal from "~/components/Common/Modal";
 import JoinUsForm from "~/components/JoinUsForm";
 import LoginForm from "~/components/LoginForm";
 import Searchbar from "~/components/Searchbar";
-import Button from "~/components/Button";
+import Button from "~/components/Common/Button";
 
 import {
   NavbarContainer,

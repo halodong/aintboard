@@ -3,7 +3,7 @@ import useSWR from "swr";
 
 import Head from "next/head";
 import Header from "~/components/Header";
-import ReviewHomepage from "~/components/ReviewHomepage";
+import ReviewHomepage from "~/components/Reviews/ReviewHomepage";
 
 import { ReviewApiResponse } from "~/types/types";
 

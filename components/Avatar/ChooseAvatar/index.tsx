@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Label from "~/components/Label";
+import Label from "~/components/Common/Label";
 import { UserWrapper, AvatarWrapper } from "~/components/Avatar/styled";
 
 import GirlAvatar from "~/assets/img/GirlAvatar";

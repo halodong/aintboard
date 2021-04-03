@@ -7,7 +7,7 @@ require("dotenv").config();
 
 export async function insertUser(
   db,
-  { firstName, lastName, email, password, role = "guest", username }
+  { firstName, lastName, email, password, role = "guest", username, avatar }
 ) {
   try {
     const checkEmail = await db.collection("users").findOne({ email });
@@ -38,6 +38,7 @@ export async function insertUser(
       password: hashedPassword,
       role,
       username,
+      avatar,
       powerups: 0,
       stars: 0,
     });

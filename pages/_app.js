@@ -1,6 +1,6 @@
 import "./../fonts/fonts.css";
 
-import { Toast } from "~/components/Toast";
+import { Toast } from "~/components/Common/Toast";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { theme } from "~/styles/theme";
 

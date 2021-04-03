@@ -15,4 +15,5 @@ export const ButtonStyled = styled.button<ButtonStyledProps>`
 
 type ButtonStyledProps = {
   bg: string;
+  type?: "button" | "submit" | "reset" | undefined;
 };

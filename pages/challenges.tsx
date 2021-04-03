@@ -1,5 +1,5 @@
 import Header from "~/components/Header";
-import ChallengesPage from "~/components/ChallengesPage";
+import ChallengesPage from "~/components/Challenges/ChallengesPage";
 
 const Challenges = () => {
   return (

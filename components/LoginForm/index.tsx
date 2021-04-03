@@ -2,9 +2,9 @@ import { Formik, Form } from "formik";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 
-import Input from "./../Input";
-import Label from "./../Label";
-import Button from "~/components/Button";
+import Input from "~/components/Common/Input";
+import Label from "~/components/Common/Label";
+import Button from "~/components/Common/Button";
 
 import { InputContainer, ButtonContainer } from "./styled";
 

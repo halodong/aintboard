@@ -9,11 +9,9 @@ import {
 } from "./styled";
 import { TreesGroup1, TreesGroup2, Tent } from "~/assets/img";
 
-import Filter from "~/components/Filter";
+import Filter from "~/components/Common/Filter";
 import Navbar from "~/components/Navbar";
 import Searchbar from "~/components/Searchbar";
-
-import { UserCookies } from "~/types/types";
 
 export default function Header({
   homepage,
