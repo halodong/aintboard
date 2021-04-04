@@ -2,7 +2,7 @@ import Header from "~/components/Header";
 import BoardGamePage from "~/components/BoardGamePage";
 import fetcher from "~/util/fetch";
 
-import { ReviewApiResponse, BggBoardgameData } from "~/types/types";
+import { ReviewApiResponse, BggBoardgameApiData } from "~/types/types";
 
 const BoardgamePage = ({ reviews, bgData }: Props) => {
   const bgItem = bgData?.items?.[0]?.item?.[0] || null;
@@ -29,7 +29,7 @@ const BoardgamePage = ({ reviews, bgData }: Props) => {
 
 type Props = {
   reviews: ReviewApiResponse;
-  bgData: BggBoardgameData;
+  bgData: BggBoardgameApiData;
 };
 
 export default BoardgamePage;
@@ -48,7 +48,7 @@ export async function getStaticProps({ params }: Params) {
   );
 
   const reviews = await fetcher(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/reviews?first=4&filter=bgId&field=${bgId}`
+    `${process.env.NEXT_PUBLIC_API_URL}/api/review/filter/bgId/${bgId}?first=4`
   );
 
   return {

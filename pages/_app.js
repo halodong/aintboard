@@ -1,5 +1,7 @@
+import { Provider } from "react-redux";
 import "./../fonts/fonts.css";
 
+import store from "redux/store";
 import { Toast } from "components/Common/Toast";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { theme } from "styles/theme";
@@ -58,7 +60,9 @@ function MyApp({ Component, pageProps }) {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Toast />
-      <Component {...pageProps} />
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
     </ThemeProvider>
   );
 }

@@ -3,13 +3,13 @@ import {
   getAllChallenges,
   filterChallenges,
 } from "../db/challenges";
-import { nanoid } from "nanoid";
+
 const chai = require("chai");
 const expect = chai.expect;
 const dbHandler = require("./db-handler");
 
 describe("Challenge routes", () => {
-  let user, db;
+  let db;
   before(async () => {
     try {
       db = await dbHandler.connect();
@@ -45,10 +45,37 @@ describe("Challenge routes", () => {
   });
 
   it("should display all the challenges", async () => {
-    let res = await getAllChallenges(db);
+    let res = await getAllChallenges(db, { first: null });
 
     expect(res.success).to.equal(true);
-    expect(res.response.message).to.equal("Display all the challenges");
+
+    const count = res.response.data.challenges.length;
+
+    const message =
+      count === 1
+        ? "1 Challenge retrieved"
+        : count > 1
+        ? `${count} Challenges retrieved`
+        : `No Challenges retrieved`;
+
+    expect(res.response.message).to.equal(message);
+  });
+
+  it("should display first 6 challenges", async () => {
+    let res = await getAllChallenges(db, { first: 6 });
+
+    expect(res.success).to.equal(true);
+
+    const count = res.response.data.challenges.length;
+
+    const message =
+      count === 1
+        ? "1 Challenge retrieved"
+        : count > 1
+        ? `${count} Challenges retrieved`
+        : `No Challenges retrieved`;
+
+    expect(res.response.message).to.equal(message);
   });
 
   it("should filter the challenges by bgId", async () => {
@@ -83,6 +110,19 @@ describe("Challenge routes", () => {
     expect(res.response.message).to.equal("Filtered Challenges");
     expect(res.response.data.challenges.map((e) => e.powerUpAmount)).to.include(
       4
+    );
+  });
+
+  it("should filter the challenges by bgName", async () => {
+    let res = await filterChallenges(db, {
+      filter: "bgName",
+      field: "Chess",
+    });
+
+    expect(res.success).to.equal(true);
+    expect(res.response.message).to.equal("Filtered Challenges");
+    expect(res.response.data.challenges.map((e) => e.bgName)).to.include(
+      "Chess"
     );
   });
 });
