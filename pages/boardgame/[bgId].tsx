@@ -7,6 +7,10 @@ import { ReviewApiResponse, BggBoardgameApiData } from "~/types/types";
 const BoardgamePage = ({ reviews, bgData }: Props) => {
   const bgItem = bgData?.items?.[0]?.item?.[0] || null;
 
+  if (typeof window === "undefined") {
+    return <></>;
+  }
+
   return (
     <div>
       <Header isBoardGamePage>

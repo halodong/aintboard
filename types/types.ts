@@ -96,11 +96,17 @@ export type BggNameAttrValue = {
 };
 
 //Redux types
-export type AintboardReduxState = {
+export type FilterState = {
   filter: {
     filters: {
       firstSelected: string;
       secondSelected: string | null;
     };
+  };
+};
+
+export type ModalState = {
+  modal: {
+    modalChosen: string;
   };
 };
