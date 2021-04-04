@@ -8,10 +8,9 @@ const handler = nc();
 handler.use(all);
 
 handler.get(async (req, res) => {
-  const filter = req.query.filter;
-  const field = parseInt(req.query.field);
+  const { filter, field, first = null } = req.query;
 
-  const challenges = await filterChallenges(req.db, { filter, field });
+  const challenges = await filterChallenges(req.db, { filter, field, first });
 
   return res.json(challenges);
 });

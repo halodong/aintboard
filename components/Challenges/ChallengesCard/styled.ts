@@ -7,6 +7,7 @@ export const ChallengesCardWrapper = styled.div`
   width: 30rem;
   display: flex;
   border-radius: ${(props) => props.theme.border["10px"]};
+  cursor: pointer;
 `;
 
 export const PowerUpIcon = styled.div`

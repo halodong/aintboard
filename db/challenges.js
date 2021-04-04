@@ -27,14 +27,30 @@ export const insertChallenge = async (
   }
 };
 
-export const getAllChallenges = async (db) => {
+export const getAllChallenges = async (db, { first }) => {
   try {
-    const challenges = await db.collection("challenges").find();
+    let challenges = null;
+    first = first ? parseInt(first) : null;
+
+    if (first) {
+      challenges = await db
+        .collection("challenges")
+        .aggregate([{ $limit: first }]);
+    } else {
+      challenges = await db.collection("challenges").find();
+    }
 
     const allChallenge = await challenges.toArray();
 
+    const challengeCount = allChallenge.length;
+
     return getSuccessResponse({
-      message: "Display all the challenges",
+      message:
+        challengeCount === 1
+          ? "1 Challenge retrieved"
+          : challengeCount > 1
+          ? `${challengeCount} Challenges retrieved`
+          : `No Challenges retrieved`,
       data: {
         challenges: allChallenge,
       },
@@ -44,11 +60,31 @@ export const getAllChallenges = async (db) => {
   }
 };
 
-export const filterChallenges = async (db, { filter, field }) => {
+export const filterChallenges = async (db, { filter, field, first }) => {
   try {
-    const challenges = await db
-      .collection("challenges")
-      .find({ [filter]: field });
+    let challenges = null;
+    first = first ? parseInt(first) : null;
+
+    if (filter && field) {
+      field = ["bgId", "bgYear", "powerUpAmount"].includes(filter)
+        ? parseInt(field)
+        : field;
+
+      let aggregate = [
+        {
+          $match: {
+            [filter]: field,
+          },
+        },
+      ];
+
+      if (first) {
+        //with limit
+        aggregate.push({ $limit: first });
+      }
+
+      challenges = await db.collection("challenges").aggregate(aggregate);
+    }
 
     const filteredChallenges = await challenges.toArray();
 

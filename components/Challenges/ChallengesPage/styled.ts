@@ -8,9 +8,12 @@ export const ChallengesPageWrapper = styled.div`
 `;
 
 export const ChallengesCardContainer = styled.div`
-  display: grid;
-  place-items: center;
-  gap: 2rem;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin: 5rem 0;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  width: 80vw;
+  margin: 9rem auto 13rem;
+  flex-wrap: wrap;
+  gap: 3rem;
+  justify-content: center;
 `;

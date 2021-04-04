@@ -28,7 +28,58 @@ export async function insertReview(
   }
 }
 
-export async function getReviews(db, { first, filter, field }) {
+export async function getReviews(db, { first }) {
+  try {
+    let reviews = null;
+    first = first ? parseInt(first) : null;
+
+    //get users data who made the review
+    const lookup = {
+      $lookup: {
+        from: "users",
+        let: { userId: "$userId" },
+        pipeline: [
+          {
+            $match: {
+              $expr: {
+                $and: [{ $eq: ["$$userId", "$_id"] }],
+              },
+            },
+          },
+          { $project: { password: 0 } },
+        ],
+        as: "users",
+      },
+    };
+
+    if (first) {
+      reviews = await db
+        .collection("reviews")
+        .aggregate([{ $limit: first }, lookup]);
+    } else {
+      reviews = await db.collection("reviews").aggregate([lookup]);
+    }
+    const reviewArray = await reviews.toArray();
+
+    const reviewsCount = reviewArray.length;
+
+    return getSuccessResponse({
+      message:
+        reviewsCount === 1
+          ? "1 Review retrieved"
+          : reviewsCount > 1
+          ? `${reviewsCount} Reviews retrieved`
+          : `No Reviews retrieved`,
+      data: {
+        reviews: reviewArray,
+      },
+    });
+  } catch (err) {
+    return getFailedResponse(err, "db/reviews.js", "Couldn't get reviews");
+  }
+}
+
+export const filterReviews = async (db, { first, filter, field }) => {
   try {
     let reviews = null;
     first = first ? parseInt(first) : null;
@@ -70,26 +121,17 @@ export async function getReviews(db, { first, filter, field }) {
       }
 
       reviews = await db.collection("reviews").aggregate(aggregate);
-    } else if (first) {
-      reviews = await db
-        .collection("reviews")
-        .aggregate([{ $limit: first }, lookup]);
-    } else {
-      reviews = await db.collection("reviews").aggregate([lookup]);
     }
+
     const reviewArray = await reviews.toArray();
 
     return getSuccessResponse({
-      message: !first
-        ? "Reviews retrieved"
-        : first > 1
-        ? `${first} Reviews retrieved`
-        : `${first} Review retrieved`,
+      message: "Filtered Reviews",
       data: {
         reviews: reviewArray,
       },
     });
   } catch (err) {
-    return getFailedResponse(err, "db/reviews.js", "Couldn't get reviews");
+    return getFailedResponse(err, "db/reviews.js", "Filter Reviews error");
   }
-}
+};

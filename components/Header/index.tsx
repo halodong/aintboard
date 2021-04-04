@@ -14,6 +14,8 @@ import Filter from "~/components/Common/Filter";
 import Navbar from "~/components/Navbar";
 import Searchbar from "~/components/Searchbar";
 
+import { CHALLENGES_PAGE } from "util/constants";
+
 export default function Header({
   homepage,
   isSearchPage = false,
@@ -50,7 +52,6 @@ export default function Header({
           tagline
         ) : (
           <>
-            {" "}
             Interactive Boardgame <br /> Community{" "}
           </>
         )}
@@ -67,7 +68,7 @@ export default function Header({
         </ChallengesTagline>
       )}
 
-      {isChallengesPage && <Filter />}
+      {isChallengesPage && <Filter type={CHALLENGES_PAGE} />}
 
       {isBoardGamePage && <BoardGameName>{children}</BoardGameName>}
     </HeaderWrapper>

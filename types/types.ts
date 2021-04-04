@@ -43,6 +43,29 @@ export type UserData = {
   starts: number;
 };
 
+export interface ChallengesApiResponse {
+  success: boolean;
+  response: {
+    message: string;
+    data: ChallengesApiData;
+  };
+}
+
+export interface ChallengesApiData {
+  challenges: ChallengesData[];
+}
+
+export type ChallengesData = {
+  [key: string]: string | number;
+  _id: string;
+  challengeName: string;
+  bgId: number;
+  bgName: string;
+  bgYear: number;
+  powerUpAmount: number;
+  createdAt: string;
+};
+
 export type BggBoardgameApiData = {
   items: BggBoardgameApiDataItem[];
 };
@@ -70,4 +93,14 @@ export type BggNameArray = {
 
 export type BggNameAttrValue = {
   value: string;
+};
+
+//Redux types
+export type AintboardReduxState = {
+  filter: {
+    filters: {
+      firstSelected: string;
+      secondSelected: string | null;
+    };
+  };
 };

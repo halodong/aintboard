@@ -9,6 +9,7 @@ import {
 } from "./styles";
 import RightArrow from "~/assets/img/rightArrow";
 
+//Challenges section in homepage
 export default function ChallengesHomePage() {
   return (
     <Wrapper>

@@ -1,4 +1,4 @@
-import { insertReview, getReviews } from "../db/reviews";
+import { insertReview, getReviews, filterReviews } from "../db/reviews";
 const chai = require("chai");
 const expect = chai.expect;
 const dbHandler = require("./db-handler");
@@ -57,8 +57,17 @@ describe("Reviews", () => {
   it("should get all reviews", async () => {
     let res = await getReviews(db, { first: null });
 
+    const count = res.response.data.reviews.length;
+
+    const message =
+      count === 1
+        ? "1 Review retrieved"
+        : count > 1
+        ? `${count} Reviews retrieved`
+        : `No Reviews retrieved`;
+
     expect(res.success).to.equal(true);
-    expect(res.response.message).to.equal("Reviews retrieved");
+    expect(res.response.message).to.equal(message);
     expect(res.response.data.reviews).to.be.an("array");
   });
 
@@ -66,29 +75,47 @@ describe("Reviews", () => {
     let res = await getReviews(db, { first: 1 });
 
     expect(res.success).to.equal(true);
-    expect(res.response.message).to.equal("1 Review retrieved");
+
+    const count = res.response.data.reviews.length;
+
+    const message =
+      count === 1
+        ? "1 Review retrieved"
+        : count > 1
+        ? `${count} Reviews retrieved`
+        : `No Reviews retrieved`;
+
+    expect(res.response.message).to.equal(message);
     expect(res.response.data.reviews).to.be.an("array");
-    expect(res.response.data.reviews).to.have.length(1);
   });
 
   it("should get first 2 reviews", async () => {
     let res = await getReviews(db, { first: 2 });
 
     expect(res.success).to.equal(true);
-    expect(res.response.message).to.equal("2 Reviews retrieved");
+
+    const count = res.response.data.reviews.length;
+
+    const message =
+      count === 1
+        ? "1 Review retrieved"
+        : count > 1
+        ? `${count} Reviews retrieved`
+        : `No Reviews retrieved`;
+
+    expect(res.response.message).to.equal(message);
     expect(res.response.data.reviews).to.be.an("array");
-    expect(res.response.data.reviews).to.have.length(2);
   });
 
   it("should get reviews with bgId: 121 with first param", async () => {
-    let res = await getReviews(db, { first: 4, filter: "bgId", field: 121 });
+    let res = await filterReviews(db, { first: 4, filter: "bgId", field: 121 });
 
     expect(res.success).to.equal(true);
     expect(res.response.data.reviews).to.be.an("array");
   });
 
   it("should get reviews with bgId: 121 without first param", async () => {
-    let res = await getReviews(db, { filter: "bgId", field: 121 });
+    let res = await filterReviews(db, { filter: "bgId", field: 121 });
 
     expect(res.success).to.equal(true);
     expect(res.response.data.reviews).to.be.an("array");
