@@ -9,8 +9,10 @@ import {
 } from "./styles";
 import RightArrow from "~/assets/img/rightArrow";
 
+import { ChallengesApiResponse } from "~/types/types";
+
 //Challenges section in homepage
-export default function ChallengesHomePage() {
+export default function ChallengesHomePage({ challenges }: Props) {
   return (
     <Wrapper>
       <GameFont>CHALLENGES</GameFont>
@@ -19,9 +21,10 @@ export default function ChallengesHomePage() {
       </p>
 
       <CardWrapper>
-        <ChallengeCard />
-        <ChallengeCard />
-        <ChallengeCard />
+        {challenges?.response?.data?.challenges?.map((c) => (
+          <ChallengeCard key={c._id} data={c} />
+        ))}
+
         <CallToAction>
           <CallToActionFont>PARTICIPATE</CallToActionFont>
           <RightArrow />
@@ -30,3 +33,7 @@ export default function ChallengesHomePage() {
     </Wrapper>
   );
 }
+
+type Props = {
+  challenges?: ChallengesApiResponse;
+};

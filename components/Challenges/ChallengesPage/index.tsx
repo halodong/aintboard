@@ -37,11 +37,7 @@ const ChallengesPage = ({ challenges }: Props) => {
       >
         <ChallengesCardContainer>
           {challengesData.map((c: ChallengesData, index) => (
-            <ChallengesCard
-              key={`${c.bgName}-${index}`}
-              puAmount={c.powerUpAmount}
-              challenges={c}
-            />
+            <ChallengesCard key={`${c.bgName}-${index}`} data={c} />
           ))}
         </ChallengesCardContainer>
       </InfiniteScroll>
