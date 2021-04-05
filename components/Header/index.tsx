@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import {
@@ -46,11 +45,8 @@ export default function Header({
   );
   const dispatch = useDispatch();
 
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-
   const closeModal = () => {
     dispatch(chooseModal(""));
-    setModalIsOpen(false);
   };
 
   return (

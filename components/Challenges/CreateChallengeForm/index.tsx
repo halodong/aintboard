@@ -1,13 +1,15 @@
 import { Formik, Form } from "formik";
-import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import axios from "axios";
 
 import Input from "components/Common/Input";
 import Label from "components/Common/Label";
 import Button from "components/Common/Button";
+import Searchbar from "components/Searchbar";
 
 import { InputContainer, ButtonContainer } from "./styled";
+import { CREATE_CHALLENGE_FORM_COMPONENT } from "util/constants";
+import { theme } from "styles/theme";
 
 const CreateChallengeForm = ({ closeModal }: Props) => {
   return (
@@ -30,12 +32,6 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
             return;
           }
 
-          Cookies.set("access_token", userResponse.data.response.data.token);
-          Cookies.set(
-            "user_data",
-            JSON.stringify(userResponse.data.response.data.user)
-          );
-
           closeModal();
           resetForm();
           toast.success("Welcome!");
@@ -46,17 +42,24 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
       }}
     >
       <Form>
-        <Label>Welcome!</Label>
+        <Label>Challenges are meant to be achievable and challenging.</Label>
 
         <InputContainer>
-          <Input name="usernameEmail" label="Username/Email" />
+          <Searchbar
+            showLinks={false}
+            from={CREATE_CHALLENGE_FORM_COMPONENT}
+            width="30rem"
+            height="3rem"
+            inputBgColor={theme.colors.inputDark}
+          />
         </InputContainer>
+
         <InputContainer>
           <Input name="password" label="Password" type="password" />
         </InputContainer>
         <ButtonContainer>
           <Button bg="lightYellow" onClick={() => {}}>
-            Login
+            Submit
           </Button>
         </ButtonContainer>
       </Form>

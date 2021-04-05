@@ -1,11 +1,30 @@
 import styled from "styled-components";
 
 export const customSelectStyles = {
-  container: (provided: object) => ({
+  container: (provided: object, props: any) => ({
     ...provided,
-    width: "38rem",
+    width: props.selectProps.width ? props.selectProps.width : "38rem",
     margin: "0 auto",
     fontFamily: "Quicksand-Regular",
+  }),
+  control: (provided: object, props: any) => ({
+    ...provided,
+    backgroundColor: props.selectProps.inputBgColor
+      ? props.selectProps.inputBgColor
+      : "white",
+    height: props.selectProps.height ? props.selectProps.height : "2.375rem",
+  }),
+  input: (provided: object, props: any) => ({
+    ...provided,
+    color: props.selectProps.inputBgColor === "white" ? "black" : "white",
+  }),
+  singleValue: (provided: object, props: any) => ({
+    ...provided,
+    color: props.selectProps.inputBgColor === "white" ? "black" : "white",
+  }),
+  menuPortal: (provided: object) => ({
+    ...provided,
+    zIndex: 99999999,
   }),
 };
 
