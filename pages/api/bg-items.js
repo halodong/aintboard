@@ -31,7 +31,7 @@ async function downloadItems(itemName) {
     });
     return collection;
   } catch (ex) {
-    console.log("Error fetching data:", ex, ex.stack);
+    console.log("Error fetching bg items:", ex, ex.stack);
   }
 }
 

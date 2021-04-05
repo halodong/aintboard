@@ -1,11 +1,15 @@
 import { Formik, Form } from "formik";
-import Input from "./../Input";
-import Label from "./../Label";
-import Button from "~/components/Button";
+import Cookies from "js-cookie";
+import { toast } from "react-toastify";
+import axios from "axios";
+
+import Input from "~/components/Common/Input";
+import Label from "~/components/Common/Label";
+import Button from "~/components/Common/Button";
 
 import { InputContainer, ButtonContainer } from "./styled";
 
-const LoginForm = () => {
+const LoginForm = ({ closeModal }: Props) => {
   return (
     <Formik
       enableReinitialize
@@ -13,7 +17,33 @@ const LoginForm = () => {
         usernameEmail: "",
         password: "",
       }}
-      onSubmit={() => {}}
+      onSubmit={async (values, { resetForm }) => {
+        try {
+          const userResponse = await axios.post("/api/login/", {
+            username: values.usernameEmail,
+            email: values.usernameEmail,
+            password: values.password,
+          });
+
+          if (!userResponse.data.success) {
+            toast.error(userResponse.data.message);
+            return;
+          }
+
+          Cookies.set("access_token", userResponse.data.response.data.token);
+          Cookies.set(
+            "user_data",
+            JSON.stringify(userResponse.data.response.data.user)
+          );
+
+          closeModal();
+          resetForm();
+          toast.success("Welcome!");
+        } catch (err) {
+          console.error("Login error: ", err);
+          toast.error("Something went wrong");
+        }
+      }}
     >
       <Form>
         <Label>Welcome!</Label>
@@ -32,6 +62,10 @@ const LoginForm = () => {
       </Form>
     </Formik>
   );
+};
+
+type Props = {
+  closeModal: () => void;
 };
 
 export default LoginForm;

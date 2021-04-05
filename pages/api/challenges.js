@@ -22,7 +22,9 @@ handler.post(async (req, res) => {
 });
 
 handler.get(async (req, res) => {
-  const challenges = await getAllChallenges(req.db);
+  const { first = null } = req.query;
+
+  const challenges = await getAllChallenges(req.db, { first });
 
   return res.json(challenges);
 });

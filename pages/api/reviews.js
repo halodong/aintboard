@@ -31,7 +31,7 @@ handler.get(async (req, res) => {
   const { first = null } = req.query;
 
   const reviews = await getReviews(req.db, {
-    first: parseInt(first),
+    first,
   });
 
   return res.json(reviews);

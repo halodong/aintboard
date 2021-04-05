@@ -24,8 +24,6 @@ describe("User routes", () => {
 
   it("should add a new user", async () => {
     let res = await insertUser(db, {
-      firstName: "Brad",
-      lastName: "Traversy",
       username: "bt",
       email,
       password,
@@ -33,8 +31,6 @@ describe("User routes", () => {
 
     expect(res.success).to.equal(true);
     expect(res.response.data.user._id).to.be.a("string");
-    expect(res.response.data.user.firstName).to.equal("Brad");
-    expect(res.response.data.user.lastName).to.equal("Traversy");
     expect(res.response.data.user.email).to.equal("brad@traversymedia.com");
     expect(res.response.data.user.username).to.equal("bt");
     expect(res.response.data.user.role).to.equal("guest");

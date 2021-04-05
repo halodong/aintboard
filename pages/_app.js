@@ -1,7 +1,10 @@
+import { Provider } from "react-redux";
 import "./../fonts/fonts.css";
 
+import store from "redux/store";
+import { Toast } from "components/Common/Toast";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
-import { theme } from "~/styles/theme";
+import { theme } from "styles/theme";
 
 const GlobalStyle = createGlobalStyle`
   html,
@@ -48,7 +51,7 @@ const GlobalStyle = createGlobalStyle`
 
   .ReactModalPortal {
     position: fixed;
-    z-index: 9999 !important;
+    z-index: 99 !important;
   }
 `;
 
@@ -56,7 +59,10 @@ function MyApp({ Component, pageProps }) {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Component {...pageProps} />
+      <Toast />
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
     </ThemeProvider>
   );
 }

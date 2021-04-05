@@ -8,10 +8,11 @@ const handler = nc();
 handler.use(all);
 
 handler.post(async (req, res) => {
-  const { email, password } = req.body;
+  const { email = "", username = "", password } = req.body;
 
   const user = await authenticateUser(req.db, {
     email,
+    username,
     password,
   });
 

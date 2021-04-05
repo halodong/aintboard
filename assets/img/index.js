@@ -8,3 +8,5 @@ export { default as WaterLeft } from "./WaterLeft";
 export { default as WaterRight } from "./WaterRight";
 export { default as UserMale } from "./user/UserMale";
 export { default as Dice } from "./Dice";
+export { default as CommentIcon } from "./comment.svg";
+export { default as HeartLikeIcon } from "./heart-like.svg";

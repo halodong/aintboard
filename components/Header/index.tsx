@@ -6,32 +6,39 @@ import {
   LookingForText,
   GameFont,
   ChallengesTagline,
+  BoardGameName,
 } from "./styled";
 import { TreesGroup1, TreesGroup2, Tent } from "~/assets/img";
 
-import Filter from "~/components/Filter";
+import Filter from "~/components/Common/Filter";
 import Navbar from "~/components/Navbar";
 import Searchbar from "~/components/Searchbar";
+
+import { CHALLENGES_PAGE } from "util/constants";
 
 export default function Header({
   homepage,
   isSearchPage = false,
   isChallengesPage = false,
   tagline,
+  isBoardGamePage = false,
+  children,
 }: Props) {
   const router = useRouter();
   const { name } = router.query;
 
   return (
     <HeaderWrapper
+      homepage={homepage}
       isSearchPage={isSearchPage}
       isChallengePage={isChallengesPage}
+      isBoardGamePage={isBoardGamePage}
     >
       <Navbar />
 
       <Searchbar />
 
-      {homepage && (
+      {(homepage || isBoardGamePage) && (
         <div className="homepage-bg-container">
           <TreesGroup1 className="trees-1" />
           <TreesGroup2 className="trees-2" />
@@ -45,7 +52,6 @@ export default function Header({
           tagline
         ) : (
           <>
-            {" "}
             Interactive Boardgame <br /> Community{" "}
           </>
         )}
@@ -62,7 +68,9 @@ export default function Header({
         </ChallengesTagline>
       )}
 
-      {isChallengesPage && <Filter />}
+      {isChallengesPage && <Filter type={CHALLENGES_PAGE} />}
+
+      {isBoardGamePage && <BoardGameName>{children}</BoardGameName>}
     </HeaderWrapper>
   );
 }
@@ -72,4 +80,6 @@ type Props = {
   isSearchPage?: boolean;
   isChallengesPage?: boolean;
   tagline?: string;
+  isBoardGamePage?: boolean;
+  children?: any;
 };

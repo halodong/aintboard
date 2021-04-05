@@ -1,27 +1,24 @@
+import { useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import Input from "./../Input";
-import Label from "./../Label";
+import { toast } from "react-toastify";
+import axios from "axios";
+
+import Input from "../Common/Input";
+import Label from "../Common/Label";
 import ChooseAvatar from "~/components/Avatar/ChooseAvatar";
-import Button from "~/components/Button/";
+import Button from "~/components/Common/Button";
+
 import { InputContainer, ErrorMessage, SignupButton } from "./styled";
 
-const JoinUsForm = () => {
+const JoinUsForm = ({ closeModal }: Props) => {
+  const [avatar, setAvatar] = useState("");
+
   const SignupSchema = Yup.object().shape({
     username: Yup.string()
       .min(3, "Too Short!")
       .max(55, "Too Long!")
       .required("Username Required"),
-
-    firstName: Yup.string()
-      .min(3, "Too Short!")
-      .max(55, "Too Long!")
-      .required("Firstname Required"),
-
-    lastName: Yup.string()
-      .min(3, "Too Short!")
-      .max(55, "Too Long!")
-      .required("Lastname Required"),
 
     email: Yup.string().email("Invalid email").required("Email Required"),
 
@@ -30,7 +27,7 @@ const JoinUsForm = () => {
       .required("Password is required"),
 
     passwordConfirmation: Yup.string()
-      .required("Confirm Password")
+      .required("Need to confirm Password")
       .oneOf([Yup.ref("password"), null], "Passwords must match"),
   });
 
@@ -39,15 +36,39 @@ const JoinUsForm = () => {
       enableReinitialize
       initialValues={{
         username: "",
-        firstName: "",
-        lastName: "",
         email: "",
         password: "",
         passwordConfirmation: "",
       }}
       validationSchema={SignupSchema}
       validateOnBlur={true}
-      onSubmit={(values) => {}}
+      onSubmit={async (values, { resetForm }) => {
+        if (avatar === "") {
+          toast.error("Choose an Avatar");
+          return;
+        }
+
+        try {
+          const userResponse = await axios.post("/api/signup", {
+            username: values.username,
+            email: values.email,
+            password: values.password,
+            avatar,
+          });
+
+          if (!userResponse.data.success) {
+            toast.error(userResponse.data.message);
+            return;
+          }
+
+          closeModal();
+          resetForm();
+          toast.success("You have successfully signed up!");
+        } catch (err) {
+          console.error("Signup error: ", err);
+          toast.error("Something went wrong");
+        }
+      }}
     >
       {({ errors, touched }) => (
         <Form>
@@ -60,29 +81,7 @@ const JoinUsForm = () => {
             <Input
               name="username"
               label="Username"
-              missingFields={errors.username || ""}
-            />
-          </InputContainer>
-
-          <InputContainer>
-            {errors.firstName && touched.firstName && (
-              <ErrorMessage>{errors.firstName}</ErrorMessage>
-            )}
-            <Input
-              name="firstName"
-              label="First Name"
-              missingFields={errors.firstName || ""}
-            />
-          </InputContainer>
-
-          <InputContainer>
-            {errors.lastName && touched.lastName && (
-              <ErrorMessage>{errors.lastName}</ErrorMessage>
-            )}
-            <Input
-              name="lastName"
-              label="Last Name"
-              missingFields={errors.lastName || ""}
+              error={errors.username || ""}
             />
           </InputContainer>
 
@@ -94,7 +93,7 @@ const JoinUsForm = () => {
               name="email"
               label="Email"
               type="email"
-              missingFields={errors.email || ""}
+              error={errors.email || ""}
             />
           </InputContainer>
 
@@ -106,7 +105,7 @@ const JoinUsForm = () => {
               name="password"
               label="Password"
               type="password"
-              missingFields={errors.password || ""}
+              error={errors.password || ""}
             />
           </InputContainer>
 
@@ -118,14 +117,16 @@ const JoinUsForm = () => {
               name="passwordConfirmation"
               label="Confirm Password"
               type="password"
-              missingFields={errors.passwordConfirmation || ""}
+              error={errors.passwordConfirmation || ""}
             />
           </InputContainer>
 
-          <ChooseAvatar />
+          <ChooseAvatar
+            chooseAvatar={(chosenAvatar) => setAvatar(chosenAvatar)}
+          />
 
           <SignupButton>
-            <Button bg="lightYellow" onClick={() => {}}>
+            <Button bg="lightYellow" type="submit">
               Join
             </Button>
           </SignupButton>
@@ -133,6 +134,10 @@ const JoinUsForm = () => {
       )}
     </Formik>
   );
+};
+
+type Props = {
+  closeModal: () => void;
 };
 
 export default JoinUsForm;

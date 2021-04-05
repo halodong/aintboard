@@ -15,6 +15,9 @@ handler.post(async (req, res) => {
     reviewId,
   });
 
+  // this token is from refreshing token in verifyToken
+  // reviewLike.token = req.jwtToken;
+
   return res.json(reviewLike);
 });
 

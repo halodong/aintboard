@@ -3,7 +3,8 @@ import useSWR from "swr";
 
 import Head from "next/head";
 import Header from "~/components/Header";
-import ReviewHomepage from "~/components/ReviewHomepage";
+import ReviewHomepage from "~/components/Reviews/ReviewHomepage";
+import ChallengesHomepage from "~/components/Challenges/ChallengesHomepage";
 
 import { ReviewApiResponse } from "~/types/types";
 
@@ -13,6 +14,10 @@ export default function Home({ reviews }: Props) {
     fetcher,
     { initialData: reviews }
   );
+
+  if (typeof window === "undefined") {
+    return <></>;
+  }
 
   return (
     <div>
@@ -24,6 +29,7 @@ export default function Home({ reviews }: Props) {
       <Header homepage />
 
       <ReviewHomepage reviews={reviewData} />
+      <ChallengesHomepage />
     </div>
   );
 }
@@ -32,7 +38,7 @@ type Props = {
   reviews: ReviewApiResponse;
 };
 
-export async function getStaticProps() {
+export const getStaticProps = async () => {
   const reviews = await fetcher(
     `${process.env.NEXT_PUBLIC_API_URL}/api/reviews?first=5`
   );
@@ -42,4 +48,4 @@ export async function getStaticProps() {
       reviews,
     },
   };
-}
+};
