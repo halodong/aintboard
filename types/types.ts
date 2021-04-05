@@ -81,10 +81,17 @@ export type BggBoardgameData = {
     type: string;
   };
   image: BggImageArray[];
+  yearpublished: BggYearArray[];
 };
 
 export type BggImageArray = {
   _text: string[];
+};
+
+export type BggYearArray = {
+  _attributes: {
+    value: string;
+  };
 };
 
 export type BggNameArray = {
@@ -108,5 +115,16 @@ export type FilterState = {
 export type ModalState = {
   modal: {
     modalChosen: string;
+  };
+};
+
+export type BgState = {
+  bg: {
+    bgSearched: {
+      bgName: string;
+      bgId: string;
+      bgYear: string;
+      bgImage: string;
+    };
   };
 };

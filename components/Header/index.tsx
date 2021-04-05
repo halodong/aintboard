@@ -39,11 +39,11 @@ export default function Header({
 }: Props) {
   const router = useRouter();
   const { name } = router.query;
+  const dispatch = useDispatch();
 
   const modalClicked = useSelector(
     (state: ModalState) => state.modal.modalChosen
   );
-  const dispatch = useDispatch();
 
   const closeModal = () => {
     dispatch(chooseModal(""));

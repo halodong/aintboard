@@ -1,6 +1,7 @@
 import { Formik, Form } from "formik";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 import Input from "components/Common/Input";
 import Label from "components/Common/Label";
@@ -9,9 +10,12 @@ import Searchbar from "components/Searchbar";
 
 import { InputContainer, ButtonContainer } from "./styled";
 import { CREATE_CHALLENGE_FORM_COMPONENT } from "util/constants";
+import { BgState } from "types/types";
 import { theme } from "styles/theme";
 
 const CreateChallengeForm = ({ closeModal }: Props) => {
+  const bgData = useSelector((state: BgState) => state.bg.bgSearched);
+
   return (
     <Formik
       enableReinitialize
@@ -51,6 +55,7 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
             width="30rem"
             height="3rem"
             inputBgColor={theme.colors.inputDark}
+            defaultValue={bgData?.bgName}
           />
         </InputContainer>
 

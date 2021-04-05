@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
@@ -17,8 +18,10 @@ const Searchbar = ({
   width,
   height,
   inputBgColor = "white",
+  defaultValue = "",
 }: Props) => {
   const router = useRouter();
+  const [inputVal, setInputVal] = useState(defaultValue);
 
   const onSelectChange = (
     value: ValueType<any, boolean>,
@@ -61,6 +64,15 @@ const Searchbar = ({
         width={width}
         height={height}
         inputBgColor={inputBgColor}
+        onInputChange={(inputVal, action) => {
+          if (
+            action.action !== "input-blur" &&
+            action.action !== "menu-close"
+          ) {
+            setInputVal(inputVal);
+          }
+        }}
+        inputValue={inputVal}
       />
 
       {!scrolling && showLinks && from === HEADER_COMPONENT && (
@@ -82,6 +94,7 @@ type Props = {
   width?: string;
   height?: string;
   inputBgColor?: string;
+  defaultValue?: string;
 };
 
 export default Searchbar;
