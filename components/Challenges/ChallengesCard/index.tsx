@@ -12,9 +12,9 @@ import PlayButton from "~/assets/img/playbutton.svg";
 
 import { ChallengesData, BggBoardgameApiData } from "types/types";
 
-const ChallengesCard = ({ puAmount, challenges }: Props) => {
+const ChallengesCard = ({ data }: Props) => {
   const { data: bgData } = useSWR<BggBoardgameApiData>(
-    `/api/bg/${challenges?.bgId || 1}`,
+    `/api/bg/${data?.bgId || 1}`,
     fetcher
   );
 
@@ -34,10 +34,10 @@ const ChallengesCard = ({ puAmount, challenges }: Props) => {
         />
       </PowerUpIcon>
 
-      <PowerUpAmount>+{puAmount}UP</PowerUpAmount>
+      <PowerUpAmount>+{data?.powerUpAmount}UP</PowerUpAmount>
 
       <ChallengeName>
-        <p>Score 170 VP in a 4-Player match in Brass Lancashire</p>
+        <p>{data?.challengeName}</p>
         <PlayButton className="play" />
       </ChallengeName>
     </ChallengesCardWrapper>
@@ -45,8 +45,7 @@ const ChallengesCard = ({ puAmount, challenges }: Props) => {
 };
 
 type Props = {
-  puAmount?: number;
-  challenges?: ChallengesData;
+  data?: ChallengesData;
 };
 
 export default ChallengesCard;
