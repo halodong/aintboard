@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const BoardGamaPageWrapper = styled.div`
+export const BoardGamePageWrapper = styled.div`
   display: flex;
   background-color: ${(props) => props.theme.colors.dark};
 `;

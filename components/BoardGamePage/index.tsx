@@ -1,7 +1,7 @@
 import React from "react";
 
 import {
-  BoardGamaPageWrapper,
+  BoardGamePageWrapper,
   LeftSide,
   RightSide,
   ReviewsSection,
@@ -32,7 +32,7 @@ const cardButton = [
 
 const BoardGamePage = ({ reviews, bgItem }: Props) => {
   return (
-    <BoardGamaPageWrapper>
+    <BoardGamePageWrapper>
       <LeftSide>
         {cardButton.map((btn) => (
           <CardButton key={btn.id}>{btn.title}</CardButton>
@@ -77,7 +77,7 @@ const BoardGamePage = ({ reviews, bgItem }: Props) => {
           </Button>
         </OnlineBattlesSection>
       </RightSide>
-    </BoardGamaPageWrapper>
+    </BoardGamePageWrapper>
   );
 };
 
