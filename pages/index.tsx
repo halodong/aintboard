@@ -50,9 +50,14 @@ export const getStaticProps = async () => {
     `${process.env.NEXT_PUBLIC_API_URL}/api/reviews?first=5`
   );
 
+  const challenges = await fetcher(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/challenges?first=3`
+  );
+
   return {
     props: {
       reviews,
+      challenges,
     },
   };
 };

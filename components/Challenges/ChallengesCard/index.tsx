@@ -19,7 +19,6 @@ const ChallengesCard = ({ data }: Props) => {
   );
 
   const bgItem = bgData?.items?.[0]?.item?.[0] || null;
-  console.log(data);
 
   return (
     <ChallengesCardWrapper>
