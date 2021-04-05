@@ -46,6 +46,7 @@ export default function Header({
   );
 
   const closeModal = () => {
+    // @TODO dispatch this with setTimeout to have a fadeout of modal
     dispatch(chooseModal(""));
   };
 

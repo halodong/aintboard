@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.min.css";
 
 const WrappedToastContainer = ({ ...rest }) => (
   <div>
-    <ToastContainer {...rest} style={{ zIndex: 99999 }} />
+    <ToastContainer {...rest} style={{ zIndex: 999999999 }} />
   </div>
 );
 

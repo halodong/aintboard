@@ -18,6 +18,7 @@ declare module "styled-components" {
       mediumGreen: string;
       mediumRed: string;
       paleGray: string;
+      errorRed: string;
     };
     breakpoints: {
       xs: string;
