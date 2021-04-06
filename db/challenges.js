@@ -3,7 +3,7 @@ import { getFailedResponse, getSuccessResponse } from "~/util/apiResponse";
 
 export const insertChallenge = async (
   db,
-  { challengeName, bgId, bgName, bgYear, powerUpAmount }
+  { challengeName, bgId, bgName, bgYear, bgImage, powerUpAmount }
 ) => {
   try {
     const challenge = await db.collection("challenges").insertOne({
@@ -11,8 +11,10 @@ export const insertChallenge = async (
       challengeName,
       bgId,
       bgName,
+      bgImage,
       bgYear,
       powerUpAmount,
+      status: "pending",
       createdAt: new Date(),
     });
 

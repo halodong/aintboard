@@ -18,6 +18,7 @@ const ChallengesCard = ({ data }: Props) => {
     fetcher
   );
 
+  // @TODO this is used for images only, should be from mongodb
   const bgItem = bgData?.items?.[0]?.item?.[0] || null;
 
   return (

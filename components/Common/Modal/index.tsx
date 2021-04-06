@@ -34,13 +34,14 @@ const ModalComponent = ({
   isOpen,
   closeModal,
   headerLabel = "Ain't Board",
+  closeTimeoutMS = 500,
 }: Props) => {
   return (
     <Modal
       isOpen={isOpen}
       onRequestClose={closeModal}
       style={customStyles}
-      closeTimeoutMS={500}
+      closeTimeoutMS={closeTimeoutMS}
       shouldCloseOnOverlayClick={false}
       htmlOpenClassName="ReactModal__Html--open"
     >
@@ -58,6 +59,7 @@ type Props = {
   isOpen: boolean;
   closeModal: () => void;
   headerLabel: string;
+  closeTimeoutMS?: number;
 };
 
 export default ModalComponent;
