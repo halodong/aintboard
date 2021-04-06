@@ -3,6 +3,7 @@ import "./../fonts/fonts.css";
 
 import store from "redux/store";
 import { Toast } from "components/Common/Toast";
+
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { theme } from "styles/theme";
 
@@ -51,7 +52,7 @@ const GlobalStyle = createGlobalStyle`
 
   .ReactModalPortal {
     position: fixed;
-    z-index: 99 !important;
+    z-index: ${theme.zIndex["3rd"]} !important;
   }
 `;
 

@@ -81,10 +81,17 @@ export type BggBoardgameData = {
     type: string;
   };
   image: BggImageArray[];
+  yearpublished: BggYearArray[];
 };
 
 export type BggImageArray = {
   _text: string[];
+};
+
+export type BggYearArray = {
+  _attributes: {
+    value: string;
+  };
 };
 
 export type BggNameArray = {
@@ -96,11 +103,28 @@ export type BggNameAttrValue = {
 };
 
 //Redux types
-export type AintboardReduxState = {
+export type FilterState = {
   filter: {
     filters: {
       firstSelected: string;
       secondSelected: string | null;
+    };
+  };
+};
+
+export type ModalState = {
+  modal: {
+    modalChosen: string;
+  };
+};
+
+export type BgState = {
+  bg: {
+    bgSearched: {
+      bgName: string;
+      bgId: string;
+      bgYear: string;
+      bgImage: string;
     };
   };
 };

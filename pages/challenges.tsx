@@ -5,6 +5,10 @@ import fetcher from "~/util/fetch";
 import { ChallengesApiResponse } from "types/types";
 
 const Challenges = ({ challenges }: Props) => {
+  if (typeof window === "undefined") {
+    return <></>;
+  }
+
   return (
     <div>
       <Header isChallengesPage />

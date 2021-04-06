@@ -9,7 +9,7 @@ export const NavbarContainer = styled.nav<NavbarContainerProps>`
   padding: 0 ${(props) => props.theme.spacing.lg};
   position: ${(props) => (props.isFixed ? "fixed" : "static")};
   width: 100%;
-  z-index: 9999;
+  z-index: ${(props) => props.theme.zIndex["6th"]};
 
   top: ${(props) => (props.isFixed ? "0" : "-9rem")};
   transition: all 0.5s ease-out;
@@ -45,12 +45,12 @@ export const MenuIcon = styled.div<MenuIconProps>`
   -moz-transform: rotate(0deg);
   -o-transform: rotate(0deg);
   transform: rotate(0deg);
-  -webkit-transition: .5s ease-in-out;
-  -moz-transition: .5s ease-in-out;
-  -o-transition: .5s ease-in-out;
-  transition: .5s ease-in-out;
+  -webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -o-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
   cursor: pointer;
-  z-index: 999999;
+  z-index: ${(props) => props.theme.zIndex["3rd"]};
 
   span {
     display: block;
@@ -65,16 +65,17 @@ export const MenuIcon = styled.div<MenuIconProps>`
     -moz-transform: rotate(0deg);
     -o-transform: rotate(0deg);
     transform: rotate(0deg);
-    -webkit-transition: .25s ease-in-out;
-    -moz-transition: .25s ease-in-out;
-    -o-transition: .25s ease-in-out;
-    transition: .25s ease-in-out;
+    -webkit-transition: 0.25s ease-in-out;
+    -moz-transition: 0.25s ease-in-out;
+    -o-transition: 0.25s ease-in-out;
+    transition: 0.25s ease-in-out;
 
     &:nth-child(1) {
       top: 0px;
     }
 
-    &:nth-child(2), &:nth-child(3) {
+    &:nth-child(2),
+    &:nth-child(3) {
       top: 0.8rem;
     }
 
@@ -111,8 +112,6 @@ export const MenuIcon = styled.div<MenuIconProps>`
           left: 50%;
         }
       `}
-  }
-
   }
 `;
 

@@ -46,6 +46,10 @@ const Search = () => {
     setDataFromPaginate(data);
   };
 
+  if (typeof window === "undefined") {
+    return <></>;
+  }
+
   return (
     <div>
       <Head>

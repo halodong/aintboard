@@ -9,7 +9,7 @@ export const SidebarContainer = styled.div<SidebarContainerProps>`
   position: fixed;
   top: 0;
   right: ${(props) => (props.menuOpen ? "0" : "-30rem")};
-  z-index: 99999;
+  z-index: ${(props) => props.theme.zIndex["4th"]};
   transition: 300ms all ease-in;
   color: white;
 `;
@@ -22,7 +22,7 @@ export const OverlaySidebar = styled.div<OverlayProps>`
   display: ${(props) => (props.menuOpen ? "block" : "none")};
   background-color: black;
   opacity: 0.7;
-  z-index: 99998;
+  z-index: ${(props) => props.theme.zIndex["5th"]};
   position: fixed;
   width: 100vw;
   height: 100vh;

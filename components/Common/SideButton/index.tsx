@@ -3,9 +3,9 @@ import React from "react";
 import { CardButtonContainer, CardTitle } from "./styled";
 import RightArrowCircle from "~/assets/img/right-arrow-circle.svg";
 
-const CardButton = ({ children }: Props) => {
+const SideButton = ({ children, onClick }: Props) => {
   return (
-    <CardButtonContainer>
+    <CardButtonContainer onClick={onClick}>
       <CardTitle>{children}</CardTitle>
       <RightArrowCircle />
     </CardButtonContainer>
@@ -14,6 +14,7 @@ const CardButton = ({ children }: Props) => {
 
 type Props = {
   children: string;
+  onClick: () => void;
 };
 
-export default CardButton;
+export default SideButton;

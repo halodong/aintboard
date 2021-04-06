@@ -10,14 +10,12 @@ import ChallengesCard from "~/components/Challenges/ChallengesCard";
 import {
   ChallengesApiResponse,
   ChallengesData,
-  AintboardReduxState,
+  FilterState,
 } from "types/types";
 
 //Challenges page - where filters are
 const ChallengesPage = ({ challenges }: Props) => {
-  const filters = useSelector(
-    (state: AintboardReduxState) => state.filter.filters
-  );
+  const filters = useSelector((state: FilterState) => state.filter.filters);
 
   const { data: filteredApiData } = useSWR<ChallengesApiResponse>(
     filters?.secondSelected !== null
@@ -39,11 +37,7 @@ const ChallengesPage = ({ challenges }: Props) => {
       >
         <ChallengesCardContainer>
           {challengesData.map((c: ChallengesData, index) => (
-            <ChallengesCard
-              key={`${c.bgName}-${index}`}
-              puAmount={c.powerUpAmount}
-              challenges={c}
-            />
+            <ChallengesCard key={`${c.bgName}-${index}`} data={c} />
           ))}
         </ChallengesCardContainer>
       </InfiniteScroll>

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
@@ -8,15 +9,25 @@ import AsyncSelect from "react-select/async";
 import fetcher from "~/util/fetch";
 import debounce from "debounce-promise";
 import { BggBoardgameApiData } from "~/types/types";
+import { HEADER_COMPONENT } from "util/constants";
 
-const Searchbar = ({ scrolling = false }: Props) => {
+const Searchbar = ({
+  scrolling = false,
+  showLinks = true,
+  from = HEADER_COMPONENT,
+  width,
+  height,
+  inputBgColor = "white",
+  defaultValue = "",
+}: Props) => {
   const router = useRouter();
+  const [inputVal, setInputVal] = useState(defaultValue);
 
   const onSelectChange = (
     value: ValueType<any, boolean>,
     action: ActionMeta<any>
   ) => {
-    if (action.action === "select-option") {
+    if (action.action === "select-option" && from === HEADER_COMPONENT) {
       router.push(`/boardgame/${value?.value}`);
     }
   };
@@ -49,9 +60,22 @@ const Searchbar = ({ scrolling = false }: Props) => {
         onBlur={() => {}}
         placeholder="Find a boardgame"
         styles={customSelectStyles}
+        menuPortalTarget={document.body}
+        width={width}
+        height={height}
+        inputBgColor={inputBgColor}
+        onInputChange={(inputVal, action) => {
+          if (
+            action.action !== "input-blur" &&
+            action.action !== "menu-close"
+          ) {
+            setInputVal(inputVal);
+          }
+        }}
+        inputValue={inputVal}
       />
 
-      {!scrolling && (
+      {!scrolling && showLinks && from === HEADER_COMPONENT && (
         <div className="links">
           <Link href="/">Reviews</Link>
           <Link href="/">Online Battles</Link>
@@ -65,6 +89,12 @@ const Searchbar = ({ scrolling = false }: Props) => {
 
 type Props = {
   scrolling?: boolean;
+  showLinks?: boolean;
+  from?: string;
+  width?: string;
+  height?: string;
+  inputBgColor?: string;
+  defaultValue?: string;
 };
 
 export default Searchbar;
