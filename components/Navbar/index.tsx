@@ -75,12 +75,17 @@ const Navbar = () => {
             ))}
           </NavBarButtons>
         ) : (
-          <MenuIcon onClick={() => setOpenMenu(!openMenu)} openMenu={openMenu}>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-          </MenuIcon>
+          <NavBarButtons>
+            <MenuIcon
+              onClick={() => setOpenMenu(!openMenu)}
+              openMenu={openMenu}
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </MenuIcon>
+          </NavBarButtons>
         )}
 
         <Sidebar menuOpen={openMenu} closeMenu={() => setOpenMenu(false)} />
