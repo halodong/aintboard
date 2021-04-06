@@ -10,7 +10,11 @@ import Label from "components/Common/Label";
 import Button from "components/Common/Button";
 import Searchbar from "components/Searchbar";
 
-import { InputContainer, ButtonContainer, ErrorMessage } from "./styled";
+import {
+  InputContainer,
+  ButtonContainer,
+  ErrorMessage,
+} from "components/Common/inputStyled";
 import { CREATE_CHALLENGE_FORM_COMPONENT } from "util/constants";
 import useCurrentUser from "hooks/useCurrentUser";
 import { BgState } from "types/types";
