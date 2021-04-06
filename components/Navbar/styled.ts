@@ -37,6 +37,12 @@ export const NavBarButtons = styled.div`
   }
 `;
 
+export const RightSideNav = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+`;
+
 export const MenuIcon = styled.div<MenuIconProps>`
   width: 2rem;
   height: 2rem;
