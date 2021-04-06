@@ -16,7 +16,7 @@ export const NavbarContainer = styled.nav<NavbarContainerProps>`
 
   .logo {
     width: 14.25rem;
-    flex: none;
+    flex: 1;
   }
 `;
 export const NavbarWrapper = styled.div`
