@@ -2,9 +2,11 @@ import styled from "styled-components";
 import { ToastContainer, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 
+import { theme } from "styles/theme";
+
 const WrappedToastContainer = ({ ...rest }) => (
   <div>
-    <ToastContainer {...rest} style={{ zIndex: 999999999 }} />
+    <ToastContainer {...rest} style={{ zIndex: theme.zIndex["1st"] }} />
   </div>
 );
 

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { theme } from "styles/theme";
 
 export const customSelectStyles = {
   container: (provided: object, props: any) => ({
@@ -24,7 +25,7 @@ export const customSelectStyles = {
   }),
   menuPortal: (provided: object) => ({
     ...provided,
-    zIndex: 99999999,
+    zIndex: theme.zIndex["2nd"],
   }),
 };
 

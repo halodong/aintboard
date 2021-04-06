@@ -1,4 +1,5 @@
 import { Formik, Form } from "formik";
+import { isEmpty } from "lodash";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -37,7 +38,9 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
       validationSchema={formSchema}
       onSubmit={async (values, { resetForm }) => {
         try {
-          const userData = JSON.parse(user?.userData || "");
+          const userData = !isEmpty(user?.userData)
+            ? JSON.parse(user?.userData || "")
+            : { role: "" };
           const role = userData?.role || "guest";
           const powerUpAmount =
             values.powerUpAmount === "" ? 0 : values.powerUpAmount;
