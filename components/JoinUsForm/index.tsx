@@ -9,7 +9,11 @@ import Label from "../Common/Label";
 import ChooseAvatar from "~/components/Avatar/ChooseAvatar";
 import Button from "~/components/Common/Button";
 
-import { InputContainer, ErrorMessage, SignupButton } from "./styled";
+import {
+  InputContainer,
+  ErrorMessage,
+  ButtonContainer,
+} from "components/Common/inputStyled";
 
 const JoinUsForm = ({ closeModal }: Props) => {
   const [avatar, setAvatar] = useState("");
@@ -125,11 +129,11 @@ const JoinUsForm = ({ closeModal }: Props) => {
             chooseAvatar={(chosenAvatar) => setAvatar(chosenAvatar)}
           />
 
-          <SignupButton>
+          <ButtonContainer>
             <Button bg="lightYellow" type="submit">
               Join
             </Button>
-          </SignupButton>
+          </ButtonContainer>
         </Form>
       )}
     </Formik>

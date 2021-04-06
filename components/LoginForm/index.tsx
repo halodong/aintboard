@@ -7,7 +7,7 @@ import Input from "~/components/Common/Input";
 import Label from "~/components/Common/Label";
 import Button from "~/components/Common/Button";
 
-import { InputContainer, ButtonContainer } from "./styled";
+import { InputContainer, ButtonContainer } from "components/Common/inputStyled";
 
 const LoginForm = ({ closeModal }: Props) => {
   return (

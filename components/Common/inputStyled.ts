@@ -6,6 +6,10 @@ export const InputContainer = styled.div<InputContainerProps>`
     props.marginbottom ? props.marginbottom : "1.5rem"};
 `;
 
+type InputContainerProps = {
+  marginbottom?: string;
+};
+
 export const ErrorMessage = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -14,10 +18,8 @@ export const ErrorMessage = styled.div`
   font-size: 0.8rem;
 `;
 
-export const SignupButton = styled.div`
+export const ButtonContainer = styled.div`
+  width: 100%;
   display: flex;
   justify-content: flex-end;
 `;
-type InputContainerProps = {
-  marginbottom?: string;
-};
