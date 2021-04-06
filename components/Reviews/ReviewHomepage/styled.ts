@@ -4,7 +4,7 @@ export const ReviewContainer = styled.div`
   width: 100%;
   min-height: 67rem;
   background-color: ${(props) => props.theme.colors.dark};
-  z-index: 10;
+  z-index: ${(props) => props.theme.zIndex["7th"]};
   position: relative;
   overflow: hidden;
 
@@ -32,7 +32,7 @@ export const ReviewContainer = styled.div`
 
 export const ReviewCardWrapper = styled.div`
   position: relative;
-  z-index: 10;
+  z-index: ${(props) => props.theme.zIndex["7th"]};
   display: flex;
   width: 57%;
   max-width: 52rem;

@@ -52,7 +52,7 @@ const GlobalStyle = createGlobalStyle`
 
   .ReactModalPortal {
     position: fixed;
-    z-index: 9999999 !important;
+    z-index: ${theme.zIndex["3rd"]} !important;
   }
 `;
 

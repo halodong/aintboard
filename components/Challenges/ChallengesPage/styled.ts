@@ -9,7 +9,6 @@ export const ChallengesPageWrapper = styled.div`
 
 export const ChallengesCardContainer = styled.div`
   position: relative;
-  z-index: 10;
   display: flex;
   width: 80vw;
   margin: 9rem auto 13rem;

@@ -1,5 +1,6 @@
 import Modal from "react-modal";
 import { ModalHeader, ModalContent } from "./styled";
+import { theme } from "styles/theme";
 import CloseIcon from "~/assets/img/close.svg";
 
 if (typeof window !== "undefined") {
@@ -14,10 +15,10 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    zIndex: 9999999,
+    zIndex: theme.zIndex["3rd"],
     padding: 0,
     border: 0,
-    background: "none",
+    background: theme.colors.darkGreen,
     borderRadius: 10,
     minWidth: "30rem",
   },

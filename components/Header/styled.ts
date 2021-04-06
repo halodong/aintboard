@@ -14,11 +14,11 @@ export const HeaderWrapper = styled.div<HeaderWrappepProps>`
   .tent {
     position: absolute;
     width: 25rem;
-    z-index: 0;
+    z-index: ${(props) => props.theme.zIndex["10th"]};
   }
 
   .tent {
-    z-index: 1;
+    z-index: ${(props) => props.theme.zIndex["9th"]};
     bottom: -2px;
   }
 
@@ -67,7 +67,7 @@ const baseTaglineStyles = styled.h1`
   font-size: 1.75rem;
   text-transform: uppercase;
   position: relative;
-  z-index: 5;
+  z-index: ${(props) => props.theme.zIndex["8th"]};
   text-align: center;
   margin-top: 4rem;
 `;

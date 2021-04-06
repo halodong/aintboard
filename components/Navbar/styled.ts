@@ -9,7 +9,7 @@ export const NavbarContainer = styled.nav<NavbarContainerProps>`
   padding: 0 ${(props) => props.theme.spacing.lg};
   position: ${(props) => (props.isFixed ? "fixed" : "static")};
   width: 100%;
-  z-index: 9999;
+  z-index: ${(props) => props.theme.zIndex["6th"]};
 
   top: ${(props) => (props.isFixed ? "0" : "-9rem")};
   transition: all 0.5s ease-out;
@@ -50,7 +50,7 @@ export const MenuIcon = styled.div<MenuIconProps>`
   -o-transition: 0.5s ease-in-out;
   transition: 0.5s ease-in-out;
   cursor: pointer;
-  z-index: 999999;
+  z-index: ${(props) => props.theme.zIndex["3rd"]};
 
   span {
     display: block;
