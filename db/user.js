@@ -61,7 +61,11 @@ export async function authenticateUser(db, { email, username, password }) {
       .findOne({ $or: [{ email }, { username }] });
 
     if (!user) {
-      return getFailedResponse("error", "db/user.js", "Email is wrong");
+      return getFailedResponse(
+        "error",
+        "db/user.js",
+        "Username or email is wrong"
+      );
     }
 
     if (user) {

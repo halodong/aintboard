@@ -18,7 +18,7 @@ import {
 const JoinUsForm = ({ closeModal }: Props) => {
   const [avatar, setAvatar] = useState("");
 
-  const SignupSchema = Yup.object().shape({
+  const signupSchema = Yup.object().shape({
     username: Yup.string()
       .min(3, "Too Short!")
       .max(55, "Too Long!")
@@ -44,7 +44,7 @@ const JoinUsForm = ({ closeModal }: Props) => {
         password: "",
         passwordConfirmation: "",
       }}
-      validationSchema={SignupSchema}
+      validationSchema={signupSchema}
       validateOnBlur={true}
       onSubmit={async (values, { resetForm }) => {
         if (avatar === "") {
