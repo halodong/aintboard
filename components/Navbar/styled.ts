@@ -16,7 +16,7 @@ export const NavbarContainer = styled.nav<NavbarContainerProps>`
 
   .logo {
     width: 14.25rem;
-    flex: none;
+    flex: 1;
   }
 `;
 export const NavbarWrapper = styled.div`
@@ -35,6 +35,12 @@ export const NavBarButtons = styled.div`
   button {
     margin: 0 0.5rem;
   }
+`;
+
+export const RightSideNav = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
 `;
 
 export const MenuIcon = styled.div<MenuIconProps>`

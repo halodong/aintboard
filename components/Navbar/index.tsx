@@ -13,6 +13,7 @@ import {
   NavBarButtons,
   NavbarWrapper,
   MenuIcon,
+  RightSideNav,
 } from "./styled";
 import WhiteLogo from "~/assets/img/white-logo.svg";
 
@@ -75,12 +76,17 @@ const Navbar = () => {
             ))}
           </NavBarButtons>
         ) : (
-          <MenuIcon onClick={() => setOpenMenu(!openMenu)} openMenu={openMenu}>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-          </MenuIcon>
+          <RightSideNav>
+            <MenuIcon
+              onClick={() => setOpenMenu(!openMenu)}
+              openMenu={openMenu}
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </MenuIcon>
+          </RightSideNav>
         )}
 
         <Sidebar menuOpen={openMenu} closeMenu={() => setOpenMenu(false)} />
