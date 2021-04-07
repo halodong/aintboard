@@ -4,9 +4,9 @@ import fetcher from "~/util/fetch";
 
 import {
   ChallengesCardWrapper,
-  PowerUpIcon,
   PowerUpAmount,
   ChallengeName,
+  ImgWrapper,
 } from "./styled";
 import PlayButton from "~/assets/img/playbutton.svg";
 
@@ -23,8 +23,8 @@ const ChallengesCard = ({ data }: Props) => {
 
   return (
     <ChallengesCardWrapper>
-      <PowerUpIcon>
-        {/* @TODO change fallback image to an aintboard logo */}
+      {/* @TODO change fallback image to an aintboard logo */}
+      <ImgWrapper>
         <Image
           src={
             bgItem?.image?.[0]?._text?.[0] ||
@@ -33,7 +33,7 @@ const ChallengesCard = ({ data }: Props) => {
           alt="challenge card"
           layout="fill"
         />
-      </PowerUpIcon>
+      </ImgWrapper>
 
       <PowerUpAmount>+{data?.powerUpAmount}UP</PowerUpAmount>
 

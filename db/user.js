@@ -102,3 +102,38 @@ export async function authenticateUser(db, { email, username, password }) {
     return getFailedResponse(err, "db/user.js", "User retrieval failed");
   }
 }
+
+export const filterUsers = async (db, { first, filter, field }) => {
+  try {
+    let users = null;
+    first = first ? parseInt(first) : null;
+
+    if (filter && field) {
+      let aggregate = [
+        {
+          $match: {
+            [filter]: field,
+          },
+        },
+      ];
+
+      if (first) {
+        //with limit
+        aggregate.push({ $limit: first });
+      }
+
+      users = await db.collection("users").aggregate(aggregate);
+    }
+
+    const usersArray = await users.toArray();
+
+    return getSuccessResponse({
+      message: "Filtered Users",
+      data: {
+        users: usersArray,
+      },
+    });
+  } catch (err) {
+    return getFailedResponse(err, "db/user.js", "Filter Users error");
+  }
+};
