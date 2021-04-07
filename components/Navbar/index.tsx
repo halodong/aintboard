@@ -4,7 +4,7 @@ import Link from "next/link";
 import Modal from "~/components/Common/Modal";
 import JoinUsForm from "~/components/JoinUsForm";
 import LoginForm from "~/components/LoginForm";
-import Searchbar from "~/components/Searchbar";
+// import Searchbar from "~/components/Searchbar"; obsolete for now
 import Button from "~/components/Common/Button";
 import Sidebar from "~/components/Common/Sidebar";
 
@@ -14,6 +14,7 @@ import {
   NavbarWrapper,
   MenuIcon,
   RightSideNav,
+  Links,
 } from "./styled";
 import WhiteLogo from "~/assets/img/white-logo.svg";
 
@@ -58,7 +59,14 @@ const Navbar = () => {
           </a>
         </Link>
 
-        {navbar && <Searchbar scrolling={navbar} />}
+        <Links>
+          <Link href="/">Reviews</Link>
+          <Link href="/">Online Battles</Link>
+          <Link href="/challenges">Challenges</Link>
+          <Link href="/">Game Nights</Link>
+        </Links>
+
+        {/* {navbar && <Searchbar scrolling={navbar} />} obsolete for now */}
 
         {!user?.accessToken ? (
           <NavBarButtons>
