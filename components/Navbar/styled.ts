@@ -124,3 +124,18 @@ export const MenuIcon = styled.div<MenuIconProps>`
 type MenuIconProps = {
   openMenu: boolean;
 };
+
+export const Links = styled.div`
+  max-width: 40rem;
+  display: flex;
+  flex: 2;
+  justify-content: space-between;
+
+  a {
+    padding: 0.625rem ${(props) => props.theme.spacing.md};
+    color: ${(props) => props.theme.colors.white};
+    background-color: ${(props) => props.theme.colors.dark};
+    border: 2px solid white;
+    border-radius: ${(props) => props.theme.border["10px"]};
+  }
+`;

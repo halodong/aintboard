@@ -13,7 +13,7 @@ import { TreesGroup1, TreesGroup2, Tent } from "~/assets/img";
 
 import Filter from "~/components/Common/Filter";
 import Navbar from "~/components/Navbar";
-import Searchbar from "~/components/Searchbar";
+// import Searchbar from "~/components/Searchbar"; obsolete for now
 import Modal from "~/components/Common/Modal";
 import CreateChallengeForm from "~/components/Challenges/CreateChallengeForm";
 
@@ -59,7 +59,7 @@ export default function Header({
     >
       <Navbar />
 
-      <Searchbar />
+      {/* <Searchbar /> obsolete for now */}
 
       {(homepage || isBoardGamePage) && (
         <div className="homepage-bg-container">
