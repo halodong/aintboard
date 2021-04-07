@@ -88,10 +88,7 @@ export const Copyright = styled.li`
 `;
 
 export const FooterSidebar = styled.div`
-  /* position: absolute; */
   width: 100%;
-  /* bottom: 0;
-  left: 0; */
   padding: 2rem 3.5rem;
   background-color: ${(props) => props.theme.colors.darkerGreen};
 
