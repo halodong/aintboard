@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Link from "next/link";
 
 import {
@@ -5,7 +6,6 @@ import {
   OverlaySidebar,
   UserSidebar,
   UlSidebar,
-  PrimaryLinkSidebar,
   SecondaryLinkSidebar,
   TertiaryLinkSidebar,
   FooterSidebar,
@@ -15,10 +15,19 @@ import useCurrentUser from "~/hooks/useCurrentUser";
 import { SIDEBAR_COMPONENT } from "util/constants";
 
 import Avatar from "components/Avatar";
+import PrimaryLinkSidebar from "components/Common/PrimaryLinkSidebar";
 
 const Sidebar = ({ menuOpen, closeMenu }: Props) => {
   const user = useCurrentUser();
   const userData = user?.userData ? JSON.parse(user?.userData) : {};
+
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "visible";
+    }
+  }, [menuOpen]);
 
   return (
     <>
@@ -29,18 +38,45 @@ const Sidebar = ({ menuOpen, closeMenu }: Props) => {
         </UserSidebar>
 
         <UlSidebar>
-          <PrimaryLinkSidebar>
-            <Link href="/">Reviews</Link>
-          </PrimaryLinkSidebar>
-          <PrimaryLinkSidebar>
-            <Link href="/">Challenges</Link>
-          </PrimaryLinkSidebar>
-          <PrimaryLinkSidebar>
-            <Link href="/">Online Battles</Link>
-          </PrimaryLinkSidebar>
-          <PrimaryLinkSidebar>
-            <Link href="/">Game Nights</Link>
-          </PrimaryLinkSidebar>
+          <PrimaryLinkSidebar
+            buttonName="Reviews"
+            links={[
+              {
+                linkHref: "/",
+                linkName: "See Reviews",
+              },
+              {
+                linkHref: "/",
+                linkName: "Make a Review or Strategy",
+              },
+            ]}
+          />
+          <PrimaryLinkSidebar
+            buttonName="Challenges"
+            links={[
+              {
+                linkHref: "/",
+                linkName: "See Challenges",
+              },
+              {
+                linkHref: "/",
+                linkName: "Create a Challenge",
+              },
+            ]}
+          />
+          <PrimaryLinkSidebar
+            buttonName="Online Battles"
+            links={[
+              {
+                linkHref: "/",
+                linkName: "See Online Battles",
+              },
+              {
+                linkHref: "/",
+                linkName: "Create an Online Battle",
+              },
+            ]}
+          />
         </UlSidebar>
 
         <UlSidebar>
