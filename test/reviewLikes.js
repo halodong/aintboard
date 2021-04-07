@@ -17,7 +17,7 @@ describe("Review Likes", () => {
 
     let userData = await insertUser(db, {
       _id: nanoid(12),
-      firstNam: "faith",
+      firstName: "faith",
       lastName: "test",
       email: "faith.morante@aintboard.app",
       password: "1234",

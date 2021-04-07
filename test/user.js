@@ -1,7 +1,10 @@
-import { authenticateUser, insertUser } from "../db/user";
+import { authenticateUser, insertUser, filterUsers } from "../db/user";
 const dbHandler = require("./db-handler");
 const chai = require("chai");
 const expect = chai.expect;
+
+chai.use(require("chai-like"));
+chai.use(require("chai-things"));
 
 describe("User routes", () => {
   let db;
@@ -46,5 +49,20 @@ describe("User routes", () => {
     expect(res.response.message).to.equal("Login Successful");
     expect(res.response.data.token).to.exist;
     expect(res.response.data.token).to.be.a("string");
+  });
+
+  it("should get a user with username: bt and only one user should return", async () => {
+    let res = await filterUsers(db, {
+      first: 1,
+      filter: "username",
+      field: "bt",
+    });
+
+    expect(res.success).to.equal(true);
+    expect(res.response.data.users).to.be.an("array");
+    expect(res.response.data.users).to.have.length(1);
+    expect(res.response.data.users).that.contains.something.like({
+      username: "bt",
+    });
   });
 });
