@@ -7,6 +7,7 @@ import {
   UlSidebar,
   PrimaryLinkSidebar,
   SecondaryLinkSidebar,
+  LogoutButton,
   TertiaryLinkSidebar,
   FooterSidebar,
   Copyright,
@@ -15,6 +16,9 @@ import useCurrentUser from "~/hooks/useCurrentUser";
 import { SIDEBAR_COMPONENT } from "util/constants";
 
 import Avatar from "components/Avatar";
+
+import cookie from "js-cookie";
+import Router from "next/router";
 
 const Sidebar = ({ menuOpen, closeMenu }: Props) => {
   const user = useCurrentUser();
@@ -53,9 +57,17 @@ const Sidebar = ({ menuOpen, closeMenu }: Props) => {
           <SecondaryLinkSidebar>0 Gold Trophies</SecondaryLinkSidebar>
           <SecondaryLinkSidebar>0 Silver Trophies</SecondaryLinkSidebar>
           <SecondaryLinkSidebar>0 Bronze Trophies</SecondaryLinkSidebar>
-          <SecondaryLinkSidebar margintop="4rem">
-            <Link href="/">Logout</Link>
-          </SecondaryLinkSidebar>
+          <LogoutButton
+            margintop="3rem"
+            onClick={() => {
+              cookie.remove("access_token");
+              cookie.remove("user_data");
+              Router.push("/");
+              closeMenu();
+            }}
+          >
+            Log Out
+          </LogoutButton>
         </UlSidebar>
 
         <FooterSidebar>

@@ -69,6 +69,24 @@ type SecondaryLinkSidebarProps = {
   margintop?: string;
 };
 
+export const LogoutButton = styled.button<LogoutButtonProps>`
+  font-family: ${(props) => props.theme.fonts.quicksandReg};
+  font-size: 1.3rem;
+  text-transform: none;
+  margin-bottom: 1rem;
+  margin-top: ${(props) => (props.margintop ? props.margintop : 0)};
+  border: none;
+  border-radius: 5rem;
+  background: ${(props) => props.theme.fonts.quicksandReg};
+  padding: 0.8rem;
+  cursor: pointer;
+  outline: none;
+`;
+
+type LogoutButtonProps = {
+  margintop?: string;
+};
+
 export const TertiaryLinkSidebar = styled.li`
   font-family: ${(props) => props.theme.fonts.quicksandLight};
   font-size: 1rem;
