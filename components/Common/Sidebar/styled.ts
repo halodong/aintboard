@@ -77,7 +77,6 @@ export const LogoutButton = styled.button<LogoutButtonProps>`
   margin-top: ${(props) => (props.margintop ? props.margintop : 0)};
   border: none;
   border-radius: 5rem;
-  background: ${(props) => props.theme.fonts.quicksandReg};
   padding: 0.8rem;
   cursor: pointer;
   outline: none;
