@@ -4,9 +4,6 @@ const chai = require("chai");
 const expect = chai.expect;
 const dbHandler = require("./db-handler");
 
-chai.use(require("chai-like"));
-chai.use(require("chai-things"));
-
 describe("Users", () => {
   let db;
 
@@ -51,8 +48,5 @@ describe("Users", () => {
     expect(res.success).to.equal(true);
     expect(res.response.message).to.equal(message);
     expect(res.response.data.users).to.be.an("array");
-    expect(res.response.data.users).that.contains.something.like({
-      username: "bt2",
-    });
   });
 });

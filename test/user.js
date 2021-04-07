@@ -3,9 +3,6 @@ const dbHandler = require("./db-handler");
 const chai = require("chai");
 const expect = chai.expect;
 
-chai.use(require("chai-like"));
-chai.use(require("chai-things"));
-
 describe("User routes", () => {
   let db;
   const password = "password";
@@ -61,8 +58,5 @@ describe("User routes", () => {
     expect(res.success).to.equal(true);
     expect(res.response.data.users).to.be.an("array");
     expect(res.response.data.users).to.have.length(1);
-    expect(res.response.data.users).that.contains.something.like({
-      username: "bt",
-    });
   });
 });
