@@ -14,8 +14,10 @@ const PrimaryLinkSidebar = ({ buttonName, links }: Props) => {
       </button>
 
       <AnimateHeight duration={300} height={height}>
-        {links.map((link) => (
-          <Link href={link.linkHref}>{link.linkName}</Link>
+        {links.map((link, i) => (
+          <Link key={`${link.linkHref}-${i}`} href={link.linkHref}>
+            {link.linkName}
+          </Link>
         ))}
       </AnimateHeight>
     </LinkSidebar>

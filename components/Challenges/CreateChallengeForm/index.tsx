@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import Input from "components/Common/Input";
 import Label from "components/Common/Label";
 import Button from "components/Common/Button";
+import ImageUpload from "components/Common/ImageUpload";
 
 import {
   InputContainer,
@@ -70,6 +71,8 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
       {({ errors, touched }) => (
         <Form>
           <Label>Challenges are meant to be achievable and challenging.</Label>
+
+          <ImageUpload buttonLabel="Select images" multi max={3} />
 
           <InputContainer>
             {errors.challengeName && touched.challengeName && (
