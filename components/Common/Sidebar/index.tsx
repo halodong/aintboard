@@ -66,7 +66,7 @@ const Sidebar = ({ menuOpen, closeMenu }: Props) => {
               closeMenu();
             }}
           >
-            Log Out
+            Logout
           </LogoutButton>
         </UlSidebar>
 
