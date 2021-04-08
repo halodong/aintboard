@@ -58,7 +58,6 @@ const Sidebar = ({ menuOpen, closeMenu }: Props) => {
           <SecondaryLinkSidebar>0 Silver Trophies</SecondaryLinkSidebar>
           <SecondaryLinkSidebar>0 Bronze Trophies</SecondaryLinkSidebar>
           <LogoutButton
-            margintop="3rem"
             onClick={() => {
               cookie.remove("access_token");
               cookie.remove("user_data");
