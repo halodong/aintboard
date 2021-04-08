@@ -1,27 +1,21 @@
 import { Formik, Form } from "formik";
 import { isEmpty } from "lodash";
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
 import axios from "axios";
 import * as Yup from "yup";
 
 import Input from "components/Common/Input";
 import Label from "components/Common/Label";
 import Button from "components/Common/Button";
-import Searchbar from "components/Searchbar";
 
 import {
   InputContainer,
   ButtonContainer,
   ErrorMessage,
 } from "components/Common/inputStyled";
-import { CREATE_CHALLENGE_FORM_COMPONENT } from "util/constants";
 import useCurrentUser from "hooks/useCurrentUser";
-import { BgState } from "types/types";
-import { theme } from "styles/theme";
 
 const CreateChallengeForm = ({ closeModal }: Props) => {
-  const bgData = useSelector((state: BgState) => state.bg.bgSearched);
   const user = useCurrentUser();
 
   const formSchema = Yup.object().shape({
@@ -57,10 +51,6 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
           const response = await axios.post("/api/challenges/", {
             challengeName: values.challengeName,
             powerUpAmount: values.powerUpAmount,
-            bgName: bgData.bgName,
-            bgId: bgData.bgId,
-            bgYear: bgData.bgYear,
-            bgImage: bgData.bgImage,
           });
 
           if (!response.data.success) {
@@ -80,17 +70,6 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
       {({ errors, touched }) => (
         <Form>
           <Label>Challenges are meant to be achievable and challenging.</Label>
-
-          <InputContainer>
-            <Searchbar
-              showLinks={false}
-              from={CREATE_CHALLENGE_FORM_COMPONENT}
-              width="30rem"
-              height="3rem"
-              inputBgColor={theme.colors.inputDark}
-              defaultValue={bgData?.bgName}
-            />
-          </InputContainer>
 
           <InputContainer>
             {errors.challengeName && touched.challengeName && (
