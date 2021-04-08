@@ -31,6 +31,18 @@ export type ReviewData = {
   users: UserData;
 };
 
+export interface UserApiResponse {
+  success: boolean;
+  response: {
+    message: string;
+    data: UserApiData;
+  };
+}
+
+export interface UserApiData {
+  users: UserData[];
+}
+
 export type UserData = {
   _id: string;
   firstName: string;
@@ -40,7 +52,8 @@ export type UserData = {
   role: string;
   username: string;
   powerups: number;
-  starts: number;
+  stars: number;
+  avatar?: string;
 };
 
 export interface ChallengesApiResponse {

@@ -16,7 +16,7 @@ export const NavbarContainer = styled.nav<NavbarContainerProps>`
 
   .logo {
     width: 14.25rem;
-    flex: none;
+    flex: 1;
   }
 `;
 export const NavbarWrapper = styled.div`
@@ -35,6 +35,12 @@ export const NavBarButtons = styled.div`
   button {
     margin: 0 0.5rem;
   }
+`;
+
+export const RightSideNav = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
 `;
 
 export const MenuIcon = styled.div<MenuIconProps>`
@@ -118,3 +124,18 @@ export const MenuIcon = styled.div<MenuIconProps>`
 type MenuIconProps = {
   openMenu: boolean;
 };
+
+export const Links = styled.div`
+  max-width: 40rem;
+  display: flex;
+  flex: 2;
+  justify-content: space-between;
+
+  a {
+    padding: 0.625rem ${(props) => props.theme.spacing.md};
+    color: ${(props) => props.theme.colors.white};
+    background-color: ${(props) => props.theme.colors.dark};
+    border: 2px solid white;
+    border-radius: ${(props) => props.theme.border["10px"]};
+  }
+`;

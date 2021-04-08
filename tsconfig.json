@@ -19,7 +19,13 @@
     "noEmit": true,
     "jsx": "preserve"
   },
-  "include": ["pages", "types", "@types"],
+  "include": [
+    "pages",
+    "types",
+    "@types",
+    "obsolete/search",
+    "obsolete/boardgame"
+  ],
   "exclude": ["node_modules"],
   "extends": "./tsconfig.paths.json"
 }
