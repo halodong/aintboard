@@ -1,68 +1,87 @@
-import { useState, useRef, useEffect } from "react";
-import { ImageUploadContainer } from "./styled";
+import { useState, useEffect } from "react";
+import {
+  ImageUploadContainer,
+  PreviewsContainer,
+  ImageContainer,
+} from "./styled";
 
-const ImageUpload = ({ buttonLabel, multi, max }: Props) => {
+const ImageUpload = ({
+  buttonLabel,
+  multi,
+  max,
+  passImagesToParent,
+}: Props) => {
   const [previews, setPreviews] = useState<string[]>([]);
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // useEffect(() => {
+  useEffect(() => {
+    passImagesToParent(previews);
+  }, [previews, passImagesToParent]);
 
-  // }, [previews])
+  let counter = 1;
+  let tempFiles: string[] = [];
 
-  const getPreview = (file: Blob, callback: (s: string) => void) => {
-    for (let f of files) {
-      // let reader = new FileReader();
-      // reader.onloadend = () => {
-      //     filesArray.push(reader.result as string);
-      //     setPreviews(filesArray);
-      //     // setPreviews([...previews, reader.result as string])
-      // };
-      // // Read in the image file as a data URL.
-      // reader.readAsDataURL(f);
-    }
+  const getPreview = (files: any) => {
+    let reader = new FileReader();
+    reader.onloadend = () => {
+      tempFiles.push(reader.result as string);
+
+      if (files.length === counter) {
+        if (previews.length > 0) {
+          // add to previews, this means to prevent resetting the previews
+          let tFiles = previews.concat(tempFiles);
+          setPreviews(tFiles);
+          return;
+        }
+
+        //set previews at first time
+        setPreviews(tempFiles);
+        return;
+      }
+      counter++;
+      getPreview(files);
+    };
+    // Read in the image file as a data URL.
+    reader.readAsDataURL(files[counter - 1]);
   };
+
+  const imageText = max > 1 ? "images" : "image";
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let files = e?.target?.files || [];
-    let filesArray: string[] = [];
+    let previewsCount = previews.length;
 
-    // for (let f of files) {
-    //     // let reader = new FileReader();
-    //     // reader.onloadend = () => {
-    //     //     filesArray.push(reader.result as string);
-    //     //     setPreviews(filesArray);
-    //     //     // setPreviews([...previews, reader.result as string])
-    //     // };
-    //     // // Read in the image file as a data URL.
-    //     // reader.readAsDataURL(f);
-    //     getPreview(f, (s) => {
+    if (files.length + previewsCount > max) {
+      alert(`Cannot upload more than ${max} ${imageText}`);
+      return;
+    }
 
-    //     });
-    // }
+    getPreview(files);
   };
 
   return (
     <ImageUploadContainer>
-      <input
-        type="file"
-        id="file"
-        className="file"
-        multiple={multi}
-        max={max}
-        onChange={handleChange}
-        ref={fileInputRef}
-      />
-      <label htmlFor="file">{buttonLabel}</label>
-      <h6>Max of 3 images</h6>
-      {previews.length > 0 &&
-        previews.map((p, i) => (
-          <img
-            key={i}
-            src={p}
-            alt="preview"
-            style={{ objectFit: "cover", width: 200 }}
-          />
-        ))}
+      <div className="wrapper">
+        <input
+          type="file"
+          id="file"
+          className="file"
+          multiple={multi}
+          onChange={handleChange}
+        />
+        <label htmlFor="file">{buttonLabel}</label>
+        <h6>
+          Max of {max} {imageText}
+        </h6>
+
+        <PreviewsContainer>
+          {previews.length > 0 &&
+            previews.map((p, i) => (
+              <ImageContainer>
+                <img key={i} src={p} alt="preview" />
+              </ImageContainer>
+            ))}
+        </PreviewsContainer>
+      </div>
     </ImageUploadContainer>
   );
 };
@@ -71,6 +90,7 @@ type Props = {
   buttonLabel: string;
   multi: boolean;
   max: number;
+  passImagesToParent: (i: string[]) => void;
 };
 
 type Img = {

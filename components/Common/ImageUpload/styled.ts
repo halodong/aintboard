@@ -1,6 +1,11 @@
 import styled from "styled-components";
 
 export const ImageUploadContainer = styled.div`
+  .wrapper {
+    margin: 0 auto;
+    width: 30rem;
+  }
+
   .file {
     /* for accessibility */
     opacity: 0;
@@ -24,5 +29,23 @@ export const ImageUploadContainer = styled.div`
     display: inline-block;
     margin-left: 1rem;
     font-size: 0.8rem;
+  }
+`;
+
+export const PreviewsContainer = styled.div`
+  margin-bottom: 1rem;
+`;
+
+export const ImageContainer = styled.div`
+  display: inline-block;
+  width: 8rem;
+  height: 8rem;
+  margin-right: 1rem;
+  border: 2px solid white;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 `;
