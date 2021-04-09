@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import useSWR from "swr";
+import { isEmpty } from "lodash";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import fetcher from "util/fetch";
@@ -18,7 +19,7 @@ const ChallengesPage = ({ challenges }: Props) => {
   const filters = useSelector((state: FilterState) => state.filter.filters);
 
   const { data: filteredApiData } = useSWR<ChallengesApiResponse>(
-    filters?.secondSelected !== null
+    !isEmpty(filters?.secondSelected)
       ? `/api/challenge/filter/${filters.firstSelected}/${filters.secondSelected}?first=6`
       : null,
     fetcher,

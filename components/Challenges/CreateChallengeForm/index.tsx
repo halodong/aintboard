@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Formik, Form } from "formik";
 import { isEmpty } from "lodash";
 import { toast } from "react-toastify";
@@ -7,6 +8,7 @@ import * as Yup from "yup";
 import Input from "components/Common/Input";
 import Label from "components/Common/Label";
 import Button from "components/Common/Button";
+import ImageUpload from "components/Common/ImageUpload";
 
 import {
   InputContainer,
@@ -14,11 +16,17 @@ import {
   ErrorMessage,
 } from "components/Common/inputStyled";
 import useCurrentUser from "hooks/useCurrentUser";
+import { upload } from "util/cloudinary";
 
 const CreateChallengeForm = ({ closeModal }: Props) => {
   const user = useCurrentUser();
+  const [images, setImages] = useState<string[]>([]);
 
   const formSchema = Yup.object().shape({
+    bgName: Yup.string().required("Boardgame Name required"),
+
+    bgYear: Yup.number().typeError("Must be a number"),
+
     challengeName: Yup.string()
       .min(10, "It is too short.")
       .required("Challenge Name required"),
@@ -30,12 +38,16 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
     <Formik
       enableReinitialize
       initialValues={{
+        bgName: "",
+        bgYear: "",
         challengeName: "",
         powerUpAmount: "",
       }}
       validationSchema={formSchema}
       onSubmit={async (values, { resetForm }) => {
         try {
+          const uploadedImage = await upload(images);
+
           const userData = !isEmpty(user?.userData)
             ? JSON.parse(user?.userData || "")
             : { role: "" };
@@ -49,8 +61,11 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
           }
 
           const response = await axios.post("/api/challenges/", {
+            bgName: values.bgName,
+            bgYear: values.bgYear,
             challengeName: values.challengeName,
             powerUpAmount: values.powerUpAmount,
+            bgImage: uploadedImage[0],
           });
 
           if (!response.data.success) {
@@ -70,6 +85,39 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
       {({ errors, touched }) => (
         <Form>
           <Label>Challenges are meant to be achievable and challenging.</Label>
+          <Label>
+            Challenge Names could be: Finish Pandemic in an hour in a 2-player
+            game.
+          </Label>
+
+          <ImageUpload
+            buttonLabel="Select an image"
+            multi
+            max={1}
+            passImagesToParent={(imgs) => setImages(imgs)}
+          />
+
+          <InputContainer>
+            {errors.bgName && touched.bgName && (
+              <ErrorMessage>{errors.bgName}</ErrorMessage>
+            )}
+            <Input
+              name="bgName"
+              label="Boardgame Name"
+              error={errors.bgName || ""}
+            />
+          </InputContainer>
+
+          <InputContainer>
+            {errors.bgYear && touched.bgYear && (
+              <ErrorMessage>{errors.bgYear}</ErrorMessage>
+            )}
+            <Input
+              name="bgYear"
+              label="Boardgame Year (optional)"
+              error={errors.bgYear || ""}
+            />
+          </InputContainer>
 
           <InputContainer>
             {errors.challengeName && touched.challengeName && (
