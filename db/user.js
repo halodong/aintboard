@@ -10,6 +10,14 @@ export async function insertUser(
   { firstName, lastName, email, password, role = "guest", username, avatar }
 ) {
   try {
+    if (username.match(/^[0-9a-zA-Z]+$/) === null) {
+      return getFailedResponse(
+        "error",
+        "db/user.js",
+        "Username cannot have special characters"
+      );
+    }
+
     const checkEmail = await db.collection("users").findOne({ email });
 
     if (checkEmail) {
