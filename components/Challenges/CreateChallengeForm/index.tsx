@@ -16,6 +16,7 @@ import {
   ErrorMessage,
 } from "components/Common/inputStyled";
 import useCurrentUser from "hooks/useCurrentUser";
+import { upload } from "util/cloudinary";
 
 const CreateChallengeForm = ({ closeModal }: Props) => {
   const user = useCurrentUser();
@@ -45,6 +46,8 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
       validationSchema={formSchema}
       onSubmit={async (values, { resetForm }) => {
         try {
+          const uploadedImage = await upload(images);
+
           const userData = !isEmpty(user?.userData)
             ? JSON.parse(user?.userData || "")
             : { role: "" };
@@ -58,8 +61,11 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
           }
 
           const response = await axios.post("/api/challenges/", {
+            bgName: values.bgName,
+            bgYear: values.bgYear,
             challengeName: values.challengeName,
             powerUpAmount: values.powerUpAmount,
+            bgImage: uploadedImage[0],
           });
 
           if (!response.data.success) {
