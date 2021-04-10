@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import React from "react";
 import ChallengeCard from "~/components/Challenges/ChallengesCard";
 import {
@@ -22,10 +24,12 @@ export default function ChallengesHomePage() {
         <ChallengeCard />
         <ChallengeCard />
         <ChallengeCard />
-        <CallToAction>
-          <CallToActionFont>PARTICIPATE</CallToActionFont>
-          <RightArrow />
-        </CallToAction>
+        <Link href="/challenges">
+          <CallToAction>
+            <CallToActionFont>PARTICIPATE</CallToActionFont>
+            <RightArrow />
+          </CallToAction>
+        </Link>
       </CardWrapper>
     </Wrapper>
   );
