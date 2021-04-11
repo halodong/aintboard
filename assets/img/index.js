@@ -10,3 +10,4 @@ export { default as UserMale } from "./user/UserMale";
 export { default as Dice } from "./Dice";
 export { default as CommentIcon } from "./comment.svg";
 export { default as HeartLikeIcon } from "./heart-like.svg";
+export { default as FooterBottom } from "./footer-bottom.svg";
