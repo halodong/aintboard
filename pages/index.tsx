@@ -3,6 +3,7 @@ import useSWR from "swr";
 
 import Head from "next/head";
 import Header from "~/components/Header";
+import Footer from "~/components/Common/Footer";
 import ReviewHomepage from "~/components/Reviews/ReviewHomepage";
 import ChallengesHomepage from "~/components/Challenges/ChallengesHomepage";
 
@@ -36,6 +37,8 @@ export default function Home({ reviews, challenges }: Props) {
 
       <ReviewHomepage reviews={reviewData} />
       <ChallengesHomepage challenges={challengesData} />
+
+      <Footer />
     </div>
   );
 }
