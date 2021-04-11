@@ -21,6 +21,7 @@ export const LogoContainer = styled.div`
 export const AdminPageText = styled.h1`
   color: ${(props) => props.theme.colors.white};
   font-family: ${(props) => props.theme.fonts.rubikBold};
+  text-transform: uppercase;
 `;
 
 export const AdminLoginContainer = styled.div`
@@ -37,6 +38,7 @@ export const AdminLoginContainer = styled.div`
 
 export const AdminLoginHeader = styled.h3`
   color: ${(props) => props.theme.colors.white};
+  text-transform: uppercase;
   background-color: ${(props) => props.theme.colors.darkerGreen};
   padding: 1rem;
   margin: 0;

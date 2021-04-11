@@ -1,5 +1,3 @@
-import React, { useEffect } from "react";
-
 import Link from "next/link";
 import Router from "next/router";
 import WhiteLogo from "~/assets/img/white-logo.svg";
@@ -18,10 +16,7 @@ import {
 const AdminPage = () => {
   const user = useCurrentUser();
 
-  // if user is already logged in and you go to /admin it will redirect to dashboard
-  useEffect(() => {
-    if (user.accessToken) Router.push("/admin/dashboard");
-  });
+  if (user.accessToken) Router.push("/admin/dashboard");
 
   return (
     <AdminPageWrapper>
@@ -31,10 +26,10 @@ const AdminPage = () => {
         </LogoContainer>
       </Link>
 
-      <AdminPageText>ADMIN LOGIN</AdminPageText>
+      <AdminPageText>Admin Login</AdminPageText>
 
       <AdminLoginContainer>
-        <AdminLoginHeader>LOGIN</AdminLoginHeader>
+        <AdminLoginHeader>Login</AdminLoginHeader>
         <LoginForm isAdmin closeModal={() => {}} />
       </AdminLoginContainer>
     </AdminPageWrapper>

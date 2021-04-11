@@ -53,12 +53,10 @@ const LoginForm = ({ closeModal, isAdmin }: Props) => {
             JSON.stringify(userResponse.data.response.data.user)
           );
 
-          // once the admin clicked login it will redirect to dashboard
-          if (isAdmin) Router.push("/admin/dashboard");
-
           closeModal();
           resetForm();
           toast.success("Welcome!");
+          if (isAdmin) Router.push("/admin/dashboard");
         } catch (err) {
           console.error("Login error: ", err);
           toast.error("Something went wrong");
