@@ -19,6 +19,12 @@ declare module "styled-components" {
       mediumRed: string;
       paleGray: string;
       errorRed: string;
+      paleGolden: string;
+      darkBrown: string;
+      peru: string;
+      sandyBrown: string;
+      slateGray: string;
+      rosyBrown: string;
     };
     breakpoints: {
       xs: string;
@@ -84,6 +90,12 @@ export const theme: DefaultTheme = {
     mediumGreen: "#76AAA4",
     mediumRed: "#BB6B6B",
     errorRed: "#E15A5A",
+    paleGolden: "#f1dca7",
+    darkBrown: "#997b65",
+    peru: "#b58463",
+    sandyBrown: "#e8ac65",
+    slateGray: "#727f84",
+    rosyBrown: "#baa587",
   },
   breakpoints: {
     xs: "360px",

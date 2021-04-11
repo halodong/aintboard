@@ -14,8 +14,61 @@ import {
   BOY_ICON,
   ALPACA_ICON,
   KNIGHT_ICON,
+  DRAGON_ICON,
+  WIZARD_ICON,
   CHOOSE_AVATAR_COMPONENT,
+  GIRL_ICON_DEFAULT_BG,
+  BOY_ICON_DEFAULT_BG,
+  ALPACA_ICON_DEFAULT_BG,
+  KNIGHT_ICON_DEFAULT_BG,
+  DRAGON_ICON_DEFAULT_BG,
+  WIZARD_ICON_DEFAULT_BG,
 } from "~/util/constants";
+
+const avatarList = [
+  {
+    key: GIRL_ICON,
+    icon: GIRL_ICON,
+    bgColor: GIRL_ICON_DEFAULT_BG,
+    className: "icon",
+    component: <GirlAvatar className="icon" />,
+  },
+  {
+    key: BOY_ICON,
+    icon: BOY_ICON,
+    bgColor: BOY_ICON_DEFAULT_BG,
+    className: "icon",
+    component: <BoyAvatar className="icon" />,
+  },
+  {
+    key: ALPACA_ICON,
+    icon: ALPACA_ICON,
+    bgColor: ALPACA_ICON_DEFAULT_BG,
+    className: "icon",
+    component: <AlpacaAvatar className="icon" />,
+  },
+  {
+    key: KNIGHT_ICON,
+    icon: KNIGHT_ICON,
+    bgColor: KNIGHT_ICON_DEFAULT_BG,
+    className: "icon",
+    component: <KnightAvatar className="icon" />,
+  },
+  {
+    key: DRAGON_ICON,
+    bgColor: DRAGON_ICON_DEFAULT_BG,
+    className: "icon",
+    component: <DragonAvatar className="icon" />,
+    special: true,
+  },
+  {
+    key: WIZARD_ICON,
+    bgColor: WIZARD_ICON_DEFAULT_BG,
+    className: "icon",
+    component: <WizardAvatar className="icon" />,
+    special: true,
+  },
+];
 
 const ChooseAvatar = ({ chooseAvatar }: Props) => {
   const [avatar, setAvatar] = useState("");
@@ -29,45 +82,20 @@ const ChooseAvatar = ({ chooseAvatar }: Props) => {
       <Label>Choose an avatar</Label>
 
       <AvatarWrapper>
-        <UserWrapper
-          onClick={() => setAvatar(GIRL_ICON)}
-          isChosen={avatar === GIRL_ICON}
-          from={CHOOSE_AVATAR_COMPONENT}
-        >
-          <GirlAvatar className="icon" />
-        </UserWrapper>
-
-        <UserWrapper
-          onClick={() => setAvatar(BOY_ICON)}
-          isChosen={avatar === BOY_ICON}
-          from={CHOOSE_AVATAR_COMPONENT}
-        >
-          <BoyAvatar className="icon" />
-        </UserWrapper>
-
-        <UserWrapper
-          onClick={() => setAvatar(ALPACA_ICON)}
-          isChosen={avatar === ALPACA_ICON}
-          from={CHOOSE_AVATAR_COMPONENT}
-        >
-          <AlpacaAvatar className="icon" />
-        </UserWrapper>
-
-        <UserWrapper
-          onClick={() => setAvatar(KNIGHT_ICON)}
-          isChosen={avatar === KNIGHT_ICON}
-          from={CHOOSE_AVATAR_COMPONENT}
-        >
-          <KnightAvatar className="icon" />
-        </UserWrapper>
-
-        <UserWrapper className="special-icon" from={CHOOSE_AVATAR_COMPONENT}>
-          <DragonAvatar className="icon" />
-        </UserWrapper>
-
-        <UserWrapper className="special-icon" from={CHOOSE_AVATAR_COMPONENT}>
-          <WizardAvatar className="icon" />
-        </UserWrapper>
+        {avatarList.map((a, i) => (
+          <UserWrapper
+            key={`${a.key}-${i}`}
+            className={a.special === true ? "special-icon" : ""}
+            onClick={() =>
+              a.special !== true && a.icon ? setAvatar(a.icon) : null
+            }
+            isChosen={a.special !== true ? avatar === a.icon : false}
+            bgColor={a.bgColor}
+            from={CHOOSE_AVATAR_COMPONENT}
+          >
+            {a.component}
+          </UserWrapper>
+        ))}
       </AvatarWrapper>
     </ChooseAvatarContainer>
   );

@@ -1,7 +1,18 @@
+import { theme } from "styles/theme";
+
 export const GIRL_ICON = "GIRL";
 export const BOY_ICON = "BOY";
 export const ALPACA_ICON = "ALPACA";
 export const KNIGHT_ICON = "KNIGHT";
+export const DRAGON_ICON = "DRAGON";
+export const WIZARD_ICON = "WIZARD";
+
+export const GIRL_ICON_DEFAULT_BG = theme.colors.paleGolden;
+export const BOY_ICON_DEFAULT_BG = theme.colors.darkBrown;
+export const ALPACA_ICON_DEFAULT_BG = theme.colors.peru;
+export const KNIGHT_ICON_DEFAULT_BG = theme.colors.sandyBrown;
+export const DRAGON_ICON_DEFAULT_BG = theme.colors.slateGray;
+export const WIZARD_ICON_DEFAULT_BG = theme.colors.rosyBrown;
 
 export const FOLLOW_AVATAR_BUTTON = "FOLLOW_AVATAR_BUTTON";
 export const MAKE_REVIEW_BUTTON = "MAKE_REVIEW_BUTTON";
