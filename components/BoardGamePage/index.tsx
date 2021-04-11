@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 
 import {
-  BoardGamaPageWrapper,
+  BoardGamePageWrapper,
   LeftSide,
   RightSide,
   ReviewsSection,
@@ -53,7 +53,7 @@ const BoardGamePage = ({ reviews, bgItem }: Props) => {
     }
   };
   return (
-    <BoardGamaPageWrapper>
+    <BoardGamePageWrapper>
       <LeftSide>
         {cardButton.map((btn) => (
           <CardButton
@@ -103,7 +103,7 @@ const BoardGamePage = ({ reviews, bgItem }: Props) => {
           </Button>
         </OnlineBattlesSection>
       </RightSide>
-    </BoardGamaPageWrapper>
+    </BoardGamePageWrapper>
   );
 };
 

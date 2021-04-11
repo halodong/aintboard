@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import React from "react";
 import ChallengeCard from "~/components/Challenges/ChallengesCard";
 import {
@@ -21,14 +23,15 @@ export default function ChallengesHomePage({ challenges }: Props) {
       </p>
 
       <CardWrapper>
-        {challenges?.response?.data?.challenges?.map((c) => (
-          <ChallengeCard key={c._id} data={c} />
-        ))}
-
-        <CallToAction>
-          <CallToActionFont>PARTICIPATE</CallToActionFont>
-          <RightArrow />
-        </CallToAction>
+        <ChallengeCard />
+        <ChallengeCard />
+        <ChallengeCard />
+        <Link href="/challenges">
+          <CallToAction>
+            <CallToActionFont>PARTICIPATE</CallToActionFont>
+            <RightArrow />
+          </CallToAction>
+        </Link>
       </CardWrapper>
     </Wrapper>
   );

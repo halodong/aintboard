@@ -42,6 +42,7 @@ export const CallToAction = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: ${(props) => props.theme.border["10px"]};
+  cursor: pointer;
 `;
 
 export const CallToActionFont = styled(GameFont)`

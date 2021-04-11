@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const BoardGamaPageWrapper = styled.div`
+export const BoardGamePageWrapper = styled.div`
   display: flex;
   background-color: ${(props) => props.theme.colors.dark};
 `;
@@ -12,6 +12,8 @@ export const LeftSide = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2rem;
+  position: relative;
+  top: -1rem;
 `;
 
 export const RightSide = styled.div`
