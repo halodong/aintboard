@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import useSWR from "swr";
+import { isEmpty } from "lodash";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import fetcher from "util/fetch";
@@ -10,17 +11,15 @@ import ChallengesCard from "~/components/Challenges/ChallengesCard";
 import {
   ChallengesApiResponse,
   ChallengesData,
-  AintboardReduxState,
+  FilterState,
 } from "types/types";
 
 //Challenges page - where filters are
 const ChallengesPage = ({ challenges }: Props) => {
-  const filters = useSelector(
-    (state: AintboardReduxState) => state.filter.filters
-  );
+  const filters = useSelector((state: FilterState) => state.filter.filters);
 
   const { data: filteredApiData } = useSWR<ChallengesApiResponse>(
-    filters?.secondSelected !== null
+    !isEmpty(filters?.secondSelected)
       ? `/api/challenge/filter/${filters.firstSelected}/${filters.secondSelected}?first=6`
       : null,
     fetcher,
@@ -39,11 +38,7 @@ const ChallengesPage = ({ challenges }: Props) => {
       >
         <ChallengesCardContainer>
           {challengesData.map((c: ChallengesData, index) => (
-            <ChallengesCard
-              key={`${c.bgName}-${index}`}
-              puAmount={c.powerUpAmount}
-              challenges={c}
-            />
+            <ChallengesCard key={`${c.bgName}-${index}`} data={c} />
           ))}
         </ChallengesCardContainer>
       </InfiniteScroll>

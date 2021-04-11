@@ -1,4 +1,5 @@
 import { Formik, Form } from "formik";
+import * as Yup from "yup";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -7,9 +8,19 @@ import Input from "~/components/Common/Input";
 import Label from "~/components/Common/Label";
 import Button from "~/components/Common/Button";
 
-import { InputContainer, ButtonContainer } from "./styled";
+import {
+  InputContainer,
+  ButtonContainer,
+  ErrorMessage,
+} from "components/Common/inputStyled";
 
 const LoginForm = ({ closeModal }: Props) => {
+  const loginSchema = Yup.object().shape({
+    usernameEmail: Yup.string().required("Username or Email Required"),
+
+    password: Yup.string().required("Password Required"),
+  });
+
   return (
     <Formik
       enableReinitialize
@@ -17,6 +28,7 @@ const LoginForm = ({ closeModal }: Props) => {
         usernameEmail: "",
         password: "",
       }}
+      validationSchema={loginSchema}
       onSubmit={async (values, { resetForm }) => {
         try {
           const userResponse = await axios.post("/api/login/", {
@@ -45,21 +57,40 @@ const LoginForm = ({ closeModal }: Props) => {
         }
       }}
     >
-      <Form>
-        <Label>Welcome!</Label>
+      {({ errors, touched }) => (
+        <Form>
+          <Label>Welcome!</Label>
 
-        <InputContainer>
-          <Input name="usernameEmail" label="Username/Email" />
-        </InputContainer>
-        <InputContainer>
-          <Input name="password" label="Password" type="password" />
-        </InputContainer>
-        <ButtonContainer>
-          <Button bg="lightYellow" onClick={() => {}}>
-            Login
-          </Button>
-        </ButtonContainer>
-      </Form>
+          <InputContainer>
+            {errors.usernameEmail && touched.usernameEmail && (
+              <ErrorMessage>{errors.usernameEmail}</ErrorMessage>
+            )}
+            <Input
+              name="usernameEmail"
+              label="Username/Email"
+              error={errors.usernameEmail || ""}
+            />
+          </InputContainer>
+
+          <InputContainer>
+            {errors.password && touched.password && (
+              <ErrorMessage>{errors.password}</ErrorMessage>
+            )}
+            <Input
+              name="password"
+              label="Password"
+              type="password"
+              error={errors.password || ""}
+            />
+          </InputContainer>
+
+          <ButtonContainer>
+            <Button bg="lightYellow" onClick={() => {}}>
+              Login
+            </Button>
+          </ButtonContainer>
+        </Form>
+      )}
     </Formik>
   );
 };

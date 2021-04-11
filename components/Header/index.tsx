@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { useSelector, useDispatch } from "react-redux";
 
 import {
   HeaderWrapper,
@@ -12,9 +13,21 @@ import { TreesGroup1, TreesGroup2, Tent } from "~/assets/img";
 
 import Filter from "~/components/Common/Filter";
 import Navbar from "~/components/Navbar";
-import Searchbar from "~/components/Searchbar";
+// import Searchbar from "~/components/Searchbar"; obsolete for now
+import Modal from "~/components/Common/Modal";
+import CreateChallengeForm from "~/components/Challenges/CreateChallengeForm";
 
-import { CHALLENGES_PAGE } from "util/constants";
+import { chooseModal } from "redux/slices/modalSlice";
+import { CHALLENGES_PAGE, CREATE_CHALLENGE_BUTTON } from "util/constants";
+import { ModalState } from "types/types";
+
+const modalCta = [
+  {
+    id: 1,
+    name: "Create a Challenge",
+    type: CREATE_CHALLENGE_BUTTON,
+  },
+];
 
 export default function Header({
   homepage,
@@ -26,6 +39,16 @@ export default function Header({
 }: Props) {
   const router = useRouter();
   const { name } = router.query;
+  const dispatch = useDispatch();
+
+  const modalClicked = useSelector(
+    (state: ModalState) => state.modal.modalChosen
+  );
+
+  const closeModal = () => {
+    // @TODO dispatch this with setTimeout to have a fadeout of modal
+    dispatch(chooseModal(""));
+  };
 
   return (
     <HeaderWrapper
@@ -36,7 +59,7 @@ export default function Header({
     >
       <Navbar />
 
-      <Searchbar />
+      {/* <Searchbar /> obsolete for now */}
 
       {(homepage || isBoardGamePage) && (
         <div className="homepage-bg-container">
@@ -71,6 +94,26 @@ export default function Header({
       {isChallengesPage && <Filter type={CHALLENGES_PAGE} />}
 
       {isBoardGamePage && <BoardGameName>{children}</BoardGameName>}
+
+      {modalCta.map((mdl) => (
+        <Modal
+          key={`${mdl.type}-${mdl.id}`}
+          isOpen={modalClicked !== ""}
+          closeModal={closeModal}
+          headerLabel={mdl.name}
+          closeTimeoutMS={0}
+          maxwidth="35rem"
+        >
+          {(() => {
+            switch (modalClicked) {
+              case CREATE_CHALLENGE_BUTTON:
+                return <CreateChallengeForm closeModal={closeModal} />;
+              default:
+                return null;
+            }
+          })()}
+        </Modal>
+      ))}
     </HeaderWrapper>
   );
 }

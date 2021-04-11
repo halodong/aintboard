@@ -8,7 +8,7 @@ export const InputContainer = styled.div<InputContainerProps>`
 
   .search-icon {
     position: absolute;
-    z-index: 1;
+    z-index: ${(props) => props.theme.zIndex["9th"]};
     right: 1rem;
     top: 0.7rem;
     cursor: pointer;
@@ -72,7 +72,7 @@ export const InputStyled = styled.input`
   outline: none;
   position: relative;
   width: 100%;
-  z-index: 0;
+  z-index: ${(props) => props.theme.zIndex["10th"]};
 
   &::placeholder,
   &:-ms-input-placeholder,

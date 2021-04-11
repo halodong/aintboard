@@ -4,26 +4,27 @@ import fetcher from "~/util/fetch";
 
 import {
   ChallengesCardWrapper,
-  PowerUpIcon,
   PowerUpAmount,
   ChallengeName,
+  ImgWrapper,
 } from "./styled";
 import PlayButton from "~/assets/img/playbutton.svg";
 
 import { ChallengesData, BggBoardgameApiData } from "types/types";
 
-const ChallengesCard = ({ puAmount, challenges }: Props) => {
+const ChallengesCard = ({ data }: Props) => {
   const { data: bgData } = useSWR<BggBoardgameApiData>(
-    `/api/bg/${challenges?.bgId || 1}`,
+    `/api/bg/${data?.bgId || 1}`,
     fetcher
   );
 
+  // @TODO this is used for images only, should be from mongodb
   const bgItem = bgData?.items?.[0]?.item?.[0] || null;
 
   return (
     <ChallengesCardWrapper>
-      <PowerUpIcon>
-        {/* @TODO change fallback image to an aintboard logo */}
+      {/* @TODO change fallback image to an aintboard logo */}
+      <ImgWrapper>
         <Image
           src={
             bgItem?.image?.[0]?._text?.[0] ||
@@ -32,12 +33,12 @@ const ChallengesCard = ({ puAmount, challenges }: Props) => {
           alt="challenge card"
           layout="fill"
         />
-      </PowerUpIcon>
+      </ImgWrapper>
 
-      <PowerUpAmount>+{puAmount}UP</PowerUpAmount>
+      <PowerUpAmount>+{data?.powerUpAmount}UP</PowerUpAmount>
 
       <ChallengeName>
-        <p>Score 170 VP in a 4-Player match in Brass Lancashire</p>
+        <p>{data?.challengeName}</p>
         <PlayButton className="play" />
       </ChallengeName>
     </ChallengesCardWrapper>
@@ -45,8 +46,7 @@ const ChallengesCard = ({ puAmount, challenges }: Props) => {
 };
 
 type Props = {
-  puAmount?: number;
-  challenges?: ChallengesData;
+  data?: ChallengesData;
 };
 
 export default ChallengesCard;

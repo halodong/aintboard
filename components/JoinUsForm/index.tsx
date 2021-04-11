@@ -9,13 +9,18 @@ import Label from "../Common/Label";
 import ChooseAvatar from "~/components/Avatar/ChooseAvatar";
 import Button from "~/components/Common/Button";
 
-import { InputContainer, ErrorMessage, SignupButton } from "./styled";
+import {
+  InputContainer,
+  ErrorMessage,
+  ButtonContainer,
+} from "components/Common/inputStyled";
 
 const JoinUsForm = ({ closeModal }: Props) => {
   const [avatar, setAvatar] = useState("");
 
-  const SignupSchema = Yup.object().shape({
+  const signupSchema = Yup.object().shape({
     username: Yup.string()
+      .matches(/^[0-9a-zA-Z]+$/, "Special characters are not allowed")
       .min(3, "Too Short!")
       .max(55, "Too Long!")
       .required("Username Required"),
@@ -40,7 +45,7 @@ const JoinUsForm = ({ closeModal }: Props) => {
         password: "",
         passwordConfirmation: "",
       }}
-      validationSchema={SignupSchema}
+      validationSchema={signupSchema}
       validateOnBlur={true}
       onSubmit={async (values, { resetForm }) => {
         if (avatar === "") {
@@ -125,11 +130,11 @@ const JoinUsForm = ({ closeModal }: Props) => {
             chooseAvatar={(chosenAvatar) => setAvatar(chosenAvatar)}
           />
 
-          <SignupButton>
+          <ButtonContainer>
             <Button bg="lightYellow" type="submit">
               Join
             </Button>
-          </SignupButton>
+          </ButtonContainer>
         </Form>
       )}
     </Formik>

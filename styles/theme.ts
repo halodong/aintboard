@@ -18,6 +18,7 @@ declare module "styled-components" {
       mediumGreen: string;
       mediumRed: string;
       paleGray: string;
+      errorRed: string;
     };
     breakpoints: {
       xs: string;
@@ -51,6 +52,18 @@ declare module "styled-components" {
       md: string;
       md2: string;
       lg: string;
+    };
+    zIndex: {
+      "1st": number;
+      "2nd": number;
+      "3rd": number;
+      "4th": number;
+      "5th": number;
+      "6th": number;
+      "7th": number;
+      "8th": number;
+      "9th": number;
+      "10th": number;
     };
   }
 }
@@ -104,5 +117,17 @@ export const theme: DefaultTheme = {
     md: "1.5rem",
     md2: "2rem",
     lg: "3.5rem",
+  },
+  zIndex: {
+    "1st": 999999999, //toast
+    "2nd": 9999999, //search input menu portal - used in searchbar and modals
+    "3rd": 999999, //.ReactModalPortal, NavBar .MenuIcon, Modal content
+    "4th": 99999, //Sidebar SidebarContainer
+    "5th": 99998, //Sidebar OverlaySidebar
+    "6th": 9999, //Navbar NavbarContainer
+    "7th": 10, //ReviewHomepage ReviewContainer, ReviewHomepage ReviewCardWrapper
+    "8th": 5, //Header baseTaglineStyles
+    "9th": 1, //Header tent, Input .search-icon
+    "10th": 0, //Input InputStyled, Header trees
   },
 };

@@ -9,14 +9,14 @@ export const NavbarContainer = styled.nav<NavbarContainerProps>`
   padding: 0 ${(props) => props.theme.spacing.lg};
   position: ${(props) => (props.isFixed ? "fixed" : "static")};
   width: 100%;
-  z-index: 9999;
+  z-index: ${(props) => props.theme.zIndex["6th"]};
 
   top: ${(props) => (props.isFixed ? "0" : "-9rem")};
   transition: all 0.5s ease-out;
 
   .logo {
     width: 14.25rem;
-    flex: none;
+    flex: 1;
   }
 `;
 export const NavbarWrapper = styled.div`
@@ -37,6 +37,12 @@ export const NavBarButtons = styled.div`
   }
 `;
 
+export const RightSideNav = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+`;
+
 export const MenuIcon = styled.div<MenuIconProps>`
   width: 2rem;
   height: 2rem;
@@ -45,12 +51,12 @@ export const MenuIcon = styled.div<MenuIconProps>`
   -moz-transform: rotate(0deg);
   -o-transform: rotate(0deg);
   transform: rotate(0deg);
-  -webkit-transition: .5s ease-in-out;
-  -moz-transition: .5s ease-in-out;
-  -o-transition: .5s ease-in-out;
-  transition: .5s ease-in-out;
+  -webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -o-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
   cursor: pointer;
-  z-index: 999999;
+  z-index: ${(props) => props.theme.zIndex["3rd"]};
 
   span {
     display: block;
@@ -65,16 +71,17 @@ export const MenuIcon = styled.div<MenuIconProps>`
     -moz-transform: rotate(0deg);
     -o-transform: rotate(0deg);
     transform: rotate(0deg);
-    -webkit-transition: .25s ease-in-out;
-    -moz-transition: .25s ease-in-out;
-    -o-transition: .25s ease-in-out;
-    transition: .25s ease-in-out;
+    -webkit-transition: 0.25s ease-in-out;
+    -moz-transition: 0.25s ease-in-out;
+    -o-transition: 0.25s ease-in-out;
+    transition: 0.25s ease-in-out;
 
     &:nth-child(1) {
       top: 0px;
     }
 
-    &:nth-child(2), &:nth-child(3) {
+    &:nth-child(2),
+    &:nth-child(3) {
       top: 0.8rem;
     }
 
@@ -112,10 +119,23 @@ export const MenuIcon = styled.div<MenuIconProps>`
         }
       `}
   }
-
-  }
 `;
 
 type MenuIconProps = {
   openMenu: boolean;
 };
+
+export const Links = styled.div`
+  max-width: 40rem;
+  display: flex;
+  flex: 2;
+  justify-content: space-between;
+
+  a {
+    padding: 0.625rem ${(props) => props.theme.spacing.md};
+    color: ${(props) => props.theme.colors.white};
+    background-color: ${(props) => props.theme.colors.dark};
+    border: 2px solid white;
+    border-radius: ${(props) => props.theme.border["10px"]};
+  }
+`;
