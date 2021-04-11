@@ -45,10 +45,11 @@ export const HeaderWrapper = styled.div<HeaderWrappepProps>`
       width: 100%;
       position: absolute;
       bottom: 0;
+      top: 29rem;
       ${(props) =>
         props.homepage &&
         `
-      top: 29rem;
+      
       `}
     }
   }
