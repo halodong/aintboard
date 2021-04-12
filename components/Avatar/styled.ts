@@ -2,18 +2,22 @@ import styled from "styled-components";
 import {
   REVIEWS_HOMEPAGE_COMPONENT,
   SIDEBAR_COMPONENT,
+  CHOOSE_AVATAR_COMPONENT,
 } from "~/util/constants";
 
 export const UserWrapper = styled.div<UserWrapperProps>`
   position: relative;
-  width: 3rem;
-  height: 3rem;
+  width: ${(props) =>
+    props.from === CHOOSE_AVATAR_COMPONENT ? "4rem" : "3rem"};
+  height: ${(props) =>
+    props.from === CHOOSE_AVATAR_COMPONENT ? "4rem" : "3rem"};
   border-radius: 50%;
   border: ${(props) =>
     props.isChosen
-      ? `5px solid ${props.theme.colors.darkerGreen}`
+      ? `5px solid ${props.theme.colors.white}`
       : `1px solid ${props.theme.colors.black}`};
-  background-color: ${(props) => props.theme.colors.white};
+  background-color: ${(props) =>
+    props.bgColor ? props.bgColor : props.theme.colors.white};
   margin: ${(props) =>
     props.from === REVIEWS_HOMEPAGE_COMPONENT
       ? "-1.5rem auto 0"
@@ -55,6 +59,7 @@ export const UserWrapper = styled.div<UserWrapperProps>`
 type UserWrapperProps = {
   isChosen?: boolean;
   from?: string;
+  bgColor?: string;
 };
 
 export const AvatarWrapper = styled.div`

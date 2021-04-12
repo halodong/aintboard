@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 
 import {
-  BoardGamePageWrapper,
+  UserProfilePageWrapper,
   LeftSide,
   RightSide,
   ReviewsSection,
@@ -23,26 +23,30 @@ import OnlineBattleCard from "~/components/OnlineBattleCard";
 import { ReviewCard } from "~/components/Reviews/ReviewCard";
 
 import { chooseModal } from "redux/slices/modalSlice";
-import { ReviewApiResponse, BggBoardgameData } from "~/types/types";
+import { ReviewApiResponse } from "~/types/types";
 import {
-  FOLLOW_AVATAR_BUTTON,
+  BUY_AVATARS_BUTTON,
   MAKE_REVIEW_BUTTON,
   CREATE_CHALLENGE_BUTTON,
   CREATE_ONLINE_BATTLE_BUTTON,
 } from "util/constants";
 
 const cardButton = [
-  { id: 1, title: "Follow this boardgame", type: FOLLOW_AVATAR_BUTTON },
-  { id: 2, title: "Make a Review", type: MAKE_REVIEW_BUTTON },
-  { id: 3, title: "Create a Challenge", type: CREATE_CHALLENGE_BUTTON },
+  { id: 1, title: "Make a Review", type: MAKE_REVIEW_BUTTON },
+  { id: 2, title: "Create a Challenge", type: CREATE_CHALLENGE_BUTTON },
   {
-    id: 4,
+    id: 3,
     title: "Create an Online Battle",
     type: CREATE_ONLINE_BATTLE_BUTTON,
   },
+  {
+    id: 4,
+    title: "Buy Avatars",
+    type: BUY_AVATARS_BUTTON,
+  },
 ];
 
-const BoardGamePage = ({ reviews, bgItem }: Props) => {
+const UserProfilePage = ({ reviews = {} }: Props) => {
   const dispatch = useDispatch();
 
   const onButtonClick = (type: string) => {
@@ -52,8 +56,9 @@ const BoardGamePage = ({ reviews, bgItem }: Props) => {
         break;
     }
   };
+
   return (
-    <BoardGamePageWrapper>
+    <UserProfilePageWrapper>
       <LeftSide>
         {cardButton.map((btn) => (
           <CardButton
@@ -70,11 +75,7 @@ const BoardGamePage = ({ reviews, bgItem }: Props) => {
           <ReviewsCardWrapper>
             {reviews?.response?.data?.reviews.length > 0 ? (
               reviews?.response?.data?.reviews?.map((r) => (
-                <ReviewCard
-                  key={r._id}
-                  data={r}
-                  bgImg={bgItem?.image?.[0]._text?.[0] || ""}
-                />
+                <ReviewCard key={r._id} data={r} />
               ))
             ) : (
               <NoReviews>No Reviews Yet</NoReviews>
@@ -103,13 +104,12 @@ const BoardGamePage = ({ reviews, bgItem }: Props) => {
           </Button>
         </OnlineBattlesSection>
       </RightSide>
-    </BoardGamePageWrapper>
+    </UserProfilePageWrapper>
   );
 };
 
 type Props = {
   reviews: ReviewApiResponse;
-  bgItem: BggBoardgameData;
 };
 
-export default BoardGamePage;
+export default UserProfilePage;

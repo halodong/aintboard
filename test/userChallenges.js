@@ -48,6 +48,7 @@ describe("User challenges", () => {
         "challengeId",
         "_id"
       );
+
       expect(res.response.data.userWithPowerUps).to.be.an("object");
     }
 

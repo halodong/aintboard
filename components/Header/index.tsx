@@ -102,6 +102,7 @@ export default function Header({
           closeModal={closeModal}
           headerLabel={mdl.name}
           closeTimeoutMS={0}
+          maxwidth="35rem"
         >
           {(() => {
             switch (modalClicked) {

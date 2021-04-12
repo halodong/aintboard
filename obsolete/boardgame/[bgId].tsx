@@ -80,9 +80,6 @@ export async function getStaticPaths() {
   /**
    * Fallback Enable statically generating additional pages
    *
-   * If we implement static pages to be generated at build time, then
-   * possible paths: [{ params: { state: "wa", region: "sydney-3" } }],
-   *
    * @see https://nextjs.org/docs/basic-features/data-fetching#fallback-true
    */
   return {
