@@ -91,7 +91,7 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
           </Label>
 
           <ImageUpload
-            buttonLabel="Select an image"
+            buttonLabel="Upload an image of the boardgame"
             multi
             max={1}
             passImagesToParent={(imgs) => setImages(imgs)}

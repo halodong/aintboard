@@ -14,11 +14,14 @@ export const LinkSidebar = styled.li`
     cursor: pointer;
   }
 
-  a {
+  a,
+  .link {
     display: block;
     text-transform: none;
     font-size: 1.2rem;
     margin-top: 0.8rem;
     margin-left: 1rem;
+    padding: 0;
+    color: ${(props) => props.theme.colors.lightYellow};
   }
 `;
