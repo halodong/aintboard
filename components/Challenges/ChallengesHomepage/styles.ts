@@ -27,7 +27,7 @@ export const CardWrapper = styled.div`
   justify-content: space-evenly;
   align-self: center;
   align-items: center;
-  height: 80%;
+  height: 70%;
   width: 70%;
 `;
 
@@ -42,6 +42,7 @@ export const CallToAction = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: ${(props) => props.theme.border["10px"]};
+  cursor: pointer;
 `;
 
 export const CallToActionFont = styled(GameFont)`

@@ -20,6 +20,7 @@ const JoinUsForm = ({ closeModal }: Props) => {
 
   const signupSchema = Yup.object().shape({
     username: Yup.string()
+      .matches(/^[0-9a-zA-Z]+$/, "Special characters are not allowed")
       .min(3, "Too Short!")
       .max(55, "Too Long!")
       .required("Username Required"),
