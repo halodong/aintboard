@@ -159,6 +159,7 @@ export async function authenticateAdmin(db, { email, username, password }) {
     return getFailedResponse(err, "db/user.js", "User retrieval failed");
   }
 }
+
 export const filterUsers = async (db, { first, filter, field }) => {
   try {
     let users = null;
