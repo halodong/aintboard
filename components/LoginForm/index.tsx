@@ -1,8 +1,10 @@
+/* eslint-disable chai-friendly/no-unused-expressions */
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import axios from "axios";
+import Router from "next/router";
 
 import Input from "~/components/Common/Input";
 import Label from "~/components/Common/Label";
@@ -14,7 +16,7 @@ import {
   ErrorMessage,
 } from "components/Common/inputStyled";
 
-const LoginForm = ({ closeModal }: Props) => {
+const LoginForm = ({ closeModal, isAdmin }: Props) => {
   const loginSchema = Yup.object().shape({
     usernameEmail: Yup.string().required("Username or Email Required"),
 
@@ -31,11 +33,14 @@ const LoginForm = ({ closeModal }: Props) => {
       validationSchema={loginSchema}
       onSubmit={async (values, { resetForm }) => {
         try {
-          const userResponse = await axios.post("/api/login/", {
-            username: values.usernameEmail,
-            email: values.usernameEmail,
-            password: values.password,
-          });
+          const userResponse = await axios.post(
+            `${isAdmin ? "/api/admin" : "/api/login"}`,
+            {
+              username: values.usernameEmail,
+              email: values.usernameEmail,
+              password: values.password,
+            }
+          );
 
           if (!userResponse.data.success) {
             toast.error(userResponse.data.message);
@@ -51,6 +56,7 @@ const LoginForm = ({ closeModal }: Props) => {
           closeModal();
           resetForm();
           toast.success("Welcome!");
+          if (isAdmin) Router.push("/admin/dashboard");
         } catch (err) {
           console.error("Login error: ", err);
           toast.error("Something went wrong");
@@ -97,6 +103,7 @@ const LoginForm = ({ closeModal }: Props) => {
 
 type Props = {
   closeModal: () => void;
+  isAdmin?: boolean;
 };
 
 export default LoginForm;
