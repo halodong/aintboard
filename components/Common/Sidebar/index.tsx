@@ -13,7 +13,12 @@ import {
   Copyright,
 } from "./styled";
 import useCurrentUser from "~/hooks/useCurrentUser";
-import { SIDEBAR_COMPONENT } from "util/constants";
+import {
+  SIDEBAR_COMPONENT,
+  MAKE_REVIEW_BUTTON,
+  CREATE_CHALLENGE_BUTTON,
+  CREATE_ONLINE_BATTLE_BUTTON,
+} from "util/constants";
 
 import Avatar from "components/Avatar";
 import PrimaryLinkSidebar from "components/Common/PrimaryLinkSidebar";
@@ -46,10 +51,14 @@ const Sidebar = ({ menuOpen, closeMenu }: Props) => {
             buttonName="Reviews"
             links={[
               {
+                key: "see-reviews",
                 linkHref: "/",
                 linkName: "See Reviews",
               },
               {
+                key: "make-review",
+                button: true,
+                type: MAKE_REVIEW_BUTTON,
                 linkHref: "/",
                 linkName: "Make a Review or Strategy",
               },
@@ -59,10 +68,14 @@ const Sidebar = ({ menuOpen, closeMenu }: Props) => {
             buttonName="Challenges"
             links={[
               {
+                key: "see-challenges",
                 linkHref: "/",
                 linkName: "See Challenges",
               },
               {
+                key: "create-challenge",
+                button: true,
+                type: CREATE_CHALLENGE_BUTTON,
                 linkHref: "/",
                 linkName: "Create a Challenge",
               },
@@ -72,10 +85,14 @@ const Sidebar = ({ menuOpen, closeMenu }: Props) => {
             buttonName="Online Battles"
             links={[
               {
+                key: "see-ob",
                 linkHref: "/",
                 linkName: "See Online Battles",
               },
               {
+                key: "create-ob",
+                button: true,
+                type: CREATE_ONLINE_BATTLE_BUTTON,
                 linkHref: "/",
                 linkName: "Create an Online Battle",
               },
