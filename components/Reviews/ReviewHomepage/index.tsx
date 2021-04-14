@@ -18,7 +18,7 @@ const ReviewHomepage = ({ reviews }: Props) => {
         ))}
         <div className="mainButtonContainer">
           <button>See more Reviews</button>
-          <button>Make a Review</button>
+          <button>Make a Review or Strategy</button>
         </div>
       </ReviewCardWrapper>
     </ReviewContainer>
