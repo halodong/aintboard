@@ -59,6 +59,7 @@ export const ReviewCardWrapper = styled.div`
       font-size: 1rem;
       cursor: pointer;
       outline: none;
+      padding: 1rem;
     }
   }
 `;

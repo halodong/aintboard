@@ -4,9 +4,7 @@ export const HeaderWrapper = styled.div<HeaderWrappepProps>`
   width: 100%;
   background-color: ${(props) => props.theme.colors.dark};
   min-height: ${(props) =>
-    props.isSearchPage || props.isChallengePage || props.isBoardGamePage
-      ? "30rem"
-      : "35rem"};
+    props.isEditorPage ? "15rem" : props.homepage ? "35rem" : "30rem"};
   position: relative;
 
   .trees-1,
@@ -57,9 +55,7 @@ export const HeaderWrapper = styled.div<HeaderWrappepProps>`
 
 type HeaderWrappepProps = {
   homepage?: boolean;
-  isSearchPage?: boolean;
-  isChallengePage?: boolean;
-  isBoardGamePage?: boolean;
+  isEditorPage?: boolean;
 };
 
 const baseTaglineStyles = styled.h1`

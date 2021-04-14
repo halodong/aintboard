@@ -35,6 +35,7 @@ export default function Header({
   isChallengesPage = false,
   tagline,
   isBoardGamePage = false,
+  isEditorPage = false,
   children,
 }: Props) {
   const router = useRouter();
@@ -56,6 +57,7 @@ export default function Header({
       isSearchPage={isSearchPage}
       isChallengePage={isChallengesPage}
       isBoardGamePage={isBoardGamePage}
+      isEditorPage={isEditorPage}
     >
       <Navbar />
 
@@ -84,14 +86,15 @@ export default function Header({
 
       {isChallengesPage && <Tent className="tent" />}
 
-      {isChallengesPage && <GameFont>CHALLENGES</GameFont>}
       {isChallengesPage && (
-        <ChallengesTagline>
-          Achieve challenges to get PowerUps!
-        </ChallengesTagline>
+        <>
+          <GameFont>CHALLENGES</GameFont>
+          <ChallengesTagline>
+            Achieve challenges to get PowerUps!
+          </ChallengesTagline>
+          <Filter type={CHALLENGES_PAGE} />
+        </>
       )}
-
-      {isChallengesPage && <Filter type={CHALLENGES_PAGE} />}
 
       {isBoardGamePage && <BoardGameName>{children}</BoardGameName>}
 
@@ -124,5 +127,6 @@ type Props = {
   isChallengesPage?: boolean;
   tagline?: string;
   isBoardGamePage?: boolean;
+  isEditorPage?: boolean;
   children?: any;
 };

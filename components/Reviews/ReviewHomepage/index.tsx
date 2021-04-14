@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { Maze, WaterRight } from "~/assets/img";
 import { ReviewContainer, ReviewCardWrapper } from "./styled";
 import { ReviewCard } from "~/components/Reviews/ReviewCard";
@@ -18,7 +20,9 @@ const ReviewHomepage = ({ reviews }: Props) => {
         ))}
         <div className="mainButtonContainer">
           <button>See more Reviews</button>
-          <button>Make a Review or Strategy</button>
+          <Link href="/review/new">
+            <button>Make a Review or Strategy</button>
+          </Link>
         </div>
       </ReviewCardWrapper>
     </ReviewContainer>

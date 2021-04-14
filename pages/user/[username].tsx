@@ -6,7 +6,7 @@ import UserProfilePage from "~/components/UserProfilePage";
 import { UserData, UserApiResponse } from "~/types/types";
 import { FALLBACK } from "util/constants";
 
-const BoardgamePage = ({ userData }: Props) => {
+const Page = ({ userData }: Props) => {
   if (typeof window === "undefined") {
     return <></>;
   }
@@ -28,7 +28,7 @@ type Props = {
   userData: UserApiResponse;
 };
 
-export default BoardgamePage;
+export default Page;
 
 type Params = {
   params: {
