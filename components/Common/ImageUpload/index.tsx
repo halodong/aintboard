@@ -7,6 +7,7 @@ import {
 
 const ImageUpload = ({
   buttonLabel,
+  marginLeft,
   multi,
   max,
   passImagesToParent,
@@ -59,7 +60,7 @@ const ImageUpload = ({
   };
 
   return (
-    <ImageUploadContainer>
+    <ImageUploadContainer marginLeft={marginLeft}>
       <div className="wrapper">
         <input
           type="file"
@@ -88,13 +89,10 @@ const ImageUpload = ({
 
 type Props = {
   buttonLabel: string;
+  marginLeft?: string;
   multi: boolean;
   max: number;
   passImagesToParent: (i: string[]) => void;
-};
-
-type Img = {
-  imgSrc: string[] | ArrayBuffer[] | null;
 };
 
 export default ImageUpload;

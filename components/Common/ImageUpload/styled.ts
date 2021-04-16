@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
-export const ImageUploadContainer = styled.div`
+export const ImageUploadContainer = styled.div<ImageUploadContainerProps>`
   .wrapper {
-    margin: 0 auto;
+    margin: ${(props) =>
+      props.marginLeft ? `0 0 0 ${props.marginLeft}` : "0 auto"};
     width: 30rem;
   }
 
@@ -27,10 +28,15 @@ export const ImageUploadContainer = styled.div`
 
   h6 {
     display: inline-block;
+    color: white;
     margin-left: 1rem;
     font-size: 0.8rem;
   }
 `;
+
+type ImageUploadContainerProps = {
+  marginLeft?: string;
+};
 
 export const PreviewsContainer = styled.div`
   margin-bottom: 1rem;
