@@ -15,7 +15,9 @@ export const RatingFormWrapper = styled.div`
 
 export const RatingLabel = styled.label`
   color: white;
-  text-align: right;
+  font-family: ${(props) => props.theme.fonts.quicksandReg};
+  font-size: 0.9rem;
+  text-align: left;
   margin-right: 1rem;
   min-width: 10rem;
 `;

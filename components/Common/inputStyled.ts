@@ -33,4 +33,5 @@ export const Label = styled.label`
   display: block;
   color: white;
   margin-bottom: 1rem;
+  margin-top: 2rem;
 `;

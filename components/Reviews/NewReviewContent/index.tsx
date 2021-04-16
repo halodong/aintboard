@@ -8,10 +8,28 @@ import {
   ErrorMessage,
   Label,
 } from "components/Common/inputStyled";
+import RTE from "components/Common/RTE";
 import Input from "components/Common/Input";
+import DropDown from "components/Common/DropDown";
 import RatingForm from "components/Common/RatingForm";
+import ImageUpload from "components/Common/ImageUpload";
 import OverallRating from "components/Common/OverallRating";
-import { NewReviewWrapper, YoutubeContainer } from "./styled";
+import { NewReviewWrapper, YoutubeContainer, Title } from "./styled";
+
+const options = [
+  {
+    label: "Filipino",
+    value: "filipino",
+  },
+  {
+    label: "English",
+    value: "english",
+  },
+  {
+    label: "Taglish",
+    value: "taglish",
+  },
+];
 
 const NewReviewContent = () => {
   const [replayabilityRating, setReplayabilityRating] = useState(1);
@@ -21,9 +39,10 @@ const NewReviewContent = () => {
   const [playingTimeRating, setPlayingTimeRating] = useState(1);
   const [componentsRating, setComponentsRating] = useState(1);
   const [overallRating, setOverallRating] = useState(1);
+  const [images, setImages] = useState<string[]>([]);
 
   const formSchema = Yup.object().shape({
-    // reviewTitle: Yup.string().required("Review Title required"),
+    reviewTitle: Yup.string().required("Review Title required"),
     // language: Yup.string().required("Language required"),
     youtubeUrl: Yup.string().required("Youtube URL required"),
   });
@@ -64,9 +83,7 @@ const NewReviewContent = () => {
           console.log("valueForMoneyRating", valueForMoneyRating);
           console.log("playingTimeRating", playingTimeRating);
           console.log("componentsRating", componentsRating);
-
-          let validYoutubeUrl = await validateUrl(values.youtubeUrl);
-          console.log(12, validYoutubeUrl);
+          console.log(12, images);
           // try {
           // } catch (err) {
           //   console.error("Challenge creation error: ", err);
@@ -76,10 +93,41 @@ const NewReviewContent = () => {
       >
         {({ errors, touched, values }) => (
           <Form>
-            <label>
+            <Title>Create a Review</Title>
+            <InputContainer>
+              {errors.reviewTitle && touched.reviewTitle && (
+                <ErrorMessage justifyContent="flex-start">
+                  {errors.reviewTitle}
+                </ErrorMessage>
+              )}
+              <Input
+                name="reviewTitle"
+                label="Review Title"
+                error={errors.reviewTitle || ""}
+                marginLeft="0"
+              />
+            </InputContainer>
+
+            <ImageUpload
+              buttonLabel="Can upload up to 3 images"
+              multi
+              max={3}
+              passImagesToParent={(imgs) => setImages(imgs)}
+              marginLeft="0"
+            />
+
+            <Label>What is your Review's primary language?</Label>
+
+            <DropDown
+              placeholder="Language"
+              options={options}
+              onChange={() => {}}
+            />
+
+            <Label>
               Rate this boardgame by these categories from 1 - 6. 1 being the
               lowest, and 6 being the highest.
-            </label>
+            </Label>
 
             <OverallRating label="Overall Rating" rating={overallRating} />
             <RatingForm
@@ -106,6 +154,10 @@ const NewReviewContent = () => {
               ratingType="Components Quality"
               onRatingClick={(rating: number) => setComponentsRating(rating)}
             />
+
+            <Label>Put your Review content here</Label>
+
+            <RTE />
 
             <Label>
               Upload a youtube link that could be your elaborate video about
