@@ -6,3 +6,19 @@ export const NewReviewWrapper = styled.div`
   padding: 5rem;
   color: white;
 `;
+
+export const YoutubeContainer = styled.div`
+  position: relative;
+  background-color: white;
+  width: 40rem;
+  height: 20rem;
+  margin-bottom: 10rem;
+
+  .label {
+    color: black;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 5rem;
+  }
+`;

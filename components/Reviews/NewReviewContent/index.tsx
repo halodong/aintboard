@@ -1,10 +1,17 @@
 import { useState, useEffect } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
+import ReactPlayer from "react-player";
 
+import {
+  InputContainer,
+  ErrorMessage,
+  Label,
+} from "components/Common/inputStyled";
+import Input from "components/Common/Input";
 import RatingForm from "components/Common/RatingForm";
 import OverallRating from "components/Common/OverallRating";
-import { NewReviewWrapper } from "./styled";
+import { NewReviewWrapper, YoutubeContainer } from "./styled";
 
 const NewReviewContent = () => {
   const [replayabilityRating, setReplayabilityRating] = useState(1);
@@ -16,8 +23,8 @@ const NewReviewContent = () => {
   const [overallRating, setOverallRating] = useState(1);
 
   const formSchema = Yup.object().shape({
-    reviewTitle: Yup.string().required("Review Title required"),
-    language: Yup.string().required("Language required"),
+    // reviewTitle: Yup.string().required("Review Title required"),
+    // language: Yup.string().required("Language required"),
     youtubeUrl: Yup.string().required("Youtube URL required"),
   });
 
@@ -49,7 +56,7 @@ const NewReviewContent = () => {
           language: "",
           youtubeUrl: "",
         }}
-        // validationSchema={formSchema}
+        validationSchema={formSchema}
         onSubmit={async (values, { resetForm }) => {
           console.log("replayabilityRating", replayabilityRating);
           console.log("complexityRating", complexityRating);
@@ -57,6 +64,9 @@ const NewReviewContent = () => {
           console.log("valueForMoneyRating", valueForMoneyRating);
           console.log("playingTimeRating", playingTimeRating);
           console.log("componentsRating", componentsRating);
+
+          let validYoutubeUrl = await validateUrl(values.youtubeUrl);
+          console.log(12, validYoutubeUrl);
           // try {
           // } catch (err) {
           //   console.error("Challenge creation error: ", err);
@@ -64,7 +74,7 @@ const NewReviewContent = () => {
           // }
         }}
       >
-        {() => (
+        {({ errors, touched, values }) => (
           <Form>
             <label>
               Rate this boardgame by these categories from 1 - 6. 1 being the
@@ -96,6 +106,30 @@ const NewReviewContent = () => {
               ratingType="Components Quality"
               onRatingClick={(rating: number) => setComponentsRating(rating)}
             />
+
+            <Label>
+              Upload a youtube link that could be your elaborate video about
+              your review
+            </Label>
+            <InputContainer>
+              {errors.youtubeUrl && touched.youtubeUrl && (
+                <ErrorMessage justifyContent="flex-start">
+                  {errors.youtubeUrl}
+                </ErrorMessage>
+              )}
+              <Input
+                name="youtubeUrl"
+                label="Youtube URL (optional)"
+                error={errors.youtubeUrl || ""}
+                marginLeft="0"
+              />
+            </InputContainer>
+
+            <YoutubeContainer>
+              <div className="label">Youtube Video will be here</div>
+              <ReactPlayer url={values.youtubeUrl} width="40rem" />
+            </YoutubeContainer>
+
             <button type="submit">Submit Review</button>
           </Form>
         )}
