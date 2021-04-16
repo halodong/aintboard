@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const InputContainer = styled.div<InputContainerProps>`
   position: relative;
   min-width: ${(props) => props.minWidth};
-  margin: 0 auto;
+  margin: ${(props) =>
+    props.marginLeft ? `0 0 0 ${props.marginLeft}` : "0 auto"};
   width: 30rem;
 
   .search-icon {
@@ -58,6 +59,7 @@ export const InputContainer = styled.div<InputContainerProps>`
 
 type InputContainerProps = {
   minWidth?: string;
+  marginLeft?: string;
   error?: string;
 };
 
