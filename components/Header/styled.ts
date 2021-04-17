@@ -75,7 +75,7 @@ export const Tagline = styled(baseTaglineStyles)<TaglineProps>`
     `
     position: absolute;
     font-size: 1rem;
-    top: 6rem;
+    top: 7rem;
     margin: 0;
     left: 3.4rem;
   `}

@@ -32,7 +32,6 @@ export const FooterWrapper = styled.div`
 
   .logo-copy {
     margin-right: 2rem;
-    margin-top: 3rem;
 
     h6 {
       color: white;
@@ -46,7 +45,7 @@ export const FooterWrapper = styled.div`
 export const LinksWrapper = styled.div`
   color: white;
   width: 10rem;
-  margin-top: 3rem;
+  margin-top: 1rem;
 
   ul {
     list-style: none;
@@ -56,4 +55,10 @@ export const LinksWrapper = styled.div`
       margin-top: 0.5rem;
     }
   }
+`;
+
+export const LogoContainer = styled.div`
+  position: relative;
+  width: 8rem;
+  height: 8rem;
 `;

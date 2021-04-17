@@ -17,12 +17,16 @@ export const NavbarContainer = styled.nav<NavbarContainerProps>`
   .logo {
     width: 14.25rem;
     flex: 1;
-
-    svg {
-      width: 7rem;
-    }
   }
 `;
+
+export const LogoContainer = styled.div`
+  position: relative;
+  width: 8rem;
+  height: 8rem;
+  left: 2.5rem;
+`;
+
 export const NavbarWrapper = styled.div`
   height: 8rem;
 `;

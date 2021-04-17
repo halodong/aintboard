@@ -1,6 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
 import Router from "next/router";
-import LogoGray from "~/assets/img/logo_gray.svg";
 import LoginForm from "~/components/LoginForm";
 
 import useCurrentUser from "~/hooks/useCurrentUser";
@@ -22,7 +22,7 @@ const AdminPage = () => {
     <AdminPageWrapper>
       <Link href="/">
         <LogoContainer>
-          <LogoGray />
+          <Image alt="aintboard logo" src="/img/logo_gray.png" layout="fill" />
         </LogoContainer>
       </Link>
 

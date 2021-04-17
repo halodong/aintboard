@@ -1,9 +1,9 @@
 import Link from "next/link";
+import Image from "next/image";
 
 import FooterLeft from "~/assets/img/footer-left.svg";
 import FooterRight from "~/assets/img/footer-right.svg";
-import WhiteLogo from "~/assets/img/white-logo.svg";
-import { FooterWrapper, LinksWrapper } from "./styled";
+import { FooterWrapper, LinksWrapper, LogoContainer } from "./styled";
 
 const Footer = () => {
   return (
@@ -25,7 +25,17 @@ const Footer = () => {
         </ul>
       </LinksWrapper>
       <div className="logo-copy">
-        <WhiteLogo />
+        <Link href="/">
+          <a className="logo">
+            <LogoContainer>
+              <Image
+                alt="aintboard logo"
+                src="/img/logo_gray.png"
+                layout="fill"
+              />
+            </LogoContainer>
+          </a>
+        </Link>
         <h6>Copyright &copy; 2021</h6>
       </div>
       <FooterLeft className="left" />

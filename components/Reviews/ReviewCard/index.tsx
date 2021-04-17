@@ -14,21 +14,24 @@ import {
 } from "./styled";
 import { UserWrapper } from "components/Avatar/styled";
 import OverallRating from "components/Common/OverallRating";
-import Landscape from "~/assets/img/landscape_default.svg";
-import { UserMale, Dice, CommentIcon, HeartLikeIcon } from "assets/img";
+import { UserMale, CommentIcon, HeartLikeIcon } from "assets/img";
 
 import { ReviewData } from "types/types";
 import { createHTMLExcerpt } from "~/util/createHTML";
 import { REVIEWS_HOMEPAGE_COMPONENT } from "~/util/constants";
 
-export const ReviewCard = ({ data, bgImg }: Props) => {
+export const ReviewCard = ({ data }: Props) => {
   return (
     <ReviewCardContainer>
       <BgImgWrapper>
         {data.images.length > 0 ? (
           <Image alt="boardgame" src={data.images[0]} layout="fill" />
         ) : (
-          <Landscape />
+          <Image
+            alt="boardgame"
+            src="/img/landscape_default.png"
+            layout="fill"
+          />
         )}
       </BgImgWrapper>
 
@@ -65,5 +68,4 @@ export const ReviewCard = ({ data, bgImg }: Props) => {
 
 type Props = {
   data: ReviewData;
-  bgImg?: string;
 };
