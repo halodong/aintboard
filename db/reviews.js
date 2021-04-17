@@ -4,16 +4,44 @@ import { getFailedResponse, getSuccessResponse } from "~/util/apiResponse";
 
 export async function insertReview(
   db,
-  { userId, bgId, reviewText, reviewStatusId, reviewType }
+  {
+    userId,
+    bgName,
+    reviewContent,
+    reviewStatus,
+    reviewType,
+    replayabilityRating,
+    componentsRating,
+    complexityRating,
+    aestheticsRating,
+    valueForMoneyRating,
+    playingTimeRating,
+    overallRating,
+    images,
+    reviewTitle,
+    language,
+    youtubeUrl,
+  }
 ) {
   try {
     const review = await db.collection("reviews").insertOne({
       _id: nanoid(12),
       userId,
-      bgId,
-      reviewText,
-      reviewStatusId,
+      bgName,
+      reviewContent,
+      reviewStatus,
       reviewType,
+      replayabilityRating,
+      componentsRating,
+      complexityRating,
+      aestheticsRating,
+      valueForMoneyRating,
+      playingTimeRating,
+      overallRating,
+      images,
+      reviewTitle,
+      language,
+      youtubeUrl,
       createdAt: new Date(),
     });
 
@@ -48,7 +76,7 @@ export async function getReviews(db, { first }) {
           },
           { $project: { password: 0 } },
         ],
-        as: "users",
+        as: "userData",
       },
     };
 
@@ -99,7 +127,7 @@ export const filterReviews = async (db, { first, filter, field }) => {
           },
           { $project: { password: 0 } },
         ],
-        as: "users",
+        as: "userData",
       },
     };
 

@@ -2,6 +2,7 @@ import nc from "next-connect";
 
 import { insertReview, getReviews } from "~/db/reviews";
 import { all } from "~/middlewares/index";
+import { REVIEW_STATUS, REVIEW_TYPE } from "util/constants";
 
 const handler = nc();
 
@@ -10,18 +11,40 @@ handler.use(all);
 handler.post(async (req, res) => {
   const {
     userId,
-    bgId,
-    reviewText,
-    reviewStatusId,
-    reviewType = "review",
+    bgName,
+    reviewContent,
+    reviewStatus = REVIEW_STATUS.PENDING,
+    reviewType = REVIEW_TYPE.REVIEW,
+    replayabilityRating,
+    componentsRating,
+    complexityRating,
+    aestheticsRating,
+    valueForMoneyRating,
+    playingTimeRating,
+    overallRating,
+    images,
+    reviewTitle,
+    language,
+    youtubeUrl,
   } = req.body;
 
   const review = await insertReview(req.db, {
     userId,
-    bgId,
-    reviewText,
-    reviewStatusId,
+    bgName,
+    reviewContent,
+    reviewStatus,
     reviewType,
+    replayabilityRating,
+    componentsRating,
+    complexityRating,
+    aestheticsRating,
+    valueForMoneyRating,
+    playingTimeRating,
+    overallRating,
+    images,
+    reviewTitle,
+    language,
+    youtubeUrl,
   });
 
   return res.json(review);

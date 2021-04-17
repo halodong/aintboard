@@ -23,12 +23,23 @@ export interface ReviewApiData {
 export type ReviewData = {
   _id: string;
   userId: number;
-  bgId: number;
-  reviewText: string;
-  reviewStatusId: number;
+  bgName: string;
+  reviewTitle: string;
+  reviewContent: string;
+  reviewStatus: string;
   reviewType: string;
+  replayabilityRating: number;
+  complexityRating: number;
+  aestheticsRating: number;
+  valueForMoneyRating: number;
+  playingTimeRating: number;
+  componentsRating: number;
+  overallRating: string;
+  images: string[];
+  language: string;
+  youtubeUrl?: string;
   createdAt: string;
-  users: UserData;
+  userData: UserData;
 };
 
 export interface UserApiResponse {

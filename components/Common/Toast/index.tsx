@@ -12,7 +12,7 @@ const WrappedToastContainer = ({ ...rest }) => (
 
 export const Toast = styled(WrappedToastContainer).attrs({
   transition: Slide,
-  autoClose: 1500,
+  autoClose: 2000,
   hideProgressBar: true,
 })`
   .Toastify__toast-container {

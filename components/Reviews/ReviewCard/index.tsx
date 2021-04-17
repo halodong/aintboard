@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import Image from "next/image";
+import { capitalize } from "lodash";
 
 import {
   ReviewCardContainer,
@@ -11,41 +12,45 @@ import {
   BottomRight,
   BottomWrapper,
 } from "./styled";
-import { UserMale, Dice, CommentIcon, HeartLikeIcon } from "assets/img";
 import { UserWrapper } from "components/Avatar/styled";
+import OverallRating from "components/Common/OverallRating";
+import Landscape from "~/assets/img/landscape_default.svg";
+import { UserMale, Dice, CommentIcon, HeartLikeIcon } from "assets/img";
+
 import { ReviewData } from "types/types";
+import { createHTMLExcerpt } from "~/util/createHTML";
 import { REVIEWS_HOMEPAGE_COMPONENT } from "~/util/constants";
 
 export const ReviewCard = ({ data, bgImg }: Props) => {
   return (
     <ReviewCardContainer>
       <BgImgWrapper>
-        <Image
-          alt="boardgame"
-          src={
-            bgImg ||
-            "https://cf.geekdo-images.com/0BsjJY9MTlx9DRrlkeE69w__original/img/6AJktf34S4ypVI75ecsfmkDicgA=/0x0/filters:format(jpeg)/pic5482020.jpg"
-          }
-          layout="fill"
-        />
+        {data.images.length > 0 ? (
+          <Image alt="boardgame" src={data.images[0]} layout="fill" />
+        ) : (
+          <Landscape />
+        )}
       </BgImgWrapper>
 
       <UserWrapper from={REVIEWS_HOMEPAGE_COMPONENT}>
         <UserMale className="icon" />
       </UserWrapper>
 
-      <Username>{data.users._id}</Username>
+      <Username>{data.userData._id}</Username>
       <ReviewDate>{dayjs(data.createdAt).format("MMM DD YYYY")}</ReviewDate>
       <ReviewContent>
-        <p>{data.reviewText}</p>
+        <div
+          className="preview"
+          dangerouslySetInnerHTML={createHTMLExcerpt(data.reviewContent)}
+        ></div>
       </ReviewContent>
 
       <BottomWrapper>
         <Bottom>
-          <Dice className="dice" />
+          <OverallRating rating={data.overallRating} paddingBottom="0" />
 
           <BottomRight>
-            <h6>Strategy</h6>
+            <h6>{capitalize(data.reviewType)}</h6>
 
             <div className="socials">
               <CommentIcon /> <span>100</span>

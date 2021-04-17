@@ -5,6 +5,7 @@ export const ImageUploadContainer = styled.div<ImageUploadContainerProps>`
     margin: ${(props) =>
       props.marginLeft ? `0 0 0 ${props.marginLeft}` : "0 auto"};
     width: 30rem;
+    margin-bottom: 1rem;
   }
 
   .file {
@@ -23,13 +24,12 @@ export const ImageUploadContainer = styled.div<ImageUploadContainerProps>`
     background: white;
     color: black;
     cursor: pointer;
-    margin-bottom: 1rem;
   }
 
   h6 {
     display: inline-block;
     color: white;
-    margin-left: 1rem;
+    margin: 0 0 0 1rem;
     font-size: 0.8rem;
   }
 `;
@@ -40,6 +40,7 @@ type ImageUploadContainerProps = {
 
 export const PreviewsContainer = styled.div`
   margin-bottom: 1rem;
+  margin-top: 1rem;
 `;
 
 export const ImageContainer = styled.div`

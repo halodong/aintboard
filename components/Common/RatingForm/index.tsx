@@ -53,6 +53,7 @@ const RatingForm = ({ ratingType, onRatingClick }: Props) => {
       <RatingLabel>{ratingType}</RatingLabel>
       {diceList.map((dice: DiceProps, i: number) => (
         <DiceContainer
+          key={i}
           hovered={diceList[i].hovered}
           onMouseEnter={() => onHover(i, "hover")}
           onMouseLeave={() =>

@@ -4,12 +4,13 @@ import Select from "react-select";
 
 const DropDown = ({
   placeholder,
+  marginLeft,
   options,
   onChange,
   keyProp = "key",
 }: Props) => {
   return (
-    <DropDownContainer>
+    <DropDownContainer marginLeft={marginLeft}>
       <Select
         key={keyProp}
         className="select"
@@ -39,6 +40,7 @@ type OptionItem = {
 
 type Props = {
   placeholder?: string;
+  marginLeft?: string;
   options?: OptionItem[];
   onChange: (selected: OptionItem) => void;
   keyProp?: string;
