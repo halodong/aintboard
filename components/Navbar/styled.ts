@@ -19,6 +19,14 @@ export const NavbarContainer = styled.nav<NavbarContainerProps>`
     flex: 1;
   }
 `;
+
+export const LogoContainer = styled.div`
+  position: relative;
+  width: 8rem;
+  height: 8rem;
+  left: 2.5rem;
+`;
+
 export const NavbarWrapper = styled.div`
   height: 8rem;
 `;

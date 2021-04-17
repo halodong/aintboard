@@ -12,10 +12,13 @@ export const AdminPageWrapper = styled.div`
 `;
 
 export const LogoContainer = styled.div`
-  padding: 4rem;
+  padding: 2rem;
   position: absolute;
   top: 0;
-  left: 0;
+  left: 2rem;
+  width: 8rem;
+  height: 8rem;
+  cursor: pointer;
 `;
 
 export const AdminPageText = styled.h1`

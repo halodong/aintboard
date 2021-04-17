@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import React, { useState, useEffect } from "react";
 
 import Modal from "~/components/Common/Modal";
 import JoinUsForm from "~/components/JoinUsForm";
@@ -15,8 +16,8 @@ import {
   MenuIcon,
   RightSideNav,
   Links,
+  LogoContainer,
 } from "./styled";
-import WhiteLogo from "~/assets/img/white-logo.svg";
 
 import useCurrentUser from "~/hooks/useCurrentUser";
 
@@ -55,7 +56,13 @@ const Navbar = () => {
       <NavbarContainer isFixed={navbar}>
         <Link href="/">
           <a className="logo">
-            <WhiteLogo />
+            <LogoContainer>
+              <Image
+                alt="aintboard logo"
+                src="/img/logo_gray.png"
+                layout="fill"
+              />
+            </LogoContainer>
           </a>
         </Link>
 
