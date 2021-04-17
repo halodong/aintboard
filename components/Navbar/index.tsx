@@ -16,7 +16,7 @@ import {
   RightSideNav,
   Links,
 } from "./styled";
-import WhiteLogo from "~/assets/img/white-logo.svg";
+import LogoGray from "~/assets/img/logo_gray.svg";
 
 import useCurrentUser from "~/hooks/useCurrentUser";
 
@@ -55,7 +55,7 @@ const Navbar = () => {
       <NavbarContainer isFixed={navbar}>
         <Link href="/">
           <a className="logo">
-            <WhiteLogo />
+            <LogoGray />
           </a>
         </Link>
 
