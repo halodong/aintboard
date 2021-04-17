@@ -1,4 +1,5 @@
 import { nanoid } from "nanoid";
+import slug from "limax";
 
 import { getFailedResponse, getSuccessResponse } from "~/util/apiResponse";
 
@@ -6,6 +7,7 @@ export async function insertReview(
   db,
   {
     userId,
+    username,
     bgName,
     reviewContent,
     reviewStatus,
@@ -24,9 +26,12 @@ export async function insertReview(
   }
 ) {
   try {
+    const slugText = slug(`${reviewTitle} ${username}`);
+
     const review = await db.collection("reviews").insertOne({
       _id: nanoid(12),
       userId,
+      slug: slugText,
       bgName,
       reviewContent,
       reviewStatus,

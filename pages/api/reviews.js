@@ -11,6 +11,7 @@ handler.use(all);
 handler.post(async (req, res) => {
   const {
     userId,
+    username,
     bgName,
     reviewContent,
     reviewStatus = REVIEW_STATUS.PENDING,
@@ -30,6 +31,7 @@ handler.post(async (req, res) => {
 
   const review = await insertReview(req.db, {
     userId,
+    username,
     bgName,
     reviewContent,
     reviewStatus,

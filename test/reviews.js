@@ -1,7 +1,19 @@
 import { insertReview, getReviews, filterReviews } from "../db/reviews";
+
 const chai = require("chai");
 const expect = chai.expect;
 const dbHandler = require("./db-handler");
+
+const REVIEW_STATUS = {
+  PENDING: "PENDING",
+  APPROVED: "APPROVED",
+  REJECTED: "REJECTED",
+};
+
+const REVIEW_TYPE = {
+  REVIEW: "REVIEW",
+  STRATEGY: "STRATEGY",
+};
 
 describe("Reviews", () => {
   let db;
@@ -23,35 +35,45 @@ describe("Reviews", () => {
   it("should make a new review", async () => {
     let res = await insertReview(db, {
       userId: 1,
-      bgId: 121,
-      reviewText: "3123123",
-      reviewStatusId: 1,
-      reviewType: "review",
+      username: "faithm",
+      bgName: "Brass Lanc",
+      reviewTitle: "I love this game!",
+      reviewContent: "3123123",
+      reviewStatus: REVIEW_STATUS.PENDING,
+      reviewType: REVIEW_TYPE.REVIEW,
     });
 
     expect(res.success).to.equal(true);
     expect(res.response.data.review.userId).to.equal(1);
-    expect(res.response.data.review.bgId).to.equal(121);
-    expect(res.response.data.review.reviewText).to.equal("3123123");
-    expect(res.response.data.review.reviewStatusId).to.equal(1);
-    expect(res.response.data.review.reviewType).to.equal("review");
+    expect(res.response.data.review.bgName).to.equal("Brass Lanc");
+    expect(res.response.data.review.slug).to.equal("i-love-this-game-faithm");
+    expect(res.response.data.review.reviewContent).to.equal("3123123");
+    expect(res.response.data.review.reviewStatus).to.equal(
+      REVIEW_STATUS.PENDING
+    );
+    expect(res.response.data.review.reviewType).to.equal(REVIEW_TYPE.REVIEW);
   });
 
   it("should make a new strategy", async () => {
     let res = await insertReview(db, {
       userId: 1,
-      bgId: 121,
-      reviewText: "3123123",
-      reviewStatusId: 1,
-      reviewType: "strategy",
+      username: "faithm",
+      bgName: "Brass Lanc",
+      reviewTitle: "I love this game!",
+      reviewContent: "3123123",
+      reviewStatus: REVIEW_STATUS.PENDING,
+      reviewType: REVIEW_TYPE.STRATEGY,
     });
 
     expect(res.success).to.equal(true);
     expect(res.response.data.review.userId).to.equal(1);
-    expect(res.response.data.review.bgId).to.equal(121);
-    expect(res.response.data.review.reviewText).to.equal("3123123");
-    expect(res.response.data.review.reviewStatusId).to.equal(1);
-    expect(res.response.data.review.reviewType).to.equal("strategy");
+    expect(res.response.data.review.bgName).to.equal("Brass Lanc");
+    expect(res.response.data.review.slug).to.equal("i-love-this-game-faithm");
+    expect(res.response.data.review.reviewContent).to.equal("3123123");
+    expect(res.response.data.review.reviewStatus).to.equal(
+      REVIEW_STATUS.PENDING
+    );
+    expect(res.response.data.review.reviewType).to.equal(REVIEW_TYPE.STRATEGY);
   });
 
   it("should get all reviews", async () => {
@@ -107,17 +129,30 @@ describe("Reviews", () => {
     expect(res.response.data.reviews).to.be.an("array");
   });
 
-  it("should get reviews with bgId: 121 with first param", async () => {
-    let res = await filterReviews(db, { first: 4, filter: "bgId", field: 121 });
+  it("should get reviews with bgName: Brass Lanc with first param", async () => {
+    let res = await filterReviews(db, {
+      first: 4,
+      filter: "bgName",
+      field: "Brass Lanc",
+    });
 
     expect(res.success).to.equal(true);
     expect(res.response.data.reviews).to.be.an("array");
+    expect(res.response.data.reviews.map((e) => e.bgName)).to.include(
+      "Brass Lanc"
+    );
   });
 
-  it("should get reviews with bgId: 121 without first param", async () => {
-    let res = await filterReviews(db, { filter: "bgId", field: 121 });
+  it("should get reviews with bgName: Brass Lanc without first param", async () => {
+    let res = await filterReviews(db, {
+      filter: "bgName",
+      field: "Brass Lanc",
+    });
 
     expect(res.success).to.equal(true);
     expect(res.response.data.reviews).to.be.an("array");
+    expect(res.response.data.reviews.map((e) => e.bgName)).to.include(
+      "Brass Lanc"
+    );
   });
 });

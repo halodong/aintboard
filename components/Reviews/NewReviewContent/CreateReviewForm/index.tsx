@@ -89,6 +89,7 @@ const CreateReviewForm = () => {
 
           const response = await axios.post("/api/reviews/", {
             userId: userData._id,
+            username: userData.username,
             bgName: values.bgName,
             reviewContent: reviewContent,
             reviewStatus: REVIEW_STATUS.PENDING,
