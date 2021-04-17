@@ -30,3 +30,29 @@ export const CREATE_CHALLENGE_FORM_COMPONENT =
 export const CHALLENGES_PAGE = "CHALLENGES_PAGE";
 
 export const FALLBACK = "blocking";
+
+export const LANGUAGE_OPTIONS = [
+  {
+    label: "Filipino",
+    value: "filipino",
+  },
+  {
+    label: "English",
+    value: "english",
+  },
+  {
+    label: "Taglish",
+    value: "taglish",
+  },
+];
+
+export const REVIEW_STATUS = {
+  PENDING: "PENDING",
+  APPROVED: "APPROVED",
+  REJECTED: "REJECTED",
+};
+
+export const REVIEW_TYPE = {
+  REVIEW: "REVIEW",
+  STRATEGY: "STRATEGY",
+};

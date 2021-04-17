@@ -8,10 +8,10 @@ export const NewReviewWrapper = styled.div`
 
 export const YoutubeContainer = styled.div`
   position: relative;
-  background-color: white;
+  /* background-color: white;
   width: 40rem;
   height: 20rem;
-  margin-bottom: 10rem;
+  margin-bottom: 10rem; */
 
   .label {
     color: black;

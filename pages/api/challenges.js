@@ -9,6 +9,7 @@ handler.use(all);
 
 handler.post(async (req, res) => {
   const {
+    createdBy,
     challengeName,
     bgId,
     bgName,
@@ -18,6 +19,7 @@ handler.post(async (req, res) => {
   } = req.body;
 
   const challenge = await insertChallenge(req.db, {
+    createdBy,
     challengeName,
     bgId,
     bgImage,

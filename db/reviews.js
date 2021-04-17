@@ -1,19 +1,52 @@
 import { nanoid } from "nanoid";
+import slug from "limax";
 
 import { getFailedResponse, getSuccessResponse } from "~/util/apiResponse";
 
 export async function insertReview(
   db,
-  { userId, bgId, reviewText, reviewStatusId, reviewType }
+  {
+    userId,
+    username,
+    bgName,
+    reviewContent,
+    reviewStatus,
+    reviewType,
+    replayabilityRating,
+    componentsRating,
+    complexityRating,
+    aestheticsRating,
+    valueForMoneyRating,
+    playingTimeRating,
+    overallRating,
+    images,
+    reviewTitle,
+    language,
+    youtubeUrl,
+  }
 ) {
   try {
+    const slugText = slug(`${reviewTitle} ${username}`);
+
     const review = await db.collection("reviews").insertOne({
       _id: nanoid(12),
       userId,
-      bgId,
-      reviewText,
-      reviewStatusId,
+      slug: slugText,
+      bgName,
+      reviewContent,
+      reviewStatus,
       reviewType,
+      replayabilityRating,
+      componentsRating,
+      complexityRating,
+      aestheticsRating,
+      valueForMoneyRating,
+      playingTimeRating,
+      overallRating,
+      images,
+      reviewTitle,
+      language,
+      youtubeUrl,
       createdAt: new Date(),
     });
 
@@ -48,7 +81,7 @@ export async function getReviews(db, { first }) {
           },
           { $project: { password: 0 } },
         ],
-        as: "users",
+        as: "userData",
       },
     };
 
@@ -99,7 +132,7 @@ export const filterReviews = async (db, { first, filter, field }) => {
           },
           { $project: { password: 0 } },
         ],
-        as: "users",
+        as: "userData",
       },
     };
 

@@ -1,9 +1,7 @@
 import { useState } from "react";
-import { EditorState } from "draft-js";
-// import { Editor } from 'react-draft-wysiwyg';
+import { EditorState, Modifier, convertToRaw } from "draft-js";
 import dynamic from "next/dynamic";
-import { convertToHTML } from "draft-convert";
-import DOMPurify from "dompurify";
+import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { RteWrapper } from "./styled";
 const Editor = dynamic(
@@ -12,36 +10,56 @@ const Editor = dynamic(
   { ssr: false }
 );
 
-const RTE = () => {
+const HANDLED = "handled";
+
+const RTE = ({ passContentToParent }) => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
-  const [convertedContent, setConvertedContent] = useState(null);
+  // const [convertedContent, setConvertedContent] = useState(null);
 
   const handleEditorChange = (state) => {
     setEditorState(state);
     convertContentToHTML();
   };
 
-  const convertContentToHTML = () => {
-    let currentContentAsHTML = convertToHTML(editorState.getCurrentContent());
-    setConvertedContent(currentContentAsHTML);
+  //this function fixes when making new lines
+  const handleBeforeInput = (chars, editorState) => {
+    const currentContentState = editorState.getCurrentContent();
+    const selectionState = editorState.getSelection();
+
+    handleEditorChange(
+      EditorState.push(
+        editorState,
+        Modifier.replaceText(currentContentState, selectionState, chars)
+      )
+    );
+
+    return HANDLED;
   };
 
-  const createMarkup = (html) => {
-    return {
-      __html: DOMPurify.sanitize(html),
-    };
+  const convertContentToHTML = () => {
+    let currentContentAsHTML = convertToRaw(editorState.getCurrentContent());
+    passContentToParent(draftToHtml(currentContentAsHTML));
+    // setConvertedContent(draftToHtml(currentContentAsHTML));
   };
+
+  // const createMarkup = (html) => {
+  //   return {
+  //     __html: DOMPurify.sanitize(html),
+  //   };
+  // };
 
   return (
     <RteWrapper>
       <Editor
         editorState={editorState}
         onEditorStateChange={handleEditorChange}
+        handleBeforeInput={handleBeforeInput}
         wrapperClassName="wrapper-class"
         editorClassName="editor-class"
         toolbarClassName="toolbar-class"
+        stripPastedStyles={true}
         toolbar={{
           options: [
             "inline",
@@ -56,10 +74,10 @@ const RTE = () => {
           ],
         }}
       />
-      <div
+      {/* <div
         className="preview"
         dangerouslySetInnerHTML={createMarkup(convertedContent)}
-      ></div>
+      ></div> */}
     </RteWrapper>
   );
 };

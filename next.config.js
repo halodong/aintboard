@@ -1,5 +1,5 @@
 module.exports = {
   images: {
-    domains: ["cf.geekdo-images.com"],
+    domains: ["res.cloudinary.com"],
   },
 };

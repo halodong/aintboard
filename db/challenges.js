@@ -3,11 +3,12 @@ import { getFailedResponse, getSuccessResponse } from "~/util/apiResponse";
 
 export const insertChallenge = async (
   db,
-  { challengeName, bgId, bgName, bgYear, bgImage, powerUpAmount }
+  { createdBy, challengeName, bgId, bgName, bgYear, bgImage, powerUpAmount }
 ) => {
   try {
     const challenge = await db.collection("challenges").insertOne({
       _id: nanoid(12),
+      createdBy,
       challengeName,
       bgId,
       bgName,

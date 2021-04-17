@@ -19,11 +19,9 @@ export const ReviewContent = styled.div`
   overflow: hidden;
   padding: 0 1rem;
   transition: 500ms ease all;
-
-  p {
-    font-size: 0.7rem;
-    text-align: center;
-  }
+  font-size: 0.7rem;
+  text-align: center;
+  font-family: ${(props) => props.theme.fonts.rubikReg} !important;
 `;
 
 export const ReviewCardContainer = styled.div`
@@ -70,6 +68,7 @@ export const BottomWrapper = styled.div`
 
 export const Bottom = styled.div`
   display: flex;
+  align-items: flex-end;
   justify-content: space-between;
   margin-top: 1.5rem;
 `;

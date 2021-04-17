@@ -77,8 +77,8 @@ const ImageUpload = ({
         <PreviewsContainer>
           {previews.length > 0 &&
             previews.map((p, i) => (
-              <ImageContainer>
-                <img key={i} src={p} alt="preview" />
+              <ImageContainer key={i}>
+                <img src={p} alt="preview" />
               </ImageContainer>
             ))}
         </PreviewsContainer>

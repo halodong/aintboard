@@ -61,6 +61,7 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
           }
 
           const response = await axios.post("/api/challenges/", {
+            createdBy: userData._id,
             bgName: values.bgName,
             bgYear: values.bgYear,
             challengeName: values.challengeName,

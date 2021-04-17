@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
-export const RatingFormWrapper = styled.div`
+export const RatingFormWrapper = styled.div<RatingFormWrapperProps>`
   display: flex;
   align-items: center;
-  padding: 1rem 0;
+  padding: ${(props) =>
+    props.paddingBottom ? `1rem 0 ${props.paddingBottom}` : "1rem 0"};
 
   .dice {
     width: 3rem;
@@ -12,6 +13,10 @@ export const RatingFormWrapper = styled.div`
     cursor: pointer;
   }
 `;
+
+type RatingFormWrapperProps = {
+  paddingBottom?: string;
+};
 
 export const RatingLabel = styled.label`
   color: white;
@@ -44,3 +49,8 @@ export const DiceContainer = styled.div<DiceContainerProps>`
 type DiceContainerProps = {
   hovered: boolean;
 };
+
+export const FloatRating = styled.label`
+  color: white;
+  font-size: 1.5rem;
+`;

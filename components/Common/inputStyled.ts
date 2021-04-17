@@ -23,15 +23,26 @@ type ErrorMessageProps = {
   justifyContent?: string;
 };
 
-export const ButtonContainer = styled.div`
+export const ButtonContainer = styled.div<ButtonContainerProps>`
   width: 100%;
   display: flex;
-  justify-content: flex-end;
+  margin-top: ${(props) => (props.marginTop ? props.marginTop : 0)};
+  justify-content: ${(props) =>
+    props.justifyContent ? props.justifyContent : "flex-end"};
 `;
 
-export const Label = styled.label`
+type ButtonContainerProps = {
+  justifyContent?: string;
+  marginTop?: string;
+};
+
+export const Label = styled.label<LabelProps>`
   display: block;
-  color: white;
+  color: ${(props) => props.theme.colors.lightYellow};
   margin-bottom: 1rem;
-  margin-top: 2rem;
+  margin-top: ${(props) => (props.marginTop ? props.marginTop : "2rem")};
 `;
+
+type LabelProps = {
+  marginTop?: string;
+};
