@@ -11,9 +11,18 @@ export const HeaderWrapper = styled.div<HeaderWrapperProps>`
   .trees-2,
   .tent {
     position: absolute;
-    width: 25rem;
+    width: ${(props) => (props.isBuyAvatarsPage ? "10rem" : "25rem")};
     z-index: ${(props) => props.theme.zIndex["10th"]};
   }
+
+  ${(props) =>
+    props.isBuyAvatarsPage &&
+    `
+      min-height: 18rem;
+      .tent {
+        top: 7rem;
+      }
+    `};
 
   .tent {
     z-index: ${(props) => props.theme.zIndex["9th"]};
@@ -59,6 +68,7 @@ type HeaderWrapperProps = {
   isSearchPage?: boolean;
   isChallengePage?: boolean;
   isBoardGamePage?: boolean;
+  isBuyAvatarsPage?: boolean;
 };
 
 const baseTaglineStyles = styled.h1`
@@ -87,6 +97,8 @@ export const Tagline = styled(baseTaglineStyles)<TaglineProps>`
 type TaglineProps = {
   homepage?: boolean;
 };
+
+export const CenterTagline = styled(baseTaglineStyles)``;
 
 export const LookingForText = styled(baseTaglineStyles)`
   margin-top: 3rem;

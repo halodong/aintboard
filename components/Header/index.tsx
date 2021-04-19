@@ -9,6 +9,7 @@ import {
   ChallengesTagline,
   BattlesTagline,
   BoardGameName,
+  CenterTagline,
 } from "./styled";
 import { TreesGroup1, TreesGroup2, Tent } from "~/assets/img";
 
@@ -39,9 +40,11 @@ export default function Header({
   isSearchPage = false,
   isChallengesPage = false,
   tagline,
+  centerTagline,
   isBoardGamePage = false,
   isEditorPage = false,
   isOnlineBattles = false,
+  isBuyAvatarsPage = false,
   children,
 }: Props) {
   const router = useRouter();
@@ -64,6 +67,7 @@ export default function Header({
       isChallengePage={isChallengesPage}
       isBoardGamePage={isBoardGamePage}
       isEditorPage={isEditorPage}
+      isBuyAvatarsPage={isBuyAvatarsPage}
     >
       <Navbar />
 
@@ -88,9 +92,13 @@ export default function Header({
         )}
       </Tagline>
 
+      {isBuyAvatarsPage && <CenterTagline>{centerTagline}</CenterTagline>}
+
       {isSearchPage && <LookingForText>Looking for "{name}"</LookingForText>}
 
-      {isChallengesPage || (isOnlineBattles && <Tent className="tent" />)}
+      {(isChallengesPage || isOnlineBattles || isBuyAvatarsPage) && (
+        <Tent className="tent" />
+      )}
 
       {isChallengesPage && (
         <>
@@ -142,8 +150,10 @@ type Props = {
   isSearchPage?: boolean;
   isChallengesPage?: boolean;
   tagline?: string;
+  centerTagline?: string;
   isBoardGamePage?: boolean;
   isEditorPage?: boolean;
   isOnlineBattles?: boolean;
+  isBuyAvatarsPage?: boolean;
   children?: any;
 };

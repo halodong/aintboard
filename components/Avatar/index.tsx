@@ -1,4 +1,3 @@
-import classnames from "classnames";
 import { UserWrapper } from "./styled";
 import {
   GIRL_ICON,
@@ -62,7 +61,7 @@ const Avatar = ({ iconType, from, isChosen, special }: Props) => {
       from={from}
       bgColor={bgColor}
       isChosen={isChosen}
-      className={classnames("avatar-icon", { "special-icon": special })}
+      className="avatar-icon"
     >
       {icon}
     </UserWrapper>

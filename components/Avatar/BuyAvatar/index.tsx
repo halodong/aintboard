@@ -40,7 +40,6 @@ const BuyAvatar = ({ specialAvatars }: Props) => {
               <Avatar
                 key={`${avatar}-${i}`}
                 iconType={avatar.icon}
-                special={true}
                 isChosen={userData?.avatar === avatar.icon}
               />
               <UnlockText>

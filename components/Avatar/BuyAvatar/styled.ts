@@ -46,6 +46,10 @@ export const UnlockText = styled.div`
   padding: 0.5rem;
   border-radius: ${(props) => props.theme.border["10px"]};
 
+  label {
+    cursor: pointer;
+  }
+
   &:hover {
     background-color: ${(props) => props.theme.colors.dark};
   }

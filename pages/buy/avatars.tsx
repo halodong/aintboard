@@ -12,7 +12,7 @@ const BuyAvatarsPage = ({ specialAvatars }: Props) => {
 
   return (
     <>
-      <Header />
+      <Header isBuyAvatarsPage centerTagline="Buy Avatars" />
       <BuyAvatar
         specialAvatars={specialAvatars?.response?.data?.avatars || []}
       />
