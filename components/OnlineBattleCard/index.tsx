@@ -1,11 +1,11 @@
 import React from "react";
 import Image from "next/image";
+import dayjs from "dayjs";
 
 import PlayButton from "~/assets/img/playbutton.svg";
 import {
   OnlineBattleCardWrapper,
   BattleCard,
-  BattleDate,
   BattleEnds,
   BattleImage,
   BattleName,
@@ -14,7 +14,9 @@ import {
   Username,
 } from "./styled";
 
-const OnlineBattleCard = () => {
+import { BattlesData } from "~/types/types";
+
+const OnlineBattleCard = ({ data }: Props) => {
   return (
     <OnlineBattleCardWrapper>
       <BattleImage>
@@ -28,9 +30,12 @@ const OnlineBattleCard = () => {
       <PlayButton className="play" />
 
       <BattleCard>
-        <BattleName>Leader Root Battle</BattleName>
-        <BattleDate>March 2021</BattleDate>
-        <BattleEnds>Ends on March 30</BattleEnds>
+        <BattleName>{`${data?.battleName} ${dayjs(data.createdAt).format(
+          "MMMM YYYY"
+        )}`}</BattleName>
+        <BattleEnds>
+          Ends on {dayjs(data?.eventEndDate).format("MMM DD")}
+        </BattleEnds>
         <div>
           <Rank>
             <Place>Top 1</Place>
@@ -48,6 +53,10 @@ const OnlineBattleCard = () => {
       </BattleCard>
     </OnlineBattleCardWrapper>
   );
+};
+
+type Props = {
+  data: BattlesData;
 };
 
 export default OnlineBattleCard;

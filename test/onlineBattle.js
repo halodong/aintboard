@@ -1,6 +1,7 @@
-import { insertBattle, insertValidEntry } from "../db/onlineBattle";
+import { insertBattle, insertValidEntry, getBattles } from "../db/onlineBattle";
 import { insertUser } from "../db/user";
 import { nanoid } from "nanoid";
+import { isArray } from "lodash-es";
 const dbHandler = require("./db-handler");
 const chai = require("chai");
 const expect = chai.expect;
@@ -78,5 +79,12 @@ describe("Online Battles", () => {
     expect(res.response.data.entry.message).to.equal("Successfully Joined!");
     expect(res.response.data.entry.googleLink).to.equal("https://battles.com");
     expect(res.response.data.entry.verifiedStatus).to.equal("approved");
+  });
+
+  it("should fetch online battles", async () => {
+    let res = await getBattles(db, {});
+    expect(res.success).to.equal(true);
+    expect(res.response.message).to.equal("1 Online Battle retrieved");
+    expect(res.response.data.battles).to.an("array");
   });
 });
