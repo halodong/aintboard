@@ -39,13 +39,8 @@ export const BattleCard = styled.div`
 `;
 
 export const BattleName = styled.h2`
+  color: ${(props) => props.theme.colors.darkGreen};
   font-family: ${(props) => props.theme.fonts.quicksandBold};
-  margin: 0;
-`;
-
-export const BattleDate = styled.h2`
-  font-family: ${(props) => props.theme.fonts.quicksandBold};
-
   margin: 0;
 `;
 
