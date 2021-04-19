@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const HeaderWrapper = styled.div<HeaderWrappepProps>`
+export const HeaderWrapper = styled.div<HeaderWrapperProps>`
   width: 100%;
   background-color: ${(props) => props.theme.colors.dark};
   min-height: ${(props) =>
@@ -11,9 +11,18 @@ export const HeaderWrapper = styled.div<HeaderWrappepProps>`
   .trees-2,
   .tent {
     position: absolute;
-    width: 25rem;
+    width: ${(props) => (props.isBuyAvatarsPage ? "10rem" : "25rem")};
     z-index: ${(props) => props.theme.zIndex["10th"]};
   }
+
+  ${(props) =>
+    props.isBuyAvatarsPage &&
+    `
+      min-height: 18rem;
+      .tent {
+        top: 7rem;
+      }
+    `};
 
   .tent {
     z-index: ${(props) => props.theme.zIndex["9th"]};
@@ -53,9 +62,13 @@ export const HeaderWrapper = styled.div<HeaderWrappepProps>`
   }
 `;
 
-type HeaderWrappepProps = {
+type HeaderWrapperProps = {
   homepage?: boolean;
   isEditorPage?: boolean;
+  isSearchPage?: boolean;
+  isChallengePage?: boolean;
+  isBoardGamePage?: boolean;
+  isBuyAvatarsPage?: boolean;
 };
 
 const baseTaglineStyles = styled.h1`
@@ -84,6 +97,8 @@ export const Tagline = styled(baseTaglineStyles)<TaglineProps>`
 type TaglineProps = {
   homepage?: boolean;
 };
+
+export const CenterTagline = styled(baseTaglineStyles)``;
 
 export const LookingForText = styled(baseTaglineStyles)`
   margin-top: 3rem;
