@@ -15,6 +15,7 @@
     "@types/lodash": "^4.14.168",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
+    "classnames": "^2.3.1",
     "dayjs": "^1.10.4",
     "debounce-promise": "^3.1.2",
     "dompurify": "^2.2.7",

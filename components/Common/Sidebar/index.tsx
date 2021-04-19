@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import Link from "next/link";
+import cookie from "js-cookie";
+import Router from "next/router";
 
 import {
   SidebarContainer,
@@ -12,19 +14,16 @@ import {
   FooterSidebar,
   Copyright,
 } from "./styled";
-import useCurrentUser from "~/hooks/useCurrentUser";
 import {
   SIDEBAR_COMPONENT,
   MAKE_REVIEW_BUTTON,
   CREATE_CHALLENGE_BUTTON,
   CREATE_ONLINE_BATTLE_BUTTON,
 } from "util/constants";
+import useCurrentUser from "~/hooks/useCurrentUser";
 
 import Avatar from "components/Avatar";
 import PrimaryLinkSidebar from "components/Common/PrimaryLinkSidebar";
-
-import cookie from "js-cookie";
-import Router from "next/router";
 
 const Sidebar = ({ menuOpen, closeMenu }: Props) => {
   const user = useCurrentUser();

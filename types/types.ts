@@ -126,6 +126,25 @@ export type BggNameAttrValue = {
   value: string;
 };
 
+export interface SpecialAvatarsApiResponse {
+  success: boolean;
+  response: {
+    message: string;
+    data: SpecialAvatarsApiData;
+  };
+}
+
+export interface SpecialAvatarsApiData {
+  avatars: SpecialAvatarsData[];
+}
+
+export type SpecialAvatarsData = {
+  icon: string;
+  powerUpAmount: number;
+  createdBy: string;
+  createdAt: string;
+};
+
 //Redux types
 export type FilterState = {
   filter: {
