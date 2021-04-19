@@ -90,9 +90,7 @@ export default function Header({
 
       {isSearchPage && <LookingForText>Looking for "{name}"</LookingForText>}
 
-      {isChallengesPage && <Tent className="tent" />}
-
-      {isOnlineBattles && <Tent className="tent" />}
+      {isChallengesPage || (isOnlineBattles && <Tent className="tent" />)}
 
       {isChallengesPage && (
         <>

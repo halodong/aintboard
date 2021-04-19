@@ -10,7 +10,7 @@ const OnlineBattle = ({ battleResponse }: Props) => {
     <>
       <BattleCardWrapper>
         {battlesData.map((b: BattlesData, index) => (
-          <OnlineBattleCard key={`${b.battleName}-${index}`} data={b} />
+          <OnlineBattleCard key={`${index}`} data={b} />
         ))}
       </BattleCardWrapper>
     </>

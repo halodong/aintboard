@@ -55,7 +55,7 @@ export async function insertValidEntry(
   }
 }
 
-export const getAllBattles = async (db, { first }) => {
+export const getBattles = async (db, { first }) => {
   try {
     let battles = null;
     first = first ? parseInt(first) : null;
@@ -75,10 +75,10 @@ export const getAllBattles = async (db, { first }) => {
     return getSuccessResponse({
       message:
         battleCount === 1
-          ? "1 Challenge retrieved"
+          ? "1 Online Battle retrieved"
           : battleCount > 1
-          ? `${battleCount} Challenges retrieved`
-          : `No Challenges retrieved`,
+          ? `${battleCount} Online Battle retrieved`
+          : `Online Battleretrieved`,
       data: {
         battles: allBattles,
       },
