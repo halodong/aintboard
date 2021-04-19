@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const HeaderWrapper = styled.div<HeaderWrappepProps>`
+export const HeaderWrapper = styled.div<HeaderWrapperProps>`
   width: 100%;
   background-color: ${(props) => props.theme.colors.dark};
   min-height: ${(props) =>
@@ -53,9 +53,12 @@ export const HeaderWrapper = styled.div<HeaderWrappepProps>`
   }
 `;
 
-type HeaderWrappepProps = {
+type HeaderWrapperProps = {
   homepage?: boolean;
   isEditorPage?: boolean;
+  isSearchPage?: boolean;
+  isChallengePage?: boolean;
+  isBoardGamePage?: boolean;
 };
 
 const baseTaglineStyles = styled.h1`

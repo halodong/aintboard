@@ -98,6 +98,7 @@ const Sidebar = ({ menuOpen, closeMenu }: Props) => {
               },
             ]}
           />
+          <PrimaryLinkSidebar buttonName="Buy Avatars" link="/buy/avatars/" />
         </UlSidebar>
 
         <UlSidebar>
