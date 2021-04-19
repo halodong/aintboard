@@ -100,6 +100,11 @@ export const ChallengesTagline = styled(baseTaglineStyles)`
   text-transform: none;
 `;
 
+export const BattlesTagline = styled(baseTaglineStyles)`
+  margin-top: 2.5rem;
+  text-transform: none;
+`;
+
 export const BoardGameName = styled(baseTaglineStyles)`
   text-transform: none;
 `;

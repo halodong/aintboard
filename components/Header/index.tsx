@@ -7,6 +7,7 @@ import {
   LookingForText,
   GameFont,
   ChallengesTagline,
+  BattlesTagline,
   BoardGameName,
 } from "./styled";
 import { TreesGroup1, TreesGroup2, Tent } from "~/assets/img";
@@ -18,7 +19,11 @@ import Modal from "~/components/Common/Modal";
 import CreateChallengeForm from "~/components/Challenges/CreateChallengeForm";
 
 import { chooseModal } from "redux/slices/modalSlice";
-import { CHALLENGES_PAGE, CREATE_CHALLENGE_BUTTON } from "util/constants";
+import {
+  CHALLENGES_PAGE,
+  CREATE_CHALLENGE_BUTTON,
+  ONLINE_BATTLES,
+} from "util/constants";
 import { ModalState } from "types/types";
 
 const modalCta = [
@@ -36,6 +41,7 @@ export default function Header({
   tagline,
   isBoardGamePage = false,
   isEditorPage = false,
+  isOnlineBattles = false,
   children,
 }: Props) {
   const router = useRouter();
@@ -84,7 +90,7 @@ export default function Header({
 
       {isSearchPage && <LookingForText>Looking for "{name}"</LookingForText>}
 
-      {isChallengesPage && <Tent className="tent" />}
+      {isChallengesPage || (isOnlineBattles && <Tent className="tent" />)}
 
       {isChallengesPage && (
         <>
@@ -93,6 +99,16 @@ export default function Header({
             Achieve challenges to get PowerUps!
           </ChallengesTagline>
           <Filter type={CHALLENGES_PAGE} />
+        </>
+      )}
+
+      {isOnlineBattles && (
+        <>
+          <GameFont>ONLINE BATTLES</GameFont>
+          <BattlesTagline>
+            Get to the top of the leaderboards to get trophies!
+          </BattlesTagline>
+          <Filter type={ONLINE_BATTLES} />
         </>
       )}
 
@@ -128,5 +144,6 @@ type Props = {
   tagline?: string;
   isBoardGamePage?: boolean;
   isEditorPage?: boolean;
+  isOnlineBattles?: boolean;
   children?: any;
 };

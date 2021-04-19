@@ -1,6 +1,6 @@
 import nc from "next-connect";
 
-import { insertBattle } from "~/db/onlineBattle";
+import { getBattles, insertBattle } from "~/db/onlineBattle";
 import { all } from "~/middlewares/index";
 
 const handler = nc();
@@ -27,6 +27,14 @@ handler.post(async (req, res) => {
   });
 
   return res.json({ battle });
+});
+
+handler.get(async (req, res) => {
+  const { first = null } = req.query;
+
+  const battles = await getBattles(req.db, { first });
+
+  return res.json(battles);
 });
 
 export default handler;
