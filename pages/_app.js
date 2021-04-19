@@ -53,6 +53,8 @@ const GlobalStyle = createGlobalStyle`
   .ReactModalPortal {
     position: fixed;
     z-index: ${theme.zIndex["3rd"]} !important;
+    height: 1px; //height and width are needed for tabbing in modal
+    width: 1px;
   }
 `;
 
