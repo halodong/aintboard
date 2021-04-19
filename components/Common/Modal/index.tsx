@@ -47,6 +47,10 @@ const ModalComponent = ({
       closeTimeoutMS={closeTimeoutMS}
       shouldCloseOnOverlayClick={false}
       htmlOpenClassName="ReactModal__Html--open"
+      aria={{
+        modal: true,
+        labelledby: headerLabel,
+      }}
     >
       <ModalHeader>
         <h3>{headerLabel}</h3>

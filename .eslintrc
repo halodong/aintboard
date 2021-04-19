@@ -1,6 +1,6 @@
 {
   "plugins": ["react", "jsx-a11y", "chai-friendly"],
-  "extends": ["react-app", "prettier"],
+  "extends": ["react-app", "prettier", "plugin:jsx-a11y/recommended"],
   "env": {
     "browser": true,
     "es6": true,
