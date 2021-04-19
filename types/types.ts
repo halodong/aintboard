@@ -79,6 +79,31 @@ export type ChallengesData = {
   createdAt: string;
 };
 
+export type BattlesData = {
+  _id: string;
+  battleName: string;
+  boardGameName: string;
+  bgId: number;
+  details: string;
+  eventStartDate: string;
+  eventEndDate: string;
+  createdAt: string;
+};
+
+export interface BattlesApiResponse {
+  success: boolean;
+  response: {
+    message: string;
+    data: {
+      battles: BattlesData[];
+    };
+  };
+}
+
+export interface BattlesApiData {
+  battles: BattlesData[];
+}
+
 export type BggBoardgameApiData = {
   items: BggBoardgameApiDataItem[];
 };

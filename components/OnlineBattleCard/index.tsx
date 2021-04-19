@@ -14,7 +14,9 @@ import {
   Username,
 } from "./styled";
 
-const OnlineBattleCard = () => {
+import { BattlesData } from "~/types/types";
+
+const OnlineBattleCard = ({ data }: Props) => {
   return (
     <OnlineBattleCardWrapper>
       <BattleImage>
@@ -28,9 +30,9 @@ const OnlineBattleCard = () => {
       <PlayButton className="play" />
 
       <BattleCard>
-        <BattleName>Leader Root Battle</BattleName>
-        <BattleDate>March 2021</BattleDate>
-        <BattleEnds>Ends on March 30</BattleEnds>
+        <BattleName>{data?.battleName}</BattleName>
+        <BattleDate>{data?.eventStartDate}</BattleDate>
+        <BattleEnds>{data?.eventEndDate}</BattleEnds>
         <div>
           <Rank>
             <Place>Top 1</Place>
@@ -48,6 +50,10 @@ const OnlineBattleCard = () => {
       </BattleCard>
     </OnlineBattleCardWrapper>
   );
+};
+
+type Props = {
+  data: BattlesData;
 };
 
 export default OnlineBattleCard;

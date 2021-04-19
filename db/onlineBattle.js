@@ -54,3 +54,36 @@ export async function insertValidEntry(
     return getFailedResponse(err, "db/onlineBattle.js");
   }
 }
+
+export const getAllBattles = async (db, { first }) => {
+  try {
+    let battles = null;
+    first = first ? parseInt(first) : null;
+
+    if (first) {
+      battles = await db
+        .collection("online_battle")
+        .aggregate([{ $limit: first }]);
+    } else {
+      battles = await db.collection("online_battle").find();
+    }
+
+    const allBattles = await battles.toArray();
+
+    const battleCount = allBattles.length;
+
+    return getSuccessResponse({
+      message:
+        battleCount === 1
+          ? "1 Challenge retrieved"
+          : battleCount > 1
+          ? `${battleCount} Challenges retrieved`
+          : `No Challenges retrieved`,
+      data: {
+        battles: allBattles,
+      },
+    });
+  } catch (err) {
+    return getFailedResponse(err, "db/onlineBattle.js");
+  }
+};

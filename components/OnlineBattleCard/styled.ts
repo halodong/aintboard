@@ -7,6 +7,7 @@ export const OnlineBattleCardWrapper = styled.div`
   width: 40rem;
   display: flex;
   border-radius: ${(props) => props.theme.border["10px"]};
+  margin: 2rem;
 
   .play {
     position: absolute;
