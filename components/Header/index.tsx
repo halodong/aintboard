@@ -106,7 +106,7 @@ export default function Header({
         <>
           <GameFont>ONLINE BATTLES</GameFont>
           <BattlesTagline>
-            Get to the top of the leaderboard to get trophies!
+            Get to the top of the leaderboards to get trophies!
           </BattlesTagline>
           <Filter type={ONLINE_BATTLES} />
         </>
