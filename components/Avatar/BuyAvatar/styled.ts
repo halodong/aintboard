@@ -38,6 +38,10 @@ export const SpecialAvatarWrapper = styled.div`
   margin-bottom: 1rem;
 `;
 
+type SpecialAvatarWrapperProps = {
+  onClick?: () => void;
+};
+
 export const UnlockText = styled.div`
   display: flex;
   align-items: center;
@@ -46,7 +50,7 @@ export const UnlockText = styled.div`
   padding: 0.5rem;
   border-radius: ${(props) => props.theme.border["10px"]};
 
-  label {
+  span {
     cursor: pointer;
   }
 

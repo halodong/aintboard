@@ -123,3 +123,9 @@ export const BattlesTagline = styled(baseTaglineStyles)`
 export const BoardGameName = styled(baseTaglineStyles)`
   text-transform: none;
 `;
+
+export const CenterButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+`;

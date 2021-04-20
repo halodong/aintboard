@@ -56,7 +56,8 @@ const LoginForm = ({ closeModal, isAdmin }: Props) => {
           closeModal();
           resetForm();
           toast.success("Welcome!");
-          if (isAdmin) Router.push("/admin/dashboard");
+          if (isAdmin) return Router.push("/admin/dashboard");
+          Router.push(window.location.href); //need to refresh current page after login
         } catch (err) {
           console.error("Login error: ", err);
           toast.error("Something went wrong");
