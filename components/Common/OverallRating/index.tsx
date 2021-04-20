@@ -28,7 +28,7 @@ const OverallRating = ({ label, rating, paddingBottom }: Props) => {
   return (
     <RatingFormWrapper paddingBottom={paddingBottom}>
       {label && <RatingLabel>{label}</RatingLabel>}
-      <DiceContainer hovered>{dices[ratingNum - 1].comp}</DiceContainer>
+      <DiceContainer hovered>{dices[ratingNum - 1]?.comp}</DiceContainer>
 
       {label && <FloatRating>{rating} / 6</FloatRating>}
     </RatingFormWrapper>

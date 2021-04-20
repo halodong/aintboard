@@ -8,6 +8,7 @@ import {
   GameFont,
   ChallengesTagline,
   BoardGameName,
+  Rubik,
 } from "./styled";
 import { TreesGroup1, TreesGroup2, Tent } from "~/assets/img";
 
@@ -35,7 +36,7 @@ export default function Header({
   isChallengesPage = false,
   tagline,
   isBoardGamePage = false,
-  isEditorPage = false,
+  isReviewsPage = false,
   children,
 }: Props) {
   const router = useRouter();
@@ -57,7 +58,7 @@ export default function Header({
       isSearchPage={isSearchPage}
       isChallengePage={isChallengesPage}
       isBoardGamePage={isBoardGamePage}
-      isEditorPage={isEditorPage}
+      isReviewsPage={isReviewsPage}
     >
       <Navbar />
 
@@ -85,16 +86,17 @@ export default function Header({
       {isSearchPage && <LookingForText>Looking for "{name}"</LookingForText>}
 
       {isChallengesPage && <Tent className="tent" />}
-
+      {isChallengesPage && <GameFont>CHALLENGES</GameFont>}
       {isChallengesPage && (
-        <>
-          <GameFont>CHALLENGES</GameFont>
-          <ChallengesTagline>
-            Achieve challenges to get PowerUps!
-          </ChallengesTagline>
-          <Filter type={CHALLENGES_PAGE} />
-        </>
+        <ChallengesTagline>
+          Achieve challenges to get PowerUps!
+        </ChallengesTagline>
       )}
+      {isChallengesPage && <Filter type={CHALLENGES_PAGE} />}
+
+      {isReviewsPage && <Tent className="tent" />}
+      {isReviewsPage && <Rubik>REVIEWS</Rubik>}
+      {isReviewsPage && <Filter type={CHALLENGES_PAGE} />}
 
       {isBoardGamePage && <BoardGameName>{children}</BoardGameName>}
 
@@ -127,6 +129,6 @@ type Props = {
   isChallengesPage?: boolean;
   tagline?: string;
   isBoardGamePage?: boolean;
-  isEditorPage?: boolean;
+  isReviewsPage?: boolean;
   children?: any;
 };
