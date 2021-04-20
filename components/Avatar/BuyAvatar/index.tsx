@@ -95,8 +95,8 @@ const BuyAvatar = ({ specialAvatars }: Props) => {
       powerups: avatar?.powerUpAmount,
     });
 
-    if (!response.data.success) {
-      toast.error(response.data.message);
+    if (!response.data.userAvatar.success) {
+      toast.error(response.data.userAvatar.message);
       return;
     }
 
