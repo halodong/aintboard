@@ -1,6 +1,6 @@
 import { nanoid } from "nanoid";
 
-import { buyAvatar } from "../db/avatar";
+import { buyAvatar, useAvatar } from "../db/avatar";
 import { insertUser } from "../db/user";
 import { insertUserChallenges } from "../db/userChallenges";
 
@@ -8,7 +8,7 @@ const chai = require("chai");
 const expect = chai.expect;
 const dbHandler = require("./db-handler");
 
-describe("Avatar routes", () => {
+describe("Avatars", () => {
   let db, user;
   before(async () => {
     try {
@@ -56,5 +56,18 @@ describe("Avatar routes", () => {
     );
     expect(res.response.data.userAvatar.icon).to.equal("DRAGON");
     expect(res.response.data.userWithPowerUps.powerups).to.equal(6);
+  });
+
+  it("should use an avatar", async () => {
+    let res = await useAvatar(db, {
+      userId: user._id,
+      icon: "DRAGON",
+    });
+
+    expect(res.success).to.equal(true);
+    expect(res.response.message).to.equal(
+      "User has used an avatar successfully"
+    );
+    expect(res.response.data.user.avatar).to.equal("DRAGON");
   });
 });

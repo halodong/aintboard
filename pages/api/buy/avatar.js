@@ -16,7 +16,7 @@ handler.post(async (req, res) => {
     powerups,
   });
 
-  return res.json({ userAvatar });
+  return res.json(userAvatar);
 });
 
 export default handler;

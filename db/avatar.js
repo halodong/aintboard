@@ -48,3 +48,23 @@ export const getUserAvatars = async (db, { userId }) => {
     return getFailedResponse(err, "db/avatar.js", "Cannot get user avatars");
   }
 };
+
+export const useAvatar = async (db, { userId, icon }) => {
+  try {
+    const user = await db.collection("users");
+    const userWithUpdatedAvatar = await user.findOneAndUpdate(
+      { _id: userId },
+      { $set: { avatar: icon } },
+      { projection: { password: 0 }, returnOriginal: false }
+    );
+
+    return getSuccessResponse({
+      message: "User has used an avatar successfully",
+      data: {
+        user: userWithUpdatedAvatar.value,
+      },
+    });
+  } catch (err) {
+    return getFailedResponse(err, "db/avatar.js", "Cannot use an avatar");
+  }
+};

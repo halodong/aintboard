@@ -95,16 +95,50 @@ const BuyAvatar = ({ specialAvatars }: Props) => {
       powerups: avatar?.powerUpAmount,
     });
 
-    if (!response.data.userAvatar.success) {
-      toast.error(response.data.userAvatar.message);
+    if (!response?.data?.success) {
+      toast.error(response?.data?.response?.message);
       return;
     }
 
+    //@todo revalidate powerups in sidebar as well
     //revalidate apis
     mutate(`/api/user/avatars?userId=${userObj?._id}`);
   };
 
-  const applyAvatar = (avatar: SpecialAvatarsData) => {};
+  const applyAvatar = async (avatar: string) => {
+    mutate(
+      `/api/user/filter/_id/${userData?._id}`,
+      () => {
+        return {
+          success: true,
+          response: {
+            message: userApiData?.response?.message,
+            data: {
+              users: [
+                ...(userApiData?.response?.data?.users || []),
+                {
+                  avatar,
+                },
+              ],
+            },
+          },
+        };
+      },
+      false
+    );
+
+    const response = await axios.post("/api/user/avatar", {
+      userId: userObj?._id,
+      icon: avatar,
+    });
+
+    if (!response?.data?.success) {
+      toast.error(response?.data?.response?.message);
+      return;
+    }
+
+    mutate(`/api/user/filter/_id/${userData?._id}`);
+  };
 
   return (
     <BuyAvatarsWrapper>
@@ -116,6 +150,7 @@ const BuyAvatar = ({ specialAvatars }: Props) => {
               key={`${avatar}-${i}`}
               iconType={avatar}
               isChosen={userObj?.avatar === avatar}
+              onClick={() => applyAvatar(avatar)}
             />
           ))}
         </div>
@@ -138,7 +173,7 @@ const BuyAvatar = ({ specialAvatars }: Props) => {
                   isChosen={userObj?.avatar === avatar.icon}
                 />
                 {hasPurchased.length > 0 ? (
-                  <UnlockText onClick={() => applyAvatar(avatar)}>
+                  <UnlockText onClick={() => applyAvatar(avatar?.icon || "")}>
                     <span>Use this avatar</span>
                   </UnlockText>
                 ) : (
