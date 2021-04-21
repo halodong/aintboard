@@ -22,7 +22,7 @@ import DragonAvatar from "~/assets/img/dragon";
 import WizardAvatar from "~/assets/img/wizardAvatar";
 import UserMale from "assets/img/user/UserMale";
 
-const Avatar = ({ iconType, from, isChosen, special }: Props) => {
+const Avatar = ({ iconType, from, isChosen, onClick }: Props) => {
   let icon = <></>;
   let bgColor = "";
 
@@ -62,6 +62,7 @@ const Avatar = ({ iconType, from, isChosen, special }: Props) => {
       bgColor={bgColor}
       isChosen={isChosen}
       className="avatar-icon"
+      onClick={onClick}
     >
       {icon}
     </UserWrapper>
@@ -73,6 +74,7 @@ type Props = {
   from?: string;
   isChosen?: boolean;
   special?: boolean;
+  onClick?: () => void;
 };
 
 export default Avatar;

@@ -170,6 +170,25 @@ export type SpecialAvatarsData = {
   createdAt: string;
 };
 
+export interface UserAvatarsApiResponse {
+  success: boolean;
+  response: {
+    message: string;
+    data: UserAvatarsApiData;
+  };
+}
+
+export interface UserAvatarsApiData {
+  userAvatars: UserAvatarsData[];
+}
+
+export type UserAvatarsData = {
+  _id: string;
+  userId: string;
+  icon: string;
+  createdAt: string;
+};
+
 //Redux types
 export type FilterState = {
   filter: {
@@ -183,6 +202,11 @@ export type FilterState = {
 export type ModalState = {
   modal: {
     modalChosen: string;
+    popup: {
+      open: false;
+      header: "";
+      content: "";
+    };
   };
 };
 

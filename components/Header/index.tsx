@@ -10,16 +10,18 @@ import {
   BattlesTagline,
   BoardGameName,
   CenterTagline,
+  CenterButtonContainer,
 } from "./styled";
 import { TreesGroup1, TreesGroup2, Tent } from "~/assets/img";
 
-import Filter from "~/components/Common/Filter";
 import Navbar from "~/components/Navbar";
-// import Searchbar from "~/components/Searchbar"; obsolete for now
 import Modal from "~/components/Common/Modal";
+import Filter from "~/components/Common/Filter";
+import Button from "~/components/Common/Button";
+// import Searchbar from "~/components/Searchbar"; obsolete for now
 import CreateChallengeForm from "~/components/Challenges/CreateChallengeForm";
 
-import { chooseModal } from "redux/slices/modalSlice";
+import { chooseModal, setPopup } from "redux/slices/modalSlice";
 import {
   CHALLENGES_PAGE,
   CREATE_CHALLENGE_BUTTON,
@@ -55,9 +57,21 @@ export default function Header({
     (state: ModalState) => state.modal.modalChosen
   );
 
+  const popupTriggered = useSelector((state: ModalState) => state.modal.popup);
+
   const closeModal = () => {
     // @TODO dispatch this with setTimeout to have a fadeout of modal
     dispatch(chooseModal(""));
+  };
+
+  const closePopup = () => {
+    dispatch(
+      setPopup({
+        open: false,
+        header: "",
+        content: "",
+      })
+    );
   };
 
   return (
@@ -141,6 +155,22 @@ export default function Header({
           })()}
         </Modal>
       ))}
+
+      <Modal
+        isOpen={popupTriggered?.open}
+        closeModal={closePopup}
+        headerLabel={popupTriggered?.header}
+        closeTimeoutMS={0}
+        maxwidth="35rem"
+      >
+        {popupTriggered?.content}
+
+        <CenterButtonContainer>
+          <Button onClick={closePopup} bg="lightYellow">
+            OK
+          </Button>
+        </CenterButtonContainer>
+      </Modal>
     </HeaderWrapper>
   );
 }

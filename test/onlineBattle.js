@@ -1,7 +1,6 @@
 import { insertBattle, insertValidEntry, getBattles } from "../db/onlineBattle";
 import { insertUser } from "../db/user";
 import { nanoid } from "nanoid";
-import { isArray } from "lodash-es";
 const dbHandler = require("./db-handler");
 const chai = require("chai");
 const expect = chai.expect;

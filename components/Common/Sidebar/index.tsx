@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import useSWR from "swr";
 import Link from "next/link";
 import cookie from "js-cookie";
 import Router from "next/router";
+import { useEffect } from "react";
 
 import {
   SidebarContainer,
@@ -21,6 +22,8 @@ import {
   CREATE_ONLINE_BATTLE_BUTTON,
 } from "util/constants";
 import useCurrentUser from "~/hooks/useCurrentUser";
+import { UserApiResponse } from "~/types/types";
+import fetcher from "~/util/fetch";
 
 import Avatar from "components/Avatar";
 import PrimaryLinkSidebar from "components/Common/PrimaryLinkSidebar";
@@ -37,11 +40,18 @@ const Sidebar = ({ menuOpen, closeMenu }: Props) => {
     }
   }, [menuOpen]);
 
+  const { data: userApiData } = useSWR<UserApiResponse>(
+    userData?._id ? `/api/user/filter/_id/${userData?._id}` : null,
+    fetcher
+  );
+
+  const userObj = userApiData?.response?.data?.users?.[0];
+
   return (
     <>
       <SidebarContainer menuOpen={menuOpen}>
         <UserSidebar>
-          <Avatar iconType={userData?.avatar} from={SIDEBAR_COMPONENT} />
+          <Avatar iconType={userObj?.avatar || ""} from={SIDEBAR_COMPONENT} />
           <h4>{userData?.username || ""}</h4>
         </UserSidebar>
 

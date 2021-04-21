@@ -172,6 +172,9 @@ export const filterUsers = async (db, { first, filter, field }) => {
             [filter]: field,
           },
         },
+        {
+          $project: { password: 0 },
+        },
       ];
 
       if (first) {

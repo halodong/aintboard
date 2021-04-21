@@ -1,3 +1,5 @@
+import useSWR from "swr";
+
 import Header from "components/Header";
 import Footer from "components/Common/Footer";
 import BuyAvatar from "components/Avatar/BuyAvatar";
@@ -6,6 +8,12 @@ import fetcher from "~/util/fetch";
 import { SpecialAvatarsApiResponse } from "~/types/types";
 
 const BuyAvatarsPage = ({ specialAvatars }: Props) => {
+  const { data: specialAvatarsData } = useSWR<SpecialAvatarsApiResponse>(
+    "/api/special-avatars",
+    fetcher,
+    { initialData: specialAvatars }
+  );
+
   if (typeof window === "undefined") {
     return <></>;
   }
@@ -14,7 +22,7 @@ const BuyAvatarsPage = ({ specialAvatars }: Props) => {
     <>
       <Header isBuyAvatarsPage centerTagline="Buy Avatars" />
       <BuyAvatar
-        specialAvatars={specialAvatars?.response?.data?.avatars || []}
+        specialAvatars={specialAvatarsData?.response?.data?.avatars || []}
       />
       <Footer />
     </>
