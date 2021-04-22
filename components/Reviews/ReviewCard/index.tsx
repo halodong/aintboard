@@ -12,6 +12,7 @@ import {
   BottomRight,
   BottomWrapper,
 } from "./styled";
+import Avatar from "components/Avatar";
 import { UserWrapper } from "components/Avatar/styled";
 import OverallRating from "components/Common/OverallRating";
 import { UserMale, CommentIcon, HeartLikeIcon } from "assets/img";
@@ -36,11 +37,11 @@ export const ReviewCard = ({ data }: Props) => {
       </BgImgWrapper>
 
       <UserWrapper from={REVIEWS_HOMEPAGE_COMPONENT}>
-        <UserMale className="icon" />
+        <Avatar iconType={data?.userData?.[0]?.avatar || ""} />
       </UserWrapper>
 
-      <Username>{data.userData._id}</Username>
-      <ReviewDate>{dayjs(data.createdAt).format("MMM DD YYYY")}</ReviewDate>
+      <Username>{data?.userData?.[0]?.username}</Username>
+      <ReviewDate>{dayjs(data?.createdAt).format("MMM DD YYYY")}</ReviewDate>
       <ReviewContent>
         <div
           className="preview"

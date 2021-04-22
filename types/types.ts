@@ -39,7 +39,7 @@ export type ReviewData = {
   language: string;
   youtubeUrl?: string;
   createdAt: string;
-  userData: UserData;
+  userData: UserData[];
 };
 
 export interface UserApiResponse {
