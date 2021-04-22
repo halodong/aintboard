@@ -128,7 +128,6 @@ const CreateReviewForm = () => {
 
         return (
           <Form>
-            <Title>Create a Review</Title>
             <InputContainer>
               {errors.reviewTitle && touched.reviewTitle && (
                 <ErrorMessage justifyContent="flex-start">
