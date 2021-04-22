@@ -3,7 +3,9 @@ import {
   ImageUploadContainer,
   PreviewsContainer,
   ImageContainer,
+  CloseContainer,
 } from "./styled";
+import CloseIcon from "~/assets/img/close.svg";
 
 const ImageUpload = ({
   buttonLabel,
@@ -59,6 +61,11 @@ const ImageUpload = ({
     getPreview(files);
   };
 
+  const handleDelete = (index: number) => {
+    let mutatedPreviews = previews.filter((_, i) => i !== index);
+    setPreviews(mutatedPreviews);
+  };
+
   return (
     <ImageUploadContainer marginLeft={marginLeft}>
       <div className="wrapper">
@@ -78,6 +85,12 @@ const ImageUpload = ({
           {previews.length > 0 &&
             previews.map((p, i) => (
               <ImageContainer key={i}>
+                <CloseContainer>
+                  <CloseIcon
+                    onClick={() => handleDelete(i)}
+                    className="close-icon"
+                  />
+                </CloseContainer>
                 <img src={p} alt="preview" />
               </ImageContainer>
             ))}
