@@ -35,7 +35,7 @@ export const HeaderWrapper = styled.div<HeaderWrappepProps>`
 
     .tent {
       left: 15rem;
-      top: 16.5rem;
+      top: 16.4rem;
       width: 15rem;
     }
 
