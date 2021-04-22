@@ -6,12 +6,14 @@ export const UserProfilePageWrapper = styled.div`
 `;
 
 export const LeftSide = styled.div`
+  position: relative;
   flex: 1;
   background-color: ${(props) => props.theme.colors.darkGreen};
   height: fit-content;
   display: flex;
   flex-direction: column;
   padding: 2rem;
+  top: -1rem;
 `;
 
 export const RightSide = styled.div`
