@@ -18,6 +18,12 @@ export const NavbarContainer = styled.nav<NavbarContainerProps>`
     width: 14.25rem;
     flex: 1;
   }
+
+  svg {
+    width: 9rem;
+    flex: 1;
+    margin-left: 2rem;
+  }
 `;
 
 export const LogoContainer = styled.div`

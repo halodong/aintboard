@@ -8,11 +8,8 @@ import fetcher from "util/fetch";
 import { ChallengesPageWrapper, ChallengesCardContainer } from "./styled";
 import ChallengesCard from "~/components/Challenges/ChallengesCard";
 
-import {
-  ChallengesApiResponse,
-  ChallengesData,
-  FilterState,
-} from "types/types";
+import { ChallengesApiResponse, ChallengesData } from "types/types";
+import { FilterState } from "types/reduxTypes";
 
 //Challenges page - where filters are
 const ChallengesPage = ({ challenges }: Props) => {

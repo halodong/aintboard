@@ -21,10 +21,19 @@ export const YoutubeContainer = styled.div`
   }
 `;
 
-export const Title = styled.h1`
+export const Title = styled.h1<TitleProps>`
   display: inline-block;
   color: white;
   font-size: 1.5rem;
   font-family: ${(props) => props.theme.fonts.quicksandBold};
   margin: 0 1rem 2rem 0;
+  background-color: ${(props) =>
+    props.isChosen ? props.theme.colors.dark : "transparent"};
+  padding: 1rem;
+  border-radius: ${(props) => props.theme.border["10px"]};
+  cursor: pointer;
 `;
+
+type TitleProps = {
+  isChosen: boolean;
+};

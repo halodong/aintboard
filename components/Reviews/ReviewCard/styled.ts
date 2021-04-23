@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { REVIEW_TYPE } from "util/constants";
 
 export const BgImgWrapper = styled.div`
   position: relative;
@@ -66,12 +67,17 @@ export const BottomWrapper = styled.div`
   padding: 0 1rem;
 `;
 
-export const Bottom = styled.div`
+export const Bottom = styled.div<BottomProps>`
   display: flex;
   align-items: flex-end;
-  justify-content: space-between;
+  justify-content: ${(props) =>
+    props.compType === REVIEW_TYPE.REVIEW ? "space-between" : "flex-end"};
   margin-top: 1.5rem;
 `;
+
+type BottomProps = {
+  compType?: string;
+};
 
 export const BottomRight = styled.div`
   display: flex;
