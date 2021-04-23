@@ -39,6 +39,11 @@ export const FooterWrapper = styled.div`
       text-align: right;
       margin-top: 0.5rem;
     }
+
+    svg {
+      margin-top: 2rem;
+      width: 6rem;
+    }
   }
 `;
 

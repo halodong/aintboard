@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { InputStyled, InputContainer } from "./styled";
+import { useState, useEffect } from "react";
 import SearchIcon from "~/assets/img/search.svg";
 import { useField, useFormikContext } from "formik";
+import { InputStyled, InputContainer } from "./styled";
 
 export default function Input({
   minWidth,
@@ -13,13 +13,25 @@ export default function Input({
   showRightIcon,
   label,
   type = "text",
+  handleChangeOnParent,
 }: Props) {
   const [field, meta] = useField(name);
   const { setFieldValue, submitForm } = useFormikContext();
   const [isActive, setIsActive] = useState(false);
 
+  useEffect(() => {
+    if (field.value !== "") {
+      setIsActive(true);
+    }
+  }, [field.value]);
+
   const handleTextChange = (text: string) => {
     setFieldValue(name, text);
+
+    //check if this function exists
+    if (handleChangeOnParent) {
+      handleChangeOnParent(name, text);
+    }
 
     if (text !== "") {
       setIsActive(true);
@@ -76,4 +88,5 @@ type Props = {
   showRightIcon?: boolean;
   label?: string;
   type?: string;
+  handleChangeOnParent?: (name: string, value: string) => void;
 };

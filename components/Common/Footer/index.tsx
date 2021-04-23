@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import FooterLeft from "~/assets/img/footer-left.svg";
 import FooterRight from "~/assets/img/footer-right.svg";
+import LogoGray from "~/assets/img/logo_gray.svg";
 import { FooterWrapper, LinksWrapper, LogoContainer } from "./styled";
 
 const Footer = () => {
@@ -27,13 +28,7 @@ const Footer = () => {
       <div className="logo-copy">
         <Link href="/">
           <a className="logo">
-            <LogoContainer>
-              <Image
-                alt="aintboard logo"
-                src="/img/logo_gray.png"
-                layout="fill"
-              />
-            </LogoContainer>
+            <LogoGray />
           </a>
         </Link>
         <h6>Copyright &copy; 2021</h6>

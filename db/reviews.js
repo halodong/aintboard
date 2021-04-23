@@ -9,7 +9,7 @@ export async function insertReview(
     userId,
     username,
     bgName,
-    reviewContent,
+    content,
     reviewStatus,
     reviewType,
     replayabilityRating,
@@ -20,20 +20,20 @@ export async function insertReview(
     playingTimeRating,
     overallRating,
     images,
-    reviewTitle,
+    title,
     language,
     youtubeUrl,
   }
 ) {
   try {
-    const slugText = slug(`${reviewTitle} ${username}`);
+    const slugText = slug(`${title} ${username}`);
 
     const review = await db.collection("reviews").insertOne({
       _id: nanoid(12),
       userId,
       slug: slugText,
       bgName,
-      reviewContent,
+      content,
       reviewStatus,
       reviewType,
       replayabilityRating,
@@ -44,7 +44,7 @@ export async function insertReview(
       playingTimeRating,
       overallRating,
       images,
-      reviewTitle,
+      title,
       language,
       youtubeUrl,
       createdAt: new Date(),

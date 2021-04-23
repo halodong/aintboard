@@ -1,10 +1,10 @@
-import CreateReviewForm from "./CreateReviewForm";
+import NewReviewTemplate from "./NewReviewTemplate";
 import { NewReviewWrapper } from "./styled";
 
 const NewReviewContent = () => {
   return (
     <NewReviewWrapper>
-      <CreateReviewForm />
+      <NewReviewTemplate />
     </NewReviewWrapper>
   );
 };

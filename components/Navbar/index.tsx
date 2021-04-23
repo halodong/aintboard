@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import React, { useState, useEffect } from "react";
 
 import Modal from "~/components/Common/Modal";
@@ -8,6 +7,7 @@ import LoginForm from "~/components/LoginForm";
 // import Searchbar from "~/components/Searchbar"; obsolete for now
 import Button from "~/components/Common/Button";
 import Sidebar from "~/components/Common/Sidebar";
+import LogoGray from "~assets/img/logo_gray.svg";
 
 import {
   NavbarContainer,
@@ -56,13 +56,7 @@ const Navbar = () => {
       <NavbarContainer isFixed={navbar}>
         <Link href="/">
           <a className="logo">
-            <LogoContainer>
-              <Image
-                alt="aintboard logo"
-                src="/img/logo_gray.png"
-                layout="fill"
-              />
-            </LogoContainer>
+            <LogoGray />
           </a>
         </Link>
 

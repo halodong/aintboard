@@ -37,8 +37,8 @@ describe("Reviews", () => {
       userId: 1,
       username: "faithm",
       bgName: "Brass Lanc",
-      reviewTitle: "I love this game!",
-      reviewContent: "3123123",
+      title: "I love this game!",
+      content: "3123123",
       reviewStatus: REVIEW_STATUS.PENDING,
       reviewType: REVIEW_TYPE.REVIEW,
     });
@@ -47,7 +47,7 @@ describe("Reviews", () => {
     expect(res.response.data.review.userId).to.equal(1);
     expect(res.response.data.review.bgName).to.equal("Brass Lanc");
     expect(res.response.data.review.slug).to.equal("i-love-this-game-faithm");
-    expect(res.response.data.review.reviewContent).to.equal("3123123");
+    expect(res.response.data.review.content).to.equal("3123123");
     expect(res.response.data.review.reviewStatus).to.equal(
       REVIEW_STATUS.PENDING
     );
@@ -59,8 +59,8 @@ describe("Reviews", () => {
       userId: 1,
       username: "faithm",
       bgName: "Brass Lanc",
-      reviewTitle: "I love this game!",
-      reviewContent: "3123123",
+      title: "I love this game!",
+      content: "3123123",
       reviewStatus: REVIEW_STATUS.PENDING,
       reviewType: REVIEW_TYPE.STRATEGY,
     });
@@ -69,7 +69,7 @@ describe("Reviews", () => {
     expect(res.response.data.review.userId).to.equal(1);
     expect(res.response.data.review.bgName).to.equal("Brass Lanc");
     expect(res.response.data.review.slug).to.equal("i-love-this-game-faithm");
-    expect(res.response.data.review.reviewContent).to.equal("3123123");
+    expect(res.response.data.review.content).to.equal("3123123");
     expect(res.response.data.review.reviewStatus).to.equal(
       REVIEW_STATUS.PENDING
     );

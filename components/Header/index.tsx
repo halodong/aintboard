@@ -28,7 +28,7 @@ import {
   CREATE_CHALLENGE_BUTTON,
   ONLINE_BATTLES,
 } from "util/constants";
-import { ModalState } from "types/types";
+import { ModalState } from "types/reduxTypes";
 
 const modalCta = [
   {

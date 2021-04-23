@@ -24,8 +24,8 @@ export type ReviewData = {
   _id: string;
   userId: number;
   bgName: string;
-  reviewTitle: string;
-  reviewContent: string;
+  title: string;
+  content: string;
   reviewStatus: string;
   reviewType: string;
   replayabilityRating: number;
@@ -187,36 +187,4 @@ export type UserAvatarsData = {
   userId: string;
   icon: string;
   createdAt: string;
-};
-
-//Redux types
-export type FilterState = {
-  filter: {
-    filters: {
-      firstSelected: string;
-      secondSelected: string | null;
-    };
-  };
-};
-
-export type ModalState = {
-  modal: {
-    modalChosen: string;
-    popup: {
-      open: false;
-      header: "";
-      content: "";
-    };
-  };
-};
-
-export type BgState = {
-  bg: {
-    bgSearched: {
-      bgName: string;
-      bgId: string;
-      bgYear: string;
-      bgImage: string;
-    };
-  };
 };

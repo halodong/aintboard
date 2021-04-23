@@ -21,14 +21,14 @@ import RatingForm from "components/Common/RatingForm";
 import ImageUpload from "components/Common/ImageUpload";
 import OverallRating from "components/Common/OverallRating";
 
-import { YoutubeContainer, Title } from "./../styled";
+import { YoutubeContainer } from "../NewReviewContent/styled";
 
 import { upload } from "util/cloudinary";
-import { LANGUAGE_OPTIONS, REVIEW_STATUS, REVIEW_TYPE } from "util/constants";
 import useCurrentUser from "hooks/useCurrentUser";
 import { OnSubmitValidationError } from "util/OnSubmitValidationError";
+import { LANGUAGE_OPTIONS, REVIEW_STATUS, REVIEW_TYPE } from "util/constants";
 
-const CreateReviewForm = () => {
+const StrategyForm = () => {
   const router = useRouter();
   const user = useCurrentUser();
   const [replayabilityRating, setReplayabilityRating] = useState(1);
@@ -38,11 +38,11 @@ const CreateReviewForm = () => {
   const [playingTimeRating, setPlayingTimeRating] = useState(1);
   const [componentsRating, setComponentsRating] = useState(1);
   const [overallRating, setOverallRating] = useState("1");
-  const [reviewContent, setReviewContent] = useState("");
+  const [strategyContent, setStrategyContent] = useState("");
   const [images, setImages] = useState<string[]>([]);
 
   const formSchema = Yup.object().shape({
-    reviewTitle: Yup.string().required("Review Title required"),
+    strategyTitle: Yup.string().required("Review Title required"),
     bgName: Yup.string().required("Boardgame Name required"),
   });
 
@@ -68,7 +68,7 @@ const CreateReviewForm = () => {
     <Formik
       enableReinitialize
       initialValues={{
-        reviewTitle: "",
+        strategyTitle: "",
         language: "",
         youtubeUrl: "",
         bgName: "",
@@ -81,7 +81,7 @@ const CreateReviewForm = () => {
             : "";
 
           if (userData === "") {
-            toast.error("You should be logged in to create a review");
+            toast.error("You should be logged in to create a strategy");
             return;
           }
 
@@ -91,18 +91,11 @@ const CreateReviewForm = () => {
             userId: userData._id,
             username: userData.username,
             bgName: values.bgName,
-            reviewContent: reviewContent,
+            content: strategyContent,
             reviewStatus: REVIEW_STATUS.PENDING,
-            reviewType: REVIEW_TYPE.REVIEW,
-            replayabilityRating,
-            componentsRating,
-            complexityRating,
-            aestheticsRating,
-            valueForMoneyRating,
-            playingTimeRating,
-            overallRating,
+            reviewType: REVIEW_TYPE.STRATEGY,
             images: uploadedImages,
-            reviewTitle: values.reviewTitle,
+            title: values.strategyTitle,
             language: values.language,
             youtubeUrl: values.youtubeUrl,
           });
@@ -113,10 +106,10 @@ const CreateReviewForm = () => {
           }
 
           resetForm();
-          toast.success("New review added!");
+          toast.success("New strategy added!");
           router.push("/");
         } catch (err) {
-          console.error("Review creation error: ", err);
+          console.error("Strategy creation error: ", err);
           toast.error("Something went wrong");
         }
       }}
@@ -128,17 +121,16 @@ const CreateReviewForm = () => {
 
         return (
           <Form>
-            <Title>Create a Review</Title>
             <InputContainer>
-              {errors.reviewTitle && touched.reviewTitle && (
+              {errors.strategyTitle && touched.strategyTitle && (
                 <ErrorMessage justifyContent="flex-start">
-                  {errors.reviewTitle}
+                  {errors.strategyTitle}
                 </ErrorMessage>
               )}
               <Input
-                name="reviewTitle"
-                label="Review Title"
-                error={errors.reviewTitle || ""}
+                name="strategyTitle"
+                label="Strategy Title"
+                error={errors.strategyTitle || ""}
                 marginLeft="0"
               />
             </InputContainer>
@@ -157,7 +149,7 @@ const CreateReviewForm = () => {
               />
             </InputContainer>
 
-            <Label>Upload your own images related to your review</Label>
+            <Label>Upload your own images related to your strategy</Label>
 
             <ImageUpload
               buttonLabel="Choose images"
@@ -167,11 +159,11 @@ const CreateReviewForm = () => {
               marginLeft="0"
             />
 
-            <Label>Put your Review content here</Label>
+            <Label>Put your Strategy content here</Label>
 
-            <RTE passContentToParent={setReviewContent} />
+            <RTE passContentToParent={setStrategyContent} />
 
-            <Label>What is your Review's primary language?</Label>
+            <Label>What is your Strategy's primary language?</Label>
 
             <DropDown
               placeholder="Language"
@@ -183,45 +175,8 @@ const CreateReviewForm = () => {
             />
 
             <Label>
-              Rate this boardgame by these categories from 1 - 6. 1 being the
-              lowest, and 6 being the highest.
-            </Label>
-
-            <Label marginTop="0">
-              * Complexity: 1 being too complex <br />* Playing Time: 1 being
-              too long or too short
-            </Label>
-
-            <OverallRating label="Overall Rating" rating={overallRating} />
-            <RatingForm
-              ratingType="Replayability"
-              onRatingClick={(rating: number) => setReplayabilityRating(rating)}
-            />
-            <RatingForm
-              ratingType="Complexity"
-              onRatingClick={(rating: number) => setComplexityRating(rating)}
-            />
-            <RatingForm
-              ratingType="Aesthetics"
-              onRatingClick={(rating: number) => setAestheticsRating(rating)}
-            />
-            <RatingForm
-              ratingType="Value for Money"
-              onRatingClick={(rating: number) => setValueForMoneyRating(rating)}
-            />
-
-            <RatingForm
-              ratingType="Playing Time"
-              onRatingClick={(rating: number) => setPlayingTimeRating(rating)}
-            />
-            <RatingForm
-              ratingType="Components Quality"
-              onRatingClick={(rating: number) => setComponentsRating(rating)}
-            />
-
-            <Label>
               Upload a youtube link that could be your elaborate video about
-              your review
+              your strategy
             </Label>
             <InputContainer>
               {errors.youtubeUrl && touched.youtubeUrl && (
@@ -246,7 +201,7 @@ const CreateReviewForm = () => {
 
             <ButtonContainer justifyContent="flex-start" marginTop="2rem">
               <Button bg="lightYellow" type="submit">
-                Submit Review
+                Submit Strategy
               </Button>
             </ButtonContainer>
 
@@ -258,4 +213,4 @@ const CreateReviewForm = () => {
   );
 };
 
-export default CreateReviewForm;
+export default StrategyForm;

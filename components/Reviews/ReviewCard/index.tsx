@@ -13,13 +13,12 @@ import {
   BottomWrapper,
 } from "./styled";
 import Avatar from "components/Avatar";
-import { UserWrapper } from "components/Avatar/styled";
 import OverallRating from "components/Common/OverallRating";
-import { UserMale, CommentIcon, HeartLikeIcon } from "assets/img";
+import { CommentIcon, HeartLikeIcon } from "assets/img";
 
 import { ReviewData } from "types/types";
 import { createHTMLExcerpt } from "~/util/createHTML";
-import { REVIEWS_HOMEPAGE_COMPONENT } from "~/util/constants";
+import { REVIEWS_HOMEPAGE_COMPONENT, REVIEW_TYPE } from "~/util/constants";
 
 export const ReviewCard = ({ data }: Props) => {
   return (
@@ -36,22 +35,25 @@ export const ReviewCard = ({ data }: Props) => {
         )}
       </BgImgWrapper>
 
-      <UserWrapper from={REVIEWS_HOMEPAGE_COMPONENT}>
-        <Avatar iconType={data?.userData?.[0]?.avatar || ""} />
-      </UserWrapper>
+      <Avatar
+        iconType={data?.userData?.[0]?.avatar || ""}
+        from={REVIEWS_HOMEPAGE_COMPONENT}
+      />
 
       <Username>{data?.userData?.[0]?.username}</Username>
       <ReviewDate>{dayjs(data?.createdAt).format("MMM DD YYYY")}</ReviewDate>
       <ReviewContent>
         <div
           className="preview"
-          dangerouslySetInnerHTML={createHTMLExcerpt(data.reviewContent)}
+          dangerouslySetInnerHTML={createHTMLExcerpt(data.content)}
         ></div>
       </ReviewContent>
 
       <BottomWrapper>
-        <Bottom>
-          <OverallRating rating={data.overallRating} paddingBottom="0" />
+        <Bottom compType={data?.reviewType}>
+          {data?.reviewType === REVIEW_TYPE.REVIEW && (
+            <OverallRating rating={data.overallRating} paddingBottom="0" />
+          )}
 
           <BottomRight>
             <h6>{capitalize(data.reviewType)}</h6>
