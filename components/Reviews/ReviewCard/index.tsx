@@ -25,7 +25,7 @@ export const ReviewCard = ({ data }: Props) => {
   return (
     <ReviewCardContainer>
       <BgImgWrapper>
-        {data.images.length > 0 ? (
+        {data.images?.length > 0 ? (
           <Image alt="boardgame" src={data.images[0]} layout="fill" />
         ) : (
           <Image

@@ -29,6 +29,7 @@ export const CREATE_CHALLENGE_FORM_COMPONENT =
 
 export const CHALLENGES_PAGE = "CHALLENGES_PAGE";
 export const ONLINE_BATTLES = "ONLINE_BATTLES";
+export const REVIEWS_PAGE = "REVIEWS_PAGE";
 
 export const FALLBACK = "blocking";
 
