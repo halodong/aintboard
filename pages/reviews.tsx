@@ -8,10 +8,10 @@ import { ReviewApiResponse } from "types/types";
 
 const Reviews = ({ reviews }: Props) => {
   return (
-    <div>
+    <>
       <Header isReviewsPage />
       <ReviewsPage reviews={reviews} />
-    </div>
+    </>
   );
 };
 
