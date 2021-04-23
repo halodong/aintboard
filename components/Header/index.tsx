@@ -85,18 +85,24 @@ export default function Header({
 
       {isSearchPage && <LookingForText>Looking for "{name}"</LookingForText>}
 
-      {isChallengesPage && <Tent className="tent" />}
-      {isChallengesPage && <GameFont>CHALLENGES</GameFont>}
       {isChallengesPage && (
-        <ChallengesTagline>
-          Achieve challenges to get PowerUps!
-        </ChallengesTagline>
+        <>
+          <Tent className="tent" />
+          <GameFont>CHALLENGES</GameFont>\
+          <ChallengesTagline>
+            Achieve challenges to get PowerUps!
+          </ChallengesTagline>
+          <Filter type={CHALLENGES_PAGE} />
+        </>
       )}
-      {isChallengesPage && <Filter type={CHALLENGES_PAGE} />}
 
-      {isReviewsPage && <Tent className="tent" />}
-      {isReviewsPage && <Rubik>REVIEWS</Rubik>}
-      {isReviewsPage && <Filter type={CHALLENGES_PAGE} />}
+      {isReviewsPage && (
+        <>
+          <Tent className="tent" />
+          <Rubik>REVIEWS</Rubik>
+          <Filter type={CHALLENGES_PAGE} />
+        </>
+      )}
 
       {isBoardGamePage && <BoardGameName>{children}</BoardGameName>}
 
