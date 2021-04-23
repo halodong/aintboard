@@ -110,7 +110,7 @@ export const GameFont = styled.h1`
 `;
 
 export const Rubik = styled.h1`
-  font-family: ${(props) => props.theme.fonts.rubikReg};
+  font-family: ${(props) => props.theme.fonts.rubikBold};
   font-weight: 700px;
   font-size: 64px;
   color: ${(props) => props.theme.colors.white};
