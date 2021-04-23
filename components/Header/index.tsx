@@ -11,6 +11,7 @@ import {
   BoardGameName,
   CenterTagline,
   CenterButtonContainer,
+  Rubik,
 } from "./styled";
 import { TreesGroup1, TreesGroup2, Tent } from "~/assets/img";
 
@@ -47,6 +48,7 @@ export default function Header({
   isEditorPage = false,
   isOnlineBattles = false,
   isBuyAvatarsPage = false,
+  isReviewsPage = false,
   children,
 }: Props) {
   const router = useRouter();
@@ -82,6 +84,7 @@ export default function Header({
       isBoardGamePage={isBoardGamePage}
       isEditorPage={isEditorPage}
       isBuyAvatarsPage={isBuyAvatarsPage}
+      isReviewsPage={isReviewsPage}
     >
       <Navbar />
 
@@ -116,7 +119,8 @@ export default function Header({
 
       {isChallengesPage && (
         <>
-          <GameFont>CHALLENGES</GameFont>
+          <Tent className="tent" />
+          <GameFont>CHALLENGES</GameFont>\
           <ChallengesTagline>
             Achieve challenges to get PowerUps!
           </ChallengesTagline>
@@ -131,6 +135,13 @@ export default function Header({
             Get to the top of the leaderboards to get trophies!
           </BattlesTagline>
           <Filter type={ONLINE_BATTLES} />
+        </>
+      )}
+      {isReviewsPage && (
+        <>
+          <Tent className="tent" />
+          <Rubik>REVIEWS</Rubik>
+          <Filter type={CHALLENGES_PAGE} />
         </>
       )}
 
@@ -185,5 +196,6 @@ type Props = {
   isEditorPage?: boolean;
   isOnlineBattles?: boolean;
   isBuyAvatarsPage?: boolean;
+  isReviewsPage?: boolean;
   children?: any;
 };

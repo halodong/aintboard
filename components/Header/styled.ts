@@ -4,8 +4,18 @@ export const HeaderWrapper = styled.div<HeaderWrapperProps>`
   width: 100%;
   background-color: ${(props) => props.theme.colors.dark};
   min-height: ${(props) =>
-    props.isEditorPage ? "15rem" : props.homepage ? "35rem" : "30rem"};
+    props.isSearchPage ||
+    props.isChallengePage ||
+    props.isBoardGamePage ||
+    props.isReviewsPage
+      ? "30rem"
+      : "35rem"};
   position: relative;
+  ${(props) =>
+    !props.homepage &&
+    `display: flex;
+  flex-direction: column;
+  justify-content: space-between;`}
 
   .trees-1,
   .trees-2,
@@ -65,10 +75,11 @@ export const HeaderWrapper = styled.div<HeaderWrapperProps>`
 type HeaderWrapperProps = {
   homepage?: boolean;
   isEditorPage?: boolean;
+  isBuyAvatarsPage?: boolean;
   isSearchPage?: boolean;
   isChallengePage?: boolean;
   isBoardGamePage?: boolean;
-  isBuyAvatarsPage?: boolean;
+  isReviewsPage?: boolean;
 };
 
 const baseTaglineStyles = styled.h1`
@@ -88,7 +99,7 @@ export const Tagline = styled(baseTaglineStyles)<TaglineProps>`
     `
     position: absolute;
     font-size: 1rem;
-    top: 7rem;
+    top: 6rem;
     margin: 0;
     left: 3.4rem;
   `}
@@ -110,6 +121,16 @@ export const GameFont = styled.h1`
   text-align: center;
   margin-top: 2rem;
 `;
+
+export const Rubik = styled.h1`
+  font-family: ${(props) => props.theme.fonts.rubikBold};
+  font-weight: 700px;
+  font-size: 64px;
+  color: ${(props) => props.theme.colors.white};
+  text-align: center;
+  margin-top: 2rem;
+`;
+
 export const ChallengesTagline = styled(baseTaglineStyles)`
   margin-top: 2rem;
   text-transform: none;
