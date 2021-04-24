@@ -85,6 +85,7 @@ export default function Header({
       isEditorPage={isEditorPage}
       isBuyAvatarsPage={isBuyAvatarsPage}
       isReviewsPage={isReviewsPage}
+      isOnlineBattles={isOnlineBattles}
     >
       <Navbar />
 
@@ -137,6 +138,7 @@ export default function Header({
           <Filter type={ONLINE_BATTLES} />
         </>
       )}
+
       {isReviewsPage && (
         <>
           <Tent className="tent" />

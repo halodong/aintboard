@@ -5,7 +5,7 @@ import { Formik, Form } from "formik";
 import ReactPlayer from "react-player";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import {
   InputContainer,
@@ -17,9 +17,7 @@ import RTE from "components/Common/RTE";
 import Input from "components/Common/Input";
 import Button from "components/Common/Button";
 import DropDown from "components/Common/DropDown";
-import RatingForm from "components/Common/RatingForm";
 import ImageUpload from "components/Common/ImageUpload";
-import OverallRating from "components/Common/OverallRating";
 
 import { YoutubeContainer } from "../NewReviewContent/styled";
 
@@ -31,13 +29,6 @@ import { LANGUAGE_OPTIONS, REVIEW_STATUS, REVIEW_TYPE } from "util/constants";
 const StrategyForm = () => {
   const router = useRouter();
   const user = useCurrentUser();
-  const [replayabilityRating, setReplayabilityRating] = useState(1);
-  const [complexityRating, setComplexityRating] = useState(1);
-  const [aestheticsRating, setAestheticsRating] = useState(1);
-  const [valueForMoneyRating, setValueForMoneyRating] = useState(1);
-  const [playingTimeRating, setPlayingTimeRating] = useState(1);
-  const [componentsRating, setComponentsRating] = useState(1);
-  const [overallRating, setOverallRating] = useState("1");
   const [strategyContent, setStrategyContent] = useState("");
   const [images, setImages] = useState<string[]>([]);
 
@@ -46,24 +37,6 @@ const StrategyForm = () => {
     bgName: Yup.string().required("Boardgame Name required"),
   });
 
-  useEffect(() => {
-    const sum =
-      replayabilityRating +
-      complexityRating +
-      complexityRating +
-      aestheticsRating +
-      valueForMoneyRating +
-      playingTimeRating;
-
-    setOverallRating((sum / 6).toFixed(1));
-  }, [
-    replayabilityRating,
-    componentsRating,
-    complexityRating,
-    aestheticsRating,
-    valueForMoneyRating,
-    playingTimeRating,
-  ]);
   return (
     <Formik
       enableReinitialize

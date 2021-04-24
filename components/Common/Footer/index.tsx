@@ -1,10 +1,9 @@
 import Link from "next/link";
-import Image from "next/image";
 
 import FooterLeft from "~/assets/img/footer-left.svg";
 import FooterRight from "~/assets/img/footer-right.svg";
 import LogoGray from "~/assets/img/logo_gray.svg";
-import { FooterWrapper, LinksWrapper, LogoContainer } from "./styled";
+import { FooterWrapper, LinksWrapper } from "./styled";
 
 const Footer = () => {
   return (

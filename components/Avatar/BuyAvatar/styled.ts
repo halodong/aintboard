@@ -38,10 +38,6 @@ export const SpecialAvatarWrapper = styled.div`
   margin-bottom: 1rem;
 `;
 
-type SpecialAvatarWrapperProps = {
-  onClick?: () => void;
-};
-
 export const UnlockText = styled.div`
   display: flex;
   align-items: center;

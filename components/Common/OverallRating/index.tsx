@@ -1,6 +1,3 @@
-import { useState } from "react";
-import { isEqual } from "lodash";
-
 import Dice1 from "~/assets/img/dice/dice_1.svg";
 import Dice2 from "~/assets/img/dice/dice_2.svg";
 import Dice3 from "~/assets/img/dice/dice_3.svg";

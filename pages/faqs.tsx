@@ -1,7 +1,7 @@
 import Header from "~/components/Header";
 import Faqs from "~/components/Faqs";
 
-const AboutPage = () => {
+const FaqsPage = () => {
   if (typeof window === "undefined") {
     return <></>;
   }
@@ -14,4 +14,4 @@ const AboutPage = () => {
   );
 };
 
-export default AboutPage;
+export default FaqsPage;

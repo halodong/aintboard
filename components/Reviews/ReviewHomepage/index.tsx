@@ -19,7 +19,9 @@ const ReviewHomepage = ({ reviews }: Props) => {
           <ReviewCard key={r._id} data={r} />
         ))}
         <div className="mainButtonContainer">
-          <button>See more Reviews</button>
+          <Link href="/reviews">
+            <button>See more Reviews</button>
+          </Link>
           <Link href="/review/new">
             <button>Make a Review or Strategy</button>
           </Link>

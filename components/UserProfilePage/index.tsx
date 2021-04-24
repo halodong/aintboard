@@ -19,7 +19,7 @@ import {
 import CardButton from "~/components/Common/SideButton";
 import Button from "~/components/Common/Button";
 import ChallengesCard from "~/components/Challenges/ChallengesCard";
-import OnlineBattleCard from "~/components/OnlineBattleCard";
+// import OnlineBattleCard from "~/components/OnlineBattleCard";
 import { ReviewCard } from "~/components/Reviews/ReviewCard";
 
 import { chooseModal } from "redux/slices/modalSlice";
@@ -46,7 +46,7 @@ const cardButton = [
   },
 ];
 
-const UserProfilePage = ({ reviews = {} }: Props) => {
+const UserProfilePage = ({ reviews }: Props) => {
   const dispatch = useDispatch();
 
   const onButtonClick = (type: string) => {
@@ -73,7 +73,7 @@ const UserProfilePage = ({ reviews = {} }: Props) => {
         <ReviewsSection>
           <H1Rubik>REVIEWS</H1Rubik>
           <ReviewsCardWrapper>
-            {reviews?.response?.data?.reviews.length > 0 ? (
+            {reviews && reviews?.response?.data?.reviews.length > 0 ? (
               reviews?.response?.data?.reviews?.map((r) => (
                 <ReviewCard key={r._id} data={r} />
               ))
@@ -97,7 +97,7 @@ const UserProfilePage = ({ reviews = {} }: Props) => {
         <OnlineBattlesSection>
           <H1GameFont>ONLINE BATTLES</H1GameFont>
           <OnlineBattleCardWrapper>
-            <OnlineBattleCard />
+            {/* <OnlineBattleCard /> */}
           </OnlineBattleCardWrapper>
           <Button bg="white" onClick={() => {}}>
             See more Online Battles
@@ -109,7 +109,7 @@ const UserProfilePage = ({ reviews = {} }: Props) => {
 };
 
 type Props = {
-  reviews: ReviewApiResponse;
+  reviews?: ReviewApiResponse;
 };
 
 export default UserProfilePage;
