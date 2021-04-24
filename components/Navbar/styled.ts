@@ -17,12 +17,11 @@ export const NavbarContainer = styled.nav<NavbarContainerProps>`
   .logo {
     width: 14.25rem;
     flex: 1;
+    margin-left: 2rem;
   }
 
   svg {
     width: 9rem;
-    flex: 1;
-    margin-left: 2rem;
   }
 `;
 
@@ -48,6 +47,9 @@ export const NavBarButtons = styled.div`
 
   button {
     margin: 0 0.5rem;
+    width: 5rem;
+    min-width: 5rem;
+    font-size: 1rem;
   }
 `;
 
@@ -140,9 +142,12 @@ type MenuIconProps = {
 };
 
 export const Links = styled.div`
+  position: absolute;
   max-width: 40rem;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
   display: flex;
-  flex: 2;
   justify-content: space-between;
 
   a {

@@ -1,9 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import useSWR from "swr";
-import fetcher from "util/fetch";
-import { FilterState, ReviewApiResponse, ReviewData } from "types/types";
 import { isEmpty } from "lodash";
+import fetcher from "util/fetch";
+
+import { FilterState } from "types/reduxTypes";
+import { ReviewApiResponse, ReviewData } from "types/types";
 
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ReviewCard } from "~/components/Reviews/ReviewCard";

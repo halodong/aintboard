@@ -4,10 +4,7 @@ export const HeaderWrapper = styled.div<HeaderWrapperProps>`
   width: 100%;
   background-color: ${(props) => props.theme.colors.dark};
   min-height: ${(props) =>
-    props.isSearchPage ||
-    props.isChallengePage ||
-    props.isBoardGamePage ||
-    props.isReviewsPage
+    props.isSearchPage || props.isChallengePage || props.isBoardGamePage
       ? "30rem"
       : "35rem"};
   position: relative;
@@ -26,13 +23,24 @@ export const HeaderWrapper = styled.div<HeaderWrapperProps>`
   }
 
   ${(props) =>
-    props.isBuyAvatarsPage &&
+    (props.isBuyAvatarsPage || props.isEditorPage) &&
     `
       min-height: 18rem;
       .tent {
         top: 7rem;
       }
-    `};
+  `};
+
+  ${(props) =>
+    (props.isReviewsPage || props.isOnlineBattles || props.isChallengePage) &&
+    `
+      min-height: 18rem;
+      height: 24.7rem;
+      .tent {
+        top: 11.1rem;
+        width: 18rem;
+      }
+  `};
 
   .tent {
     z-index: ${(props) => props.theme.zIndex["9th"]};
@@ -80,6 +88,7 @@ type HeaderWrapperProps = {
   isChallengePage?: boolean;
   isBoardGamePage?: boolean;
   isReviewsPage?: boolean;
+  isOnlineBattles?: boolean;
 };
 
 const baseTaglineStyles = styled.h1`
@@ -99,7 +108,7 @@ export const Tagline = styled(baseTaglineStyles)<TaglineProps>`
     `
     position: absolute;
     font-size: 1rem;
-    top: 6rem;
+    top: 7rem;
     margin: 0;
     left: 3.4rem;
   `}
@@ -120,24 +129,27 @@ export const GameFont = styled.h1`
   color: ${(props) => props.theme.colors.white};
   text-align: center;
   margin-top: 2rem;
+  margin-bottom: 0;
 `;
 
 export const Rubik = styled.h1`
   font-family: ${(props) => props.theme.fonts.rubikBold};
-  font-weight: 700px;
-  font-size: 64px;
+  font-weight: 700;
+  font-size: 3rem;
   color: ${(props) => props.theme.colors.white};
   text-align: center;
   margin-top: 2rem;
+  margin-bottom: 1rem;
 `;
 
 export const ChallengesTagline = styled(baseTaglineStyles)`
-  margin-top: 2rem;
+  margin: 0;
   text-transform: none;
 `;
 
 export const BattlesTagline = styled(baseTaglineStyles)`
-  margin-top: 2.5rem;
+  margin-top: 0;
+  margin-bottom: 0;
   text-transform: none;
 `;
 

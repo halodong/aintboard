@@ -16,7 +16,6 @@ import {
   MenuIcon,
   RightSideNav,
   Links,
-  LogoContainer,
 } from "./styled";
 
 import useCurrentUser from "~/hooks/useCurrentUser";
@@ -61,8 +60,8 @@ const Navbar = () => {
         </Link>
 
         <Links>
-          <Link href="/">Reviews</Link>
-          <Link href="/">Online Battles</Link>
+          <Link href="/reviews">Reviews</Link>
+          <Link href="/online-battles">Online Battles</Link>
           <Link href="/challenges">Challenges</Link>
           <Link href="/">Game Nights</Link>
         </Links>

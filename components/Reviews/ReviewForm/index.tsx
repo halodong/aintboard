@@ -175,7 +175,7 @@ const ReviewForm = () => {
               />
             </InputContainer>
 
-            <Label>Upload your own images related to your review</Label>
+            <Label>Upload your own images related to your Review</Label>
 
             <ImageUpload
               buttonLabel="Choose images"
@@ -206,8 +206,10 @@ const ReviewForm = () => {
             </Label>
 
             <Label marginTop="0">
-              * Complexity: 1 being too complex <br />* Playing Time: 1 being
-              too long or too short
+              * Complexity: 1 being too complex or too easy, 6 being
+              well-balanced
+              <br />* Playing Time: 1 being too long or too short, 6 being
+              well-balanced
             </Label>
 
             <OverallRating label="Overall Rating" rating={overallRating} />

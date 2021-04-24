@@ -19,7 +19,7 @@ const Page = ({ userData }: Props) => {
         <Avatar iconType={user?.avatar || ""} />
       </Header>
 
-      <UserProfilePage reviews={{}} />
+      <UserProfilePage />
     </div>
   );
 };
@@ -63,8 +63,8 @@ export async function getStaticPaths() {
 
   const pathsData =
     response?.success &&
-    response.response.data.users &&
-    response.response.data.users.map((user: UserData) => {
+    response?.response?.data?.users &&
+    response?.response?.data?.users?.map((user: UserData) => {
       return { params: { username: user?.username } };
     });
 

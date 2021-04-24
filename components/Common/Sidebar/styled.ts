@@ -51,6 +51,17 @@ export const UlSidebar = styled.ul`
   list-style: none;
   padding: 3.5rem 0 0 3.5rem;
   margin: 0;
+
+  .icon {
+    width: 3rem;
+    margin-left: 0.5rem;
+  }
+`;
+
+export const PowerUps = styled.span`
+  font-family: ${(props) => props.theme.fonts.gameFont};
+  color: white;
+  margin-left: 0.5rem;
 `;
 
 export const PrimaryLinkSidebar = styled.li`
@@ -61,6 +72,8 @@ export const PrimaryLinkSidebar = styled.li`
 `;
 
 export const SecondaryLinkSidebar = styled.li<SecondaryLinkSidebarProps>`
+  display: flex;
+  align-items: center;
   font-family: ${(props) => props.theme.fonts.quicksandReg};
   font-size: 1.3rem;
   text-transform: none;

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { connect } from "formik";
 
-const OnSubmitValidationErrorComponent = (props) => {
+const OnSubmitValidationErrorComponent = (props: any) => {
   const { callback, formik } = props;
 
   const effect = () => {

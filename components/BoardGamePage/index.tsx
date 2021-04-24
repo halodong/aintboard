@@ -19,7 +19,7 @@ import {
 import CardButton from "~/components/Common/SideButton";
 import Button from "~/components/Common/Button";
 import ChallengesCard from "~/components/Challenges/ChallengesCard";
-import OnlineBattleCard from "~/components/OnlineBattleCard";
+// import OnlineBattleCard from "~/components/OnlineBattleCard";
 import { ReviewCard } from "~/components/Reviews/ReviewCard";
 
 import { chooseModal } from "redux/slices/modalSlice";
@@ -42,7 +42,7 @@ const cardButton = [
   },
 ];
 
-const BoardGamePage = ({ reviews, bgItem }: Props) => {
+const BoardGamePage = ({ reviews }: Props) => {
   const dispatch = useDispatch();
 
   const onButtonClick = (type: string) => {
@@ -70,11 +70,7 @@ const BoardGamePage = ({ reviews, bgItem }: Props) => {
           <ReviewsCardWrapper>
             {reviews?.response?.data?.reviews.length > 0 ? (
               reviews?.response?.data?.reviews?.map((r) => (
-                <ReviewCard
-                  key={r._id}
-                  data={r}
-                  bgImg={bgItem?.image?.[0]._text?.[0] || ""}
-                />
+                <ReviewCard key={r._id} data={r} />
               ))
             ) : (
               <NoReviews>No Reviews Yet</NoReviews>
@@ -96,7 +92,7 @@ const BoardGamePage = ({ reviews, bgItem }: Props) => {
         <OnlineBattlesSection>
           <H1GameFont>ONLINE BATTLES</H1GameFont>
           <OnlineBattleCardWrapper>
-            <OnlineBattleCard />
+            {/* <OnlineBattleCard /> */}
           </OnlineBattleCardWrapper>
           <Button bg="white" onClick={() => {}}>
             See more Online Battles

@@ -23,7 +23,7 @@ export default function ChallengesHomePage({ challenges }: Props) {
       </p>
 
       <CardWrapper>
-        <ChallengeCard />
+        <ChallengeCard data={challenges?.response?.data?.challenges?.[0]} />
         <ChallengeCard />
         <ChallengeCard />
         <Link href="/challenges">
