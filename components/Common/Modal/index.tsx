@@ -30,6 +30,9 @@ const ModalComponent = ({
       borderRadius: 10,
       minWidth: "30rem",
       maxWidth: maxwidth,
+      minHeight: "32rem",
+      maxHeight: "40rem",
+      overlfow: "auto",
     },
     overlay: {
       width: "100%",

@@ -40,10 +40,10 @@ describe("Online Battles", () => {
     let res = await insertBattle(db, {
       battleName: "Battle of the legends",
       boardGameName: "Boardie",
-      bgId: 54321,
       details: "This is a battle for the legends",
       eventStartDate,
       eventEndDate,
+      status: "PENDING",
     });
 
     expect(res.success).to.equal(true);
@@ -51,7 +51,6 @@ describe("Online Battles", () => {
       "Battle of the legends"
     );
     expect(res.response.data.onlineBattle.boardGameName).to.equal("Boardie");
-    expect(res.response.data.onlineBattle.bgId).to.equal(54321);
     expect(res.response.data.onlineBattle.details).to.equal(
       "This is a battle for the legends"
     );
@@ -59,6 +58,7 @@ describe("Online Battles", () => {
       eventStartDate
     );
     expect(res.response.data.onlineBattle.eventEndDate).to.equal(eventEndDate);
+    expect(res.response.data.onlineBattle.status).to.equal("PENDING");
   });
 
   it("should submit a valid entry", async () => {

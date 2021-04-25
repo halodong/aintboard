@@ -20,13 +20,15 @@ import Modal from "~/components/Common/Modal";
 import Filter from "~/components/Common/Filter";
 import Button from "~/components/Common/Button";
 // import Searchbar from "~/components/Searchbar"; obsolete for now
+import OnlineBattleForm from "~/components/OnlineBattle/OnlineBattleForm";
 import CreateChallengeForm from "~/components/Challenges/CreateChallengeForm";
 
 import { chooseModal, setPopup } from "redux/slices/modalSlice";
 import {
   CHALLENGES_PAGE,
-  CREATE_CHALLENGE_BUTTON,
   ONLINE_BATTLES,
+  CREATE_CHALLENGE_BUTTON,
+  CREATE_ONLINE_BATTLE_BUTTON,
 } from "util/constants";
 import { ModalState } from "types/reduxTypes";
 
@@ -35,6 +37,11 @@ const modalCta = [
     id: 1,
     name: "Create a Challenge",
     type: CREATE_CHALLENGE_BUTTON,
+  },
+  {
+    id: 2,
+    name: "Create an Online Battle",
+    type: CREATE_ONLINE_BATTLE_BUTTON,
   },
 ];
 
@@ -74,6 +81,17 @@ export default function Header({
         content: "",
       })
     );
+  };
+
+  const getModalHeaderLabel = () => {
+    switch (modalClicked) {
+      case CREATE_CHALLENGE_BUTTON:
+        return modalCta[0].name;
+      case CREATE_ONLINE_BATTLE_BUTTON:
+        return modalCta[1].name;
+      default:
+        return "";
+    }
   };
 
   return (
@@ -152,9 +170,11 @@ export default function Header({
       {modalCta.map((mdl) => (
         <Modal
           key={`${mdl.type}-${mdl.id}`}
-          isOpen={modalClicked !== ""}
+          isOpen={modalClicked !== "" && modalClicked === mdl.type}
           closeModal={closeModal}
-          headerLabel={mdl.name}
+          headerLabel={
+            modalCta.filter((m) => m.type === modalClicked)?.[0]?.name || ""
+          }
           closeTimeoutMS={0}
           maxwidth="35rem"
         >
@@ -162,6 +182,8 @@ export default function Header({
             switch (modalClicked) {
               case CREATE_CHALLENGE_BUTTON:
                 return <CreateChallengeForm closeModal={closeModal} />;
+              case CREATE_ONLINE_BATTLE_BUTTON:
+                return <OnlineBattleForm closeModal={closeModal} />;
               default:
                 return null;
             }
