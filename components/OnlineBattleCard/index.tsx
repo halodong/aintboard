@@ -20,19 +20,24 @@ const OnlineBattleCard = ({ data }: Props) => {
   return (
     <OnlineBattleCardWrapper>
       <BattleImage>
-        <Image
-          src="https://cf.geekdo-images.com/0BsjJY9MTlx9DRrlkeE69w__original/img/6AJktf34S4ypVI75ecsfmkDicgA=/0x0/filters:format(jpeg)/pic5482020.jpg"
-          alt="online battle card"
-          layout="fill"
-        />
+        {data?.bgImage && data?.bgImage.length > 0 ? (
+          <Image alt="boardgame" src={data.bgImage} layout="fill" />
+        ) : (
+          <Image
+            alt="online battle cover photo"
+            src="/img/portrait_def.png"
+            layout="fill"
+          />
+        )}
       </BattleImage>
 
       <PlayButton className="play" />
 
       <BattleCard>
-        <BattleName>{`${data?.battleName} ${dayjs(data.createdAt).format(
-          "MMMM YYYY"
-        )}`}</BattleName>
+        <BattleName>
+          {`${data?.battleName}`} <br />{" "}
+          {`${dayjs(data.createdAt).format("MMMM DD YYYY")}`}
+        </BattleName>
         <BattleEnds>
           Ends on {dayjs(data?.eventEndDate).format("MMM DD")}
         </BattleEnds>

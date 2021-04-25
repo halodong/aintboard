@@ -11,22 +11,26 @@ handler.post(async (req, res) => {
   const {
     battleName,
     boardGameName,
-    bgId,
+    bgImage,
     details,
     eventStartDate,
     eventEndDate,
+    createdBy,
+    status,
   } = req.body;
 
   const battle = await insertBattle(req.db, {
     battleName,
     boardGameName,
-    bgId,
+    bgImage,
     details,
     eventStartDate,
     eventEndDate,
+    createdBy,
+    status,
   });
 
-  return res.json({ battle });
+  return res.json(battle);
 });
 
 handler.get(async (req, res) => {

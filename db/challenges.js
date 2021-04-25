@@ -3,7 +3,16 @@ import { getFailedResponse, getSuccessResponse } from "~/util/apiResponse";
 
 export const insertChallenge = async (
   db,
-  { createdBy, challengeName, bgId, bgName, bgYear, bgImage, powerUpAmount }
+  {
+    createdBy,
+    challengeName,
+    bgId,
+    bgName,
+    bgYear,
+    bgImage,
+    powerUpAmount,
+    status,
+  }
 ) => {
   try {
     const challenge = await db.collection("challenges").insertOne({
@@ -15,7 +24,7 @@ export const insertChallenge = async (
       bgImage,
       bgYear,
       powerUpAmount,
-      status: "pending",
+      status,
       createdAt: new Date(),
     });
 

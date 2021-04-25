@@ -17,6 +17,7 @@ import {
 } from "components/Common/inputStyled";
 import useCurrentUser from "hooks/useCurrentUser";
 import { upload } from "util/cloudinary";
+import { CHALLENGE_STATUS } from "util/constants";
 
 const CreateChallengeForm = ({ closeModal }: Props) => {
   const user = useCurrentUser();
@@ -28,7 +29,7 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
     bgYear: Yup.number().typeError("Must be a number"),
 
     challengeName: Yup.string()
-      .min(10, "It is too short.")
+      .min(5, "It is too short.")
       .required("Challenge Name required"),
 
     powerUpAmount: Yup.number().required("PowerUp amount required"),
@@ -46,6 +47,11 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
       validationSchema={formSchema}
       onSubmit={async (values, { resetForm }) => {
         try {
+          if (images.length < 1) {
+            toast.error("You need to upload an image");
+            return;
+          }
+
           const uploadedImage = await upload(images);
 
           const userData = !isEmpty(user?.userData)
@@ -67,6 +73,7 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
             challengeName: values.challengeName,
             powerUpAmount: values.powerUpAmount,
             bgImage: uploadedImage[0],
+            status: CHALLENGE_STATUS.PENDING,
           });
 
           if (!response.data.success) {

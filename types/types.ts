@@ -94,7 +94,7 @@ export type BattlesData = {
   _id: string;
   battleName: string;
   boardGameName: string;
-  bgId: number;
+  bgImage: string;
   details: string;
   eventStartDate: string;
   eventEndDate: string;

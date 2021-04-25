@@ -3,17 +3,28 @@ import { getFailedResponse, getSuccessResponse } from "~/util/apiResponse";
 
 export async function insertBattle(
   db,
-  { battleName, boardGameName, bgId, details, eventStartDate, eventEndDate }
+  {
+    battleName,
+    boardGameName,
+    bgImage,
+    details,
+    eventStartDate,
+    eventEndDate,
+    createdBy,
+    status,
+  }
 ) {
   try {
     const onlineBattle = await db.collection("online_battle").insertOne({
       _id: nanoid(12),
       battleName,
       boardGameName,
-      bgId,
+      bgImage,
       details,
       eventStartDate,
       eventEndDate,
+      createdBy,
+      status,
       createdAt: new Date(),
     });
 

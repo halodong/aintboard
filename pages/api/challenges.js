@@ -16,6 +16,7 @@ handler.post(async (req, res) => {
     bgYear,
     bgImage,
     powerUpAmount,
+    status,
   } = req.body;
 
   const challenge = await insertChallenge(req.db, {
@@ -26,6 +27,7 @@ handler.post(async (req, res) => {
     bgName,
     bgYear,
     powerUpAmount,
+    status,
   });
 
   return res.json(challenge);
