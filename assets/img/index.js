@@ -11,3 +11,4 @@ export { default as Dice } from "./Dice";
 export { default as CommentIcon } from "./comment.svg";
 export { default as HeartLikeIcon } from "./heart-like.svg";
 export { default as FooterBottom } from "./footer-bottom.svg";
+export { default as DiceOne } from "./dice/dice_1.svg";

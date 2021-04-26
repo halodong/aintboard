@@ -1,5 +1,6 @@
+import DiceOne from "assets/img/dice/DiceOne";
 import Dice1 from "~/assets/img/dice/dice_1.svg";
-import Dice2 from "~/assets/img/dice/dice_2.svg";
+import Dice2 from "~/assets/img/dice/dice_one.svg";
 import Dice3 from "~/assets/img/dice/dice_3.svg";
 import Dice4 from "~/assets/img/dice/dice_4.svg";
 import Dice5 from "~/assets/img/dice/dice_5.svg";
