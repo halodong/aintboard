@@ -27,8 +27,8 @@ export const AdminHeader = styled.div`
     top: 1rem;
     left: 35%;
 
-    font-size: 24px;
-    line-height: 28px;
+    font-size: 1.5rem;
+    line-height: 1.75rem;
     text-transform: uppercase;
     color: ${(props) => props.theme.colors.white};
   }
@@ -61,8 +61,8 @@ export const AdminCards = styled.div`
 export const AdminCard = styled.div`
   color: ${(props) => props.theme.colors.white};
   background: ${(props) => props.theme.colors.darkGreen};
-  padding: 1rem;
-  border-radius: 30px;
+  padding: 2rem;
+  border-radius: 1.875rem;
   width: 18.75rem;
   height: 12.5rem;
   margin: 2rem;

@@ -1,9 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
+import LogoGray from "~/assets/img/LogoGray";
 
 import * as Styles from "./styles";
 import PrimaryLinkSidebar from "components/Common/PrimaryLinkSidebar";
-import * as CONSTANTS from "util/constants";
 
 const AdminDashboard = () => {
   return (
@@ -12,11 +12,7 @@ const AdminDashboard = () => {
         <Styles.AdminHeader>
           <Link href="/">
             <Styles.LogoContainer>
-              <Image
-                alt="aintboard logo"
-                src="/img/logo_gray.png"
-                layout="fill"
-              />
+              <LogoGray />
             </Styles.LogoContainer>
           </Link>
           <h2>Admin</h2>
