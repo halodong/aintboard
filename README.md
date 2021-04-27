@@ -39,3 +39,10 @@ To test a single file run `yarn test <relative path>`
 To create migrations you have to have migrate-mongo installed globally
 
 To create a migration run `migrate-mongo create <file_name>`
+
+# SVGS
+
+To convert svgs to React components
+
+Use stdin / stdout, run:
+`npx @svgr/cli < bronze.svg > Bronze.js`

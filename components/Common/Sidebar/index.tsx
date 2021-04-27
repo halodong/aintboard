@@ -29,10 +29,10 @@ import fetcher from "~/util/fetch";
 import Avatar from "components/Avatar";
 import PrimaryLinkSidebar from "components/Common/PrimaryLinkSidebar";
 
-// import StarIcon from "~/assets/img/star.svg";
-// import GoldIcon from "~/assets/img/gold.svg";
-// import BronzeIcon from "~/assets/img/bronze.svg";
-// import SilverIcon from "~/assets/img/silver.svg";
+import StarIcon from "~/assets/img/Star";
+import GoldIcon from "~/assets/img/Gold";
+import BronzeIcon from "~/assets/img/Bronze";
+import SilverIcon from "~/assets/img/Silver";
 
 const Sidebar = ({ menuOpen, closeMenu }: Props) => {
   const user = useCurrentUser();
@@ -118,20 +118,19 @@ const Sidebar = ({ menuOpen, closeMenu }: Props) => {
 
         <UlSidebar>
           <SecondaryLinkSidebar>
-            {userData?.stars || 0}
-            {/* <StarIcon className="icon" /> */}
-          </SecondaryLinkSidebar>
-          <SecondaryLinkSidebar>
             {userData?.powerups || 0} <PowerUps>UP</PowerUps>
           </SecondaryLinkSidebar>
           <SecondaryLinkSidebar>
-            0{/* <GoldIcon className="icon" /> */}
+            {userData?.stars || 0} <StarIcon className="icon" />
           </SecondaryLinkSidebar>
           <SecondaryLinkSidebar>
-            0{/* <SilverIcon className="icon" /> */}
+            0 <GoldIcon className="icon" />
           </SecondaryLinkSidebar>
           <SecondaryLinkSidebar>
-            0{/* <BronzeIcon className="icon" /> */}
+            0 <SilverIcon className="icon" />
+          </SecondaryLinkSidebar>
+          <SecondaryLinkSidebar>
+            0 <BronzeIcon className="icon" />
           </SecondaryLinkSidebar>
           <LogoutButton
             onClick={() => {

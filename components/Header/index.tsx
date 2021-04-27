@@ -14,6 +14,9 @@ import {
   Rubik,
 } from "./styled";
 // import { TreesGroup1, TreesGroup2, Tent } from "~/assets/img";
+import Tent from "assets/img/Tent";
+import TreesGroup1 from "assets/img/TreesGroup1";
+import TreesGroup2 from "assets/img/TreesGroup2";
 
 import Navbar from "~/components/Navbar";
 import Modal from "~/components/Common/Modal";
@@ -111,9 +114,9 @@ export default function Header({
 
       {(homepage || isBoardGamePage) && (
         <div className="homepage-bg-container">
-          {/* <TreesGroup1 className="trees-1" />
+          <TreesGroup1 className="trees-1" />
           <TreesGroup2 className="trees-2" />
-          <Tent className="tent" /> */}
+          <Tent className="tent" />
           <div className="ground"></div>
         </div>
       )}
@@ -132,13 +135,13 @@ export default function Header({
 
       {isSearchPage && <LookingForText>Looking for "{name}"</LookingForText>}
 
-      {/* {(isChallengesPage || isOnlineBattles || isBuyAvatarsPage) && (
+      {(isChallengesPage || isOnlineBattles || isBuyAvatarsPage) && (
         <Tent className="tent" />
-      )} */}
+      )}
 
       {isChallengesPage && (
         <>
-          {/* <Tent className="tent" /> */}
+          <Tent className="tent" />
           <GameFont>CHALLENGES</GameFont>\
           <ChallengesTagline>
             Achieve challenges to get PowerUps!
@@ -159,7 +162,7 @@ export default function Header({
 
       {isReviewsPage && (
         <>
-          {/* <Tent className="tent" /> */}
+          <Tent className="tent" />
           <Rubik>REVIEWS</Rubik>
           <Filter type={CHALLENGES_PAGE} />
         </>

@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import dayjs from "dayjs";
 
-// import PlayButton from "~/assets/img/playbutton.svg";
+import PlayButton from "~/assets/img/PlayButton";
 import {
   OnlineBattleCardWrapper,
   BattleCard,
@@ -31,7 +31,7 @@ const OnlineBattleCard = ({ data }: Props) => {
         )}
       </BattleImage>
 
-      {/* <PlayButton className="play" /> */}
+      <PlayButton className="play" />
 
       <BattleCard>
         <BattleName>

@@ -1,7 +1,7 @@
 const LogoGray = ({ ...props }) => (
   <svg
     id="fe96d8f8-fecc-4f9b-ab54-2f77f8c41781"
-    dataName="Layer 1"
+    dataname="Layer 1"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 243.4 167.2"
     {...props}
@@ -16,13 +16,13 @@ const LogoGray = ({ ...props }) => (
         gradientTransform="matrix(1, 0, 0, -1, -3.3, 118.05)"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0.01" stop-color="#886441" />
-        <stop offset="0.14" stop-color="#634522" />
-        <stop offset="0.31" stop-color="#735229" />
-        <stop offset="0.65" stop-color="#603b0f" />
-        <stop offset="0.8" stop-color="#886441" />
-        <stop offset="1" stop-color="#603b0f" />
-        <stop offset="1" stop-color="#5f4421" />
+        <stop offset="0.01" stopColor="#886441" />
+        <stop offset="0.14" stopColor="#634522" />
+        <stop offset="0.31" stopColor="#735229" />
+        <stop offset="0.65" stopColor="#603b0f" />
+        <stop offset="0.8" stopColor="#886441" />
+        <stop offset="1" stopColor="#603b0f" />
+        <stop offset="1" stopColor="#5f4421" />
       </linearGradient>
       <linearGradient
         id="bcf68224-f54e-4bce-9630-a1bea7323758"
@@ -33,8 +33,8 @@ const LogoGray = ({ ...props }) => (
         gradientTransform="matrix(1, 0, 0, -1, -3.3, 118.05)"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0.01" stop-color="#f6e8d7" />
-        <stop offset="1" stop-color="#d8cdbb" />
+        <stop offset="0.01" stopColor="#f6e8d7" />
+        <stop offset="1" stopColor="#d8cdbb" />
       </linearGradient>
       <linearGradient
         id="fbedc42d-1e70-4f3e-83e6-6953ee31cd58"
@@ -45,17 +45,17 @@ const LogoGray = ({ ...props }) => (
         gradientTransform="matrix(1, 0, 0, -1, -3.3, 118.05)"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0.01" stop-color="#f3f4f4" />
-        <stop offset="0.12" stop-color="#e7e7e7" />
-        <stop offset="0.34" stop-color="#d5d3d4" />
-        <stop offset="0.49" stop-color="#cecccd" />
-        <stop offset="0.5" stop-color="#cac8c9" />
-        <stop offset="0.51" stop-color="#c4c3c2" />
-        <stop offset="0.54" stop-color="#c2c1c0" />
-        <stop offset="0.57" stop-color="#c8c7c7" />
-        <stop offset="0.67" stop-color="#d5d5d5" />
-        <stop offset="0.8" stop-color="#ddd" />
-        <stop offset="1" stop-color="#dfdfe0" />
+        <stop offset="0.01" stopColor="#f3f4f4" />
+        <stop offset="0.12" stopColor="#e7e7e7" />
+        <stop offset="0.34" stopColor="#d5d3d4" />
+        <stop offset="0.49" stopColor="#cecccd" />
+        <stop offset="0.5" stopColor="#cac8c9" />
+        <stop offset="0.51" stopColor="#c4c3c2" />
+        <stop offset="0.54" stopColor="#c2c1c0" />
+        <stop offset="0.57" stopColor="#c8c7c7" />
+        <stop offset="0.67" stopColor="#d5d5d5" />
+        <stop offset="0.8" stopColor="#ddd" />
+        <stop offset="1" stopColor="#dfdfe0" />
       </linearGradient>
       <linearGradient
         id="a511a1ca-7cfe-455f-8e6f-afee8eb86c5d"
@@ -97,12 +97,12 @@ const LogoGray = ({ ...props }) => (
         gradientTransform="matrix(1, 0, 0, -1, 0, 169.97)"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0" stop-color="#a97c50" />
-        <stop offset="0.2" stop-color="#a5794e" />
-        <stop offset="0.4" stop-color="#987046" />
-        <stop offset="0.61" stop-color="#84603b" />
-        <stop offset="0.82" stop-color="#674a2a" />
-        <stop offset="1" stop-color="#483318" />
+        <stop offset="0" stopColor="#a97c50" />
+        <stop offset="0.2" stopColor="#a5794e" />
+        <stop offset="0.4" stopColor="#987046" />
+        <stop offset="0.61" stopColor="#84603b" />
+        <stop offset="0.82" stopColor="#674a2a" />
+        <stop offset="1" stopColor="#483318" />
       </radialGradient>
       <radialGradient
         id="fe02a67b-7d01-4545-8e1b-7b3d6beeb9f6"
@@ -127,11 +127,11 @@ const LogoGray = ({ ...props }) => (
         gradientTransform="matrix(1, 0, 0, -1, -3.3, 118.05)"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0.01" stop-color="#f6e8d7" />
-        <stop offset="0.5" stop-color="#f4e6d5" />
-        <stop offset="0.76" stop-color="#ecdfcd" />
-        <stop offset="0.98" stop-color="#ded3c1" />
-        <stop offset="1" stop-color="#dcd1bf" />
+        <stop offset="0.01" stopColor="#f6e8d7" />
+        <stop offset="0.5" stopColor="#f4e6d5" />
+        <stop offset="0.76" stopColor="#ecdfcd" />
+        <stop offset="0.98" stopColor="#ded3c1" />
+        <stop offset="1" stopColor="#dcd1bf" />
       </linearGradient>
       <linearGradient
         id="af5851ee-bf5d-4d5e-beea-9647330a68bd"
@@ -209,13 +209,13 @@ const LogoGray = ({ ...props }) => (
         gradientTransform="matrix(1, 0, 0, -1, -3.3, 118.05)"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0.03" stop-color="#d3d1d3" />
-        <stop offset="0.4" stop-color="#d0ced0" />
-        <stop offset="0.71" stop-color="#c5c6c8" />
-        <stop offset="1" stop-color="#b4b9bb" />
+        <stop offset="0.03" stopColor="#d3d1d3" />
+        <stop offset="0.4" stopColor="#d0ced0" />
+        <stop offset="0.71" stopColor="#c5c6c8" />
+        <stop offset="1" stopColor="#b4b9bb" />
       </radialGradient>
     </defs>
-    <g id="b0be39da-34c1-4833-af79-dfc53cf0b839" dataName="Layer 7">
+    <g id="b0be39da-34c1-4833-af79-dfc53cf0b839" dataname="Layer 7">
       <path
         d="M29.06,70.05l15.1-59.7a1.68,1.68,0,0,1,1.72-1.3l33.7,1.45a1.71,1.71,0,0,1,1.53,1.13l3.3,9.4c.8,1.36,1.34-11.54,1.34-11.54,0-.9,24.15.92,24.15.92h.21l19.77-.31c.69,0,2,.22,2.25.88l2,4.75c.46,1.38,2.09,1.76,2.64.6a1.28,1.28,0,0,0,.13-.51l.38-4.4a1.52,1.52,0,0,1,.1-.47,1.31,1.31,0,0,1,1.26-.94l19.17.38a1.67,1.67,0,0,0,1.48-.8l2.44-4a1.64,1.64,0,0,1,1.44-.81h9.58c1.12,0-.8,4.75-1.1,5.83v1.44c-.31,1.1,2.28.55,3.42.52l48.27-1.21A1.7,1.7,0,0,1,225,13V45.75a1.7,1.7,0,0,1-1.7,1.7H212.7A1.69,1.69,0,0,0,211,49.14h0V77.53a1.69,1.69,0,0,0,1.58,1.69l8.16.53a14.87,14.87,0,0,1,6.55,2l14.63,8.58a1.68,1.68,0,0,1,.83,1.46l-.53,27.26.55,29a1.67,1.67,0,0,1-.67,1.35l-17.1,13a1.71,1.71,0,0,1-1.09.35L205.84,162h-.2l-19-3a1.66,1.66,0,0,1-1.33-1.1l-3.61-10.25a1.69,1.69,0,0,0-3.28.44l-.63,8a1.67,1.67,0,0,1-1.27,1.51l-18.38,4.65a1.7,1.7,0,0,1-2.06-1.24,1.83,1.83,0,0,1-.05-.4v-1.33a1.69,1.69,0,0,0-1.61-1.69l-10.82-.52a1.7,1.7,0,0,1-1.59-1.4l-.79-4.5a1.7,1.7,0,0,0-1.69-1.4l-6.71.09a1.7,1.7,0,0,0-1.64,1.38l-1.26,6.63a1.7,1.7,0,0,1-1.48,1.37l-17.35,1.95a1.68,1.68,0,0,1-1.87-1.48,1.15,1.15,0,0,1,0-.32l.38-5.78a1.69,1.69,0,0,0-1.57-1.81H57.41a1.73,1.73,0,0,1-1.21-.51l-3.5-3.62a1.7,1.7,0,0,0-2.39-.05,1.68,1.68,0,0,0-.43.68l-1.55,4.6a1.65,1.65,0,0,1-.6.82L29.83,166.9a1.66,1.66,0,0,1-1.4.28L3.3,161.11A1.7,1.7,0,0,1,2,159.31c.83-9,6.33-56.41-.16-81.56-.26-1-1.11-2.7-.1-2.84l26-3.59A1.68,1.68,0,0,0,29.06,70.05Z"
         transform="translate(0 -0.03)"
@@ -232,7 +232,7 @@ const LogoGray = ({ ...props }) => (
         fill="url(#f67d71a2-6c00-480e-8ce4-3c6138e6b34d)"
       />
     </g>
-    <g id="bebb8fbf-dc78-4448-a825-cf6ae5d7ddb1" dataName="Layer 6">
+    <g id="bebb8fbf-dc78-4448-a825-cf6ae5d7ddb1" dataname="Layer 6">
       <path
         d="M100.13,84.83H55a4.74,4.74,0,0,0-4.77,4.71h0v42.27a4.69,4.69,0,0,0,1.34,3.24l8.75,9a4.8,4.8,0,0,0,3.43,1.44h45.12a4.75,4.75,0,0,0,4.76-4.71V98.54a4.73,4.73,0,0,0-1.33-3.28l-8.76-9A4.79,4.79,0,0,0,100.13,84.83Z"
         transform="translate(0 -0.03)"
@@ -287,7 +287,7 @@ const LogoGray = ({ ...props }) => (
         d="M98.2,83.39H53.55a4.72,4.72,0,0,0-4.72,4.72h0v42.26a4.7,4.7,0,0,0,1.32,3.27l8.67,9a4.7,4.7,0,0,0,3.39,1.41h44.65a4.71,4.71,0,0,0,4.72-4.7h0V97.1a4.74,4.74,0,0,0-1.32-3.27l-8.67-9A4.71,4.71,0,0,0,98.2,83.39Z"
         transform="translate(0 -0.03)"
         stroke="#c2b59b"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
         fill="url(#bcf68224-f54e-4bce-9630-a1bea7323758)"
       />
       <path
@@ -295,48 +295,48 @@ const LogoGray = ({ ...props }) => (
         transform="translate(0 -0.03)"
         fill="none"
         stroke="#c2b59b"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
       />
       <path
         d="M110.89,142.66l-9.67-9.22A2.89,2.89,0,0,0,99,132.27H58.87"
         transform="translate(0 -0.03)"
         fill="none"
         stroke="#c2b59b"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
       />
       <path
         d="M159,57.68c-.57-23.14.53-47.31.53-47.31h0a3.37,3.37,0,0,0-.06-1H140.56a.64.64,0,0,0-.64.64l.53,22.29a.63.63,0,0,1-.65.63.64.64,0,0,1-.58-.39L129.77,9.76a.65.65,0,0,0-.59-.39H115.63l1.24,68.17h13.68a.62.62,0,0,0,.64-.6h0V64.81a.65.65,0,0,1,.68-.61.67.67,0,0,1,.46.22l10.81,12.87a.68.68,0,0,0,.5.22h15.83a.62.62,0,0,0,.64-.6v0Z"
         transform="translate(0 -0.03)"
         stroke="#939598"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
         fill="url(#fbedc42d-1e70-4f3e-83e6-6953ee31cd58)"
       />
       <path
         d="M71.92,76,87.79,72.1a.78.78,0,0,0,.58-.92L75.12,10a.79.79,0,0,0-.76-.62H47.1a.8.8,0,0,0-.75.59L30.82,72.05a.77.77,0,0,0,.52,1,.35.35,0,0,0,.11,0l18,3a.77.77,0,0,0,.89-.63v0L51.49,67a.77.77,0,0,1,.77-.67H67.13a.77.77,0,0,1,.73.51L71,75.53A.77.77,0,0,0,71.92,76ZM53.7,54.42l5.07-9a.78.78,0,0,1,1-.31.8.8,0,0,1,.35.42l3.28,9a.78.78,0,0,1-.53,1,.64.64,0,0,1-.2,0H54.36a.78.78,0,0,1-.74-.8A.84.84,0,0,1,53.7,54.42Z"
         transform="translate(0 -0.03)"
         stroke="#939598"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
         fill="url(#a511a1ca-7cfe-455f-8e6f-afee8eb86c5d)"
       />
       <path
         d="M90.84,7.86l18.08,1.19a1.35,1.35,0,0,1,1.26,1.3l.9,31.93,1.19,32.16A1.34,1.34,0,0,1,111,75.83l-8.65.54-9.55,1.08a1.35,1.35,0,0,1-1.49-1.19.76.76,0,0,1,0-.15V33l-1.9-23.7a1.34,1.34,0,0,1,1.22-1.45Z"
         transform="translate(0 -0.03)"
         stroke="#939598"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
         fill="url(#aa3ea162-5993-41a6-8a6c-06bdfaba9257)"
       />
       <path
         d="M165.2,2.92l-3,11.5a.35.35,0,0,0,.23.44.36.36,0,0,0,.37-.11L168,9.4a.35.35,0,0,0,.08-.13l2-6.15a.35.35,0,0,0-.21-.45l-.13,0h-4.21A.34.34,0,0,0,165.2,2.92Z"
         transform="translate(0 -0.03)"
         stroke="#939598"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
         fill="url(#b70a54d2-c0a4-4a7b-baec-1b1255dfa35b)"
       />
       <path
         d="M170.11,14.77V35.48a1.83,1.83,0,0,0,1.82,1.83h11.44a1.81,1.81,0,0,1,1.82,1.82h0V77.84a1.82,1.82,0,0,0,1.69,1.82L204.72,81a1.83,1.83,0,0,0,1.95-1.69V39.5a1.81,1.81,0,0,1,1.82-1.82h0l10.59.24A1.82,1.82,0,0,0,221,36.14V13.25a1.81,1.81,0,0,0-1.82-1.82h-.06L171.87,13A1.82,1.82,0,0,0,170.11,14.77Z"
         transform="translate(0 -0.03)"
         stroke="#939598"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
         fill="url(#f19132ed-566b-4338-98f7-f26739aef12f)"
       />
       <path d="M3.07,85.34" transform="translate(0 -0.03)" fill="#f0daac" />
@@ -365,28 +365,28 @@ const LogoGray = ({ ...props }) => (
         d="M157.94,148.63l-3.1-16.84h0L145.05,78a1.56,1.56,0,0,0-1.81-1.26,2,2,0,0,0-.35.11l-1.57.67-.1,0L124.7,83.29a1.57,1.57,0,0,0-1,1.21l-8,47.28h0l-3.5,20.4a1.25,1.25,0,0,0,1,1.46,1.28,1.28,0,0,0,.39,0l12.37-1.6a1.24,1.24,0,0,0,1.08-1l1.46-8.66a1.28,1.28,0,0,1,1.25-1H141.9a1.27,1.27,0,0,1,1.25,1l1.08,6.1a1.26,1.26,0,0,0,1.17,1l11.22.67A1.26,1.26,0,0,0,158,149,1.1,1.1,0,0,0,157.94,148.63Zm-20.31-37.06,3.27,17.63a1.56,1.56,0,0,1-1.24,1.82l-.3,0h-8.19a.38.38,0,0,1-.38-.36s0-.05,0-.08l3.75-19.06a1.57,1.57,0,0,1,3.08,0Z"
         transform="translate(0 -0.03)"
         stroke="#c2b59b"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
         fill="url(#a49c8a93-66e8-4706-a295-c3f6df1e0fec)"
       />
       <path
         d="M205.7,153.37a355.68,355.68,0,0,0,.12-75.8h8.54c2.54,0,8.09,0,8.31.13,4.59,2.55,17.92,12.52,17.89,14-.11,6.21-.44,22.77-.49,24.14-.07,2.58.41,23.78.35,26.3,0,.39-2.6,2.17-3.73,2.94L230,149.59c-2.14,1.44-4.28,2.9-6.43,4.33a1.06,1.06,0,0,1-.55.15c-.33,0-.66,0-1-.06l-6.15-.16-3.7-.13-3.51-.11L206,153.5Zm13.67-17.92,5.85-2.59a4.33,4.33,0,0,0,2.29-4c0-8.32.09-16.61.08-24.9a4.33,4.33,0,0,0-2.26-4l-6.9-3.15v.53c0,.62,0,1.24,0,1.86.06,2.17.11,4.33.16,6.5l.15,6q.08,3.24.16,6.5c0,2,.1,4,.14,6q.09,3.63.17,7.28c0,1.2.06,2.41.08,3.61a1.77,1.77,0,0,1,.07.36Z"
         transform="translate(0 -0.03)"
         stroke="#c2b59b"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
         fill="url(#af5851ee-bf5d-4d5e-beea-9647330a68bd)"
       />
       <path
         d="M4.78,73.63A1.5,1.5,0,0,1,6,72c2.7-.33,8.78-1,9.46-1.12,1.49-.17,10.05-1.15,11.43-1.33.58-.07,16.62,10.42,16.64,11,.12,3,1.17,13.72,1.07,15.74,0,.76-3.46,11.19-4.36,13.26a1.8,1.8,0,0,0,0,1.33c.8,2.13,3,8.15,4,10.67.17.45,1.94,11.84,2,13.37.09,2.14-2.31,12.74-2.68,13-1.56,1.06-3.6,3.28-6.25,5.57q-4.22,2.84-8.41,5.69c-.21.14-11.69-2.24-13-2.53-1.1-.23-6.88-1.48-9.37-2A1.54,1.54,0,0,1,5.42,153C5.72,146.6,7,119.48,7,115.56S5.18,80.82,4.78,73.63ZM20,133.22c0,.9-.77,12,0,11.92,2.48-.19,7.37,1.34,8,1.28,0,0,.11-22.78,0-24.28,0-.55-3.53-.48-6.23-1.56-.86-.34-1.75.41-1.75,1.48ZM27.12,102c.19-2.6.39-18.49-.35-18.54-2.1-.15-4.46.12-6.56,0-.75,0,0,14,0,16.68C20.2,101,27.07,102.81,27.12,102Z"
         transform="translate(0 -0.03)"
         stroke="#c2b59b"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
         fill="url(#b9c6c422-5f94-4533-a9d6-2d558b8cb288)"
       />
       <path
         d="M189.07,117.25l9.34-9.93a.73.73,0,0,0,.18-.7c-.33-1.25-1.1-6,.09-21.14a.75.75,0,0,0-.34-.68c-1.8-1.17-9.78-6.33-14.46-9.34a.72.72,0,0,0-.2-.09c-1.25-.33-12.71-3.12-24,2.18h0a.73.73,0,0,0-.4.89c1.32,4.21,8.44,30.06,0,75.33a.47.47,0,0,0,.35.55.54.54,0,0,0,.22,0l14.34-3.81a.72.72,0,0,0,.55-.63l2.66-21.31a.75.75,0,0,1,.82-.65.76.76,0,0,1,.6.46l9.3,22.06a.73.73,0,0,0,.54.44l14.91,2.9a.46.46,0,0,0,.53-.37.42.42,0,0,0,0-.27l-15.14-35.08A.76.76,0,0,1,189.07,117.25ZM176.7,106.88l-1.1-20.35a.44.44,0,0,1,.41-.48.4.4,0,0,1,.19,0l7.61,2.64a.74.74,0,0,1,.5.73l-.61,15.73a.78.78,0,0,1-.57.7l-5.84,1.43a.46.46,0,0,1-.57-.31A.43.43,0,0,1,176.7,106.88Z"
         transform="translate(0 -0.03)"
         stroke="#c2b59b"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
         fill="url(#b95e5d81-df67-46b6-af58-16dcad17f239)"
       />
       <path d="M184.7,81.23" transform="translate(0 -0.03)" fill="#726658" />
@@ -395,16 +395,16 @@ const LogoGray = ({ ...props }) => (
         transform="translate(0 -0.03)"
         fill="none"
         stroke="#c2b59b"
-        stroke-miterlimit="10"
-        stroke-width="5"
+        strokeMiterlimit="10"
+        strokeWidth="5"
       />
       <path
         d="M111.58,144.05"
         transform="translate(0 -0.03)"
         fill="none"
         stroke="#c2b59b"
-        stroke-miterlimit="10"
-        stroke-width="5"
+        strokeMiterlimit="10"
+        strokeWidth="5"
       />
       <rect
         x="49.39"
@@ -413,7 +413,7 @@ const LogoGray = ({ ...props }) => (
         height="47.72"
         rx="3.06"
         stroke="#c2b59b"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
         fill="url(#ed30b557-5764-4d8a-b880-4e09ebc5e6ba)"
       />
       <circle
@@ -452,7 +452,7 @@ const LogoGray = ({ ...props }) => (
         fill="url(#b04e9268-bcf7-46bc-9444-3122147893ab)"
       />
     </g>
-    <g id="ace414e4-1e49-43d7-b921-5e553600dc7d" dataName="Layer 5">
+    <g id="ace414e4-1e49-43d7-b921-5e553600dc7d" dataname="Layer 5">
       <polygon
         points="67.68 9.95 72.79 10.31 84.75 57.42 74.52 9.95 67.68 9.95"
         fill="#f8f8f9"

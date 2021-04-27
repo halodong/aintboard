@@ -1,9 +1,9 @@
 import Link from "next/link";
 
-// import FooterLeft from "~/assets/img/footer-left.svg";
-// import FooterRight from "~/assets/img/footer-right.svg";
 import LogoGray from "~/assets/img/LogoGray";
-// import LogoGray from "~/assets/img/logo_gray.svg";
+import FooterBottom from "~/assets/img/FooterBottom";
+import FooterLeft from "~/assets/img/FooterLeft";
+import FooterRight from "~/assets/img/FooterRight";
 import { FooterWrapper, LinksWrapper } from "./styled";
 
 const Footer = () => {
@@ -33,22 +33,9 @@ const Footer = () => {
         </Link>
         <h6>Copyright &copy; 2021</h6>
       </div>
-      {/* <FooterLeft className="left" />
-      <FooterRight className="right" /> */}
-      <div className="bottom">
-        <svg
-          width="100%"
-          height="73"
-          viewBox="0 0 1440 73"
-          preserveAspectRatio="none"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d="M1440 0.274414H0V29.3745H1440V0.274414Z" fill="#568481" />
-          <path d="M1440 29.3745H0V72.9745H1440V29.3745Z" fill="#234C4C" />
-          <path d="M1440 0.274414H0V7.77441H1440V0.274414Z" fill="#76AAA4" />
-        </svg>
-      </div>
+      <FooterLeft className="left" />
+      <FooterRight className="right" />
+      <FooterBottom className="bottom" />
     </FooterWrapper>
   );
 };
