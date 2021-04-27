@@ -8,7 +8,7 @@ import {
   ChallengeName,
   ImgWrapper,
 } from "./styled";
-import PlayButton from "~/assets/img/playbutton.svg";
+// import PlayButton from "~/assets/img/playbutton.svg";
 
 import { ChallengesData } from "types/types";
 
@@ -30,7 +30,7 @@ const ChallengesCard = ({ data }: Props) => {
 
       <ChallengeName>
         <p>{data?.challengeName}</p>
-        <PlayButton className="play" />
+        {/* <PlayButton className="play" /> */}
       </ChallengeName>
     </ChallengesCardWrapper>
   );

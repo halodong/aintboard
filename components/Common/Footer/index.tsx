@@ -1,8 +1,9 @@
 import Link from "next/link";
 
-import FooterLeft from "~/assets/img/footer-left.svg";
-import FooterRight from "~/assets/img/footer-right.svg";
-import LogoGray from "~/assets/img/logo_gray.svg";
+// import FooterLeft from "~/assets/img/footer-left.svg";
+// import FooterRight from "~/assets/img/footer-right.svg";
+import LogoGray from "~/assets/img/LogoGray";
+// import LogoGray from "~/assets/img/logo_gray.svg";
 import { FooterWrapper, LinksWrapper } from "./styled";
 
 const Footer = () => {
@@ -32,8 +33,8 @@ const Footer = () => {
         </Link>
         <h6>Copyright &copy; 2021</h6>
       </div>
-      <FooterLeft className="left" />
-      <FooterRight className="right" />
+      {/* <FooterLeft className="left" />
+      <FooterRight className="right" /> */}
       <div className="bottom">
         <svg
           width="100%"

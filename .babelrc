@@ -32,23 +32,9 @@
         "ssr": true
       }
     ],
-    [
-      "inline-react-svg",
-      {
-        "svgo": {
-          "plugins": [
-            {
-              "removeTitle": true
-            },
-            {
-              "cleanupIDs": {
-                "minify": false
-              }
-            }
-          ]
-        }
-      }
-    ],
+    // [
+    //   "inline-react-svg"
+    // ],
     [
       "lodash",
       {

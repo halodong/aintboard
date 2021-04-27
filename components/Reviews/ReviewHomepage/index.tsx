@@ -1,18 +1,18 @@
 import Link from "next/link";
 
-import { Maze, WaterRight } from "~/assets/img";
+// import { Maze, WaterRight } from "~/assets/img";
 import { ReviewContainer, ReviewCardWrapper } from "./styled";
 import { ReviewCard } from "~/components/Reviews/ReviewCard";
-import WaterLeftSvg from "~/assets/img/water-left.svg";
+// import WaterLeftSvg from "~/assets/img/water-left.svg";
 
 import { ReviewApiResponse } from "~/types/types";
 
 const ReviewHomepage = ({ reviews }: Props) => {
   return (
     <ReviewContainer>
-      <Maze className="maze" />
-      <WaterLeftSvg className="water-left" />
-      <WaterRight className="water-right" />
+      {/* <Maze className="maze" /> */}
+      {/* <WaterLeftSvg className="water-left" /> */}
+      {/* <WaterRight className="water-right" /> */}
 
       <ReviewCardWrapper>
         {reviews?.response?.data?.reviews?.map((r) => (

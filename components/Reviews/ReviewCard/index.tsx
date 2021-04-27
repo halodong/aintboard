@@ -14,7 +14,7 @@ import {
 } from "./styled";
 import Avatar from "components/Avatar";
 import OverallRating from "components/Common/OverallRating";
-import { CommentIcon, HeartLikeIcon } from "assets/img";
+// import { CommentIcon, HeartLikeIcon } from "assets/img";
 
 import { ReviewData } from "types/types";
 import { createHTMLExcerpt } from "~/util/createHTML";
@@ -59,8 +59,8 @@ export const ReviewCard = ({ data }: Props) => {
             <h6>{capitalize(data.reviewType)}</h6>
 
             <div className="socials">
-              <CommentIcon /> <span>100</span>
-              <HeartLikeIcon /> <span>102</span>
+              {/* <CommentIcon /> <span>100</span>
+              <HeartLikeIcon /> <span>102</span> */}
             </div>
           </BottomRight>
         </Bottom>

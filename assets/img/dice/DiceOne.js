@@ -4,7 +4,9 @@ export default function DiceOne(props) {
       id="b6296545-15a2-4ec8-a1c6-686832055d2d"
       data-name="Layer 1"
       xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
       viewBox="0 0 933.5 903.3"
+      {...props}
     >
       <defs>
         <linearGradient
@@ -54,6 +56,7 @@ export default function DiceOne(props) {
           y1="766.9"
           x2="788.6"
           y2="766.9"
+          xlinkHref="#fae2e99f-e2ea-4fa9-b023-ead61ef1eacd"
         />
         <radialGradient
           id="bb72bc32-cf63-4cb4-a939-64f651961836"
@@ -61,6 +64,7 @@ export default function DiceOne(props) {
           cy="138.69"
           r="65.42"
           gradientTransform="matrix(0.34, 0, 0, -0.89, 505.9, 829.49)"
+          xlinkHref="#a44ef6ea-0d07-4a53-9d5d-dadacb64e988"
         />
         <radialGradient
           id="bff8e4e4-56ec-4dd6-9b41-05f1749a004f"
@@ -68,6 +72,7 @@ export default function DiceOne(props) {
           cy="292.4"
           r="65.39"
           gradientTransform="matrix(0, 0.39, 1, -0.01, -95.6, 386.11)"
+          xlinkHref="#a44ef6ea-0d07-4a53-9d5d-dadacb64e988"
         />
         <radialGradient
           id="b2bf9455-62cb-4dfd-85d8-6c59c2303c38"
@@ -75,6 +80,7 @@ export default function DiceOne(props) {
           cy="620.14"
           r="65.43"
           gradientTransform="matrix(0, 0.34, 0.89, 0.01, -72.29, 452.27)"
+          xlinkHref="#a44ef6ea-0d07-4a53-9d5d-dadacb64e988"
         />
         <radialGradient
           id="abbc4dec-238d-4eb9-b153-1e59257e2f3c"
@@ -82,6 +88,7 @@ export default function DiceOne(props) {
           cy="861.6"
           r="48.33"
           gradientTransform="matrix(1, 0, 0, 1, 0, 0)"
+          xlinkHref="#a44ef6ea-0d07-4a53-9d5d-dadacb64e988"
         />
         <radialGradient
           id="a979a223-327d-4cf4-bdad-dcac00a7123d"
@@ -89,6 +96,7 @@ export default function DiceOne(props) {
           cy="477.2"
           r="75.1"
           gradientTransform="matrix(1, 0, 0, -1, -28.7, 853.3)"
+          xlinkHref="#a44ef6ea-0d07-4a53-9d5d-dadacb64e988"
         />
       </defs>
       <path
