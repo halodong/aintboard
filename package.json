@@ -7,11 +7,13 @@
     "build": "next build",
     "start": "next start",
     "test": "cross-env NODE_ENV=test ENV=test yarn mocha --require @babel/register",
+    "svg": "svgr --ignore-existing --template assets/img/Template.js -d assets/img assets/img",
     "migrate:up": "migrate-mongo up",
     "migrate:down": "migrate-mongo down"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.1",
+    "@svgr/cli": "^5.5.0",
     "@types/lodash": "^4.14.168",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",

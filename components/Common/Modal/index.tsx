@@ -1,7 +1,7 @@
 import Modal from "react-modal";
 import { ModalHeader, ModalContent } from "./styled";
 import { theme } from "styles/theme";
-import CloseIcon from "~/assets/img/close.svg";
+import CloseIcon from "assets/img/Close";
 
 if (typeof window !== "undefined") {
   Modal.setAppElement("body");

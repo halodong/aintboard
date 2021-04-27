@@ -11,14 +11,14 @@ export const FooterWrapper = styled.div`
   .left {
     position: absolute;
     left: 0;
-    bottom: 4rem;
+    bottom: 3.6rem;
     z-index: ${(props) => props.theme.zIndex["9th"]};
   }
 
   .right {
     position: absolute;
     right: 0;
-    bottom: 4rem;
+    bottom: 3.4rem;
     z-index: ${(props) => props.theme.zIndex["9th"]};
   }
 

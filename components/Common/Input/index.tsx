@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import SearchIcon from "~/assets/img/search.svg";
+// import SearchIcon from "~/assets/img/search.svg";
 import { useField, useFormikContext } from "formik";
 import { InputStyled, InputContainer } from "./styled";
 
@@ -43,7 +43,7 @@ export default function Input({
 
   return (
     <InputContainer minWidth={minWidth} marginLeft={marginLeft} error={error}>
-      {showRightIcon && rightIcon === "search" && (
+      {/* {showRightIcon && rightIcon === "search" && (
         <SearchIcon
           className="search-icon"
           onClick={() => {
@@ -51,7 +51,7 @@ export default function Input({
             submitForm();
           }}
         />
-      )}
+      )} */}
       {label && (
         <div className="float-label-input">
           <InputStyled

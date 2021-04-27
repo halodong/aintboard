@@ -14,7 +14,8 @@ import {
 } from "./styled";
 import Avatar from "components/Avatar";
 import OverallRating from "components/Common/OverallRating";
-import { CommentIcon, HeartLikeIcon } from "assets/img";
+import CommentIcon from "assets/img/Comment";
+import HeartLikeIcon from "assets/img/HeartLike";
 
 import { ReviewData } from "types/types";
 import { createHTMLExcerpt } from "~/util/createHTML";

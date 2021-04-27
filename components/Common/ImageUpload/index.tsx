@@ -5,7 +5,8 @@ import {
   ImageContainer,
   CloseContainer,
 } from "./styled";
-import CloseIcon from "~/assets/img/close.svg";
+// import CloseIcon from "~/assets/img/close.svg";
+import CloseIcon from "assets/img/Close";
 
 const ImageUpload = ({
   buttonLabel,

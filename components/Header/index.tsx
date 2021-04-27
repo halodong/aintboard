@@ -13,7 +13,9 @@ import {
   CenterButtonContainer,
   Rubik,
 } from "./styled";
-import { TreesGroup1, TreesGroup2, Tent } from "~/assets/img";
+import Tent from "assets/img/Tent";
+import TreesGroup1 from "assets/img/TreesGroup1";
+import TreesGroup2 from "assets/img/TreesGroup2";
 
 import Navbar from "~/components/Navbar";
 import Modal from "~/components/Common/Modal";
@@ -81,17 +83,6 @@ export default function Header({
         content: "",
       })
     );
-  };
-
-  const getModalHeaderLabel = () => {
-    switch (modalClicked) {
-      case CREATE_CHALLENGE_BUTTON:
-        return modalCta[0].name;
-      case CREATE_ONLINE_BATTLE_BUTTON:
-        return modalCta[1].name;
-      default:
-        return "";
-    }
   };
 
   return (

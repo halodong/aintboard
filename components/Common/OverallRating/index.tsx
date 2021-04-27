@@ -1,9 +1,10 @@
-import Dice1 from "~/assets/img/dice/dice_1.svg";
-import Dice2 from "~/assets/img/dice/dice_2.svg";
-import Dice3 from "~/assets/img/dice/dice_3.svg";
-import Dice4 from "~/assets/img/dice/dice_4.svg";
-import Dice5 from "~/assets/img/dice/dice_5.svg";
-import Dice6 from "~/assets/img/dice/dice_6.svg";
+import DiceOne from "~/assets/img/dice/DiceOne";
+import DiceTwo from "~/assets/img/dice/DiceTwo";
+import DiceThree from "~/assets/img/dice/DiceThree";
+import DiceFour from "~/assets/img/dice/DiceFour";
+import DiceFive from "~/assets/img/dice/DiceFive";
+import DiceSix from "~/assets/img/dice/DiceSix";
+
 import {
   RatingFormWrapper,
   RatingLabel,
@@ -12,12 +13,12 @@ import {
 } from "components/Common/RatingForm/styled";
 
 const dices = [
-  { comp: <Dice1 className="dice dice-1" /> },
-  { comp: <Dice2 className="dice dice-2" /> },
-  { comp: <Dice3 className="dice dice-3" /> },
-  { comp: <Dice4 className="dice dice-4" /> },
-  { comp: <Dice5 className="dice dice-5" /> },
-  { comp: <Dice6 className="dice dice-6" /> },
+  { comp: <DiceOne className="dice dice-1" /> },
+  { comp: <DiceTwo className="dice dice-2" /> },
+  { comp: <DiceThree className="dice dice-3" /> },
+  { comp: <DiceFour className="dice dice-4" /> },
+  { comp: <DiceFive className="dice dice-5" /> },
+  { comp: <DiceSix className="dice dice-6" /> },
 ];
 
 const OverallRating = ({ label, rating, paddingBottom }: Props) => {

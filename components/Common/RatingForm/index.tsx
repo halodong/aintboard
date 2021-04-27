@@ -1,21 +1,33 @@
 import { useState } from "react";
 import { isEqual } from "lodash";
 
-import Dice1 from "~/assets/img/dice/dice_1.svg";
-import Dice2 from "~/assets/img/dice/dice_2.svg";
-import Dice3 from "~/assets/img/dice/dice_3.svg";
-import Dice4 from "~/assets/img/dice/dice_4.svg";
-import Dice5 from "~/assets/img/dice/dice_5.svg";
-import Dice6 from "~/assets/img/dice/dice_6.svg";
+import DiceOne from "~/assets/img/dice/DiceOne";
+import DiceTwo from "~/assets/img/dice/DiceTwo";
+import DiceThree from "~/assets/img/dice/DiceThree";
+import DiceFour from "~/assets/img/dice/DiceFour";
+import DiceFive from "~/assets/img/dice/DiceFive";
+import DiceSix from "~/assets/img/dice/DiceSix";
 import { RatingFormWrapper, RatingLabel, DiceContainer } from "./styled";
 
 const initialDices = [
-  { comp: <Dice1 className="dice dice-1" />, hovered: true, clicked: true },
-  { comp: <Dice2 className="dice dice-2" />, hovered: false, clicked: false },
-  { comp: <Dice3 className="dice dice-3" />, hovered: false, clicked: false },
-  { comp: <Dice4 className="dice dice-4" />, hovered: false, clicked: false },
-  { comp: <Dice5 className="dice dice-5" />, hovered: false, clicked: false },
-  { comp: <Dice6 className="dice dice-6" />, hovered: false, clicked: false },
+  { comp: <DiceOne className="dice dice-1" />, hovered: true, clicked: true },
+  { comp: <DiceTwo className="dice dice-2" />, hovered: false, clicked: false },
+  {
+    comp: <DiceThree className="dice dice-3" />,
+    hovered: false,
+    clicked: false,
+  },
+  {
+    comp: <DiceFour className="dice dice-4" />,
+    hovered: false,
+    clicked: false,
+  },
+  {
+    comp: <DiceFive className="dice dice-5" />,
+    hovered: false,
+    clicked: false,
+  },
+  { comp: <DiceSix className="dice dice-6" />, hovered: false, clicked: false },
 ];
 
 const RatingForm = ({ ratingType, onRatingClick }: Props) => {

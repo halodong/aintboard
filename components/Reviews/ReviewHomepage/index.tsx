@@ -1,9 +1,10 @@
 import Link from "next/link";
 
-import { Maze, WaterRight } from "~/assets/img";
-import { ReviewContainer, ReviewCardWrapper } from "./styled";
+import Maze from "~/assets/img/Maze";
+import WaterLeft from "~/assets/img/WaterLeft";
+import WaterRight from "~/assets/img/WaterRight";
 import { ReviewCard } from "~/components/Reviews/ReviewCard";
-import WaterLeftSvg from "~/assets/img/water-left.svg";
+import { ReviewContainer, ReviewCardWrapper } from "./styled";
 
 import { ReviewApiResponse } from "~/types/types";
 
@@ -11,7 +12,7 @@ const ReviewHomepage = ({ reviews }: Props) => {
   return (
     <ReviewContainer>
       <Maze className="maze" />
-      <WaterLeftSvg className="water-left" />
+      <WaterLeft className="water-left" />
       <WaterRight className="water-right" />
 
       <ReviewCardWrapper>
