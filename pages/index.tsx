@@ -1,8 +1,9 @@
 import fetcher from "~/util/fetch";
+import Head from "next/head";
 import useSWR from "swr";
 
-import Head from "next/head";
 import Header from "~/components/Header";
+import Seo from "~/components/Common/Seo";
 import Footer from "~/components/Common/Footer";
 import ReviewHomepage from "~/components/Reviews/ReviewHomepage";
 import ChallengesHomepage from "~/components/Challenges/ChallengesHomepage";
@@ -28,10 +29,11 @@ export default function Home({ reviews, challenges }: Props) {
 
   return (
     <div>
-      <Head>
+      <Seo />
+      {/* <Head>
         <title>Ain't Board - Interactive Boardgame Community</title>
         <link rel="icon" href="/favicon.ico" />
-      </Head>
+      </Head> */}
 
       <Header homepage />
 
