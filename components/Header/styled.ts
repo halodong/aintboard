@@ -60,7 +60,7 @@ export const HeaderWrapper = styled.div<HeaderWrapperProps>`
 
     .tent {
       left: 15rem;
-      top: 16.5rem;
+      top: 16.4rem;
       width: 15rem;
     }
 
