@@ -35,6 +35,7 @@
     "nanoid": "^3.1.21",
     "next": "10.0.8",
     "next-connect": "^0.10.0",
+    "next-seo": "^4.24.0",
     "promise-path": "^1.4.0",
     "prop-types": "^15.7.2",
     "react": "17.0.1",

@@ -39,8 +39,13 @@ type OverlayProps = {
 export const UserSidebar = styled.div`
   display: flex;
   align-items: center;
-  height: 3rem;
   padding: 3.5rem 0 0 3.5rem;
+
+  a {
+    display: flex;
+    margin-bottom: 1rem;
+    cursor: pointer;
+  }
 
   h4 {
     margin-left: 1rem;
@@ -49,7 +54,7 @@ export const UserSidebar = styled.div`
 
 export const UlSidebar = styled.ul`
   list-style: none;
-  padding: 3.5rem 0 0 3.5rem;
+  padding: 0 0 1rem 3.5rem;
   margin: 0;
 
   .icon {

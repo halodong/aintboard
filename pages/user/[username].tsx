@@ -1,10 +1,11 @@
-import fetcher from "~/util/fetch";
 import Header from "~/components/Header";
 import Avatar from "~/components/Avatar";
+import Seo from "~/components/Common/Seo";
 import UserProfilePage from "~/components/UserProfilePage";
 
-import { UserData, UserApiResponse } from "~/types/types";
+import fetcher from "~/util/fetch";
 import { FALLBACK } from "util/constants";
+import { UserData, UserApiResponse } from "~/types/types";
 
 const Page = ({ userData }: Props) => {
   if (typeof window === "undefined") {
@@ -13,14 +14,20 @@ const Page = ({ userData }: Props) => {
   const user = userData?.response?.data?.users[0];
 
   return (
-    <div>
-      <Header isBoardGamePage>
+    <>
+      <Seo
+        isHomepage={false}
+        title={`${user?.username} Profile Page`}
+        description={`${user?.username} Profile Page`}
+        canonical={`/user/${user?.username}`}
+      />
+      <Header isUserPage>
         {user?.username}
         <Avatar iconType={user?.avatar || ""} />
       </Header>
 
       <UserProfilePage />
-    </div>
+    </>
   );
 };
 

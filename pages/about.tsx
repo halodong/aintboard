@@ -1,5 +1,6 @@
-import Header from "~/components/Header";
 import About from "~/components/About";
+import Header from "~/components/Header";
+import Seo from "~/components/Common/Seo";
 
 const AboutPage = () => {
   if (typeof window === "undefined") {
@@ -7,10 +8,16 @@ const AboutPage = () => {
   }
 
   return (
-    <div>
+    <>
+      <Seo
+        isHomepage={false}
+        title="About Us"
+        description="Learn more about Ain't Board"
+        canonical="/about"
+      />
       <Header homepage tagline="About Us" />
       <About />
-    </div>
+    </>
   );
 };
 
