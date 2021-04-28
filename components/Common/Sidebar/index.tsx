@@ -57,8 +57,15 @@ const Sidebar = ({ menuOpen, closeMenu }: Props) => {
     <>
       <SidebarContainer menuOpen={menuOpen}>
         <UserSidebar>
-          <Avatar iconType={userObj?.avatar || ""} from={SIDEBAR_COMPONENT} />
-          <h4>{userData?.username || ""}</h4>
+          <Link href={`/user/${userData?.username}`}>
+            <a>
+              <Avatar
+                iconType={userObj?.avatar || ""}
+                from={SIDEBAR_COMPONENT}
+              />
+              <h4>{userData?.username || ""}</h4>
+            </a>
+          </Link>
         </UserSidebar>
 
         <UlSidebar>

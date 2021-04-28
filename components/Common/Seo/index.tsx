@@ -1,22 +1,32 @@
+import Head from "next/head";
 import { isEmpty } from "lodash";
 import { NextSeo } from "next-seo";
 
 import { SeoDataProps } from "types/seoTypes";
 
 const Seo = (props: SeoDataProps) => {
+  //will add Ain't Board after pipe in the end of text if not homepage
+  const parsedTitle = props.isHomepage
+    ? "Ain't Board"
+    : `${props?.title} | Ain't Board`;
+
+  //props.canonical should be prefixed with /
   const parsedCanonical = !isEmpty(props?.canonical)
     ? `${process.env.NEXT_PUBLIC_FRONTEND_URL}${props?.canonical}`
     : `${process.env.NEXT_PUBLIC_FRONTEND_URL}/`;
 
   return (
     <>
+      <Head>
+        <link rel="icon" href="/aintboard.ico" />
+      </Head>
       <NextSeo
-        title={props?.title || "Ain't Board"}
+        title={parsedTitle}
         description={props?.description || "Interactive Boardgame Community"}
         canonical={parsedCanonical}
         openGraph={{
           url: parsedCanonical,
-          title: props?.title || "Ain't Board",
+          title: parsedTitle,
           description: props?.description || "Interactive Boardgame Community",
           // images: [
           // {

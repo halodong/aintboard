@@ -1,5 +1,4 @@
 import fetcher from "~/util/fetch";
-import Head from "next/head";
 import useSWR from "swr";
 
 import Header from "~/components/Header";
@@ -29,11 +28,11 @@ export default function Home({ reviews, challenges }: Props) {
 
   return (
     <div>
-      <Seo />
-      {/* <Head>
-        <title>Ain't Board - Interactive Boardgame Community</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head> */}
+      <Seo
+        isHomepage
+        title="Ain't Board"
+        description="Interactive Boardgame Community"
+      />
 
       <Header homepage />
 
