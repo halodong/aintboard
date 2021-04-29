@@ -56,6 +56,7 @@ export default function Header({
   isOnlineBattles = false,
   isBuyAvatarsPage = false,
   isReviewsPage = false,
+  isReviewArticlePage = false,
   children,
 }: Props) {
   const router = useRouter();
@@ -104,6 +105,7 @@ export default function Header({
       isBuyAvatarsPage={isBuyAvatarsPage}
       isReviewsPage={isReviewsPage}
       isOnlineBattles={isOnlineBattles}
+      isReviewArticlePage={isReviewArticlePage}
     >
       <Navbar />
 
@@ -132,9 +134,10 @@ export default function Header({
 
       {isSearchPage && <LookingForText>Looking for "{name}"</LookingForText>}
 
-      {(isChallengesPage || isOnlineBattles || isBuyAvatarsPage) && (
-        <Tent className="tent" />
-      )}
+      {(isChallengesPage ||
+        isOnlineBattles ||
+        isBuyAvatarsPage ||
+        isReviewArticlePage) && <Tent className="tent" />}
 
       {isChallengesPage && (
         <>
@@ -221,5 +224,6 @@ type Props = {
   isOnlineBattles?: boolean;
   isBuyAvatarsPage?: boolean;
   isReviewsPage?: boolean;
+  isReviewArticlePage?: boolean;
   children?: any;
 };
