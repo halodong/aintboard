@@ -1,6 +1,6 @@
 export type SeoDataProps = {
   isHomepage?: boolean;
   title: string;
-  description: string;
+  description?: string;
   canonical?: string;
 };
