@@ -7,7 +7,8 @@ import LoginForm from "~/components/LoginForm";
 // import Searchbar from "~/components/Searchbar"; obsolete for now
 import Button from "~/components/Common/Button";
 import Sidebar from "~/components/Common/Sidebar";
-import LogoGray from "~assets/img/logo_gray.svg";
+// import LogoGray from "~assets/img/logo_gray.svg";
+import LogoGray from "~/assets/img/LogoGray";
 
 import {
   NavbarContainer,

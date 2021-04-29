@@ -5,6 +5,8 @@ import Button from "~/components/Common/Button";
 import OverallRating from "~/components/Common/OverallRating";
 import Rating from "~/components/Common/Rating";
 
+import { createHTML } from "~/util/createHTML";
+
 import * as Styles from "./styled";
 
 const ReviewArticlePage = ({ review }: Props) => {
@@ -24,16 +26,17 @@ const ReviewArticlePage = ({ review }: Props) => {
       </Styles.LanguageContainer>
 
       <Styles.ReviewContentContainer>
-        {review.content}
+        <OverallRating rating={review.overallRating} big />
+        <div
+          className="preview"
+          dangerouslySetInnerHTML={createHTML(review.content)}
+        ></div>
       </Styles.ReviewContentContainer>
 
       <Styles.RatingWrapper>
         <Styles.RatingContainer>
           <Styles.RatingName>Overall Rating</Styles.RatingName>
-          <OverallRating
-            rating={review.overallRating}
-            label={review.overallRating}
-          />
+          <OverallRating rating={review.overallRating} label />
         </Styles.RatingContainer>
         {ratingData.map((r) => (
           <Styles.RatingContainer>

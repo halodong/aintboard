@@ -64,7 +64,7 @@ export type UserData = {
   username: string;
   powerups: number;
   stars: number;
-  avatar?: string;
+  avatar: string;
 };
 
 export interface ChallengesApiResponse {

@@ -7,7 +7,7 @@ const list: ListProps[] = [
   {
     key: "stars",
     label: "How do I earn stars?",
-    content: "Every 10 likes on your Review will gain you a star",
+    content: "Every 10 likes on your Review or Strategy will gain you a star",
     height: 0,
   },
   {

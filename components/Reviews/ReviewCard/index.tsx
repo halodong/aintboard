@@ -14,7 +14,8 @@ import {
 } from "./styled";
 import Avatar from "components/Avatar";
 import OverallRating from "components/Common/OverallRating";
-import { CommentIcon, HeartLikeIcon } from "assets/img";
+import CommentIcon from "assets/img/Comment";
+import HeartLikeIcon from "assets/img/HeartLike";
 
 import { ReviewData } from "types/types";
 import { createHTMLExcerpt } from "~/util/createHTML";
@@ -22,7 +23,7 @@ import { REVIEWS_HOMEPAGE_COMPONENT, REVIEW_TYPE } from "~/util/constants";
 
 export const ReviewCard = ({ data }: Props) => {
   return (
-    <ReviewCardContainer>
+    <ReviewCardContainer onClick={() => {}}>
       <BgImgWrapper>
         {data.images?.length > 0 ? (
           <Image alt="boardgame" src={data.images[0]} layout="fill" />

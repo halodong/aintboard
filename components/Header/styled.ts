@@ -17,6 +17,8 @@ export const HeaderWrapper = styled.div<HeaderWrapperProps>`
   flex-direction: column;
   justify-content: space-between;`}
 
+  ${(props) => props.isUserPage && `justify-content: flex-start;`}
+
   .trees-1,
   .trees-2,
   .tent {
@@ -63,7 +65,7 @@ export const HeaderWrapper = styled.div<HeaderWrapperProps>`
 
     .tent {
       left: 15rem;
-      top: 16.5rem;
+      top: 16.4rem;
       width: 15rem;
     }
 
@@ -93,6 +95,7 @@ type HeaderWrapperProps = {
   isReviewsPage?: boolean;
   isOnlineBattles?: boolean;
   isReviewArticlePage?: boolean;
+  isUserPage?: boolean;
 };
 
 const baseTaglineStyles = styled.h1`
@@ -122,7 +125,13 @@ type TaglineProps = {
   homepage?: boolean;
 };
 
-export const CenterTagline = styled(baseTaglineStyles)``;
+export const CenterTagline = styled(baseTaglineStyles)<CenterTaglineProps>`
+  text-transform: ${(props) => (props.isUserPage ? "none" : "uppercase")};
+`;
+
+type CenterTaglineProps = {
+  isUserPage?: boolean;
+};
 
 export const LookingForText = styled(baseTaglineStyles)`
   margin-top: 3rem;

@@ -11,11 +11,13 @@ export const LanguageContainer = styled.div`
 `;
 
 export const ReviewContentContainer = styled.div`
-  margin: 2rem 0;
+  display: flex;
+  align-items: flex-start;
 `;
 
 export const RatingWrapper = styled.div`
-  padding: 3rem 2rem;
+  padding: 3rem 0;
+  margin: 0 7rem;
 `;
 
 export const RatingContainer = styled.div`

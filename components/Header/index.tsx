@@ -13,7 +13,9 @@ import {
   CenterButtonContainer,
   Rubik,
 } from "./styled";
-import { TreesGroup1, TreesGroup2, Tent } from "~/assets/img";
+import Tent from "assets/img/Tent";
+import TreesGroup1 from "assets/img/TreesGroup1";
+import TreesGroup2 from "assets/img/TreesGroup2";
 
 import Navbar from "~/components/Navbar";
 import Modal from "~/components/Common/Modal";
@@ -57,6 +59,7 @@ export default function Header({
   isBuyAvatarsPage = false,
   isReviewsPage = false,
   isReviewArticlePage = false,
+  isUserPage = false,
   children,
 }: Props) {
   const router = useRouter();
@@ -84,17 +87,6 @@ export default function Header({
     );
   };
 
-  const getModalHeaderLabel = () => {
-    switch (modalClicked) {
-      case CREATE_CHALLENGE_BUTTON:
-        return modalCta[0].name;
-      case CREATE_ONLINE_BATTLE_BUTTON:
-        return modalCta[1].name;
-      default:
-        return "";
-    }
-  };
-
   return (
     <HeaderWrapper
       homepage={homepage}
@@ -106,12 +98,15 @@ export default function Header({
       isReviewsPage={isReviewsPage}
       isOnlineBattles={isOnlineBattles}
       isReviewArticlePage={isReviewArticlePage}
+      isUserPage={isUserPage}
     >
       <Navbar />
 
       {/* <Searchbar /> obsolete for now */}
 
-      {(homepage || isBoardGamePage) && (
+      {isUserPage && <CenterTagline isUserPage>{children}</CenterTagline>}
+
+      {(homepage || isBoardGamePage || isUserPage) && (
         <div className="homepage-bg-container">
           <TreesGroup1 className="trees-1" />
           <TreesGroup2 className="trees-2" />
@@ -169,6 +164,7 @@ export default function Header({
       )}
 
       {isBoardGamePage && <BoardGameName>{children}</BoardGameName>}
+      {isReviewArticlePage && <Rubik>{children}</Rubik>}
 
       {modalCta.map((mdl) => (
         <Modal
@@ -225,5 +221,6 @@ type Props = {
   isBuyAvatarsPage?: boolean;
   isReviewsPage?: boolean;
   isReviewArticlePage?: boolean;
+  isUserPage?: boolean;
   children?: any;
 };

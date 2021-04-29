@@ -1,5 +1,6 @@
-import Header from "~/components/Header";
 import Faqs from "~/components/Faqs";
+import Header from "~/components/Header";
+import Seo from "~/components/Common/Seo";
 
 const FaqsPage = () => {
   if (typeof window === "undefined") {
@@ -7,10 +8,16 @@ const FaqsPage = () => {
   }
 
   return (
-    <div>
+    <>
+      <Seo
+        isHomepage={false}
+        title="FAQs"
+        description="Ain't Board frequently asked questions (FAQs)"
+        canonical="/faqs"
+      />
       <Header homepage tagline="FAQs" />
       <Faqs />
-    </div>
+    </>
   );
 };
 

@@ -8,7 +8,7 @@ import {
   ChallengeName,
   ImgWrapper,
 } from "./styled";
-import PlayButton from "~/assets/img/playbutton.svg";
+import PlayButton from "~/assets/img/PlayButton";
 
 import { ChallengesData } from "types/types";
 
