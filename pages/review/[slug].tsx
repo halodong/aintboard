@@ -9,7 +9,7 @@ import fetcher from "~/util/fetch";
 import { FALLBACK } from "~/util/constants";
 import dayjs from "dayjs";
 
-import * as Styles from "./styled";
+import * as Styles from "~/components/Reviews/ReviewArticlePage/styled";
 
 const Slug = ({ reviewData }: Props) => {
   if (typeof window === "undefined") {

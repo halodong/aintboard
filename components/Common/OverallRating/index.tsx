@@ -20,12 +20,7 @@ const dices = [
   { comp: <DiceSix className="dice dice-6" /> },
 ];
 
-const OverallRating = ({
-  label = false,
-  rating,
-  paddingBottom,
-  big,
-}: Props) => {
+const OverallRating = ({ label, rating, paddingBottom, big }: Props) => {
   let ratingNum = Math.floor(parseFloat(rating));
 
   return (
@@ -38,7 +33,7 @@ const OverallRating = ({
 };
 
 type Props = {
-  label?: boolean;
+  label?: string | boolean;
   paddingBottom?: string;
   rating: string;
   big?: boolean;
