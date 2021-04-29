@@ -25,7 +25,7 @@ export const HeaderWrapper = styled.div<HeaderWrapperProps>`
   }
 
   ${(props) =>
-    (props.isBuyAvatarsPage || props.isEditorPage) &&
+    (props.isBuyAvatarsPage || props.isEditorPage || props.isErrorPage) &&
     `
       min-height: 18rem;
       .tent {
@@ -85,6 +85,7 @@ export const HeaderWrapper = styled.div<HeaderWrapperProps>`
 type HeaderWrapperProps = {
   homepage?: boolean;
   isEditorPage?: boolean;
+  isErrorPage?: boolean;
   isBuyAvatarsPage?: boolean;
   isSearchPage?: boolean;
   isChallengePage?: boolean;

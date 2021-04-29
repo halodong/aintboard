@@ -55,6 +55,7 @@ export default function Header({
   centerTagline,
   isBoardGamePage = false,
   isEditorPage = false,
+  isErrorPage = false,
   isOnlineBattles = false,
   isBuyAvatarsPage = false,
   isReviewsPage = false,
@@ -93,6 +94,7 @@ export default function Header({
       isChallengePage={isChallengesPage}
       isBoardGamePage={isBoardGamePage}
       isEditorPage={isEditorPage}
+      isErrorPage={isErrorPage}
       isBuyAvatarsPage={isBuyAvatarsPage}
       isReviewsPage={isReviewsPage}
       isOnlineBattles={isOnlineBattles}
@@ -213,6 +215,7 @@ type Props = {
   centerTagline?: string;
   isBoardGamePage?: boolean;
   isEditorPage?: boolean;
+  isErrorPage?: boolean;
   isOnlineBattles?: boolean;
   isBuyAvatarsPage?: boolean;
   isReviewsPage?: boolean;

@@ -78,7 +78,7 @@ const UserProfilePage = ({ reviews }: Props) => {
                 <ReviewCard key={r._id} data={r} />
               ))
             ) : (
-              <NoReviews>No Reviews Yet</NoReviews>
+              <NoReviews>User has no Reviews yet</NoReviews>
             )}
           </ReviewsCardWrapper>
         </ReviewsSection>
