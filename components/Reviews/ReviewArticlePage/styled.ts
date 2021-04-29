@@ -33,11 +33,13 @@ export const RatingName = styled.div`
 export const ArticleContainer = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 3rem;
 `;
 
 export const ArticleName = styled.h1`
+  font-size: 3rem;
   margin: 1rem;
-  padding: 0 8rem;
+  padding: 0 20rem;
 `;
 
 export const ArticleAuthor = styled.p`

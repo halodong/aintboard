@@ -1,9 +1,8 @@
-import React from "react";
 import { ReviewData } from "~/types/types";
 
 import Button from "~/components/Common/Button";
 import OverallRating from "~/components/Common/OverallRating";
-import Rating from "~/components/Common/Rating";
+import RatingForm from "~/components/Common/RatingForm";
 
 import { createHTML } from "~/util/createHTML";
 
@@ -41,7 +40,7 @@ const ReviewArticlePage = ({ review }: Props) => {
         {ratingData.map((r) => (
           <Styles.RatingContainer>
             <Styles.RatingName>{r.name}</Styles.RatingName>
-            <Rating rating={r.rating} />
+            <RatingForm onRatingClick={() => {}} rating={r.rating} />
           </Styles.RatingContainer>
         ))}
       </Styles.RatingWrapper>

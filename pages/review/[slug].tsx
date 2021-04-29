@@ -1,15 +1,12 @@
 import React from "react";
 import Header from "~/components/Header";
 import Footer from "~/components/Common/Footer";
-import Avatar from "~/components/Avatar";
+import ReviewArticleHeader from "~/components/Reviews/ReviewArticlePage/Header";
 
-import ReviewArticlePagge from "~/components/Reviews/ReviewArticlePage";
+import ReviewArticlePage from "~/components/Reviews/ReviewArticlePage";
 import { ReviewData, ReviewApiResponse } from "~/types/types";
 import fetcher from "~/util/fetch";
 import { FALLBACK } from "~/util/constants";
-import dayjs from "dayjs";
-
-import * as Styles from "~/components/Reviews/ReviewArticlePage/styled";
 
 const Slug = ({ reviewData }: Props) => {
   if (typeof window === "undefined") {
@@ -22,18 +19,9 @@ const Slug = ({ reviewData }: Props) => {
   return (
     <div>
       <Header isReviewArticlePage>
-        <Styles.ArticleContainer>
-          <Styles.ArticleName>{review.title}</Styles.ArticleName>
-          <Styles.ArticleAuthor>
-            {review.userData[0].username}
-          </Styles.ArticleAuthor>
-          <Styles.ArticleDate>
-            {dayjs(review.createdAt).format("MMM DD YYYY")}
-          </Styles.ArticleDate>
-          <Avatar iconType={review.userData[0].avatar} />
-        </Styles.ArticleContainer>
+        <ReviewArticleHeader review={review} />
       </Header>
-      <ReviewArticlePagge review={review} />
+      <ReviewArticlePage review={review} />
       <Footer />
     </div>
   );
