@@ -6,6 +6,8 @@ Technologies need before anything else (for super newbie)
 
 Download the following:
 
+For Windows only.
+
 GITBASH: https://git-scm.com/downloads
 
 MongoDB: https://www.mongodb.com/try/download/community
@@ -31,12 +33,12 @@ Now if you have your SSH key installed check it here: C:\Users\admin\.ssh
 
 ## Cloning
 
-1. create a folder or director in your C: drive.
+1. create a folder or directory in your C: drive.
 2. Open Gitbash and type`"cd" then your created folder or directory`
 3. Go to Github search for the repository.
 4. Click "CODE" then select "SSH" on the tab selection.
 5. Copy the link and go back to Gitbash.
-6. type`get clone` and the link you copy from Github.
+6. type`git clone` and the link you copy from Github.
 
 ## Running with Localhost
 
