@@ -30,10 +30,14 @@ export const RatingName = styled.div`
   width: 10rem;
 `;
 
-export const ArticleContainer = styled.div``;
+export const ArticleContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 export const ArticleName = styled.h1`
   margin: 1rem;
+  padding: 0 8rem;
 `;
 
 export const ArticleAuthor = styled.p`

@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import Image from "next/image";
 import { capitalize } from "lodash";
+import { useRouter } from "next/router";
 
 import {
   ReviewCardContainer,
@@ -22,8 +23,9 @@ import { createHTMLExcerpt } from "~/util/createHTML";
 import { REVIEWS_HOMEPAGE_COMPONENT, REVIEW_TYPE } from "~/util/constants";
 
 export const ReviewCard = ({ data }: Props) => {
+  const router = useRouter();
   return (
-    <ReviewCardContainer onClick={() => {}}>
+    <ReviewCardContainer onClick={() => router.push(`review/${data?.slug}`)}>
       <BgImgWrapper>
         {data.images?.length > 0 ? (
           <Image alt="boardgame" src={data.images[0]} layout="fill" />
