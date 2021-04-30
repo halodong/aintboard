@@ -74,6 +74,7 @@ const Sidebar = ({ menuOpen, closeMenu }: Props) => {
             links={[
               {
                 key: "see-reviews",
+                button: true,
                 linkHref: "/",
                 linkName: "See Reviews",
               },
@@ -91,6 +92,7 @@ const Sidebar = ({ menuOpen, closeMenu }: Props) => {
             links={[
               {
                 key: "see-challenges",
+                button: true,
                 linkHref: "/",
                 linkName: "See Challenges",
               },
@@ -108,6 +110,7 @@ const Sidebar = ({ menuOpen, closeMenu }: Props) => {
             links={[
               {
                 key: "see-ob",
+                button: true,
                 linkHref: "/",
                 linkName: "See Online Battles",
               },
