@@ -32,8 +32,21 @@ export type ReviewFormState = {
       valueForMoneyRating: number;
       playingTimeRating: number;
       overallRating: number;
-      images: string;
+      images: string[];
       reviewTitle: string;
+      language: string;
+      youtubeUrl: string;
+    };
+  };
+};
+
+export type StrategyFormState = {
+  strategyForm: {
+    strategyFormValues: {
+      bgName: string;
+      strategyContent: string;
+      images: string[];
+      strategyTitle: string;
       language: string;
       youtubeUrl: string;
     };

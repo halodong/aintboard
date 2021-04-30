@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   ImageUploadContainer,
   PreviewsContainer,
@@ -13,13 +13,25 @@ const ImageUpload = ({
   marginLeft,
   multi,
   max,
+  previewImages,
   passImagesToParent,
 }: Props) => {
   const [previews, setPreviews] = useState<string[]>([]);
+  const prevPreviews = useRef<string[]>([]);
 
   useEffect(() => {
-    passImagesToParent(previews);
+    if (previews !== prevPreviews.current) {
+      passImagesToParent(previews);
+      prevPreviews.current = previews;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [previews, passImagesToParent]);
+
+  useEffect(() => {
+    if (previewImages && previewImages?.length > 0) {
+      setPreviews(previewImages);
+    }
+  }, [previewImages]);
 
   let counter = 1;
   let tempFiles: string[] = [];
@@ -106,6 +118,7 @@ type Props = {
   marginLeft?: string;
   multi: boolean;
   max: number;
+  previewImages?: string[];
   passImagesToParent: (i: string[]) => void;
 };
 
