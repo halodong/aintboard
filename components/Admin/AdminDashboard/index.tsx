@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import LogoGray from "~/assets/img/LogoGray";
 
 import * as Styles from "./styles";

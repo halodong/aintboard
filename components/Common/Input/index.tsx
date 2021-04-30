@@ -9,14 +9,12 @@ export default function Input({
   error,
   placeholder,
   name,
-  rightIcon,
-  showRightIcon,
   label,
   type = "text",
   handleChangeOnParent,
 }: Props) {
   const [field, meta] = useField(name);
-  const { setFieldValue, submitForm } = useFormikContext();
+  const { setFieldValue } = useFormikContext();
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {

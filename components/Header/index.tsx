@@ -59,6 +59,7 @@ export default function Header({
   isOnlineBattles = false,
   isBuyAvatarsPage = false,
   isReviewsPage = false,
+  isReviewArticlePage = false,
   isUserPage = false,
   children,
 }: Props) {
@@ -98,6 +99,7 @@ export default function Header({
       isBuyAvatarsPage={isBuyAvatarsPage}
       isReviewsPage={isReviewsPage}
       isOnlineBattles={isOnlineBattles}
+      isReviewArticlePage={isReviewArticlePage}
       isUserPage={isUserPage}
     >
       <Navbar />
@@ -129,9 +131,10 @@ export default function Header({
 
       {isSearchPage && <LookingForText>Looking for "{name}"</LookingForText>}
 
-      {(isChallengesPage || isOnlineBattles || isBuyAvatarsPage) && (
-        <Tent className="tent" />
-      )}
+      {(isChallengesPage ||
+        isOnlineBattles ||
+        isBuyAvatarsPage ||
+        isReviewArticlePage) && <Tent className="tent" />}
 
       {isChallengesPage && (
         <>
@@ -163,6 +166,7 @@ export default function Header({
       )}
 
       {isBoardGamePage && <BoardGameName>{children}</BoardGameName>}
+      {isReviewArticlePage && <Rubik>{children}</Rubik>}
 
       {modalCta.map((mdl) => (
         <Modal
@@ -219,6 +223,7 @@ type Props = {
   isOnlineBattles?: boolean;
   isBuyAvatarsPage?: boolean;
   isReviewsPage?: boolean;
+  isReviewArticlePage?: boolean;
   isUserPage?: boolean;
   children?: any;
 };

@@ -7,7 +7,6 @@ import DiceSix from "~/assets/img/dice/DiceSix";
 
 import {
   RatingFormWrapper,
-  RatingLabel,
   DiceContainer,
   FloatRating,
 } from "components/Common/RatingForm/styled";
@@ -21,11 +20,11 @@ const dices = [
   { comp: <DiceSix className="dice dice-6" /> },
 ];
 
-const OverallRating = ({ label, rating, paddingBottom }: Props) => {
+const OverallRating = ({ label, rating, paddingBottom, big }: Props) => {
   let ratingNum = Math.floor(parseFloat(rating));
+
   return (
-    <RatingFormWrapper paddingBottom={paddingBottom}>
-      {label && <RatingLabel>{label}</RatingLabel>}
+    <RatingFormWrapper paddingBottom={paddingBottom} big={big}>
       <DiceContainer hovered>{dices[ratingNum - 1]?.comp}</DiceContainer>
 
       {label && <FloatRating>{rating} / 6</FloatRating>}
@@ -34,9 +33,10 @@ const OverallRating = ({ label, rating, paddingBottom }: Props) => {
 };
 
 type Props = {
-  label?: string;
+  label?: string | boolean;
   paddingBottom?: string;
   rating: string;
+  big?: boolean;
 };
 
 export default OverallRating;

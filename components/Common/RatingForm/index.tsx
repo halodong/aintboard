@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { isEqual } from "lodash";
 
 import DiceOne from "~/assets/img/dice/DiceOne";
@@ -30,7 +30,7 @@ const initialDices = [
   { comp: <DiceSix className="dice dice-6" />, hovered: false, clicked: false },
 ];
 
-const RatingForm = ({ ratingType, onRatingClick }: Props) => {
+const RatingForm = ({ ratingType, onRatingClick, rating = 0 }: Props) => {
   const [diceList, setDiceList] = useState<DiceProps[]>(initialDices);
   const [diceListClicked, setDiceListClicked] = useState<DiceProps[]>(
     initialDices
@@ -60,29 +60,47 @@ const RatingForm = ({ ratingType, onRatingClick }: Props) => {
     return setDiceListClicked(diceMutated);
   };
 
+  useEffect(() => {
+    if (rating) onHover(rating - 1, "hover");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <RatingFormWrapper>
-      <RatingLabel>{ratingType}</RatingLabel>
+      {!rating && <RatingLabel>{ratingType}</RatingLabel>}
       {diceList.map((dice: DiceProps, i: number) => (
-        <DiceContainer
-          key={i}
-          hovered={diceList[i].hovered}
-          onMouseEnter={() => onHover(i, "hover")}
-          onMouseLeave={() =>
-            !isEqual(initialDices, diceList) && setDiceList(diceListClicked)
-          }
-          onClick={() => onHover(i, "click")}
-        >
-          {dice.comp}
-        </DiceContainer>
+        <>
+          {!rating ? (
+            <DiceContainer
+              key={i}
+              hovered={diceList[i].hovered}
+              onMouseEnter={() => onHover(i, "hover")}
+              onMouseLeave={() =>
+                !isEqual(initialDices, diceList) && setDiceList(diceListClicked)
+              }
+              onClick={() => onHover(i, "click")}
+            >
+              {dice.comp}
+            </DiceContainer>
+          ) : (
+            <DiceContainer
+              key={i}
+              hovered={diceList[i].hovered}
+              onLoad={() => onHover(rating, "hover")}
+            >
+              {dice.comp}
+            </DiceContainer>
+          )}
+        </>
       ))}
     </RatingFormWrapper>
   );
 };
 
 type Props = {
-  ratingType: string;
+  ratingType?: string;
   onRatingClick: (rating: number) => void;
+  rating?: number;
 };
 
 type DiceProps = {

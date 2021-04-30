@@ -24,6 +24,7 @@ export type ReviewData = {
   _id: string;
   userId: number;
   bgName: string;
+  slug: string;
   title: string;
   content: string;
   reviewStatus: string;
@@ -64,7 +65,7 @@ export type UserData = {
   username: string;
   powerups: number;
   stars: number;
-  avatar?: string;
+  avatar: string;
 };
 
 export interface ChallengesApiResponse {

@@ -4,7 +4,10 @@ export const HeaderWrapper = styled.div<HeaderWrapperProps>`
   width: 100%;
   background-color: ${(props) => props.theme.colors.dark};
   min-height: ${(props) =>
-    props.isSearchPage || props.isChallengePage || props.isBoardGamePage
+    props.isSearchPage ||
+    props.isChallengePage ||
+    props.isBoardGamePage ||
+    props.isReviewArticlePage
       ? "30rem"
       : "35rem"};
   position: relative;
@@ -92,6 +95,7 @@ type HeaderWrapperProps = {
   isBoardGamePage?: boolean;
   isReviewsPage?: boolean;
   isOnlineBattles?: boolean;
+  isReviewArticlePage?: boolean;
   isUserPage?: boolean;
 };
 

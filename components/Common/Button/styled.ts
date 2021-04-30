@@ -11,6 +11,7 @@ export const ButtonStyled = styled.button<ButtonStyledProps>`
   outline: none;
   border: none;
   cursor: pointer;
+  text-transform: capitalize;
 `;
 
 type ButtonStyledProps = {
