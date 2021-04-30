@@ -63,7 +63,7 @@ const RatingForm = ({ ratingType, onRatingClick, rating = 0 }: Props) => {
   useEffect(() => {
     if (rating) onHover(rating - 1, "hover");
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [onHover]);
+  }, []);
 
   return (
     <RatingFormWrapper>
@@ -84,6 +84,7 @@ const RatingForm = ({ ratingType, onRatingClick, rating = 0 }: Props) => {
             </DiceContainer>
           ) : (
             <DiceContainer
+              key={i}
               hovered={diceList[i].hovered}
               onLoad={() => onHover(rating, "hover")}
             >
