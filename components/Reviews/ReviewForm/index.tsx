@@ -27,32 +27,38 @@ import { YoutubeContainer } from "../NewReviewContent/styled";
 import { upload } from "util/cloudinary";
 import useCurrentUser from "hooks/useCurrentUser";
 import { ReviewFormState } from "types/reduxTypes";
-import { setReviewFormValues } from "redux/slices/reviewFormSlice";
 import { OnSubmitValidationError } from "util/OnSubmitValidationError";
 import { LANGUAGE_OPTIONS, REVIEW_STATUS, REVIEW_TYPE } from "util/constants";
+import {
+  setReviewFormValues,
+  resetReviewFormValues,
+} from "redux/slices/reviewFormSlice";
 
 const ReviewForm = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const user = useCurrentUser();
-  const [replayabilityRating, setReplayabilityRating] = useState(1);
-  const [complexityRating, setComplexityRating] = useState(1);
-  const [aestheticsRating, setAestheticsRating] = useState(1);
-  const [valueForMoneyRating, setValueForMoneyRating] = useState(1);
-  const [playingTimeRating, setPlayingTimeRating] = useState(1);
-  const [componentsRating, setComponentsRating] = useState(1);
+
+  const formValuesState = useSelector(
+    (state: ReviewFormState) => state.reviewForm
+  );
+
   const [overallRating, setOverallRating] = useState("1");
-  const [reviewContent, setReviewContent] = useState("");
-  const [images, setImages] = useState<string[]>([]);
+  const [savedContent, setSavedContent] = useState("");
+  const {
+    replayabilityRating,
+    complexityRating,
+    aestheticsRating,
+    valueForMoneyRating,
+    playingTimeRating,
+    componentsRating,
+    reviewContent,
+  } = formValuesState?.reviewFormValues;
 
   const formSchema = Yup.object().shape({
     reviewTitle: Yup.string().required("Review Title required"),
     bgName: Yup.string().required("Boardgame Name required"),
   });
-
-  const formValuesState = useSelector(
-    (state: ReviewFormState) => state.reviewForm
-  );
 
   useEffect(() => {
     const sum =
@@ -63,7 +69,11 @@ const ReviewForm = () => {
       valueForMoneyRating +
       playingTimeRating;
 
-    setOverallRating((sum / 6).toFixed(1));
+    const overallRatingVal = (sum / 6).toFixed(1);
+
+    setOverallRating(overallRatingVal);
+    handleValueChange("overallRating", overallRatingVal);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     replayabilityRating,
     componentsRating,
@@ -73,8 +83,27 @@ const ReviewForm = () => {
     playingTimeRating,
   ]);
 
-  const handleValueChange = (name: string, value: string) => {
+  useEffect(() => {
+    const _content = formValuesState?.reviewFormValues?.reviewContent;
+
+    if (_content && _content.length > 0 && _content !== "<p></p>\n") {
+      setSavedContent(_content);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleValueChange = (name: string, value: any) => {
     dispatch(setReviewFormValues({ name, value }));
+  };
+
+  const onSetImages = (images: string[]) => {
+    handleValueChange("images", images);
+  };
+
+  const onSetReviewContent = (content: string) => {
+    if (content && content.length > 0 && content !== "<p></p>\n") {
+      handleValueChange("reviewContent", content);
+    }
   };
 
   return (
@@ -98,7 +127,9 @@ const ReviewForm = () => {
             return;
           }
 
-          const uploadedImages = await upload(images);
+          const uploadedImages = await upload(
+            formValuesState?.reviewFormValues?.images
+          );
 
           const response = await axios.post("/api/reviews/", {
             userId: userData._id,
@@ -126,6 +157,7 @@ const ReviewForm = () => {
           }
 
           resetForm();
+          dispatch(resetReviewFormValues());
           toast.success("New review added!");
           router.push("/");
         } catch (err) {
@@ -181,23 +213,29 @@ const ReviewForm = () => {
               buttonLabel="Choose images"
               multi
               max={3}
-              passImagesToParent={(imgs) => setImages(imgs)}
+              previewImages={formValuesState?.reviewFormValues?.images || []}
+              passImagesToParent={(imgs) => onSetImages(imgs)}
               marginLeft="0"
             />
 
             <Label>Put your Review content here</Label>
 
-            <RTE passContentToParent={setReviewContent} />
+            <RTE
+              savedContent={savedContent}
+              passContentToParent={onSetReviewContent}
+            />
 
             <Label>What is your Review's primary language?</Label>
 
             <DropDown
               placeholder="Language"
               marginLeft="0"
+              selected={formValuesState?.reviewFormValues?.language}
               options={LANGUAGE_OPTIONS}
-              onChange={(selectedOption) =>
-                setFieldValue("language", selectedOption.value)
-              }
+              onChange={(selectedOption) => {
+                setFieldValue("language", selectedOption.value);
+                handleValueChange("language", selectedOption.value);
+              }}
             />
 
             <Label>
@@ -215,28 +253,58 @@ const ReviewForm = () => {
             <OverallRating label="Overall Rating" rating={overallRating} />
             <RatingForm
               ratingType="Replayability"
-              onRatingClick={(rating: number) => setReplayabilityRating(rating)}
+              defaultRating={
+                formValuesState?.reviewFormValues?.replayabilityRating || null
+              }
+              onRatingClick={(rating: number) => {
+                handleValueChange("replayabilityRating", rating);
+              }}
             />
             <RatingForm
               ratingType="Complexity"
-              onRatingClick={(rating: number) => setComplexityRating(rating)}
+              defaultRating={
+                formValuesState?.reviewFormValues?.complexityRating || null
+              }
+              onRatingClick={(rating: number) => {
+                handleValueChange("complexityRating", rating);
+              }}
             />
             <RatingForm
               ratingType="Aesthetics"
-              onRatingClick={(rating: number) => setAestheticsRating(rating)}
+              defaultRating={
+                formValuesState?.reviewFormValues?.aestheticsRating || null
+              }
+              onRatingClick={(rating: number) => {
+                handleValueChange("aestheticsRating", rating);
+              }}
             />
             <RatingForm
               ratingType="Value for Money"
-              onRatingClick={(rating: number) => setValueForMoneyRating(rating)}
+              defaultRating={
+                formValuesState?.reviewFormValues?.valueForMoneyRating || null
+              }
+              onRatingClick={(rating: number) => {
+                handleValueChange("valueForMoneyRating", rating);
+              }}
             />
 
             <RatingForm
               ratingType="Playing Time"
-              onRatingClick={(rating: number) => setPlayingTimeRating(rating)}
+              defaultRating={
+                formValuesState?.reviewFormValues?.playingTimeRating || null
+              }
+              onRatingClick={(rating: number) => {
+                handleValueChange("playingTimeRating", rating);
+              }}
             />
             <RatingForm
               ratingType="Components Quality"
-              onRatingClick={(rating: number) => setComponentsRating(rating)}
+              defaultRating={
+                formValuesState?.reviewFormValues?.componentsRating || null
+              }
+              onRatingClick={(rating: number) => {
+                handleValueChange("componentsRating", rating);
+              }}
             />
 
             <Label>

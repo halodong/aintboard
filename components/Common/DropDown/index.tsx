@@ -1,14 +1,20 @@
-import { DropDownContainer } from "./styled";
-
 import Select from "react-select";
+
+import { DropDownContainer } from "./styled";
 
 const DropDown = ({
   placeholder,
   marginLeft,
   options,
-  onChange,
+  selected,
   keyProp = "key",
+  onChange,
 }: Props) => {
+  const emptyDefault = {
+    label: "",
+    value: "",
+  };
+
   return (
     <DropDownContainer marginLeft={marginLeft}>
       <Select
@@ -20,14 +26,13 @@ const DropDown = ({
         isClearable={true}
         isSearchable={false}
         options={options}
-        onChange={(selected) =>
-          onChange(
-            selected || {
-              label: "",
-              value: "",
-            }
-          )
+        value={
+          (selected &&
+            selected.length > 0 &&
+            options?.filter((o) => o.value === selected)) ||
+          emptyDefault
         }
+        onChange={(selectedOption) => onChange(selectedOption || emptyDefault)}
       />
     </DropDownContainer>
   );
@@ -41,6 +46,7 @@ type OptionItem = {
 type Props = {
   placeholder?: string;
   marginLeft?: string;
+  selected?: string;
   options?: OptionItem[];
   onChange: (selected: OptionItem) => void;
   keyProp?: string;

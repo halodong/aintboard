@@ -5,7 +5,8 @@ import { Formik, Form } from "formik";
 import ReactPlayer from "react-player";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
   InputContainer,
@@ -23,28 +24,68 @@ import { YoutubeContainer } from "../NewReviewContent/styled";
 
 import { upload } from "util/cloudinary";
 import useCurrentUser from "hooks/useCurrentUser";
+import { StrategyFormState } from "types/reduxTypes";
 import { OnSubmitValidationError } from "util/OnSubmitValidationError";
 import { LANGUAGE_OPTIONS, REVIEW_STATUS, REVIEW_TYPE } from "util/constants";
+import {
+  setStrategyFormValues,
+  resetStrategyFormValues,
+} from "redux/slices/strategyFormSlice";
 
 const StrategyForm = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const user = useCurrentUser();
-  const [strategyContent, setStrategyContent] = useState("");
-  const [images, setImages] = useState<string[]>([]);
+  const [savedContent, setSavedContent] = useState("");
+
+  const formValuesState = useSelector(
+    (state: StrategyFormState) => state.strategyForm
+  );
+
+  useEffect(() => {
+    const _content = formValuesState?.strategyFormValues?.strategyContent;
+    if (_content && _content.length > 0) {
+      setSavedContent(_content);
+    } else {
+      setSavedContent("");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleValueChange = (name: string, value: any) => {
+    dispatch(setStrategyFormValues({ name, value }));
+  };
+
+  const onSetImages = (images: string[]) => {
+    handleValueChange("images", images);
+  };
+
+  const onSetStrategyContent = (content: string) => {
+    if (content && content.length > 0 && content !== "<p></p>\n") {
+      handleValueChange("strategyContent", content);
+    }
+  };
 
   const formSchema = Yup.object().shape({
     strategyTitle: Yup.string().required("Review Title required"),
     bgName: Yup.string().required("Boardgame Name required"),
   });
 
+  const {
+    strategyTitle,
+    language,
+    youtubeUrl,
+    bgName,
+  } = formValuesState?.strategyFormValues;
+
   return (
     <Formik
       enableReinitialize
       initialValues={{
-        strategyTitle: "",
-        language: "",
-        youtubeUrl: "",
-        bgName: "",
+        strategyTitle,
+        language,
+        youtubeUrl,
+        bgName,
       }}
       validationSchema={formSchema}
       onSubmit={async (values, { resetForm }) => {
@@ -58,17 +99,19 @@ const StrategyForm = () => {
             return;
           }
 
-          const uploadedImages = await upload(images);
+          const uploadedImages = await upload(
+            formValuesState?.strategyFormValues?.images
+          );
 
           const response = await axios.post("/api/reviews/", {
             userId: userData._id,
             username: userData.username,
             bgName: values.bgName,
-            content: strategyContent,
+            content: formValuesState?.strategyFormValues?.strategyContent,
             reviewStatus: REVIEW_STATUS.PENDING,
             reviewType: REVIEW_TYPE.STRATEGY,
             images: uploadedImages,
-            title: values.strategyTitle,
+            title: strategyTitle,
             language: values.language,
             youtubeUrl: values.youtubeUrl,
           });
@@ -79,6 +122,7 @@ const StrategyForm = () => {
           }
 
           resetForm();
+          dispatch(resetStrategyFormValues());
           toast.success("New strategy added!");
           router.push("/");
         } catch (err) {
@@ -103,6 +147,9 @@ const StrategyForm = () => {
               <Input
                 name="strategyTitle"
                 label="Strategy Title"
+                handleChangeOnParent={(name, value) =>
+                  handleValueChange(name, value)
+                }
                 error={errors.strategyTitle || ""}
                 marginLeft="0"
               />
@@ -117,6 +164,9 @@ const StrategyForm = () => {
               <Input
                 name="bgName"
                 label="Boardgame Name"
+                handleChangeOnParent={(name, value) =>
+                  handleValueChange(name, value)
+                }
                 error={errors.bgName || ""}
                 marginLeft="0"
               />
@@ -128,23 +178,29 @@ const StrategyForm = () => {
               buttonLabel="Choose images"
               multi
               max={3}
-              passImagesToParent={(imgs) => setImages(imgs)}
+              previewImages={formValuesState?.strategyFormValues?.images || []}
+              passImagesToParent={(imgs) => onSetImages(imgs)}
               marginLeft="0"
             />
 
             <Label>Put your Strategy content here</Label>
 
-            <RTE passContentToParent={setStrategyContent} />
+            <RTE
+              savedContent={savedContent}
+              passContentToParent={onSetStrategyContent}
+            />
 
             <Label>What is your Strategy's primary language?</Label>
 
             <DropDown
               placeholder="Language"
               marginLeft="0"
+              selected={formValuesState?.strategyFormValues?.language}
               options={LANGUAGE_OPTIONS}
-              onChange={(selectedOption) =>
-                setFieldValue("language", selectedOption.value)
-              }
+              onChange={(selectedOption) => {
+                setFieldValue("language", selectedOption.value);
+                handleValueChange("language", selectedOption.value);
+              }}
             />
 
             <Label>
@@ -159,6 +215,9 @@ const StrategyForm = () => {
               )}
               <Input
                 name="youtubeUrl"
+                handleChangeOnParent={(name, value) =>
+                  handleValueChange(name, value)
+                }
                 label="Youtube URL (optional)"
                 error={errors.youtubeUrl || ""}
                 marginLeft="0"

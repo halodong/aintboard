@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { EditorState, Modifier, convertToRaw } from "draft-js";
 import dynamic from "next/dynamic";
 import draftToHtml from "draftjs-to-html";
+import { stateFromHTML } from "draft-js-import-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { RteWrapper } from "./styled";
 const Editor = dynamic(
@@ -12,16 +13,21 @@ const Editor = dynamic(
 
 const HANDLED = "handled";
 
-const RTE = ({ passContentToParent }) => {
+const RTE = ({ savedContent, passContentToParent }) => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
-  // const [convertedContent, setConvertedContent] = useState(null);
 
   const handleEditorChange = (state) => {
     setEditorState(state);
     convertContentToHTML();
   };
+
+  useEffect(() => {
+    const contentState = stateFromHTML(savedContent);
+    handleEditorChange(EditorState.createWithContent(contentState));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [savedContent]);
 
   //this function fixes when making new lines
   const handleBeforeInput = (chars, editorState) => {

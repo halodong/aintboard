@@ -30,7 +30,12 @@ const initialDices = [
   { comp: <DiceSix className="dice dice-6" />, hovered: false, clicked: false },
 ];
 
-const RatingForm = ({ ratingType, onRatingClick, rating = 0 }: Props) => {
+const RatingForm = ({
+  ratingType,
+  defaultRating,
+  onRatingClick,
+  rating = 0,
+}: Props) => {
   const [diceList, setDiceList] = useState<DiceProps[]>(initialDices);
   const [diceListClicked, setDiceListClicked] = useState<DiceProps[]>(
     initialDices
@@ -62,6 +67,9 @@ const RatingForm = ({ ratingType, onRatingClick, rating = 0 }: Props) => {
 
   useEffect(() => {
     if (rating) onHover(rating - 1, "hover");
+
+    if (defaultRating) onHover(defaultRating - 1, "hover");
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -101,6 +109,7 @@ type Props = {
   ratingType?: string;
   onRatingClick: (rating: number) => void;
   rating?: number;
+  defaultRating?: number | null;
 };
 
 type DiceProps = {
