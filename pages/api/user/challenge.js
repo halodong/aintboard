@@ -8,8 +8,7 @@ const handler = nc();
 handler.use(all);
 
 handler.post(async (req, res) => {
-  const { userId } = req.body;
-  const challengeId = parseInt(req.body.challengeId);
+  const { userId, challengeId } = req.body;
   const powerups = parseInt(req.body.powerups);
 
   const challenge = await insertUserChallenges(req.db, {

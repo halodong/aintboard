@@ -2,42 +2,49 @@ import Image from "next/image";
 // import useSWR from "swr";
 // import fetcher from "~/util/fetch";
 
-import {
-  ChallengesCardWrapper,
-  PowerUpAmount,
-  ChallengeName,
-  ImgWrapper,
-} from "./styled";
+import * as Styles from "./styled";
 import PlayButton from "~/assets/img/PlayButton";
+import Muscle from "~/assets/img/Muscle";
 
 import { ChallengesData } from "types/types";
 
-const ChallengesCard = ({ data }: Props) => {
+const ChallengesCard = ({ data, achieved }: Props) => {
   return (
-    <ChallengesCardWrapper>
+    <Styles.ChallengesCardWrapper>
       {/* @TODO change fallback image to an aintboard logo */}
-      <ImgWrapper>
-        <Image
-          src={
-            "https://cf.geekdo-images.com/0BsjJY9MTlx9DRrlkeE69w__original/img/6AJktf34S4ypVI75ecsfmkDicgA=/0x0/filters:format(jpeg)/pic5482020.jpg"
-          }
-          alt="challenge card"
-          layout="fill"
-        />
-      </ImgWrapper>
+      <Styles.ImgWrapper>
+        {data && data?.bgImage?.length > 0 ? (
+          <Image alt="challenge card" src={`${data?.bgImage}`} layout="fill" />
+        ) : (
+          <Image
+            src={
+              "https://cf.geekdo-images.com/0BsjJY9MTlx9DRrlkeE69w__original/img/6AJktf34S4ypVI75ecsfmkDicgA=/0x0/filters:format(jpeg)/pic5482020.jpg"
+            }
+            alt="challenge card"
+            layout="fill"
+          />
+        )}
+      </Styles.ImgWrapper>
 
-      <PowerUpAmount>+{data?.powerUpAmount}UP</PowerUpAmount>
+      <Styles.PowerUpAmount>+{data?.powerUpAmount}UP</Styles.PowerUpAmount>
 
-      <ChallengeName>
+      <Styles.ChallengeName>
         <p>{data?.challengeName}</p>
-        <PlayButton className="play" />
-      </ChallengeName>
-    </ChallengesCardWrapper>
+        {achieved ? (
+          <Styles.Achieved>
+            Achieved <Muscle />
+          </Styles.Achieved>
+        ) : (
+          <PlayButton className="play" />
+        )}
+      </Styles.ChallengeName>
+    </Styles.ChallengesCardWrapper>
   );
 };
 
 type Props = {
   data?: ChallengesData;
+  achieved?: boolean;
 };
 
 export default ChallengesCard;

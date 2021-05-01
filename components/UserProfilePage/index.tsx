@@ -23,7 +23,11 @@ import ChallengesCard from "~/components/Challenges/ChallengesCard";
 import { ReviewCard } from "~/components/Reviews/ReviewCard";
 
 import { chooseModal } from "redux/slices/modalSlice";
-import { ReviewApiResponse } from "~/types/types";
+import {
+  ChallengesApiResponse,
+  ReviewApiResponse,
+  UserChallangesApiResponse,
+} from "~/types/types";
 import {
   BUY_AVATARS_BUTTON,
   MAKE_REVIEW_BUTTON,
@@ -46,7 +50,7 @@ const cardButton = [
   },
 ];
 
-const UserProfilePage = ({ reviews }: Props) => {
+const UserProfilePage = ({ reviews, challenges, userChallenges }: Props) => {
   const dispatch = useDispatch();
 
   const onButtonClick = (type: string) => {
@@ -86,8 +90,26 @@ const UserProfilePage = ({ reviews }: Props) => {
         <ChallengesSection>
           <H1GameFont>CHALLENGES</H1GameFont>
           <ChallengesCardWrapper>
-            <ChallengesCard />
-            <ChallengesCard />
+            {challenges &&
+            challenges?.response?.data?.challenges?.length > 0 ? (
+              <>
+                <ChallengesCard
+                  key={challenges?.response?.data?.challenges[0]?._id}
+                  data={challenges?.response?.data?.challenges[0]}
+                />
+                {challenges?.response?.data?.challenges
+                  ?.filter(
+                    (c) =>
+                      c._id ===
+                      userChallenges?.response?.data?.challenge[0]?.challengeId
+                  )
+                  .map((c) => (
+                    <ChallengesCard key={c._id} data={c} achieved />
+                  ))}
+              </>
+            ) : (
+              <NoReviews>User has no Challenges yet</NoReviews>
+            )}
           </ChallengesCardWrapper>
           <Button bg="white" onClick={() => {}}>
             See more Challenges
@@ -110,6 +132,8 @@ const UserProfilePage = ({ reviews }: Props) => {
 
 type Props = {
   reviews?: ReviewApiResponse;
+  challenges?: ChallengesApiResponse;
+  userChallenges?: UserChallangesApiResponse;
 };
 
 export default UserProfilePage;
