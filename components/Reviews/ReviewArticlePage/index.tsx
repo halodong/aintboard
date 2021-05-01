@@ -37,8 +37,8 @@ const ReviewArticlePage = ({ review }: Props) => {
           <Styles.RatingName>Overall Rating</Styles.RatingName>
           <OverallRating rating={review.overallRating} label />
         </Styles.RatingContainer>
-        {ratingData.map((r) => (
-          <Styles.RatingContainer>
+        {ratingData.map((r, i) => (
+          <Styles.RatingContainer key={`${r.name}-${i}`}>
             <Styles.RatingName>{r.name}</Styles.RatingName>
             <RatingForm onRatingClick={() => {}} rating={r.rating} />
           </Styles.RatingContainer>

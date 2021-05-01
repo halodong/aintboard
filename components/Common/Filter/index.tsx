@@ -1,4 +1,3 @@
-import { uniqBy } from "lodash";
 import { useState, useEffect } from "react";
 import useSWR from "swr";
 import fetcher from "~/util/fetch";
@@ -6,24 +5,34 @@ import { useDispatch } from "react-redux";
 import { saveFilters } from "redux/slices/filterSlice";
 
 import DropDown from "~/components/Common/DropDown";
-import { CHALLENGES_PAGE } from "util/constants";
-import { FilterWrapper, Text } from "./styled";
 
-import { ChallengesApiResponse, ChallengesData } from "types/types";
+import { FilterWrapper, Text } from "./styled";
+import { CHALLENGES_PAGE, REVIEWS_PAGE } from "util/constants";
+import useChallengeFilteredData from "~/hooks/useChallengeFilteredData";
+import { ChallengesApiResponse, ReviewApiResponse } from "types/types";
+
+const initialFilteredData = [
+  {
+    label: "",
+    value: "",
+  },
+];
 
 const Filter = ({ type }: Props) => {
   const dispatch = useDispatch();
   const [firstSelected, setFirstSelected] = useState<string>("");
   const [secondSelected, setSecondSelected] = useState<string | null>(null);
-  const [filteredData, setFilteredData] = useState<OptionProps>([
-    {
-      label: "",
-      value: "",
-    },
-  ]);
+  const [filteredData, setFilteredData] = useState<OptionProps>(
+    initialFilteredData
+  );
 
-  const { data } = useSWR<ChallengesApiResponse>(
+  const { data: challengeData } = useSWR<ChallengesApiResponse>(
     type === CHALLENGES_PAGE ? `/api/challenges` : null,
+    fetcher
+  );
+
+  const { data: reviewData } = useSWR<ReviewApiResponse>(
+    type === REVIEWS_PAGE ? `/api/reviews` : null,
     fetcher
   );
 
@@ -39,18 +48,26 @@ const Filter = ({ type }: Props) => {
     //eslint-disable-next-line
   }, [secondSelected]);
 
+  const handleFilter = useChallengeFilteredData();
+
   useEffect(() => {
     if (firstSelected !== null) {
-      let filter =
-        data?.response?.data?.challenges?.map((c: ChallengesData) => {
-          return {
-            label: c[firstSelected]?.toString() || "",
-            value: c[firstSelected]?.toString() || "",
-          };
-        }) || [];
+      let filter = initialFilteredData;
 
-      filter = uniqBy(filter, "value");
+      switch (type) {
+        case CHALLENGES_PAGE:
+          filter = handleFilter({
+            challengeApi: challengeData,
+            firstSelected,
+            type,
+          });
+          break;
+        case REVIEWS_PAGE:
+          filter = handleFilter({ reviewApi: reviewData, firstSelected, type });
+          break;
+      }
 
+      // this filteredData to filled for second dropdown
       setFilteredData(filter);
       return;
     }
@@ -61,7 +78,8 @@ const Filter = ({ type }: Props) => {
         value: "",
       },
     ]);
-  }, [firstSelected, data]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [firstSelected, challengeData]);
 
   let options: OptionProps = [];
 
@@ -79,6 +97,26 @@ const Filter = ({ type }: Props) => {
         {
           label: "PowerUp Amount",
           value: "powerUpAmount",
+        },
+      ];
+      break;
+    case REVIEWS_PAGE:
+      options = [
+        {
+          label: "Boardgame Name",
+          value: "bgName",
+        },
+        {
+          label: "Review Type",
+          value: "reviewType",
+        },
+        {
+          label: "Language",
+          value: "language",
+        },
+        {
+          label: "Overall Rating",
+          value: "overallRating",
         },
       ];
       break;

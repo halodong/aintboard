@@ -14,7 +14,6 @@ const Slug = ({ reviewData }: Props) => {
   }
 
   const review = reviewData?.response?.data?.reviews[0];
-  console.log(review.userData);
 
   return (
     <div>
