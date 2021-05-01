@@ -18,6 +18,7 @@ export const LinkSidebar = styled.li`
   .link {
     display: block;
     text-transform: none;
+    font-family: ${(props) => props.theme.fonts.quicksandBold};
     font-size: 1.2rem;
     margin-top: 0.8rem;
     margin-left: 1rem;
