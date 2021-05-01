@@ -29,6 +29,7 @@ import { chooseModal, setPopup } from "redux/slices/modalSlice";
 import {
   CHALLENGES_PAGE,
   ONLINE_BATTLES,
+  REVIEWS_PAGE,
   CREATE_CHALLENGE_BUTTON,
   CREATE_ONLINE_BATTLE_BUTTON,
 } from "util/constants";
@@ -161,7 +162,7 @@ export default function Header({
         <>
           <Tent className="tent" />
           <Rubik>REVIEWS</Rubik>
-          <Filter type={CHALLENGES_PAGE} />
+          <Filter type={REVIEWS_PAGE} />
         </>
       )}
 

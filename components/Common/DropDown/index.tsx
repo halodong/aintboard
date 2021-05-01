@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Select from "react-select";
 
 import { DropDownContainer } from "./styled";
@@ -14,6 +15,7 @@ const DropDown = ({
     label: "",
     value: "",
   };
+  const [selectedState, setSelectedState] = useState(emptyDefault);
 
   return (
     <DropDownContainer marginLeft={marginLeft}>
@@ -30,9 +32,13 @@ const DropDown = ({
           (selected &&
             selected.length > 0 &&
             options?.filter((o) => o.value === selected)) ||
+          selectedState ||
           emptyDefault
         }
-        onChange={(selectedOption) => onChange(selectedOption || emptyDefault)}
+        onChange={(selectedOption) => {
+          onChange(selectedOption || emptyDefault);
+          setSelectedState(selectedOption || emptyDefault);
+        }}
       />
     </DropDownContainer>
   );

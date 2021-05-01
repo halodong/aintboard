@@ -21,6 +21,7 @@ export interface ReviewApiData {
 }
 
 export type ReviewData = {
+  [key: string]: string | number;
   _id: string;
   userId: number;
   bgName: string;
@@ -89,6 +90,10 @@ export type ChallengesData = {
   bgYear: number;
   powerUpAmount: number;
   createdAt: string;
+};
+
+export type CommonData = {
+  [key: string]: string | number;
 };
 
 export type BattlesData = {

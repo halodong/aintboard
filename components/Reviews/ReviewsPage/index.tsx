@@ -1,4 +1,4 @@
-import React from "react";
+import { useRef } from "react";
 import { useSelector } from "react-redux";
 import useSWR from "swr";
 import { isEmpty } from "lodash";
@@ -11,22 +11,20 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { ReviewCard } from "~/components/Reviews/ReviewCard";
 
 import { ReviewsCardContainer, ReviewsPageWrapper } from "./styled";
-const ReviewsPage = ({ reviews }: Props) => {
+const ReviewsPage = () => {
   const filters = useSelector((state: FilterState) => state.filter.filters);
+  const ref = useRef(true);
+  const firstRender = ref.current;
 
   const { data: filteredApiData } = useSWR<ReviewApiResponse>(
-    // TODO FILTER
-    !isEmpty(filters?.secondSelected)
+    !isEmpty(filters?.secondSelected) && !firstRender
       ? `/api/review/filter/${filters.firstSelected}/${filters.secondSelected}?first=8`
-      : null,
-    fetcher,
-    { initialData: reviews }
+      : `/api/reviews?first=8`,
+    fetcher
   );
 
   const reviewsData = filteredApiData?.response?.data?.reviews || [];
-  if (typeof window === "undefined") {
-    return <></>;
-  }
+  ref.current = false;
 
   return (
     <ReviewsPageWrapper>
@@ -44,10 +42,6 @@ const ReviewsPage = ({ reviews }: Props) => {
       </InfiniteScroll>
     </ReviewsPageWrapper>
   );
-};
-
-type Props = {
-  reviews: ReviewApiResponse;
 };
 
 export default ReviewsPage;
