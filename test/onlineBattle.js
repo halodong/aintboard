@@ -1,6 +1,7 @@
 import { insertBattle, insertValidEntry, getBattles } from "../db/onlineBattle";
 import { insertUser } from "../db/user";
 import { nanoid } from "nanoid";
+import dayjs from "dayjs";
 const dbHandler = require("./db-handler");
 const chai = require("chai");
 const expect = chai.expect;
@@ -51,6 +52,9 @@ describe("Online Battles", () => {
       "Battle of the legends"
     );
     expect(res.response.data.onlineBattle.boardGameName).to.equal("Boardie");
+    expect(res.response.data.onlineBattle.slug).to.equal(
+      `battle-of-the-legends-${dayjs(eventStartDate).format("MM-DD-YYYY")}`
+    );
     expect(res.response.data.onlineBattle.details).to.equal(
       "This is a battle for the legends"
     );
