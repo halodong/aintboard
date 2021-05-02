@@ -1,3 +1,5 @@
+import slug from "limax";
+import dayjs from "dayjs";
 import { nanoid } from "nanoid";
 import { getFailedResponse, getSuccessResponse } from "~/util/apiResponse";
 
@@ -15,8 +17,13 @@ export async function insertBattle(
   }
 ) {
   try {
+    const slugText = slug(
+      `${battleName} ${dayjs(eventStartDate).format("MM-DD-YYYY")}`
+    );
+
     const onlineBattle = await db.collection("online_battle").insertOne({
       _id: nanoid(12),
+      slug: slugText,
       battleName,
       boardGameName,
       bgImage,
