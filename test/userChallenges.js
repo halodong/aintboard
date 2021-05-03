@@ -1,4 +1,7 @@
-import { insertUserChallenges } from "../db/userChallenges";
+import {
+  insertUserChallenges,
+  filterUserChallenges,
+} from "../db/userChallenges";
 import { insertUser } from "../db/user";
 import { nanoid } from "nanoid";
 const chai = require("chai");
@@ -57,5 +60,18 @@ describe("User challenges", () => {
     if (alreadyAchieveChallenge === "User has achieved this challenge") {
       expect(res.response.data.userWithPowerUps).to.be.an("object");
     }
+  });
+
+  it("should filter userChallenges by userId", async () => {
+    let res = await filterUserChallenges(db, {
+      filter: "userId",
+      field: user._id,
+    });
+
+    expect(res.success).to.equal(true);
+    expect(res.response.message).to.equal("Filtered User Challenges");
+    expect(res.response.data.challenge.map((e) => e.userId)).to.include(
+      user._id
+    );
   });
 });

@@ -5,9 +5,20 @@ import UserProfilePage from "~/components/UserProfilePage";
 
 import fetcher from "~/util/fetch";
 import { FALLBACK } from "util/constants";
-import { UserData, UserApiResponse } from "~/types/types";
+import {
+  UserData,
+  UserApiResponse,
+  ChallengesApiResponse,
+  UserChallangesApiResponse,
+  ReviewApiResponse,
+} from "~/types/types";
 
-const Page = ({ userData }: Props) => {
+const Page = ({
+  userData,
+  challengeData,
+  reviewData,
+  userChallengeData,
+}: Props) => {
   if (typeof window === "undefined") {
     return <></>;
   }
@@ -26,13 +37,20 @@ const Page = ({ userData }: Props) => {
         <Avatar iconType={user?.avatar || ""} />
       </Header>
 
-      <UserProfilePage />
+      <UserProfilePage
+        challenges={challengeData}
+        reviews={reviewData}
+        userChallenges={userChallengeData}
+      />
     </>
   );
 };
 
 type Props = {
   userData: UserApiResponse;
+  challengeData: ChallengesApiResponse;
+  reviewData: ReviewApiResponse;
+  userChallengeData: UserChallangesApiResponse;
 };
 
 export default Page;
@@ -50,6 +68,18 @@ export async function getStaticProps({ params }: Params) {
     `${process.env.NEXT_PUBLIC_API_URL}/api/user/filter/username/${username}?first=1`
   );
 
+  const challengeData: ChallengesApiResponse = await fetcher(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/challenge/filter/createdBy/${userData.response.data.users[0]._id}`
+  );
+
+  const reviewData: ReviewApiResponse = await fetcher(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/review/filter/userId/${userData.response.data.users[0]._id}?first=4`
+  );
+
+  const userChallengeData: UserChallangesApiResponse = await fetcher(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/userChallenges/filter/userId/${userData.response.data.users[0]._id}?first=1`
+  );
+
   if (userData?.response?.data?.users?.length < 1) {
     return {
       notFound: true,
@@ -59,6 +89,9 @@ export async function getStaticProps({ params }: Params) {
   return {
     props: {
       userData,
+      challengeData,
+      reviewData,
+      userChallengeData,
     },
   };
 }

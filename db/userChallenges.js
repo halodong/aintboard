@@ -53,3 +53,41 @@ export const insertUserChallenges = async (
     return getFailedResponse(err, "db/userChallenges.js");
   }
 };
+
+export const filterUserChallenges = async (db, { first, filter, field }) => {
+  try {
+    let challenges = null;
+    first = first ? parseInt(first) : null;
+
+    if (filter && field) {
+      let aggregate = [
+        {
+          $match: {
+            [filter]: field,
+          },
+        },
+        {
+          $project: { password: 0 },
+        },
+      ];
+
+      if (first) {
+        //with limit
+        aggregate.push({ $limit: first });
+      }
+
+      challenges = await db.collection("user_challenges").aggregate(aggregate);
+    }
+
+    const userChallengesArray = await challenges.toArray();
+
+    return getSuccessResponse({
+      message: "Filtered User Challenges",
+      data: {
+        challenge: userChallengesArray,
+      },
+    });
+  } catch (err) {
+    return getFailedResponse(err, "db/user.js", "Filter User Challenges error");
+  }
+};

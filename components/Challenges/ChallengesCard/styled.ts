@@ -31,6 +31,7 @@ export const ChallengeName = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  width: 100%;
 
   & p {
     padding: 0 2rem;
@@ -50,4 +51,13 @@ export const ImgWrapper = styled.div`
     border-top-left-radius: ${(props) => props.theme.border["10px"]};
     border-bottom-left-radius: ${(props) => props.theme.border["10px"]};
   }
+`;
+
+export const Achieved = styled.p`
+  font-family: ${(props) => props.theme.fonts.rubikBold};
+  color: ${(props) => props.theme.colors.darkGreen};
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
 `;

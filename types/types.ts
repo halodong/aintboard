@@ -84,11 +84,14 @@ export interface ChallengesApiData {
 export type ChallengesData = {
   [key: string]: string | number;
   _id: string;
+  createdBy: string;
   challengeName: string;
   bgId: number;
   bgName: string;
+  bgImage: string;
   bgYear: number;
   powerUpAmount: number;
+  status: string;
   createdAt: string;
 };
 
@@ -193,4 +196,23 @@ export type UserAvatarsData = {
   userId: string;
   icon: string;
   createdAt: string;
+};
+
+export interface UserChallangesApiResponse {
+  success: boolean;
+  response: {
+    message: string;
+    data: UserChallengesApiData;
+  };
+}
+
+export interface UserChallengesApiData {
+  challenge: UserChallengesData[];
+  userWithPowerUps: UserData[];
+}
+
+export type UserChallengesData = {
+  userId: string;
+  challengeId: string;
+  _id: string;
 };
