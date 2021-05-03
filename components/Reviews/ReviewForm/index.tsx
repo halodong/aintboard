@@ -176,6 +176,10 @@ const ReviewForm = () => {
             </InputContainer>
 
             <Label>Upload your own images related to your Review</Label>
+            <Label marginTop="1rem">
+              Images from any website is prohibited. Please upload your own
+              images. Make sure it's good quality too :)
+            </Label>
 
             <ImageUpload
               buttonLabel="Choose images"
