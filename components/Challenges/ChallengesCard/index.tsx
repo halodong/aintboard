@@ -17,9 +17,7 @@ const ChallengesCard = ({ data, achieved }: Props) => {
           <Image alt="challenge card" src={`${data?.bgImage}`} layout="fill" />
         ) : (
           <Image
-            src={
-              "https://cf.geekdo-images.com/0BsjJY9MTlx9DRrlkeE69w__original/img/6AJktf34S4ypVI75ecsfmkDicgA=/0x0/filters:format(jpeg)/pic5482020.jpg"
-            }
+            src="/img/portrait_def.png"
             alt="challenge card"
             layout="fill"
           />
