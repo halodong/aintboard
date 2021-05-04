@@ -25,7 +25,7 @@ import { REVIEWS_HOMEPAGE_COMPONENT, REVIEW_TYPE } from "~/util/constants";
 export const ReviewCard = ({ data }: Props) => {
   const router = useRouter();
   return (
-    <ReviewCardContainer onClick={() => router.push(`../review/${data?.slug}`)}>
+    <ReviewCardContainer onClick={() => router.push(`/review/${data?.slug}`)}>
       <BgImgWrapper>
         {data.images?.length > 0 ? (
           <Image alt="boardgame" src={data.images[0]} layout="fill" />
