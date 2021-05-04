@@ -1,6 +1,7 @@
 import nc from "next-connect";
 
-import { filterUserChallenges } from "~/db/userChallenges";
+import { filterUserChallenges } from "db/userChallenges";
+
 import { all } from "~/middlewares";
 
 const handler = nc();
