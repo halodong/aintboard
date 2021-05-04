@@ -16,7 +16,7 @@ import {
 import Avatar from "components/Avatar";
 import OverallRating from "components/Common/OverallRating";
 import CommentIcon from "assets/img/Comment";
-import HeartLikeIcon from "assets/img/HeartLike";
+import HeartIcon from "assets/img/Heart";
 
 import { ReviewData } from "types/types";
 import { createHTMLExcerpt } from "~/util/createHTML";
@@ -63,7 +63,7 @@ export const ReviewCard = ({ data }: Props) => {
 
             <div className="socials">
               <CommentIcon /> <span>100</span>
-              <HeartLikeIcon /> <span>102</span>
+              <HeartIcon /> <span>102</span>
             </div>
           </BottomRight>
         </Bottom>
