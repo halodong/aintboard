@@ -5,12 +5,12 @@ export const upload = async (files) => {
     // Initial FormData
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", "hhyc0f1i"); // Replace the preset name with your own
+    formData.append("upload_preset", process.env.NEXT_PUBLIC_CLOUDINARY_PRESET); // Replace the preset name with your own
 
     // Make an AJAX upload request using Axios (replace Cloudinary URL below with your own)
     return axios
       .post(
-        "https://api.cloudinary.com/v1_1/aintboard-faith/image/upload",
+        `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
         formData,
         {
           headers: { "X-Requested-With": "XMLHttpRequest" },

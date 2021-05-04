@@ -1,22 +1,25 @@
-import { useState } from "react";
-import { Formik, Form } from "formik";
-import { isEmpty } from "lodash";
-import { toast } from "react-toastify";
+import useSWR from "swr";
 import axios from "axios";
 import * as Yup from "yup";
+import { isEmpty } from "lodash";
+import { useState } from "react";
+import { Formik, Form } from "formik";
+import { toast } from "react-toastify";
 
 import Input from "components/Common/Input";
 import Label from "components/Common/Label";
 import Button from "components/Common/Button";
 import ImageUpload from "components/Common/ImageUpload";
-
 import {
   InputContainer,
   ButtonContainer,
   ErrorMessage,
 } from "components/Common/inputStyled";
-import useCurrentUser from "hooks/useCurrentUser";
+
+import fetcher from "util/fetch";
 import { upload } from "util/cloudinary";
+import { UserApiResponse } from "types/types";
+import useCurrentUser from "hooks/useCurrentUser";
 import { CHALLENGE_STATUS } from "util/constants";
 
 const CreateChallengeForm = ({ closeModal }: Props) => {
@@ -35,6 +38,15 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
     powerUpAmount: Yup.number().required("PowerUp amount required"),
   });
 
+  const userData = user?.userData ? JSON.parse(user?.userData) : {};
+
+  const { data: userApiData } = useSWR<UserApiResponse>(
+    userData?._id ? `/api/user/filter/_id/${userData?._id}` : null,
+    fetcher
+  );
+
+  const userObj = userApiData?.response?.data?.users?.[0];
+
   return (
     <Formik
       enableReinitialize
@@ -52,19 +64,23 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
             return;
           }
 
-          const uploadedImage = await upload(images);
-
-          const userData = !isEmpty(user?.userData)
-            ? JSON.parse(user?.userData || "")
-            : { role: "" };
-          const role = userData?.role || "guest";
           const powerUpAmount =
             values.powerUpAmount === "" ? 0 : values.powerUpAmount;
 
-          if (role === "guest" && powerUpAmount > 2) {
+          if (userObj?.role === "guest" && powerUpAmount > 2) {
             toast.error("You're not allowed to assign more than 2 PowerUps");
             return;
           }
+
+          if (
+            ["admin", "community_manager"].includes(userObj?.role || "") &&
+            powerUpAmount > 5
+          ) {
+            toast.error("Max is 5 PowerUps");
+            return;
+          }
+
+          const uploadedImage = await upload(images);
 
           const response = await axios.post("/api/challenges/", {
             createdBy: userData._id,
