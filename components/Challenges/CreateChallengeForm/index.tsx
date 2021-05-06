@@ -97,6 +97,10 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
             Challenge Names could be: Finish Pandemic in an hour in a 2-player
             game.
           </Label>
+          <Label>
+            Images from any website is prohibited. Please upload your own
+            images. Make sure it's good quality too :)
+          </Label>
 
           <ImageUpload
             buttonLabel="Upload an image of the boardgame"
