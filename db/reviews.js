@@ -88,9 +88,11 @@ export async function getReviews(db, { first }) {
     if (first) {
       reviews = await db
         .collection("reviews")
-        .aggregate([{ $limit: first }, lookup]);
+        .aggregate([{ $sort: { createdAt: -1 } }, { $limit: first }, lookup]);
     } else {
-      reviews = await db.collection("reviews").aggregate([lookup]);
+      reviews = await db
+        .collection("reviews")
+        .aggregate([{ $sort: { createdAt: -1 } }, lookup]);
     }
     const reviewArray = await reviews.toArray();
 

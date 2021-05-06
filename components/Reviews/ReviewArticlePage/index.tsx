@@ -1,10 +1,9 @@
 import { ReviewData } from "~/types/types";
+import { createHTML } from "~/util/createHTML";
 
 import Button from "~/components/Common/Button";
 import OverallRating from "~/components/Common/OverallRating";
 import RatingForm from "~/components/Common/RatingForm";
-
-import { createHTML } from "~/util/createHTML";
 
 import * as Styles from "./styled";
 
@@ -44,6 +43,14 @@ const ReviewArticlePage = ({ review }: Props) => {
           </Styles.RatingContainer>
         ))}
       </Styles.RatingWrapper>
+
+      {review?.userData?.[0]?.gcash && (
+        <Styles.TipText>
+          Send tips to the author!
+          <br />
+          Here's their gcash account: {review?.userData?.[0]?.gcash}
+        </Styles.TipText>
+      )}
     </Styles.ReviewArticlePageWrapper>
   );
 };
