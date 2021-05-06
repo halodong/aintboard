@@ -173,6 +173,10 @@ const StrategyForm = () => {
             </InputContainer>
 
             <Label>Upload your own images related to your strategy</Label>
+            <Label marginTop="1rem" fontSize="0.8rem">
+              Images from any website is prohibited. Please upload your own
+              images. Make sure it's good quality too :)
+            </Label>
 
             <ImageUpload
               buttonLabel="Choose images"

@@ -120,6 +120,10 @@ const OnlineBattleForm = ({ closeModal }: Props) => {
             either in a real or online boardgame. At the end of the event, top 3
             users are awarded with trophies.
           </Label>
+          <Label>
+            Images from any website is prohibited. Please upload your own
+            images. Make sure it's good quality too :)
+          </Label>
 
           <ImageUpload
             buttonLabel="Upload a cover photo"

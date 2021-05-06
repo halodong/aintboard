@@ -41,8 +41,10 @@ export const Label = styled.label<LabelProps>`
   color: ${(props) => props.theme.colors.lightYellow};
   margin-bottom: 1rem;
   margin-top: ${(props) => (props.marginTop ? props.marginTop : "2rem")};
+  font-size: ${(props) => (props.fontSize ? props.fontSize : "1rem")};
 `;
 
 type LabelProps = {
   marginTop?: string;
+  fontSize?: string;
 };
