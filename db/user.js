@@ -7,7 +7,16 @@ require("dotenv").config();
 
 export async function insertUser(
   db,
-  { firstName, lastName, email, password, role = "guest", username, avatar }
+  {
+    firstName,
+    lastName,
+    email,
+    password,
+    role = "guest",
+    username,
+    avatar,
+    gcash,
+  }
 ) {
   try {
     if (username.match(/^[0-9a-zA-Z]+$/) === null) {
@@ -47,6 +56,7 @@ export async function insertUser(
       role,
       username,
       avatar,
+      gcash,
       powerups: 0,
       stars: 0,
     });

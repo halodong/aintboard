@@ -103,7 +103,7 @@ const Navbar = () => {
         {cta.map((mdl) => (
           <Modal
             key={`${mdl.name}-${mdl.id}`}
-            isOpen={modalIsOpen}
+            isOpen={modalIsOpen && whichModal === mdl.id}
             closeModal={() => setModalIsOpen(false)}
             headerLabel={whichModal === 1 ? "Login" : "Join Us!"}
           >

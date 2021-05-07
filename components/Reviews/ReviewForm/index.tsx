@@ -185,7 +185,11 @@ const ReviewForm = () => {
                 handleChangeOnParent={(name, value) =>
                   handleValueChange(name, value)
                 }
-                error={errors.reviewTitle || ""}
+                error={
+                  touched.reviewTitle && errors.reviewTitle
+                    ? errors.reviewTitle
+                    : ""
+                }
                 marginLeft="0"
               />
             </InputContainer>
@@ -199,7 +203,7 @@ const ReviewForm = () => {
               <Input
                 name="bgName"
                 label="Boardgame Name"
-                error={errors.bgName || ""}
+                error={touched.bgName && errors.bgName ? errors.bgName : ""}
                 handleChangeOnParent={(name, value) =>
                   handleValueChange(name, value)
                 }
@@ -327,7 +331,11 @@ const ReviewForm = () => {
                 handleChangeOnParent={(name, value) =>
                   handleValueChange(name, value)
                 }
-                error={errors.youtubeUrl || ""}
+                error={
+                  touched.youtubeUrl && errors.youtubeUrl
+                    ? errors.youtubeUrl
+                    : ""
+                }
                 marginLeft="0"
               />
             </InputContainer>

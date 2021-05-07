@@ -1,13 +1,13 @@
+import axios from "axios";
+import * as Yup from "yup";
 import { useState } from "react";
 import { Formik, Form } from "formik";
-import * as Yup from "yup";
 import { toast } from "react-toastify";
-import axios from "axios";
 
 import Input from "../Common/Input";
 import Label from "../Common/Label";
-import ChooseAvatar from "~/components/Avatar/ChooseAvatar";
 import Button from "~/components/Common/Button";
+import ChooseAvatar from "~/components/Avatar/ChooseAvatar";
 
 import {
   InputContainer,
@@ -27,6 +27,8 @@ const JoinUsForm = ({ closeModal }: Props) => {
 
     email: Yup.string().email("Invalid email").required("Email Required"),
 
+    // gcash: Yup.number().typeError("Must be a number"),
+
     password: Yup.string()
       .min(8, "Password must have at least 8 characters")
       .required("Password is required"),
@@ -43,6 +45,7 @@ const JoinUsForm = ({ closeModal }: Props) => {
         username: "",
         email: "",
         password: "",
+        // gcash: "",
         passwordConfirmation: "",
       }}
       validationSchema={signupSchema}
@@ -58,6 +61,7 @@ const JoinUsForm = ({ closeModal }: Props) => {
             username: values.username,
             email: values.email,
             password: values.password,
+            // gcash: values.gcash,
             avatar,
           });
 
@@ -110,11 +114,11 @@ const JoinUsForm = ({ closeModal }: Props) => {
               name="password"
               label="Password"
               type="password"
-              error={errors.password || ""}
+              error={errors.password && touched.password ? errors.password : ""}
             />
           </InputContainer>
 
-          <InputContainer marginbottom="0">
+          <InputContainer>
             {errors.passwordConfirmation && touched.passwordConfirmation && (
               <ErrorMessage>{errors.passwordConfirmation}</ErrorMessage>
             )}
@@ -122,9 +126,30 @@ const JoinUsForm = ({ closeModal }: Props) => {
               name="passwordConfirmation"
               label="Confirm Password"
               type="password"
-              error={errors.passwordConfirmation || ""}
+              error={
+                errors.passwordConfirmation && touched.passwordConfirmation
+                  ? errors.passwordConfirmation
+                  : ""
+              }
             />
           </InputContainer>
+
+          {/* delete for now */}
+          {/* <Label>
+            You can receive tips from your review and strategy posts!
+          </Label>
+
+          <InputContainer>
+            {errors.gcash && touched.gcash && (
+              <ErrorMessage>{errors.gcash}</ErrorMessage>
+            )}
+            <Input
+              name="gcash"
+              label="Gcash number (optional)"
+              type="gcash"
+              error={errors.gcash && touched.gcash ? errors.gcash : ""}
+            />
+          </InputContainer> */}
 
           <ChooseAvatar
             chooseAvatar={(chosenAvatar) => setAvatar(chosenAvatar)}

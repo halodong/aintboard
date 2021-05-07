@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const ReviewArticlePageWrapper = styled.div`
   background-color: ${(props) => props.theme.colors.darkGreen};
   color: ${(props) => props.theme.colors.white};
-  padding: 0 10rem;
+  padding: 0 10rem 10rem 10rem;
 `;
 
 export const LanguageContainer = styled.div`
@@ -50,4 +50,8 @@ export const ArticleAuthor = styled.p`
 export const ArticleDate = styled.p`
   font-size: 1.5rem;
   margin: 0.5rem;
+`;
+
+export const TipText = styled.div`
+  margin-bottom: 1rem;
 `;

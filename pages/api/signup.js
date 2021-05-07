@@ -16,6 +16,7 @@ handler.post(async (req, res) => {
     username,
     password,
     avatar,
+    gcash = "",
   } = req.body;
 
   const user = await insertUser(req.db, {
@@ -26,6 +27,7 @@ handler.post(async (req, res) => {
     role,
     username,
     avatar,
+    gcash,
   });
 
   return res.json(user);
