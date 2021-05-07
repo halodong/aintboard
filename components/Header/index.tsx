@@ -62,6 +62,7 @@ export default function Header({
   isReviewsPage = false,
   isReviewArticlePage = false,
   isUserPage = false,
+  isSettingsPage = false,
   children,
 }: Props) {
   const router = useRouter();
@@ -102,14 +103,18 @@ export default function Header({
       isOnlineBattles={isOnlineBattles}
       isReviewArticlePage={isReviewArticlePage}
       isUserPage={isUserPage}
+      isSettingsPage={isSettingsPage}
     >
       <Navbar />
 
       {/* <Searchbar /> obsolete for now */}
 
-      {isUserPage && <CenterTagline isUserPage>{children}</CenterTagline>}
+      {isUserPage ||
+        (isSettingsPage && (
+          <CenterTagline isUserPage>{children}</CenterTagline>
+        ))}
 
-      {(homepage || isBoardGamePage || isUserPage) && (
+      {(homepage || isBoardGamePage || isUserPage || isSettingsPage) && (
         <div className="homepage-bg-container">
           <TreesGroup1 className="trees-1" />
           <TreesGroup2 className="trees-2" />
@@ -226,5 +231,6 @@ type Props = {
   isReviewsPage?: boolean;
   isReviewArticlePage?: boolean;
   isUserPage?: boolean;
+  isSettingsPage?: boolean;
   children?: any;
 };

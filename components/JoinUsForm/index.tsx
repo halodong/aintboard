@@ -27,7 +27,7 @@ const JoinUsForm = ({ closeModal }: Props) => {
 
     email: Yup.string().email("Invalid email").required("Email Required"),
 
-    gcash: Yup.number().typeError("Must be a number"),
+    // gcash: Yup.number().typeError("Must be a number"),
 
     password: Yup.string()
       .min(8, "Password must have at least 8 characters")
@@ -45,7 +45,7 @@ const JoinUsForm = ({ closeModal }: Props) => {
         username: "",
         email: "",
         password: "",
-        gcash: "",
+        // gcash: "",
         passwordConfirmation: "",
       }}
       validationSchema={signupSchema}
@@ -61,7 +61,7 @@ const JoinUsForm = ({ closeModal }: Props) => {
             username: values.username,
             email: values.email,
             password: values.password,
-            gcash: values.gcash,
+            // gcash: values.gcash,
             avatar,
           });
 
@@ -134,7 +134,8 @@ const JoinUsForm = ({ closeModal }: Props) => {
             />
           </InputContainer>
 
-          <Label>
+          {/* delete for now */}
+          {/* <Label>
             You can receive tips from your review and strategy posts!
           </Label>
 
@@ -148,7 +149,7 @@ const JoinUsForm = ({ closeModal }: Props) => {
               type="gcash"
               error={errors.gcash && touched.gcash ? errors.gcash : ""}
             />
-          </InputContainer>
+          </InputContainer> */}
 
           <ChooseAvatar
             chooseAvatar={(chosenAvatar) => setAvatar(chosenAvatar)}

@@ -7,7 +7,8 @@ export const HeaderWrapper = styled.div<HeaderWrapperProps>`
     props.isSearchPage ||
     props.isChallengePage ||
     props.isBoardGamePage ||
-    props.isReviewArticlePage
+    props.isReviewArticlePage ||
+    props.isSettingsPage
       ? "30rem"
       : "35rem"};
   position: relative;
@@ -97,6 +98,7 @@ type HeaderWrapperProps = {
   isOnlineBattles?: boolean;
   isReviewArticlePage?: boolean;
   isUserPage?: boolean;
+  isSettingsPage?: boolean;
 };
 
 const baseTaglineStyles = styled.h1`
