@@ -7,8 +7,8 @@ export const RatingFormWrapper = styled.div<RatingFormWrapperProps>`
     props.paddingBottom ? `1rem 0 ${props.paddingBottom}` : "1rem 0"};
 
   .dice {
-    width: ${(props) => (props.big ? "6rem" : "3rem")};
-    height: ${(props) => (props.big ? "6rem" : "3rem")};
+    width: ${(props) => (props.big ? "4rem" : "3rem")};
+    height: ${(props) => (props.big ? "4rem" : "3rem")};
     margin-right: 1rem;
     cursor: pointer;
   }

@@ -1,3 +1,8 @@
+import ReactPlayer from "react-player";
+import AwesomeSlider from "react-awesome-slider";
+import "react-awesome-slider/dist/styles.css";
+import "react-awesome-slider/dist/custom-animations/cube-animation.css";
+
 import { ReviewData } from "~/types/types";
 import { createHTML } from "~/util/createHTML";
 
@@ -6,6 +11,7 @@ import OverallRating from "~/components/Common/OverallRating";
 import RatingForm from "~/components/Common/RatingForm";
 
 import * as Styles from "./styled";
+import { YoutubeContainer } from "../NewReviewContent/styled";
 
 const ReviewArticlePage = ({ review }: Props) => {
   const ratingData = [
@@ -19,12 +25,26 @@ const ReviewArticlePage = ({ review }: Props) => {
 
   return (
     <Styles.ReviewArticlePageWrapper>
-      <Styles.LanguageContainer>
-        <Button bg="white">{review.language}</Button>
-      </Styles.LanguageContainer>
+      <Styles.ReviewHeader>
+        <Styles.ReviewHeaderLeft>
+          <Button bg="white">{review.language}</Button>
+          <Styles.OverallRating>
+            <OverallRating rating={review.overallRating} big />
+            <span>{review.overallRating}</span>
+          </Styles.OverallRating>
+        </Styles.ReviewHeaderLeft>
+        <Styles.SliderWrapper>
+          {review.images && (
+            <AwesomeSlider animation="cubeAnimation">
+              {review.images?.map((r) => (
+                <div data-src={r} />
+              ))}
+            </AwesomeSlider>
+          )}
+        </Styles.SliderWrapper>
+      </Styles.ReviewHeader>
 
       <Styles.ReviewContentContainer>
-        <OverallRating rating={review.overallRating} big />
         <div
           className="preview"
           dangerouslySetInnerHTML={createHTML(review.content)}
@@ -44,13 +64,21 @@ const ReviewArticlePage = ({ review }: Props) => {
         ))}
       </Styles.RatingWrapper>
 
-      {review?.userData?.[0]?.gcash && (
+      <YoutubeContainer>
+        {review?.youtubeUrl &&
+          review?.youtubeUrl?.length > 0 &&
+          isNaN(parseInt(review.youtubeUrl)) && (
+            <ReactPlayer url={review.youtubeUrl} width="40rem" />
+          )}
+      </YoutubeContainer>
+
+      {/* {review?.userData?.[0]?.gcash && (
         <Styles.TipText>
           Send tips to the author!
           <br />
           Here's their gcash account: {review?.userData?.[0]?.gcash}
         </Styles.TipText>
-      )}
+      )} */}
     </Styles.ReviewArticlePageWrapper>
   );
 };
