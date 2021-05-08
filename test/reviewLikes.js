@@ -1,4 +1,4 @@
-import { likeReview } from "../db/reviewLikes";
+import { likeReview, getLikes } from "../db/reviewLikes";
 import { insertUser } from "../db/user";
 import { nanoid } from "nanoid";
 const chai = require("chai");
@@ -7,7 +7,7 @@ const dbHandler = require("./db-handler");
 
 describe("Review Likes", () => {
   let db, user;
-  beforeEach(async () => {
+  before(async () => {
     try {
       db = await dbHandler.connect();
       await dbHandler.clearDatabase();
@@ -28,12 +28,12 @@ describe("Review Likes", () => {
     user = userData.response.data.user;
   });
 
-  afterEach(async () => {
+  after(async () => {
     await dbHandler.clearDatabase();
     await dbHandler.closeDatabase();
   });
 
-  it("should like a review and should", async () => {
+  it("should like a review", async () => {
     let res = await likeReview(db, {
       userId: user._id,
       reviewId: 1,
@@ -65,5 +65,13 @@ describe("Review Likes", () => {
       expect(res.response.message).to.exist;
       expect(totalLikes).to.be.equal(10);
     }
+  });
+
+  it("should get total likes count", async () => {
+    let res = await getLikes(db, { reviewId: 1 });
+
+    expect(res.success).to.equal(true);
+    expect(res.response.totalLikes).to.be.a("number");
+    expect(res.response.totalLikes).to.be.equal(11);
   });
 });

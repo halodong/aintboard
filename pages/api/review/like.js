@@ -1,11 +1,21 @@
 import nc from "next-connect";
 
-import { likeReview } from "~/db/reviewLikes";
+import { likeReview, getLikes } from "~/db/reviewLikes";
 import { all } from "~/middlewares/index";
 
 const handler = nc();
 
 handler.use(all);
+
+handler.get(async (req, res) => {
+  const { reviewId } = req.query;
+
+  const reviews = await getLikes(req.db, {
+    reviewId,
+  });
+
+  return res.json(reviews);
+});
 
 handler.post(async (req, res) => {
   const { userId, reviewId } = req.body;

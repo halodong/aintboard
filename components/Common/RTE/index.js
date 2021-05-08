@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { EditorState, Modifier, convertToRaw } from "draft-js";
 import dynamic from "next/dynamic";
 import draftToHtml from "draftjs-to-html";
@@ -13,7 +13,7 @@ const Editor = dynamic(
 
 const HANDLED = "handled";
 
-const RTE = ({ savedContent, passContentToParent }) => {
+const RTE = ({ savedContent = "", passContentToParent }) => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
