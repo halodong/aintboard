@@ -17,7 +17,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "sourceMap": true
   },
   "include": [
     "pages",
@@ -26,6 +27,6 @@
     "obsolete/search",
     "obsolete/boardgame"
   ],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "types/types", "types/reduxTypes"],
   "extends": "./tsconfig.paths.json"
 }

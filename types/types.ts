@@ -21,7 +21,7 @@ export interface ReviewApiData {
 }
 
 export type ReviewData = {
-  [key: string]: string | number;
+  [key: string]: string | number | string[] | UserData[] | undefined;
   _id: string;
   userId: number;
   bgName: string;
@@ -95,6 +95,14 @@ export type ChallengesData = {
   status: string;
   createdAt: string;
 };
+
+export interface ReviewLikesApiResponse {
+  success: boolean;
+  response: {
+    totalLikes: number;
+    message: string;
+  };
+}
 
 export type CommonData = {
   [key: string]: string | number;

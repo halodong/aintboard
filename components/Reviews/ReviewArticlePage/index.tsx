@@ -1,14 +1,11 @@
 import ReactPlayer from "react-player";
-import AwesomeSlider from "react-awesome-slider";
-import "react-awesome-slider/dist/styles.css";
-import "react-awesome-slider/dist/custom-animations/cube-animation.css";
 
 import { ReviewData } from "~/types/types";
 import { createHTML } from "~/util/createHTML";
 
-import Button from "~/components/Common/Button";
-import OverallRating from "~/components/Common/OverallRating";
 import RatingForm from "~/components/Common/RatingForm";
+import OverallRating from "~/components/Common/OverallRating";
+import ReviewArticleHero from "~/components/Reviews/ReviewArticleHero";
 
 import * as Styles from "./styled";
 import { YoutubeContainer } from "../NewReviewContent/styled";
@@ -25,24 +22,7 @@ const ReviewArticlePage = ({ review }: Props) => {
 
   return (
     <Styles.ReviewArticlePageWrapper>
-      <Styles.ReviewHeader>
-        <Styles.ReviewHeaderLeft>
-          <Button bg="white">{review.language}</Button>
-          <Styles.OverallRating>
-            <OverallRating rating={review.overallRating} big />
-            <span>{review.overallRating}</span>
-          </Styles.OverallRating>
-        </Styles.ReviewHeaderLeft>
-        <Styles.SliderWrapper>
-          {review.images && (
-            <AwesomeSlider animation="cubeAnimation">
-              {review.images?.map((r) => (
-                <div data-src={r} />
-              ))}
-            </AwesomeSlider>
-          )}
-        </Styles.SliderWrapper>
-      </Styles.ReviewHeader>
+      <ReviewArticleHero review={review} />
 
       <Styles.ReviewContentContainer>
         <div
