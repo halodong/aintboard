@@ -4,6 +4,9 @@ import Header from "components/Header";
 import Footer from "components/Common/Footer";
 import BuyAvatar from "components/Avatar/BuyAvatar";
 
+import database from "middlewares/dbForFrontend";
+import { getSpecialAvatars } from "db/specialAvatars";
+
 import fetcher from "~/util/fetch";
 import { SpecialAvatarsApiResponse } from "~/types/types";
 
@@ -36,9 +39,8 @@ type Props = {
 export default BuyAvatarsPage;
 
 export async function getStaticProps() {
-  const specialAvatars = await fetcher(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/special-avatars`
-  );
+  const db = await database();
+  const specialAvatars = await getSpecialAvatars(db);
 
   return {
     props: {

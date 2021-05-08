@@ -3,7 +3,13 @@ import Avatar from "~/components/Avatar";
 import Seo from "~/components/Common/Seo";
 import UserProfilePage from "~/components/UserProfilePage";
 
-import fetcher from "~/util/fetch";
+import { filterUsers } from "db/user";
+import { getUsers } from "db/users";
+import { filterReviews } from "db/reviews";
+import { filterChallenges } from "db/challenges";
+import database from "middlewares/dbForFrontend";
+import { filterUserChallenges } from "db/userChallenges";
+
 import { FALLBACK } from "util/constants";
 import {
   UserData,
@@ -64,21 +70,27 @@ type Params = {
 export async function getStaticProps({ params }: Params) {
   const { username } = params;
 
-  const userData: UserApiResponse = await fetcher(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/user/filter/username/${username}?first=1`
-  );
-
-  const challengeData: ChallengesApiResponse = await fetcher(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/challenge/filter/createdBy/${userData.response.data.users[0]._id}`
-  );
-
-  const reviewData: ReviewApiResponse = await fetcher(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/review/filter/userId/${userData.response.data.users[0]._id}?first=4`
-  );
-
-  const userChallengeData: UserChallangesApiResponse = await fetcher(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/userChallenges/filter/userId/${userData.response.data.users[0]._id}?first=1`
-  );
+  const db = await database();
+  const userData = await filterUsers(db, {
+    filter: "username",
+    field: username,
+    first: 1,
+  });
+  const challengeData = await filterChallenges(db, {
+    filter: "createdBy",
+    field: userData.response.data.users[0]._id,
+    first: null,
+  });
+  const reviewData = await filterReviews(db, {
+    filter: "userId",
+    field: userData.response.data.users[0]._id,
+    first: 4,
+  });
+  const userChallengeData = await filterUserChallenges(db, {
+    filter: "userId",
+    field: userData.response.data.users[0]._id,
+    first: 1,
+  });
 
   if (userData?.response?.data?.users?.length < 1) {
     return {
@@ -97,9 +109,8 @@ export async function getStaticProps({ params }: Params) {
 }
 
 export async function getStaticPaths() {
-  const response = await fetcher(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/users?first=2`
-  );
+  const db = await database();
+  const response = await getUsers(db, { first: 2 });
 
   const pathsData =
     response?.success &&

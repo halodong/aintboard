@@ -1,7 +1,9 @@
 import Seo from "~/components/Common/Seo";
 import Header from "~/components/Header/";
 import OnlineBattle from "~/components/OnlineBattle";
-import fetcher from "~/util/fetch";
+
+import { getBattles } from "db/onlineBattle";
+import database from "middlewares/dbForFrontend";
 import { BattlesApiResponse } from "~/types/types";
 
 const OnlineBattles = ({ battleResponse }: Props) => {
@@ -26,9 +28,8 @@ type Props = {
 export default OnlineBattles;
 
 export async function getStaticProps() {
-  const battleResponse = await fetcher(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/online-battles`
-  );
+  const db = await database();
+  const battleResponse = await getBattles(db, { first: null });
 
   return {
     props: {

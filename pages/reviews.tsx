@@ -1,5 +1,3 @@
-import React from "react";
-
 import Header from "~/components/Header";
 import Seo from "~/components/Common/Seo";
 import ReviewsPage from "~/components/Reviews/ReviewsPage";

@@ -7,6 +7,9 @@ import Footer from "~/components/Common/Footer";
 import ReviewHomepage from "~/components/Reviews/ReviewHomepage";
 import ChallengesHomepage from "~/components/Challenges/ChallengesHomepage";
 
+import { getReviews } from "db/reviews";
+import database from "middlewares/dbForFrontend";
+import { getAllChallenges } from "db/challenges";
 import { ReviewApiResponse, ChallengesApiResponse } from "~/types/types";
 
 export default function Home({ reviews, challenges }: Props) {
@@ -50,13 +53,9 @@ type Props = {
 };
 
 export const getStaticProps = async () => {
-  const reviews = await fetcher(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/reviews?first=5`
-  );
-
-  const challenges = await fetcher(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/challenges?first=3`
-  );
+  const db = await database();
+  const challenges = await getAllChallenges(db, { first: 3 });
+  const reviews = await getReviews(db, { first: 5 });
 
   return {
     props: {

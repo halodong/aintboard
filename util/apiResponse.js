@@ -5,9 +5,11 @@ export const getFailedResponse = (
 ) => {
   return {
     success: false,
-    error,
-    fileName,
-    message,
+    response: {
+      error,
+      fileName,
+      message,
+    },
   };
 };
 
