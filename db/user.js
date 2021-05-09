@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import { getFailedResponse, getSuccessResponse } from "~/util/apiResponse";
 
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
