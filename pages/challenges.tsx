@@ -1,8 +1,9 @@
 import Header from "~/components/Header";
 import Seo from "~/components/Common/Seo";
 import ChallengesPage from "~/components/Challenges/ChallengesPage";
-import fetcher from "~/util/fetch";
 
+import database from "middlewares/dbForFrontend";
+import { getAllChallenges } from "db/challenges";
 import { ChallengesApiResponse } from "types/types";
 
 const Challenges = ({ challenges }: Props) => {
@@ -31,9 +32,8 @@ type Props = {
 export default Challenges;
 
 export async function getStaticProps() {
-  const challenges = await fetcher(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/challenges?first=6`
-  );
+  const db = await database();
+  const challenges = await getAllChallenges(db, { first: 6 });
 
   return {
     props: {

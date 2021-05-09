@@ -1,12 +1,14 @@
 import React from "react";
 import Header from "~/components/Header";
 import Footer from "~/components/Common/Footer";
+import ReviewArticlePage from "~/components/Reviews/ReviewArticlePage";
 import ReviewArticleHeader from "~/components/Reviews/ReviewArticlePage/Header";
 
-import ReviewArticlePage from "~/components/Reviews/ReviewArticlePage";
-import { ReviewData, ReviewApiResponse } from "~/types/types";
-import fetcher from "~/util/fetch";
+import database from "middlewares/dbForFrontend";
+import { filterReviews, getReviews } from "db/reviews";
+
 import { FALLBACK } from "~/util/constants";
+import { ReviewData, ReviewApiResponse } from "~/types/types";
 
 const Slug = ({ reviewData }: Props) => {
   if (typeof window === "undefined") {
@@ -41,9 +43,12 @@ type Params = {
 export const getStaticProps = async ({ params }: Params) => {
   const { slug } = params;
 
-  const reviewData: ReviewApiResponse = await fetcher(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/review/filter/slug/${slug}`
-  );
+  const db = await database();
+  const reviewData = await filterReviews(db, {
+    filter: "slug",
+    field: slug,
+    first: null,
+  });
 
   if (reviewData?.response?.data?.reviews?.length < 1) {
     return {
@@ -59,9 +64,8 @@ export const getStaticProps = async ({ params }: Params) => {
 };
 
 export const getStaticPaths = async () => {
-  const response = await fetcher(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/reviews?first=1`
-  );
+  const db = await database();
+  const response = await getReviews(db, { first: 1 });
 
   const pathsData =
     response?.success &&
