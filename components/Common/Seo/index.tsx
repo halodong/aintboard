@@ -10,10 +10,12 @@ const Seo = (props: SeoDataProps) => {
     ? "Ain't Board"
     : `${props?.title} | Ain't Board`;
 
+  const origin = window.location.origin;
+
   //props.canonical should be prefixed with /
   const parsedCanonical = !isEmpty(props?.canonical)
-    ? `${process.env.NEXT_PUBLIC_FRONTEND_URL}${props?.canonical}`
-    : `${process.env.NEXT_PUBLIC_FRONTEND_URL}/`;
+    ? `${origin}${props?.canonical}`
+    : `${origin}/`;
 
   return (
     <>
