@@ -5,6 +5,10 @@ import { NextSeo } from "next-seo";
 import { SeoDataProps } from "types/seoTypes";
 
 const Seo = (props: SeoDataProps) => {
+  if (typeof window === "undefined") {
+    return null;
+  }
+
   //will add Ain't Board after pipe in the end of text if not homepage
   const parsedTitle = props.isHomepage
     ? "Ain't Board"
