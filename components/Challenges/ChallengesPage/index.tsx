@@ -20,7 +20,7 @@ const ChallengesPage = ({ challenges }: Props) => {
       ? `/api/challenge/filter/${filters.firstSelected}/${filters.secondSelected}?first=6`
       : null,
     fetcher,
-    { initialData: challenges }
+    { initialData: challenges, revalidateOnMount: true }
   );
 
   const challengesData = filteredApiData?.response?.data?.challenges || [];
