@@ -51,7 +51,7 @@ describe("Review Likes", () => {
 
     for (let i = 0; i < 10; i++) {
       res = await likeReview(db, {
-        userId: user._id,
+        userId: i,
         reviewId: 1,
       });
     }
