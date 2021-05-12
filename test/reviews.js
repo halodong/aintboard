@@ -1,4 +1,10 @@
-import { insertReview, getReviews, filterReviews } from "../db/reviews";
+import {
+  insertReview,
+  getReviews,
+  filterReviews,
+  reviewStatus,
+  deleteReview,
+} from "../db/reviews";
 
 const chai = require("chai");
 const expect = chai.expect;
@@ -56,6 +62,7 @@ describe("Reviews", () => {
 
   it("should make a new strategy", async () => {
     let res = await insertReview(db, {
+      _id: "123",
       userId: 1,
       username: "faithm",
       bgName: "Brass Lanc",
@@ -154,5 +161,22 @@ describe("Reviews", () => {
     expect(res.response.data.reviews.map((e) => e.bgName)).to.include(
       "Brass Lanc"
     );
+  });
+
+  it("should update PENDING review to APPROVED of REJECTED", async () => {
+    let res = await reviewStatus(db, {
+      id: "123",
+      status: REVIEW_STATUS.APPROVED,
+    });
+
+    expect(res.success).to.equal(true);
+    expect(res.response.message).to.equal("Review Updated");
+  });
+
+  it("should delete the review", async () => {
+    let res = await deleteReview(db, { id: "123" });
+
+    expect(res.success).to.equal(true);
+    expect(res.response.message).to.equal("Review Deleted");
   });
 });
