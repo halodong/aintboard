@@ -86,6 +86,7 @@ const ImageUpload = ({
           type="file"
           id="file"
           className="file"
+          accept="image/*"
           multiple={multi}
           onChange={handleChange}
         />
