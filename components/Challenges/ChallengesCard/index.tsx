@@ -1,6 +1,5 @@
 import Image from "next/image";
-// import useSWR from "swr";
-// import fetcher from "~/util/fetch";
+import DOMPurify from "dompurify";
 
 import * as Styles from "./styled";
 import PlayButton from "~/assets/img/PlayButton";
@@ -27,7 +26,7 @@ const ChallengesCard = ({ data, achieved }: Props) => {
       <Styles.PowerUpAmount>+{data?.powerUpAmount}UP</Styles.PowerUpAmount>
 
       <Styles.ChallengeName>
-        <p>{data?.challengeName}</p>
+        <p>{DOMPurify.sanitize(data?.challengeName || "")}</p>
         {achieved ? (
           <Styles.Achieved>
             Achieved <Muscle />

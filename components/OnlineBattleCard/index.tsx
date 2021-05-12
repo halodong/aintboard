@@ -1,6 +1,7 @@
 import React from "react";
-import Image from "next/image";
 import dayjs from "dayjs";
+import Image from "next/image";
+import DOMPurify from "dompurify";
 
 import PlayButton from "~/assets/img/PlayButton";
 import {
@@ -35,7 +36,7 @@ const OnlineBattleCard = ({ data }: Props) => {
 
       <BattleCard>
         <BattleName>
-          {`${data?.battleName}`} <br />{" "}
+          {`${DOMPurify.sanitize(data?.battleName)}`} <br />{" "}
           {`${dayjs(data.createdAt).format("MMMM DD YYYY")}`}
         </BattleName>
         <BattleEnds>
