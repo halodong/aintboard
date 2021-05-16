@@ -25,9 +25,6 @@ const Page = ({
   reviewData,
   userChallengeData,
 }: Props) => {
-  if (typeof window === "undefined") {
-    return <></>;
-  }
   const user = userData?.response?.data?.users[0];
 
   return (

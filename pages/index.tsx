@@ -25,10 +25,6 @@ export default function Home({ reviews, challenges }: Props) {
     { initialData: challenges, revalidateOnMount: true }
   );
 
-  if (typeof window === "undefined") {
-    return <></>;
-  }
-
   return (
     <div>
       <Seo

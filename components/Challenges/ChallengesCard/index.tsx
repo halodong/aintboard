@@ -26,7 +26,11 @@ const ChallengesCard = ({ data, achieved }: Props) => {
       <Styles.PowerUpAmount>+{data?.powerUpAmount}UP</Styles.PowerUpAmount>
 
       <Styles.ChallengeName>
-        <p>{DOMPurify.sanitize(data?.challengeName || "")}</p>
+        <p>
+          {process.browser
+            ? DOMPurify.sanitize(data?.challengeName || "")
+            : data?.challengeName}
+        </p>
         {achieved ? (
           <Styles.Achieved>
             Achieved <Muscle />

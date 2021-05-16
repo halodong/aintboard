@@ -3,10 +3,6 @@ import Seo from "~/components/Common/Seo";
 import ReviewsPage from "~/components/Reviews/ReviewsPage";
 
 const Reviews = () => {
-  if (typeof window === "undefined") {
-    return <></>;
-  }
-
   return (
     <>
       <Seo

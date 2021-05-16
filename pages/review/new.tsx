@@ -3,10 +3,6 @@ import Footer from "~/components/Common/Footer";
 import NewReviewContent from "~/components/Reviews/NewReviewContent";
 
 const NewReviewPage = () => {
-  if (typeof window === "undefined") {
-    return <></>;
-  }
-
   return (
     <>
       <Header isEditorPage />

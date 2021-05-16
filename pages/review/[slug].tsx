@@ -11,10 +11,6 @@ import { FALLBACK } from "~/util/constants";
 import { ReviewData, ReviewApiResponse } from "~/types/types";
 
 const Slug = ({ reviewData }: Props) => {
-  if (typeof window === "undefined") {
-    return <></>;
-  }
-
   const review = reviewData?.response?.data?.reviews[0];
 
   return (

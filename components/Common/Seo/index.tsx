@@ -5,16 +5,14 @@ import { NextSeo } from "next-seo";
 import { SeoDataProps } from "types/seoTypes";
 
 const Seo = (props: SeoDataProps) => {
-  if (typeof window === "undefined") {
-    return null;
-  }
-
   //will add Ain't Board after pipe in the end of text if not homepage
   const parsedTitle = props.isHomepage
     ? "Ain't Board"
     : `${props?.title} | Ain't Board`;
 
-  const origin = window.location.origin;
+  const origin =
+    process.env.NEXT_PUBLIC_FRONTEND_URL ??
+    (process.browser ? window.location.origin : null);
 
   //props.canonical should be prefixed with /
   const parsedCanonical = !isEmpty(props?.canonical)

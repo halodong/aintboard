@@ -7,10 +7,6 @@ import { getAllChallenges } from "db/challenges";
 import { ChallengesApiResponse } from "types/types";
 
 const Challenges = ({ challenges }: Props) => {
-  if (typeof window === "undefined") {
-    return <></>;
-  }
-
   return (
     <>
       <Seo
