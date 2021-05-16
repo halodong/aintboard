@@ -36,8 +36,12 @@ const OnlineBattleCard = ({ data }: Props) => {
 
       <BattleCard>
         <BattleName>
-          {`${DOMPurify.sanitize(data?.battleName)}`} <br />{" "}
-          {`${dayjs(data.createdAt).format("MMMM DD YYYY")}`}
+          {`${
+            process.browser
+              ? DOMPurify.sanitize(data?.battleName)
+              : data?.battleName
+          }`}{" "}
+          <br /> {`${dayjs(data.createdAt).format("MMMM DD YYYY")}`}
         </BattleName>
         <BattleEnds>
           Ends on {dayjs(data?.eventEndDate).format("MMM DD")}

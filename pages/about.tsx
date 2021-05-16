@@ -3,10 +3,6 @@ import Header from "~/components/Header";
 import Seo from "~/components/Common/Seo";
 
 const AboutPage = () => {
-  if (typeof window === "undefined") {
-    return <></>;
-  }
-
   return (
     <>
       <Seo

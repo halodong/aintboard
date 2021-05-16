@@ -2,12 +2,14 @@ import DOMPurify from "dompurify";
 
 export const createHTML = (html: string) => {
   return {
-    __html: DOMPurify.sanitize(html),
+    __html: process.browser ? DOMPurify.sanitize(html) : html,
   };
 };
 
 export const createHTMLExcerpt = (html: string) => {
-  const sanitizedHTML = DOMPurify.sanitize(html).substring(0, 300);
+  const sanitizedHTML = process.browser
+    ? DOMPurify.sanitize(html).substring(0, 300)
+    : html.substring(0, 300);
 
   return {
     __html: sanitizedHTML,

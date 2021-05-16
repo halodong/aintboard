@@ -17,10 +17,6 @@ const BuyAvatarsPage = ({ specialAvatars }: Props) => {
     { initialData: specialAvatars, revalidateOnMount: true }
   );
 
-  if (typeof window === "undefined") {
-    return <></>;
-  }
-
   return (
     <>
       <Header isBuyAvatarsPage centerTagline="Buy Avatars" />
