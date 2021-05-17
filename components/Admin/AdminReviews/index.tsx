@@ -9,7 +9,6 @@ import { ReviewApiResponse } from "types/types";
 import { REVIEW_STATUS } from "~/util/constants";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { BattleName } from "~/components/OnlineBattleCard/styled";
 
 const AdminReviews = () => {
   const router = useRouter();
@@ -59,7 +58,7 @@ const AdminReviews = () => {
                 See Details
               </Button>
 
-              {r.reviewStatus === REVIEW_STATUS.PENDING ? (
+              {r.reviewStatus === REVIEW_STATUS.PENDING &&
                 reviewStatusBtn.map((btn) => (
                   <Button
                     key={btn.id}
@@ -70,10 +69,12 @@ const AdminReviews = () => {
                   >
                     {btn.name}
                   </Button>
-                ))
-              ) : r.reviewStatus === REVIEW_STATUS.APPROVED ? (
+                ))}
+
+              {r.reviewStatus === REVIEW_STATUS.APPROVED && (
                 <Button bg="white">Approved</Button>
-              ) : (
+              )}
+              {r.reviewStatus === REVIEW_STATUS.REJECTED && (
                 <Button bg="white">Rejected</Button>
               )}
 
