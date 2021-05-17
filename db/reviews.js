@@ -170,3 +170,29 @@ export const filterReviews = async (db, { first, filter, field }) => {
     return getFailedResponse(err, "db/reviews.js", "Filter Reviews error");
   }
 };
+
+export const reviewStatus = async (db, { status, id }) => {
+  try {
+    await db
+      .collection("reviews")
+      .updateOne({ _id: id }, { $set: { reviewStatus: status } });
+
+    return getSuccessResponse({
+      message: "Review Updated",
+    });
+  } catch (err) {
+    return getFailedResponse(err, "db/reviews.js", "Filter Reviews error");
+  }
+};
+
+export const deleteReview = async (db, { id }) => {
+  try {
+    await db.collection("reviews").deleteOne({ _id: id });
+
+    return getSuccessResponse({
+      message: "Review Deleted",
+    });
+  } catch (err) {
+    return getFailedResponse(err, "db/reviews.js", "Filter Reviews error");
+  }
+};
