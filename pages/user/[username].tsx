@@ -17,13 +17,21 @@ import {
   ChallengesApiResponse,
   UserChallangesApiResponse,
   ReviewApiResponse,
+  OnlineBattlesApiResponse,
+  UserTrophiesApiResponse,
 } from "~/types/types";
+import { filterOnlineBattles } from "~/db/onlineBattle";
+import { filterChampions } from "~/db/champion";
 
 const Page = ({
   userData,
   challengeData,
   reviewData,
   userChallengeData,
+  reviewMade,
+  challengeMade,
+  onlineBattleMade,
+  userTrophies,
 }: Props) => {
   const user = userData?.response?.data?.users[0];
 
@@ -41,9 +49,14 @@ const Page = ({
       </Header>
 
       <UserProfilePage
+        user={userData}
         challenges={challengeData}
         reviews={reviewData}
         userChallenges={userChallengeData}
+        reviewMade={reviewMade}
+        challengeMade={challengeMade}
+        onlineBattleMade={onlineBattleMade}
+        userTrophies={userTrophies}
       />
     </>
   );
@@ -54,6 +67,10 @@ type Props = {
   challengeData: ChallengesApiResponse;
   reviewData: ReviewApiResponse;
   userChallengeData: UserChallangesApiResponse;
+  reviewMade: ReviewApiResponse;
+  challengeMade: ChallengesApiResponse;
+  onlineBattleMade: OnlineBattlesApiResponse;
+  userTrophies: UserTrophiesApiResponse;
 };
 
 export default Page;
@@ -78,15 +95,35 @@ export async function getStaticProps({ params }: Params) {
     field: userData.response.data.users[0]._id,
     first: null,
   });
+  const challengeMade = await filterChallenges(db, {
+    filter: "createdBy",
+    field: userData.response.data.users[0]._id,
+    first: null,
+  });
   const reviewData = await filterReviews(db, {
     filter: "userId",
     field: userData.response.data.users[0]._id,
     first: 2,
   });
+  const reviewMade = await filterReviews(db, {
+    filter: "userId",
+    field: userData.response.data.users[0]._id,
+    first: null,
+  });
   const userChallengeData = await filterUserChallenges(db, {
     filter: "userId",
     field: userData.response.data.users[0]._id,
     first: 1,
+  });
+  const onlineBattleMade = await filterOnlineBattles(db, {
+    filter: "createdBy",
+    field: userData.response.data.users[0]._id,
+    first: null,
+  });
+  const userTrophies = await filterChampions(db, {
+    filter: "userId",
+    field: userData.response.data.users[0]._id,
+    first: null,
   });
 
   if (userData?.response?.data?.users?.length < 1) {
@@ -101,6 +138,10 @@ export async function getStaticProps({ params }: Params) {
       challengeData,
       reviewData,
       userChallengeData,
+      reviewMade,
+      challengeMade,
+      onlineBattleMade,
+      userTrophies,
     },
   };
 }

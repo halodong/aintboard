@@ -105,3 +105,41 @@ export const getBattles = async (db, { first }) => {
     return getFailedResponse(err, "db/onlineBattle.js");
   }
 };
+
+export const filterOnlineBattles = async (db, { first, filter, field }) => {
+  try {
+    let onlineBattles = null;
+    first = first ? parseInt(first) : null;
+
+    if (filter && field) {
+      let aggregate = [
+        {
+          $match: {
+            [filter]: field,
+          },
+        },
+        {
+          $project: { password: 0 },
+        },
+      ];
+
+      if (first) {
+        //with limit
+        aggregate.push({ $limit: first });
+      }
+
+      onlineBattles = await db.collection("online_battle").aggregate(aggregate);
+    }
+
+    const onlineBattleArray = await onlineBattles.toArray();
+
+    return getSuccessResponse({
+      message: "Filtered Online Battle",
+      data: {
+        onlineBattles: onlineBattleArray,
+      },
+    });
+  } catch (err) {
+    return getFailedResponse(err, "db/user.js", "Filter Online Battle error");
+  }
+};

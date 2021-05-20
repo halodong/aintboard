@@ -17,6 +17,17 @@ export const LeftSide = styled.div`
   margin-top: -6rem;
 `;
 
+export const UserDetails = styled.div`
+  width: 100%;
+  margin: 0 1rem;
+  padding: 0 2rem;
+`;
+
+export const TextDetails = styled.p`
+  font-family: ${(porps) => porps.theme.fonts.quicksandBold};
+  color: ${(props) => props.theme.colors.white};
+`;
+
 export const RightSide = styled.div`
   flex: 4;
   display: flex;
