@@ -27,6 +27,7 @@ export const ReviewsSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 `;
 
 export const H1Rubik = styled.h1`
@@ -36,6 +37,7 @@ export const H1Rubik = styled.h1`
 
 export const ReviewsCardWrapper = styled.div`
   display: flex;
+  width: 100%;
   position: relative;
   justify-content: center;
   flex-wrap: wrap;
