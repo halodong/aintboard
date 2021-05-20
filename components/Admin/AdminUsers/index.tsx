@@ -30,8 +30,8 @@ const AdminUsers = () => {
       <AdminSidebar />
       <Styles.AdminUsersContainer>
         <Styles.AdminTitle>Users</Styles.AdminTitle>
-        {userData.map((u) => (
-          <Styles.UserContainer>
+        {userData.map((u, index) => (
+          <Styles.UserContainer key={index}>
             <Styles.AvatarContainer>
               <Avatar iconType={u.avatar} />
             </Styles.AvatarContainer>
