@@ -29,3 +29,15 @@ export async function getUsers(db, { first }) {
     return getFailedResponse(err, "db/users.js", "Couldn't get users");
   }
 }
+
+export const deleteUser = async (db, { id }) => {
+  try {
+    await db.collection("users").deleteOne({ _id: id });
+
+    return getSuccessResponse({
+      message: "User Deleted",
+    });
+  } catch (err) {
+    return getFailedResponse(err, "db/users.js", "Couldn't delete user");
+  }
+};
