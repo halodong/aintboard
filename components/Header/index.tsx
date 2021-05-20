@@ -109,10 +109,9 @@ export default function Header({
 
       {/* <Searchbar /> obsolete for now */}
 
-      {isUserPage ||
-        (isSettingsPage && (
-          <CenterTagline isUserPage>{children}</CenterTagline>
-        ))}
+      {(isUserPage || isSettingsPage) && (
+        <CenterTagline isUserPage>{children}</CenterTagline>
+      )}
 
       {(homepage || isBoardGamePage || isUserPage || isSettingsPage) && (
         <div className="homepage-bg-container">
