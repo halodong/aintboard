@@ -18,7 +18,9 @@ const AdminUsers = () => {
   const userData = usersData?.response?.data?.users || [];
 
   const deleteUser = async (id: string) => {
-    await axios.delete(`/api/user/delete/${id}`);
+    if (userData[0].role === "admin") {
+      await axios.delete(`/api/user/delete/${id}`);
+    }
 
     mutate(`/api/users`);
   };
