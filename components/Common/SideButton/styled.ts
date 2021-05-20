@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const CardButtonContainer = styled.div`
-  width: 15rem;
+  width: 18rem;
+  height: 12rem;
   background: rgba(53, 53, 53, 0.5);
   backdrop-filter: blur(40px);
   border-radius: ${(props) => props.theme.border["10px"]};

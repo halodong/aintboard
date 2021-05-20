@@ -11,6 +11,7 @@ export const LeftSide = styled.div`
   background-color: ${(props) => props.theme.colors.darkGreen};
   height: fit-content;
   display: flex;
+  align-items: center;
   flex-direction: column;
   padding: 2rem;
   margin-top: -6rem;
