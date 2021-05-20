@@ -81,7 +81,7 @@ export async function getStaticProps({ params }: Params) {
   const reviewData = await filterReviews(db, {
     filter: "userId",
     field: userData.response.data.users[0]._id,
-    first: 4,
+    first: 2,
   });
   const userChallengeData = await filterUserChallenges(db, {
     filter: "userId",
