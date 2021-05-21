@@ -18,7 +18,7 @@ const ChallengesPage = ({ challenges }: Props) => {
   const { data: filteredApiData } = useSWR<ChallengesApiResponse>(
     !isEmpty(filters?.secondSelected)
       ? `/api/challenge/filter/${filters.firstSelected}/${filters.secondSelected}?first=6`
-      : null,
+      : `/api/challenges?first=6`,
     fetcher,
     { initialData: challenges, revalidateOnMount: true }
   );
