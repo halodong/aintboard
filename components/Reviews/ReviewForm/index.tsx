@@ -29,6 +29,7 @@ import useCurrentUser from "hooks/useCurrentUser";
 import { ReviewFormState } from "types/reduxTypes";
 import { OnSubmitValidationError } from "util/OnSubmitValidationError";
 import { LANGUAGE_OPTIONS, REVIEW_STATUS, REVIEW_TYPE } from "util/constants";
+import reviewFormTester from "util/reviewFormTester";
 import {
   setReviewFormValues,
   resetReviewFormValues,
@@ -58,6 +59,9 @@ const ReviewForm = () => {
   const formSchema = Yup.object().shape({
     reviewTitle: Yup.string().required("Review Title required"),
     bgName: Yup.string().required("Boardgame Name required"),
+    language: Yup.string().required(
+      "Please specify the language of your Review"
+    ),
   });
 
   useEffect(() => {
@@ -122,14 +126,18 @@ const ReviewForm = () => {
             ? JSON.parse(user?.userData || "")
             : "";
 
-          if (userData === "") {
-            toast.error("You should be logged in to create a review");
+          const toBeUploaded = formValuesState?.reviewFormValues?.images;
+
+          const validated = reviewFormTester({
+            imagesToBeUploaded: toBeUploaded,
+            userData,
+          });
+
+          if (!validated) {
             return;
           }
 
-          const uploadedImages = await upload(
-            formValuesState?.reviewFormValues?.images
-          );
+          const uploadedImages = await upload(toBeUploaded);
 
           const response = await axios.post("/api/reviews/", {
             userId: userData._id,
@@ -235,6 +243,11 @@ const ReviewForm = () => {
 
             <Label>What is your Review's primary language?</Label>
 
+            {errors.language && touched.language && (
+              <ErrorMessage justifyContent="flex-start">
+                {errors.language}
+              </ErrorMessage>
+            )}
             <DropDown
               placeholder="Language"
               marginLeft="0"
