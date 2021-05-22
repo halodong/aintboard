@@ -12,6 +12,10 @@ export const ButtonStyled = styled.button<ButtonStyledProps>`
   border: none;
   cursor: pointer;
   text-transform: capitalize;
+
+  &:hover {
+    box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.8);
+  }
 `;
 
 type ButtonStyledProps = {

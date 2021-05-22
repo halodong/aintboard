@@ -12,7 +12,7 @@ const DropDown = ({
   onChange,
 }: Props) => {
   const emptyDefault = {
-    label: "",
+    label: placeholder || "Please choose" || "",
     value: "",
   };
   const [selectedState, setSelectedState] = useState(emptyDefault);

@@ -156,5 +156,9 @@ export const Links = styled.div`
     background-color: ${(props) => props.theme.colors.dark};
     border: 2px solid white;
     border-radius: ${(props) => props.theme.border["10px"]};
+
+    &:hover {
+      box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.8);
+    }
   }
 `;

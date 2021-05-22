@@ -27,6 +27,7 @@ import useCurrentUser from "hooks/useCurrentUser";
 import { StrategyFormState } from "types/reduxTypes";
 import { OnSubmitValidationError } from "util/OnSubmitValidationError";
 import { LANGUAGE_OPTIONS, REVIEW_STATUS, REVIEW_TYPE } from "util/constants";
+import strategyFormTester from "util/strategyFormTester";
 import {
   setStrategyFormValues,
   resetStrategyFormValues,
@@ -69,6 +70,9 @@ const StrategyForm = () => {
   const formSchema = Yup.object().shape({
     strategyTitle: Yup.string().required("Review Title required"),
     bgName: Yup.string().required("Boardgame Name required"),
+    language: Yup.string().required(
+      "Please specify the language of your Review"
+    ),
   });
 
   const {
@@ -94,8 +98,17 @@ const StrategyForm = () => {
             ? JSON.parse(user?.userData || "")
             : "";
 
-          if (userData === "") {
-            toast.error("You should be logged in to create a strategy");
+          const toBeUploaded = formValuesState?.strategyFormValues?.images;
+          const strategyContent =
+            formValuesState?.strategyFormValues?.strategyContent;
+
+          const validated = strategyFormTester({
+            imagesToBeUploaded: toBeUploaded,
+            userData,
+            strategyContent,
+          });
+
+          if (!validated) {
             return;
           }
 
@@ -196,6 +209,11 @@ const StrategyForm = () => {
 
             <Label>What is your Strategy's primary language?</Label>
 
+            {errors.language && touched.language && (
+              <ErrorMessage justifyContent="flex-start">
+                {errors.language}
+              </ErrorMessage>
+            )}
             <DropDown
               placeholder="Language"
               marginLeft="0"
