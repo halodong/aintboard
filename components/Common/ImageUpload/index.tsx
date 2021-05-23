@@ -1,13 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 
 import ImagePreviewContainer from "./ImagePreviewContainer";
-import {
-  ImageUploadContainer,
-  PreviewsContainer,
-  ImageContainer,
-  CloseContainer,
-} from "./styled";
-import CloseIcon from "assets/img/Close";
+import { ImageUploadContainer } from "./styled";
 
 const ImageUpload = ({
   buttonLabel,
