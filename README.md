@@ -46,12 +46,12 @@ First, run the development server in this order:
 
 1. Open `CMD` then `cd` then repository directory.
 2. type `mongod`
-3. type `yarn` then `yarn dev`
+3. type `npm install` then `npm run dev`
 
 ```bash
 docker-compose up -d
-yarn dev
-yarn migrate:up
+npm run dev
+npm run migrate:up
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -74,9 +74,9 @@ For backend we are using Next Connect through NextJS API Routes
 
 All db functions should be tested.
 
-To test all files run `yarn test`
+To test all files run `npm run test`
 
-To test a single file run `yarn test <relative path>`
+To test a single file run `npm run test <relative path>`
 
 # Migrations
 
