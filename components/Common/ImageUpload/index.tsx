@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef } from "react";
+
+import ImagePreviewContainer from "./ImagePreviewContainer";
 import {
   ImageUploadContainer,
   PreviewsContainer,
   ImageContainer,
   CloseContainer,
 } from "./styled";
-// import CloseIcon from "~/assets/img/close.svg";
 import CloseIcon from "assets/img/Close";
 
 const ImageUpload = ({
@@ -95,20 +96,10 @@ const ImageUpload = ({
           Max of {max} {imageText}
         </h6>
 
-        <PreviewsContainer>
-          {previews.length > 0 &&
-            previews.map((p, i) => (
-              <ImageContainer key={i}>
-                <CloseContainer>
-                  <CloseIcon
-                    onClick={() => handleDelete(i)}
-                    className="close-icon"
-                  />
-                </CloseContainer>
-                <img src={p} alt="preview" />
-              </ImageContainer>
-            ))}
-        </PreviewsContainer>
+        <ImagePreviewContainer
+          previews={previews}
+          handleDelete={(i) => handleDelete(i)}
+        />
       </div>
     </ImageUploadContainer>
   );
