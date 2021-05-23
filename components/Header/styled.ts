@@ -22,7 +22,8 @@ export const HeaderWrapper = styled.div<HeaderWrapperProps>`
 
   .trees-1,
   .trees-2,
-  .tent {
+  .tent,
+  .playing-icon {
     position: absolute;
     width: ${(props) => (props.isBuyAvatarsPage ? "10rem" : "25rem")};
     z-index: ${(props) => props.theme.zIndex["10th"]};
@@ -68,6 +69,13 @@ export const HeaderWrapper = styled.div<HeaderWrapperProps>`
       left: 15rem;
       top: 16.4rem;
       width: 15rem;
+    }
+
+    .playing-icon {
+      bottom: 5.8rem;
+      left: 17rem;
+      width: 10rem;
+      z-index: ${(props) => props.theme.zIndex["9th"]};
     }
 
     .ground {

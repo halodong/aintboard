@@ -14,6 +14,7 @@ import {
   Rubik,
 } from "./styled";
 import Tent from "assets/img/Tent";
+import PlayingBoardGameImg from "assets/img/PlayingBoardGame";
 import TreesGroup1 from "assets/img/TreesGroup1";
 import TreesGroup2 from "assets/img/TreesGroup2";
 
@@ -119,6 +120,7 @@ export default function Header({
           <TreesGroup1 className="trees-1" />
           <TreesGroup2 className="trees-2" />
           <Tent className="tent" />
+          <PlayingBoardGameImg className="playing-icon" />
           <div className="ground"></div>
         </div>
       )}
