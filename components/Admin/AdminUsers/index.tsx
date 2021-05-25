@@ -43,9 +43,11 @@ const AdminUsers = () => {
               >
                 See Details
               </Button>
-              <Button bg="errorRed" onClick={() => deleteUser(u._id)}>
-                Delete
-              </Button>
+              {userData[0].role === "admin" && (
+                <Button bg="errorRed" onClick={() => deleteUser(u._id)}>
+                  Delete
+                </Button>
+              )}
             </Styles.UserCTA>
           </Styles.UserContainer>
         ))}
