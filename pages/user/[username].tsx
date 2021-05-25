@@ -20,7 +20,6 @@ import {
   OnlineBattlesApiResponse,
   UserTrophiesApiResponse,
 } from "~/types/types";
-import { filterOnlineBattles } from "~/db/onlineBattle";
 import { filterChampions } from "~/db/champion";
 
 const Page = ({
@@ -28,8 +27,6 @@ const Page = ({
   challengeData,
   reviewData,
   userChallengeData,
-  reviewMade,
-  challengeMade,
   onlineBattleMade,
   userTrophies,
 }: Props) => {
@@ -53,9 +50,6 @@ const Page = ({
         challenges={challengeData}
         reviews={reviewData}
         userChallenges={userChallengeData}
-        reviewMade={reviewMade}
-        challengeMade={challengeMade}
-        onlineBattleMade={onlineBattleMade}
         userTrophies={userTrophies}
       />
     </>
@@ -67,8 +61,6 @@ type Props = {
   challengeData: ChallengesApiResponse;
   reviewData: ReviewApiResponse;
   userChallengeData: UserChallangesApiResponse;
-  reviewMade: ReviewApiResponse;
-  challengeMade: ChallengesApiResponse;
   onlineBattleMade: OnlineBattlesApiResponse;
   userTrophies: UserTrophiesApiResponse;
 };
@@ -95,30 +87,15 @@ export async function getStaticProps({ params }: Params) {
     field: userData.response.data.users[0]._id,
     first: null,
   });
-  const challengeMade = await filterChallenges(db, {
-    filter: "createdBy",
-    field: userData.response.data.users[0]._id,
-    first: null,
-  });
   const reviewData = await filterReviews(db, {
     filter: "userId",
     field: userData.response.data.users[0]._id,
     first: 2,
   });
-  const reviewMade = await filterReviews(db, {
-    filter: "userId",
-    field: userData.response.data.users[0]._id,
-    first: null,
-  });
   const userChallengeData = await filterUserChallenges(db, {
     filter: "userId",
     field: userData.response.data.users[0]._id,
     first: 1,
-  });
-  const onlineBattleMade = await filterOnlineBattles(db, {
-    filter: "createdBy",
-    field: userData.response.data.users[0]._id,
-    first: null,
   });
   const userTrophies = await filterChampions(db, {
     filter: "userId",
@@ -138,9 +115,6 @@ export async function getStaticProps({ params }: Params) {
       challengeData,
       reviewData,
       userChallengeData,
-      reviewMade,
-      challengeMade,
-      onlineBattleMade,
       userTrophies,
     },
   };

@@ -1,4 +1,4 @@
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import axios from "axios";
 import * as Yup from "yup";
 import { useState } from "react";
@@ -95,9 +95,11 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
             toast.error(response.data.message);
             return;
           }
-
           closeModal();
           resetForm();
+          mutate(`/api/review/filter/userId/${userObj?._id}`);
+          mutate(`/api/challenge/filter/createdBy/${userObj?._id}`);
+          mutate(`/api/online-battles/filter/createdBy/${userObj?._id}`);
           toast.success("New challenge added!");
         } catch (err) {
           console.error("Challenge creation error: ", err);
