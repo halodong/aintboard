@@ -68,6 +68,7 @@ export type UserData = {
   stars: number;
   avatar: string;
   gcash: number;
+  createdAt: string;
 };
 
 export interface ChallengesApiResponse {
@@ -224,4 +225,49 @@ export type UserChallengesData = {
   userId: string;
   challengeId: string;
   _id: string;
+};
+
+export interface OnlineBattlesApiResponse {
+  success: boolean;
+  response: {
+    message: string;
+    data: OnlineBattlesApiData;
+  };
+}
+
+export interface OnlineBattlesApiData {
+  onlineBattles: OnlineBattlesData[];
+}
+
+export type OnlineBattlesData = {
+  _id: string;
+  slug: string;
+  battleName: string;
+  boardGameName: string;
+  bgImage: string;
+  details: string;
+  eventStartDate: string;
+  eventEndData: string;
+  craetedBy: string;
+  status: string;
+  createdAt: string;
+};
+
+export interface UserTrophiesApiResponse {
+  success: boolean;
+  response: {
+    message: string;
+    data: UserTrophiesApiData;
+  };
+}
+
+export interface UserTrophiesApiData {
+  champions: UserTrophiesData[];
+}
+
+export type UserTrophiesData = {
+  _id: string;
+  userId: string;
+  trophyType: string;
+  battleId: string;
 };

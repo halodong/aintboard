@@ -44,7 +44,7 @@ export const ReviewCard = ({ data }: Props) => {
       />
 
       <Username>{data?.userData?.[0]?.username}</Username>
-      <ReviewDate>{dayjs(data?.createdAt).format("MMM DD YYYY")}</ReviewDate>
+      <ReviewDate>{dayjs(data?.createdAt).format("MMM DD, YYYY")}</ReviewDate>
       <ReviewContent>
         <div
           className="preview"

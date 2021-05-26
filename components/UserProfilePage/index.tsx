@@ -14,6 +14,10 @@ import {
   OnlineBattleCardWrapper,
   OnlineBattlesSection,
   NoReviews,
+  TextDetails,
+  UserDetails,
+  UserIconContainer,
+  PowerUps,
 } from "./styled";
 
 import CardButton from "~/components/Common/SideButton";
@@ -25,8 +29,11 @@ import { ReviewCard } from "~/components/Reviews/ReviewCard";
 import { chooseModal } from "redux/slices/modalSlice";
 import {
   ChallengesApiResponse,
+  OnlineBattlesApiResponse,
   ReviewApiResponse,
+  UserApiResponse,
   UserChallangesApiResponse,
+  UserTrophiesApiResponse,
 } from "~/types/types";
 import {
   BUY_AVATARS_BUTTON,
@@ -34,6 +41,14 @@ import {
   CREATE_CHALLENGE_BUTTON,
   CREATE_ONLINE_BATTLE_BUTTON,
 } from "util/constants";
+import dayjs from "dayjs";
+import useSWR from "swr";
+
+import StarIcon from "~/assets/img/Star";
+import GoldIcon from "~/assets/img/Gold";
+import BronzeIcon from "~/assets/img/Bronze";
+import SilverIcon from "~/assets/img/Silver";
+import fetcher from "~/util/fetch";
 
 const cardButton = [
   { id: 1, title: "Make a Review", type: MAKE_REVIEW_BUTTON },
@@ -50,7 +65,12 @@ const cardButton = [
   },
 ];
 
-const UserProfilePage = ({ reviews, challenges, userChallenges }: Props) => {
+const UserProfilePage = ({
+  user,
+  reviews,
+  challenges,
+  userChallenges,
+}: Props) => {
   const dispatch = useDispatch();
 
   const onButtonClick = (type: string) => {
@@ -61,9 +81,94 @@ const UserProfilePage = ({ reviews, challenges, userChallenges }: Props) => {
     }
   };
 
+  const { data: reviewsMadeData } = useSWR<ReviewApiResponse>(
+    `/api/review/filter/userId/${user?.response.data.users[0]._id}`,
+    fetcher
+  );
+
+  const { data: challengesMadeData } = useSWR<ChallengesApiResponse>(
+    `/api/challenge/filter/createdBy/${user?.response.data.users[0]._id}`,
+    fetcher
+  );
+
+  const { data: onlineBattlesMadeData } = useSWR<OnlineBattlesApiResponse>(
+    `/api/online-battles/filter/createdBy/${user?.response.data.users[0]._id}`,
+    fetcher
+  );
+
+  const { data: userTrophies } = useSWR<UserTrophiesApiResponse>(
+    `/api/online-battle/filter/userId/${user?.response.data.users[0]._id}`,
+    fetcher
+  );
+
+  const userMade = [
+    {
+      name: "Joined",
+      detail: dayjs(user?.response?.data?.users[0]?.createdAt).format(
+        "MMM DD, YYYY"
+      ),
+    },
+    {
+      name: "Reviews made",
+      detail: reviewsMadeData?.response?.data?.reviews?.length,
+    },
+    {
+      name: "Challenges made",
+      detail: challengesMadeData?.response?.data?.challenges?.length,
+    },
+    {
+      name: "Online Battles made",
+      detail: onlineBattlesMadeData?.response?.data?.onlineBattles?.length,
+    },
+  ];
+
+  const userIcon = [
+    {
+      name: <StarIcon className="icon" />,
+      detail: user?.response?.data?.users[0]?.stars,
+    },
+    {
+      name: <PowerUps className="icon">UP</PowerUps>,
+      detail: user?.response?.data?.users[0]?.powerups,
+    },
+    {
+      name: <GoldIcon className="icon" />,
+      detail: userTrophies?.response?.data?.champions?.filter(
+        (trophy) => trophy.trophyType === "gold"
+      )?.length,
+    },
+    {
+      name: <SilverIcon className="icon" />,
+      detail: userTrophies?.response?.data?.champions?.filter(
+        (trophy) => trophy.trophyType === "silver"
+      )?.length,
+    },
+    {
+      name: <BronzeIcon className="icon" />,
+      detail: userTrophies?.response?.data?.champions?.filter(
+        (trophy) => trophy.trophyType === "bronze"
+      )?.length,
+    },
+  ];
+
   return (
     <UserProfilePageWrapper>
       <LeftSide>
+        <UserDetails>
+          {userMade.map((detail, index) => (
+            <TextDetails key={index}>
+              {detail.name}: {detail.detail}
+            </TextDetails>
+          ))}
+          <br />
+          {userIcon.map((detail, index) => (
+            <TextDetails key={index}>
+              {detail.detail}
+              <UserIconContainer>{detail.name}</UserIconContainer>
+            </TextDetails>
+          ))}
+          <br />
+        </UserDetails>
         {cardButton.map((btn) => (
           <CardButton
             key={`${btn.type}-${btn.id}`}
@@ -131,9 +236,14 @@ const UserProfilePage = ({ reviews, challenges, userChallenges }: Props) => {
 };
 
 type Props = {
+  user?: UserApiResponse;
   reviews?: ReviewApiResponse;
   challenges?: ChallengesApiResponse;
   userChallenges?: UserChallangesApiResponse;
+  reviewMade?: ReviewApiResponse;
+  challengeMade?: ChallengesApiResponse;
+  onlineBattleMade?: OnlineBattlesApiResponse;
+  userTrophies?: UserTrophiesApiResponse;
 };
 
 export default UserProfilePage;
