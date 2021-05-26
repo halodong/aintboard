@@ -17,6 +17,10 @@ import {
 
 import { BattlesData } from "~/types/types";
 
+import GoldIcon from "~/assets/img/Gold";
+import BronzeIcon from "~/assets/img/Bronze";
+import SilverIcon from "~/assets/img/Silver";
+
 const OnlineBattleCard = ({ data }: Props) => {
   return (
     <OnlineBattleCardWrapper>
@@ -48,15 +52,21 @@ const OnlineBattleCard = ({ data }: Props) => {
         </BattleEnds>
         <div>
           <Rank>
-            <Place>Top 1</Place>
+            <Place>
+              <GoldIcon />
+            </Place>
             <Username>Username 1</Username>
           </Rank>
           <Rank>
-            <Place>Top 1</Place>
+            <Place>
+              <SilverIcon />
+            </Place>
             <Username>Username 1</Username>
           </Rank>
           <Rank>
-            <Place>Top 1</Place>
+            <Place>
+              <BronzeIcon />
+            </Place>
             <Username>Username 1</Username>
           </Rank>
         </div>
