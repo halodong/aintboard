@@ -79,9 +79,9 @@ const Sidebar = ({ menuOpen, closeMenu }: Props) => {
               },
               {
                 key: "make-review",
-                button: true,
+                button: false,
                 type: MAKE_REVIEW_BUTTON,
-                linkHref: "/",
+                linkHref: "/review/new",
                 linkName: "Make a Review or Strategy",
               },
             ]}
