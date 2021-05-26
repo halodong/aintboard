@@ -14,6 +14,7 @@ export const SidebarContainer = styled.div<SidebarContainerProps>`
   z-index: ${(props) => props.theme.zIndex["4th"]};
   transition: 300ms all ease-in;
   color: white;
+  background: red;
 `;
 
 type SidebarContainerProps = {
