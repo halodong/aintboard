@@ -1,26 +1,26 @@
-import fetcher from "~/util/fetch";
-import useSWR from "swr";
+import fetcher from '~/util/fetch';
+import useSWR from 'swr';
 
-import Header from "~/components/Header";
-import Seo from "~/components/Common/Seo";
-import Footer from "~/components/Common/Footer";
-import ReviewHomepage from "~/components/Reviews/ReviewHomepage";
-import ChallengesHomepage from "~/components/Challenges/ChallengesHomepage";
+import Header from '~/components/Header';
+import Seo from '~/components/Common/Seo';
+import Footer from '~/components/Common/Footer';
+import ReviewHomepage from '~/components/Reviews/ReviewHomepage';
+import ChallengesHomepage from '~/components/Challenges/ChallengesHomepage';
 
-import { getReviews } from "db/reviews";
-import database from "middlewares/dbForFrontend";
-import { getAllChallenges } from "db/challenges";
-import { ReviewApiResponse, ChallengesApiResponse } from "~/types/types";
+import { getReviews } from 'db/reviews';
+import database from 'middlewares/dbForFrontend';
+import { getAllChallenges } from 'db/challenges';
+import { ReviewApiResponse, ChallengesApiResponse } from '~/types/types';
 
 export default function Home({ reviews, challenges }: Props) {
   const { data: reviewData } = useSWR<ReviewApiResponse>(
-    "/api/reviews?first=5",
+    '/api/reviews?first=5',
     fetcher,
     { initialData: reviews, revalidateOnMount: true }
   );
 
   const { data: challengesData } = useSWR<ChallengesApiResponse>(
-    "/api/challenges?first=3",
+    '/api/challenges?first=3',
     fetcher,
     { initialData: challenges, revalidateOnMount: true }
   );

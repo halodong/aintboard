@@ -23,6 +23,17 @@ export const NavbarContainer = styled.nav<NavbarContainerProps>`
   svg {
     width: 9rem;
   }
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    flex-direction: column;
+    min-height: 8rem;
+    padding: 0.3rem;
+
+    .logo {
+      margin-left: 0rem;
+      align-self: flex-start;
+    }
+  }
 `;
 
 export const LogoContainer = styled.div`
@@ -50,6 +61,15 @@ export const NavBarButtons = styled.div`
     width: 5rem;
     min-width: 5rem;
     font-size: 1rem;
+  }
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    flex-direction: column;
+
+    button {
+      margin: 0.8rem 1rem;
+      width: 10rem;
+    }
   }
 `;
 

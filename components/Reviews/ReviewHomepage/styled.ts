@@ -1,12 +1,14 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+import { theme } from '~/styles/theme';
 
 export const ReviewContainer = styled.div`
   width: 100%;
   min-height: 67rem;
   background-color: ${(props) => props.theme.colors.dark};
-  z-index: ${(props) => props.theme.zIndex["7th"]};
+  z-index: ${(props) => props.theme.zIndex['7th']};
   position: relative;
   overflow: hidden;
+  /* background: red; */
 
   .maze {
     position: absolute;
@@ -32,7 +34,7 @@ export const ReviewContainer = styled.div`
 
 export const ReviewCardWrapper = styled.div`
   position: relative;
-  z-index: ${(props) => props.theme.zIndex["7th"]};
+  z-index: ${(props) => props.theme.zIndex['7th']};
   display: flex;
   width: 57%;
   max-width: 52rem;
@@ -60,6 +62,22 @@ export const ReviewCardWrapper = styled.div`
       cursor: pointer;
       outline: none;
       padding: 1rem;
+    }
+  }
+
+  @media (max-width: ${theme.breakpoints.sm}) {
+    width: 100%;
+    margin: 5rem auto auto;
+
+    .mainButtonContainer {
+      width: 80%;
+      justify-content: space-evenly;
+      align-items: center;
+
+      button {
+        min-width: 13.25rem;
+        height: 4rem;
+      }
     }
   }
 `;

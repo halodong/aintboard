@@ -18,6 +18,17 @@ export const HeaderWrapper = styled.div<HeaderWrapperProps>`
   flex-direction: column;
   justify-content: space-between;`}
 
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    min-height: ${(props) =>
+      props.isSearchPage ||
+      props.isChallengePage ||
+      props.isBoardGamePage ||
+      props.isReviewArticlePage ||
+      props.isSettingsPage
+        ? "25rem"
+        : "30rem"};
+  }
+
   ${(props) => props.isUserPage && `justify-content: flex-start;`}
 
   .trees-1,
@@ -58,6 +69,10 @@ export const HeaderWrapper = styled.div<HeaderWrapperProps>`
     .trees-1 {
       left: 0;
       top: 5.8rem;
+
+      @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+        display: none;
+      }
     }
 
     .trees-2 {
@@ -69,6 +84,10 @@ export const HeaderWrapper = styled.div<HeaderWrapperProps>`
       left: 15rem;
       top: 16.4rem;
       width: 15rem;
+
+      @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+        left: 2rem;
+      }
     }
 
     .playing-icon {
@@ -76,6 +95,10 @@ export const HeaderWrapper = styled.div<HeaderWrapperProps>`
       left: 17rem;
       width: 10rem;
       z-index: ${(props) => props.theme.zIndex["9th"]};
+
+      @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+        display: none;
+      }
     }
 
     .ground {
@@ -130,6 +153,10 @@ export const Tagline = styled(baseTaglineStyles)<TaglineProps>`
     margin: 0;
     left: 3.4rem;
   `}
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    margin-top: 7rem;
+  }
 `;
 
 type TaglineProps = {
