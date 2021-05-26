@@ -8,6 +8,9 @@ export const ChallengesCardWrapper = styled.div`
   display: flex;
   border-radius: ${(props) => props.theme.border["10px"]};
   cursor: pointer;
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    margin: 1rem auto 1rem;
+  }
 `;
 
 export const PowerUpAmount = styled.div`
