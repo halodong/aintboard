@@ -104,50 +104,50 @@ const UserProfilePage = ({
   const userMade = [
     {
       name: "Joined",
-      detail: dayjs(user?.response.data.users[0].createdAt).format(
+      detail: dayjs(user?.response?.data?.users[0]?.createdAt).format(
         "MMM DD, YYYY"
       ),
     },
     {
       name: "Reviews made",
-      detail: reviewsMadeData?.response.data.reviews.length,
+      detail: reviewsMadeData?.response?.data?.reviews?.length,
     },
     {
       name: "Challenges made",
-      detail: challengesMadeData?.response.data.challenges.length,
+      detail: challengesMadeData?.response?.data?.challenges?.length,
     },
     {
       name: "Online Battles made",
-      detail: onlineBattlesMadeData?.response.data.onlineBattles.length,
+      detail: onlineBattlesMadeData?.response?.data?.onlineBattles?.length,
     },
   ];
 
   const userIcon = [
     {
       name: <StarIcon className="icon" />,
-      detail: user?.response.data.users[0].stars,
+      detail: user?.response?.data?.users[0]?.stars,
     },
     {
       name: <PowerUps className="icon">UP</PowerUps>,
-      detail: user?.response.data.users[0].powerups,
+      detail: user?.response?.data?.users[0]?.powerups,
     },
     {
       name: <GoldIcon className="icon" />,
-      detail: userTrophies?.response.data.champions.filter(
+      detail: userTrophies?.response?.data?.champions?.filter(
         (trophy) => trophy.trophyType === "gold"
-      ).length,
+      )?.length,
     },
     {
       name: <SilverIcon className="icon" />,
-      detail: userTrophies?.response.data.champions.filter(
+      detail: userTrophies?.response?.data?.champions?.filter(
         (trophy) => trophy.trophyType === "silver"
-      ).length,
+      )?.length,
     },
     {
       name: <BronzeIcon className="icon" />,
-      detail: userTrophies?.response.data.champions.filter(
+      detail: userTrophies?.response?.data?.champions?.filter(
         (trophy) => trophy.trophyType === "bronze"
-      ).length,
+      )?.length,
     },
   ];
 
