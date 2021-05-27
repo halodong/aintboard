@@ -1,6 +1,11 @@
 {
   "plugins": ["react", "jsx-a11y", "chai-friendly"],
-  "extends": ["react-app", "prettier", "plugin:jsx-a11y/recommended"],
+  "extends": [
+    "react-app",
+    "prettier",
+    "plugin:jsx-a11y/recommended",
+    "eslint:recommended"
+  ],
   "env": {
     "browser": true,
     "es6": true,
@@ -8,6 +13,16 @@
     "mocha": true
   },
   "rules": {
+    // We will use TypeScript's types for component props instead
+    "react/prop-types": "off",
+
+    // No need to import React when using Next.js
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+
+    // Why would you want unused vars?
+    "@typescript-eslint/no-unused-vars": ["error"],
+
     "no-const-assign": "error",
     "import/no-anonymous-default-export": "error",
     "import/dynamic-import-chunkname": "error",
@@ -28,6 +43,9 @@
         "input[type=\"image\"]": ["InputImage"]
       }
     ]
+  },
+  "globals": {
+    "React": "writable"
   },
   "settings": {
     "import/resolver": {
