@@ -38,12 +38,10 @@ const ChallengesCard = ({ data, achieved }: Props) => {
       <Styles.PowerUpAmount>+{data?.powerUpAmount}UP</Styles.PowerUpAmount>
 
       <Styles.RightSide>
-        {userData.map((user, index) => (
-          <Styles.UserContainer key={index}>
-            <Avatar iconType={user.avatar} />
-            <p>{user.username}</p>
-          </Styles.UserContainer>
-        ))}
+        <Styles.UserContainer>
+          <Avatar iconType={userData?.[0]?.avatar} />
+          <p>{userData?.[0]?.username}</p>
+        </Styles.UserContainer>
 
         <Styles.ChallengeName>
           <p>
