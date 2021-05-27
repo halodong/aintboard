@@ -43,7 +43,7 @@ const AdminUsers = () => {
               >
                 See Details
               </Button>
-              {Array.isArray(userData) && userData[0]?.role === "admin" && (
+              {Array.isArray(userData) && userData?.[0]?.role === "admin" && (
                 <Button bg="errorRed" onClick={() => deleteUser(u._id)}>
                   Delete
                 </Button>
