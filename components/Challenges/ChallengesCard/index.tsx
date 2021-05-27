@@ -5,9 +5,21 @@ import * as Styles from "./styled";
 import PlayButton from "~/assets/img/PlayButton";
 import Muscle from "~/assets/img/Muscle";
 
-import { ChallengesData } from "types/types";
+import { ChallengesData, UserApiResponse } from "types/types";
+
+import useSWR from "swr";
+import fetcher from "util/fetch";
+
+import Avatar from "~/components/Avatar";
 
 const ChallengesCard = ({ data, achieved }: Props) => {
+  const { data: userApiData } = useSWR<UserApiResponse>(
+    `/api/user/filter/_id/${data?.createdBy}`,
+    fetcher
+  );
+
+  const userData = userApiData?.response?.data?.users || [];
+
   return (
     <Styles.ChallengesCardWrapper>
       {/* @TODO change fallback image to an aintboard logo */}
@@ -25,20 +37,27 @@ const ChallengesCard = ({ data, achieved }: Props) => {
 
       <Styles.PowerUpAmount>+{data?.powerUpAmount}UP</Styles.PowerUpAmount>
 
-      <Styles.ChallengeName>
-        <p>
-          {process.browser
-            ? DOMPurify.sanitize(data?.challengeName || "")
-            : data?.challengeName}
-        </p>
-        {achieved ? (
-          <Styles.Achieved>
-            Achieved <Muscle />
-          </Styles.Achieved>
-        ) : (
-          <PlayButton className="play" />
-        )}
-      </Styles.ChallengeName>
+      <Styles.RightSide>
+        <Styles.UserContainer>
+          <Avatar iconType={userData?.[0]?.avatar} />
+          <p>{userData?.[0]?.username}</p>
+        </Styles.UserContainer>
+
+        <Styles.ChallengeName>
+          <p>
+            {process.browser
+              ? DOMPurify.sanitize(data?.challengeName || "")
+              : data?.challengeName}
+          </p>
+          {achieved ? (
+            <Styles.Achieved>
+              Achieved <Muscle />
+            </Styles.Achieved>
+          ) : (
+            <PlayButton className="play" />
+          )}
+        </Styles.ChallengeName>
+      </Styles.RightSide>
     </Styles.ChallengesCardWrapper>
   );
 };
