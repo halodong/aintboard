@@ -117,8 +117,22 @@ const Paginate = (props: Props) => {
         <ArrowContainer>
           {currentClickedNumber > 1 ? (
             <div>
-              <span onClick={moveToFirstPage}>&lt;</span>
-              <span onClick={moveOnePageBackward}>&lt;</span>
+              <span
+                onClick={moveToFirstPage}
+                onKeyPress={moveToFirstPage}
+                role="button"
+                tabIndex={0}
+              >
+                &lt;
+              </span>
+              <span
+                onClick={moveOnePageBackward}
+                onKeyPress={moveOnePageBackward}
+                role="button"
+                tabIndex={0}
+              >
+                &lt;
+              </span>
             </div>
           ) : (
             <div />
@@ -128,8 +142,22 @@ const Paginate = (props: Props) => {
         <ArrowContainer>
           {currentClickedNumber !== totalPages ? (
             <div>
-              <span onClick={moveOnePageForward}>&gt;</span>
-              <span onClick={moveToLastPage}>&gt;</span>
+              <span
+                onClick={moveOnePageForward}
+                onKeyPress={moveOnePageForward}
+                role="button"
+                tabIndex={0}
+              >
+                &gt;
+              </span>
+              <span
+                onClick={moveToLastPage}
+                onKeyPress={moveToLastPage}
+                role="button"
+                tabIndex={0}
+              >
+                &gt;
+              </span>
             </div>
           ) : (
             <div></div>

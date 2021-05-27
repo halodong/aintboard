@@ -6,6 +6,7 @@
     "dev": "next dev -p 3002",
     "build": "next build",
     "start": "next start",
+    "lint": "eslint . --ext .ts,.tsx --no-ignore --fix",
     "test": "cross-env NODE_ENV=test ENV=test yarn mocha --require @babel/register",
     "svg": "svgr --ignore-existing --template assets/img/Template.js -d assets/img assets/img",
     "migrate:up": "migrate-mongo up",
@@ -118,7 +119,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "yarn eslint --no-ignore"
+      "yarn eslint . --ext .ts,.tsx --no-ignore --fix"
     ],
     "*.scss": "stylelint --syntax=scss --fix"
   }

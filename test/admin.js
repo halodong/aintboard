@@ -14,6 +14,7 @@ describe("Admin routes", () => {
       db = await dbHandler.connect();
       await dbHandler.clearDatabase();
     } catch (e) {
+      console.log("error", e);
       throw e;
     }
   });
