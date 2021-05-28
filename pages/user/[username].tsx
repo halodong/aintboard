@@ -27,7 +27,6 @@ const Page = ({
   challengeData,
   reviewData,
   userChallengeData,
-  onlineBattleMade,
   userTrophies,
 }: Props) => {
   const user = userData?.response?.data?.users[0];
