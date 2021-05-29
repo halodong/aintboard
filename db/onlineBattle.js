@@ -111,6 +111,24 @@ export const filterOnlineBattles = async (db, { first, filter, field }) => {
     let onlineBattles = null;
     first = first ? parseInt(first) : null;
 
+    const lookup = {
+      $lookup: {
+        from: "users",
+        let: { createdBy: "$createdBy" },
+        pipeline: [
+          {
+            $match: {
+              $expr: {
+                $and: [{ $eq: ["$$createdBy", "$_id"] }],
+              },
+            },
+          },
+          { $project: { password: 0 } },
+        ],
+        as: "userData",
+      },
+    };
+
     if (filter && field) {
       let aggregate = [
         {
@@ -118,6 +136,7 @@ export const filterOnlineBattles = async (db, { first, filter, field }) => {
             [filter]: field,
           },
         },
+        lookup,
         {
           $project: { password: 0 },
         },

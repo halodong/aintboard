@@ -112,6 +112,7 @@ export type CommonData = {
 export type BattlesData = {
   _id: string;
   battleName: string;
+  slug: string;
   boardGameName: string;
   bgImage: string;
   details: string;
@@ -251,6 +252,7 @@ export type OnlineBattlesData = {
   craetedBy: string;
   status: string;
   createdAt: string;
+  userData: UserData[];
 };
 
 export interface UserTrophiesApiResponse {

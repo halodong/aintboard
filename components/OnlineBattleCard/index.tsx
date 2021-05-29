@@ -3,6 +3,8 @@ import dayjs from "dayjs";
 import Image from "next/image";
 import DOMPurify from "dompurify";
 
+import { useRouter } from "next/router";
+
 import PlayButton from "~/assets/img/PlayButton";
 import {
   OnlineBattleCardWrapper,
@@ -22,8 +24,11 @@ import BronzeIcon from "~/assets/img/Bronze";
 import SilverIcon from "~/assets/img/Silver";
 
 const OnlineBattleCard = ({ data }: Props) => {
+  const router = useRouter();
   return (
-    <OnlineBattleCardWrapper>
+    <OnlineBattleCardWrapper
+      onClick={() => router.push(`/online-battle/${data?.slug}`)}
+    >
       <BattleImage>
         {data?.bgImage && data?.bgImage.length > 0 ? (
           <Image alt="boardgame" src={data.bgImage} layout="fill" />
