@@ -10,7 +10,7 @@ export const ReviewsPageWrapper = styled.div`
 export const ReviewsCardContainer = styled.div`
   position: relative;
   display: flex;
-  width: 55vw;
+  width: 70vw;
   margin: 9rem auto 13rem;
   flex-wrap: wrap;
   gap: 3rem;
