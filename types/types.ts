@@ -17,6 +17,8 @@ export interface ReviewApiResponse {
 }
 
 export interface ReviewApiData {
+  totalReviewsCount: number;
+  hasMore: boolean;
   reviews: ReviewData[];
 }
 

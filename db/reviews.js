@@ -61,10 +61,11 @@ export async function insertReview(
   }
 }
 
-export async function getReviews(db, { first }) {
+export async function getReviews(db, { first, offset }) {
   try {
     let reviews = null;
     first = first ? parseInt(first) : null;
+    offset = offset ? parseInt(offset) : 0;
 
     //get users data who made the review
     const lookup = {
@@ -85,10 +86,21 @@ export async function getReviews(db, { first }) {
       },
     };
 
+    let totalReviewsCount = 0;
+
     if (first) {
       reviews = await db
         .collection("reviews")
-        .aggregate([{ $sort: { createdAt: -1 } }, { $limit: first }, lookup]);
+        .aggregate([
+          { $sort: { createdAt: -1 } },
+          { $skip: offset },
+          { $limit: first },
+          lookup,
+        ]);
+
+      const totalReviews = await db.collection("reviews");
+
+      totalReviewsCount = await totalReviews.count();
     } else {
       reviews = await db
         .collection("reviews")
@@ -107,6 +119,8 @@ export async function getReviews(db, { first }) {
           : `No Reviews retrieved`,
       data: {
         reviews: reviewArray,
+        totalReviewsCount,
+        hasMore: first + offset < totalReviewsCount,
       },
     });
   } catch (err) {
