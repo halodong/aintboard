@@ -10,6 +10,7 @@ export const HeaderBattleName = styled.h1`
   font-size: 3rem;
   margin: 1rem;
   padding: 0 20rem;
+  text-transform: uppercase;
 `;
 
 const basePTagStyles = styled.p`
@@ -19,9 +20,14 @@ const basePTagStyles = styled.p`
 
 export const HeaderBoardGameName = styled(basePTagStyles)`
   color: ${(props) => props.theme.colors.lightGreen};
+  text-transform: capitalize;
 `;
 
-export const HeaderAuthor = styled(basePTagStyles)``;
+export const HeaderAuthor = styled(basePTagStyles)`
+  span {
+    text-transform: capitalize;
+  }
+`;
 
 export const OnlineBattlePageWrapper = styled.div`
   background-color: ${(props) => props.theme.colors.darkGreen};

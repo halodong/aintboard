@@ -14,7 +14,8 @@ const Header = ({ onlineBattle }: Props) => {
         {onlineBattle?.boardGameName}
       </Styles.HeaderBoardGameName>
       <Styles.HeaderAuthor>
-        CREATED BY {onlineBattle?.userData?.[0]?.username}
+        <span>created by </span>
+        {onlineBattle?.userData?.[0]?.username}
       </Styles.HeaderAuthor>
       <Avatar iconType={onlineBattle?.userData?.[0]?.avatar} />
     </Styles.HeaderContainer>
