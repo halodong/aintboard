@@ -24,6 +24,7 @@ import { CHALLENGE_STATUS } from "util/constants";
 const CreateChallengeForm = ({ closeModal }: Props) => {
   const user = useCurrentUser();
   const [images, setImages] = useState<string[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const formSchema = Yup.object().shape({
     bgName: Yup.string().required("Boardgame Name required"),
@@ -57,9 +58,11 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
       }}
       validationSchema={formSchema}
       onSubmit={async (values, { resetForm }) => {
+        setIsSubmitting(true);
         try {
           if (images.length < 1) {
             toast.error("You need to upload an image");
+            setIsSubmitting(false);
             return;
           }
 
@@ -68,6 +71,7 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
 
           if (userObj?.role === "guest" && powerUpAmount > 2) {
             toast.error("You're not allowed to assign more than 2 PowerUps");
+            setIsSubmitting(false);
             return;
           }
 
@@ -76,6 +80,7 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
             powerUpAmount > 5
           ) {
             toast.error("Max is 5 PowerUps");
+            setIsSubmitting(false);
             return;
           }
 
@@ -93,6 +98,7 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
 
           if (!response.data.success) {
             toast.error(response.data.message);
+            setIsSubmitting(false);
             return;
           }
           closeModal();
@@ -102,8 +108,10 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
           mutate(`/api/online-battles/filter/createdBy/${userObj?._id}`);
           toast.success("New challenge added!");
         } catch (err) {
+          console.log(err);
           console.error("Challenge creation error: ", err);
           toast.error("Something went wrong");
+          setIsSubmitting(false);
         }
       }}
     >
@@ -172,8 +180,8 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
           </InputContainer>
 
           <ButtonContainer>
-            <Button bg="lightYellow" type="submit">
-              Submit
+            <Button bg="lightYellow" type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "Submiting" : "Submit"}
             </Button>
           </ButtonContainer>
         </Form>
