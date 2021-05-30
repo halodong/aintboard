@@ -24,7 +24,7 @@ const OnlineBattlePage = ({ onlineBattle }: Props) => {
           ) : (
             <Image
               alt="online battle cover photo"
-              src="/img/portrait_def.png"
+              src="/img/landscape_default.png"
               layout="fill"
             />
           )}

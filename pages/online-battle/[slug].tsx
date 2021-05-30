@@ -9,7 +9,7 @@ import OnlineBattleHeader from "~/components/OnlineBattlePage/Header";
 import OnlineBattlePage from "~/components/OnlineBattlePage";
 import Footer from "~/components/Common/Footer";
 
-const Slug = ({ onlineBattleData }: Props) => {
+const OnlineBattleSlug = ({ onlineBattleData }: Props) => {
   const onlineBattle = onlineBattleData?.response?.data?.onlineBattles[0];
 
   return (
@@ -27,7 +27,7 @@ type Props = {
   onlineBattleData: OnlineBattlesApiResponse;
 };
 
-export default Slug;
+export default OnlineBattleSlug;
 
 type Params = {
   params: {
