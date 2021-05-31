@@ -1,7 +1,7 @@
-import dayjs from 'dayjs';
-import Image from 'next/image';
-import { capitalize } from 'lodash';
-import { useRouter } from 'next/router';
+import dayjs from "dayjs";
+import Image from "next/image";
+import { capitalize } from "lodash";
+import { useRouter } from "next/router";
 
 import {
   ReviewCardContainer,
@@ -12,15 +12,15 @@ import {
   Bottom,
   BottomRight,
   BottomWrapper,
-} from './styled';
-import Avatar from 'components/Avatar';
-import OverallRating from 'components/Common/OverallRating';
-import CommentIcon from 'assets/img/Comment';
-import HeartIcon from 'assets/img/Heart';
+} from "./styled";
+import Avatar from "components/Avatar";
+import OverallRating from "components/Common/OverallRating";
+import CommentIcon from "assets/img/Comment";
+import HeartIcon from "assets/img/Heart";
 
-import { ReviewData } from 'types/types';
-import { createHTMLExcerpt } from '~/util/createHTML';
-import { REVIEWS_HOMEPAGE_COMPONENT, REVIEW_TYPE } from '~/util/constants';
+import { ReviewData } from "types/types";
+import { createHTMLExcerpt } from "~/util/createHTML";
+import { REVIEWS_HOMEPAGE_COMPONENT, REVIEW_TYPE } from "~/util/constants";
 
 export const ReviewCard = ({ data }: Props) => {
   const router = useRouter();
@@ -39,12 +39,12 @@ export const ReviewCard = ({ data }: Props) => {
       </BgImgWrapper>
 
       <Avatar
-        iconType={data?.userData?.[0]?.avatar || ''}
+        iconType={data?.userData?.[0]?.avatar || ""}
         from={REVIEWS_HOMEPAGE_COMPONENT}
       />
 
       <Username>{data?.userData?.[0]?.username}</Username>
-      <ReviewDate>{dayjs(data?.createdAt).format('MMM DD YYYY')}</ReviewDate>
+      <ReviewDate>{dayjs(data?.createdAt).format("MMM DD YYYY")}</ReviewDate>
       <ReviewContent>
         <div
           className="preview"
