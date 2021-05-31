@@ -107,6 +107,7 @@ type HeaderWrapperProps = {
   isReviewArticlePage?: boolean;
   isUserPage?: boolean;
   isSettingsPage?: boolean;
+  isOnlineBattlePage?: boolean;
 };
 
 const baseTaglineStyles = styled.h1`
