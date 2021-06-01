@@ -44,9 +44,6 @@ const ChallengesPage = () => {
 
   ref.current = false;
 
-  console.log(filteredApiData);
-  console.log(items);
-
   return (
     <ChallengesPageWrapper>
       <InfiniteScroll
