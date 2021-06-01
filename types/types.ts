@@ -82,6 +82,7 @@ export interface ChallengesApiResponse {
 }
 
 export interface ChallengesApiData {
+  hasMore: boolean;
   challenges: ChallengesData[];
 }
 
