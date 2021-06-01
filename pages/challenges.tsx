@@ -2,11 +2,7 @@ import Header from "~/components/Header";
 import Seo from "~/components/Common/Seo";
 import ChallengesPage from "~/components/Challenges/ChallengesPage";
 
-import database from "middlewares/dbForFrontend";
-import { getAllChallenges } from "db/challenges";
-import { ChallengesApiResponse } from "types/types";
-
-const Challenges = ({ challenges }: Props) => {
+const Challenges = () => {
   return (
     <>
       <Seo
@@ -16,24 +12,9 @@ const Challenges = ({ challenges }: Props) => {
         canonical="/challenges"
       />
       <Header isChallengesPage />
-      <ChallengesPage challenges={challenges} />
+      <ChallengesPage />
     </>
   );
 };
 
-type Props = {
-  challenges: ChallengesApiResponse;
-};
-
 export default Challenges;
-
-export async function getStaticProps() {
-  const db = await database();
-  const challenges = await getAllChallenges(db, { first: 6 });
-
-  return {
-    props: {
-      challenges,
-    },
-  };
-}

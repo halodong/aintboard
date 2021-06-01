@@ -39,36 +39,71 @@ export const insertChallenge = async (
   }
 };
 
-export const getAllChallenges = async (db, { first }) => {
+export const getAllChallenges = async (db, { first, offset }) => {
   try {
     let challenges = null;
     first = first ? parseInt(first) : null;
+    offset = offset ? parseInt(offset) : 0;
+
+    const lookup = {
+      $lookup: {
+        from: "users",
+        let: { createdBy: "$createdBy" },
+        pipeline: [
+          {
+            $match: {
+              $expr: {
+                $and: [{ $eq: ["$$createdBy", "$_id"] }],
+              },
+            },
+          },
+          { $project: { password: 0 } },
+        ],
+        as: "userData",
+      },
+    };
+
+    let totalChallengesCount = 0;
 
     if (first) {
       challenges = await db
         .collection("challenges")
-        .aggregate([{ $limit: first }]);
+        .aggregate([
+          { $sort: { createdAt: -1 } },
+          { $skip: offset },
+          { $limit: first },
+          lookup,
+        ]);
+      const totalChallenges = await db.collection("challenges");
+
+      totalChallengesCount = await totalChallenges.count();
     } else {
-      challenges = await db.collection("challenges").find();
+      challenges = await db
+        .collection("challenges")
+        .aggregate([{ $sort: { createdAt: -1 } }, lookup]);
     }
-
-    const allChallenge = await challenges.toArray();
-
-    const challengeCount = allChallenge.length;
+    const challengeArray = await challenges.toArray();
+    const challengesCount = challengeArray.length;
 
     return getSuccessResponse({
       message:
-        challengeCount === 1
+        challengesCount === 1
           ? "1 Challenge retrieved"
-          : challengeCount > 1
-          ? `${challengeCount} Challenges retrieved`
-          : `No Challenges retrieved`,
+          : challengesCount > 1
+          ? `${challengesCount} Challenges retrieved`
+          : "No Challenges retrieved",
       data: {
-        challenges: allChallenge,
+        challenges: challengeArray,
+        totalChallengesCount,
+        hasMore: first + offset < totalChallengesCount,
       },
     });
   } catch (err) {
-    return getFailedResponse(err, "db/challenges.js");
+    return getFailedResponse(
+      err,
+      "db/challenges.js",
+      "Couldn't get challenges"
+    );
   }
 };
 
