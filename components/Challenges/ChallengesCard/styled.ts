@@ -78,11 +78,11 @@ export const UserContainer = styled.div`
 
   .avatar-icon {
     margin: 0;
-    width: 2rem;
-    height: 2rem;
+    width: 1.5rem;
+    height: 1.5rem;
   }
 
   p {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
 `;
