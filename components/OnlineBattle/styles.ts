@@ -5,6 +5,11 @@ export const BattleCardWrapper = styled.div`
   background: ${theme.colors.darkGreen};
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
   min-height: 100vh;
+
+  .infinite-scroll-component {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 `;

@@ -113,6 +113,7 @@ export type CommonData = {
 };
 
 export type BattlesData = {
+  [key: string]: string | undefined;
   _id: string;
   battleName: string;
   slug: string;
@@ -128,13 +129,13 @@ export interface BattlesApiResponse {
   success: boolean;
   response: {
     message: string;
-    data: {
-      battles: BattlesData[];
-    };
+    data: BattlesApiData;
   };
 }
 
 export interface BattlesApiData {
+  totalOnlineBattlesCount: number;
+  hasMore: boolean;
   battles: BattlesData[];
 }
 

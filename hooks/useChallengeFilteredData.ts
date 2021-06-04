@@ -1,12 +1,15 @@
 import { uniqBy, isEmpty, capitalize } from "lodash";
 
-import { CHALLENGES_PAGE, REVIEWS_PAGE } from "util/constants";
+import { CHALLENGES_PAGE, ONLINE_BATTLES, REVIEWS_PAGE } from "util/constants";
 import {
   ChallengesApiResponse,
   ChallengesData,
   ReviewApiResponse,
   ReviewData,
+  BattlesApiResponse,
+  BattlesData,
 } from "types/types";
+import dayjs from "dayjs";
 
 const initialFilteredData = [
   {
@@ -21,6 +24,7 @@ export default function useChallengeFilteredData() {
   const handleFilter = ({
     challengeApi,
     reviewApi,
+    onlineBattleApi,
     firstSelected,
     type,
   }: Props) => {
@@ -54,6 +58,26 @@ export default function useChallengeFilteredData() {
             })
             .filter((v) => !isEmpty(v.value)) || initialFilteredData;
         break;
+
+      case ONLINE_BATTLES:
+        filter =
+          onlineBattleApi?.response?.data?.battles
+            ?.map((val: BattlesData) => {
+              let label = val[firstSelected]?.toString() || "";
+              let value = val[firstSelected]?.toString() || "";
+
+              if (["eventEndDate"].includes(firstSelected)) {
+                label = dayjs(label).format("MMMM DD, YYYY");
+              }
+
+              return {
+                label,
+                value,
+              };
+            })
+            .filter((v) => !isEmpty(v.value) || initialFilteredData) ||
+          initialFilteredData;
+        break;
     }
 
     // only get the unique values
@@ -66,6 +90,7 @@ export default function useChallengeFilteredData() {
 type Props = {
   challengeApi?: ChallengesApiResponse | undefined;
   reviewApi?: ReviewApiResponse | undefined;
+  onlineBattleApi?: BattlesApiResponse | undefined;
   firstSelected: string;
   type: string;
 };

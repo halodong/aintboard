@@ -95,7 +95,7 @@ const OnlineBattleForm = ({ closeModal }: Props) => {
             bgImage: uploadedImage[0],
             details,
             eventStartDate: startDate,
-            eventEndDate: endDate,
+            eventEndDate: endDate ? dayjs(endDate).format("MM-DD-YYYY") : null,
             status: OB_STATUS.PENDING,
           });
 

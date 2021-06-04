@@ -7,9 +7,13 @@ import { saveFilters } from "redux/slices/filterSlice";
 import DropDown from "~/components/Common/DropDown";
 
 import { FilterWrapper, Text } from "./styled";
-import { CHALLENGES_PAGE, REVIEWS_PAGE } from "util/constants";
+import { CHALLENGES_PAGE, REVIEWS_PAGE, ONLINE_BATTLES } from "util/constants";
 import useChallengeFilteredData from "~/hooks/useChallengeFilteredData";
-import { ChallengesApiResponse, ReviewApiResponse } from "types/types";
+import {
+  BattlesApiResponse,
+  ChallengesApiResponse,
+  ReviewApiResponse,
+} from "types/types";
 
 const initialFilteredData = [
   {
@@ -33,6 +37,11 @@ const Filter = ({ type }: Props) => {
 
   const { data: reviewData } = useSWR<ReviewApiResponse>(
     type === REVIEWS_PAGE ? `/api/reviews` : null,
+    fetcher
+  );
+
+  const { data: onlineBattleData } = useSWR<BattlesApiResponse>(
+    type === ONLINE_BATTLES ? `/api/online-battles` : null,
     fetcher
   );
 
@@ -64,6 +73,13 @@ const Filter = ({ type }: Props) => {
           break;
         case REVIEWS_PAGE:
           filter = handleFilter({ reviewApi: reviewData, firstSelected, type });
+          break;
+        case ONLINE_BATTLES:
+          filter = handleFilter({
+            onlineBattleApi: onlineBattleData,
+            firstSelected,
+            type,
+          });
           break;
       }
 
@@ -117,6 +133,22 @@ const Filter = ({ type }: Props) => {
         {
           label: "Overall Rating",
           value: "overallRating",
+        },
+      ];
+      break;
+    case ONLINE_BATTLES:
+      options = [
+        {
+          label: "Boardgame Name",
+          value: "boardGameName",
+        },
+        {
+          label: "Event End Date",
+          value: "eventEndDate",
+        },
+        {
+          label: "Created By Me",
+          value: "createdBy",
         },
       ];
       break;

@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { useState } from "react";
 import Select from "react-select";
 
@@ -16,6 +17,8 @@ const DropDown = ({
     value: "",
   };
   const [selectedState, setSelectedState] = useState(emptyDefault);
+  // Sort Event End Date ascending
+  options = _.sortBy(options, (e) => e.value);
 
   return (
     <DropDownContainer marginLeft={marginLeft}>
@@ -27,7 +30,7 @@ const DropDown = ({
         placeholder={placeholder}
         isClearable={true}
         isSearchable={false}
-        options={options}
+        options={_.uniqBy(options, (e) => e.label)}
         value={
           (selected &&
             selected.length > 0 &&

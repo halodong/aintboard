@@ -73,17 +73,49 @@ export async function insertValidEntry(
   }
 }
 
-export const getBattles = async (db, { first }) => {
+export const getBattles = async (db, { first, offset }) => {
   try {
     let battles = null;
     first = first ? parseInt(first) : null;
+    offset = offset ? parseInt(offset) : 0;
+
+    const lookup = {
+      $lookup: {
+        from: "users",
+        let: { createdBy: "$createdBy" },
+        pipeline: [
+          {
+            $match: {
+              $expr: {
+                $and: [{ $eq: ["$$createdBy", "$_id"] }],
+              },
+            },
+          },
+          { $project: { password: 0 } },
+        ],
+        as: "userData",
+      },
+    };
+
+    let totalOnlineBattlesCount = 0;
 
     if (first) {
       battles = await db
         .collection("online_battle")
-        .aggregate([{ $limit: first }]);
+        .aggregate([
+          { $sort: { createdAt: -1 } },
+          { $skip: offset },
+          { $limit: first },
+          lookup,
+        ]);
+
+      const totalOnlineBattles = await db.collection("online_battle");
+
+      totalOnlineBattlesCount = await totalOnlineBattles.count();
     } else {
-      battles = await db.collection("online_battle").find();
+      battles = await db
+        .collection("online_battle")
+        .aggregate([{ $sort: { createdAt: -1 } }, lookup]);
     }
 
     const allBattles = await battles.toArray();
@@ -99,6 +131,8 @@ export const getBattles = async (db, { first }) => {
           : `Online Battleretrieved`,
       data: {
         battles: allBattles,
+        totalOnlineBattlesCount,
+        hasMore: first + offset < totalOnlineBattlesCount,
       },
     });
   } catch (err) {
