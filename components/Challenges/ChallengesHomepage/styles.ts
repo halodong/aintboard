@@ -14,7 +14,7 @@ export const Wrapper = styled.div`
   }
 
   @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    height: 78rem;
+    min-height: 62rem;
 
     .slogan {
       padding: 0.2rem;
