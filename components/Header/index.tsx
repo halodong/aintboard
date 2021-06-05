@@ -64,6 +64,7 @@ export default function Header({
   isReviewArticlePage = false,
   isUserPage = false,
   isSettingsPage = false,
+  isOnlineBattlePage = false,
   children,
 }: Props) {
   const router = useRouter();
@@ -105,15 +106,15 @@ export default function Header({
       isReviewArticlePage={isReviewArticlePage}
       isUserPage={isUserPage}
       isSettingsPage={isSettingsPage}
+      isOnlineBattlePage={isOnlineBattlePage}
     >
       <Navbar />
 
       {/* <Searchbar /> obsolete for now */}
 
-      {isUserPage ||
-        (isSettingsPage && (
-          <CenterTagline isUserPage>{children}</CenterTagline>
-        ))}
+      {(isUserPage || isSettingsPage) && (
+        <CenterTagline isUserPage>{children}</CenterTagline>
+      )}
 
       {(homepage || isBoardGamePage || isUserPage || isSettingsPage) && (
         <div className="homepage-bg-container">
@@ -142,7 +143,8 @@ export default function Header({
       {(isChallengesPage ||
         isOnlineBattles ||
         isBuyAvatarsPage ||
-        isReviewArticlePage) && <Tent className="tent" />}
+        isReviewArticlePage ||
+        isOnlineBattlePage) && <Tent className="tent" />}
 
       {isChallengesPage && (
         <>
@@ -175,6 +177,7 @@ export default function Header({
 
       {isBoardGamePage && <BoardGameName>{children}</BoardGameName>}
       {isReviewArticlePage && <Rubik>{children}</Rubik>}
+      {isOnlineBattlePage && <Rubik>{children}</Rubik>}
 
       {modalCta.map((mdl) => (
         <Modal
@@ -234,5 +237,6 @@ type Props = {
   isReviewArticlePage?: boolean;
   isUserPage?: boolean;
   isSettingsPage?: boolean;
+  isOnlineBattlePage?: boolean;
   children?: any;
 };

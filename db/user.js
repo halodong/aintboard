@@ -59,6 +59,7 @@ export async function insertUser(
       gcash,
       powerups: 0,
       stars: 0,
+      createdAt: new Date(),
     });
 
     return getSuccessResponse({

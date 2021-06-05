@@ -54,15 +54,11 @@ export const Rank = styled.div`
   display: flex;
   flex-direction: row;
   margin: 1rem 0;
+  gap: 0.5rem;
 `;
 
 export const Place = styled.div`
-  font-family: ${(props) => props.theme.fonts.quicksandBold};
-
-  padding: 1rem;
-  border-radius: ${(props) => props.theme.border["10px"]};
-  background-color: ${(props) => props.theme.colors.darkGreen};
-  color: ${(props) => props.theme.colors.white};
+  width: 3rem;
 `;
 
 export const Username = styled.div`

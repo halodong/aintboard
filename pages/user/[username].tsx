@@ -17,13 +17,17 @@ import {
   ChallengesApiResponse,
   UserChallangesApiResponse,
   ReviewApiResponse,
+  OnlineBattlesApiResponse,
+  UserTrophiesApiResponse,
 } from "~/types/types";
+import { filterChampions } from "~/db/champion";
 
 const Page = ({
   userData,
   challengeData,
   reviewData,
   userChallengeData,
+  userTrophies,
 }: Props) => {
   const user = userData?.response?.data?.users[0];
 
@@ -41,9 +45,11 @@ const Page = ({
       </Header>
 
       <UserProfilePage
+        user={userData}
         challenges={challengeData}
         reviews={reviewData}
         userChallenges={userChallengeData}
+        userTrophies={userTrophies}
       />
     </>
   );
@@ -54,6 +60,8 @@ type Props = {
   challengeData: ChallengesApiResponse;
   reviewData: ReviewApiResponse;
   userChallengeData: UserChallangesApiResponse;
+  onlineBattleMade: OnlineBattlesApiResponse;
+  userTrophies: UserTrophiesApiResponse;
 };
 
 export default Page;
@@ -88,6 +96,11 @@ export async function getStaticProps({ params }: Params) {
     field: userData.response.data.users[0]._id,
     first: 1,
   });
+  const userTrophies = await filterChampions(db, {
+    filter: "userId",
+    field: userData.response.data.users[0]._id,
+    first: null,
+  });
 
   if (userData?.response?.data?.users?.length < 1) {
     return {
@@ -101,6 +114,7 @@ export async function getStaticProps({ params }: Params) {
       challengeData,
       reviewData,
       userChallengeData,
+      userTrophies,
     },
   };
 }

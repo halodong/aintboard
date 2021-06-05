@@ -68,3 +68,28 @@ export const Achieved = styled.p`
   gap: 0.5rem;
   margin: 0;
 `;
+
+export const RightSide = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+export const UserContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin: 0.5rem 1rem;
+
+  .avatar-icon {
+    margin: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  p {
+    font-size: 0.8rem;
+  }
+`;

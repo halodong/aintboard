@@ -17,6 +17,33 @@ export const LeftSide = styled.div`
   margin-top: -6rem;
 `;
 
+export const UserDetails = styled.div`
+  width: 100%;
+  margin: 0 1rem;
+  padding: 0 2rem;
+`;
+
+export const TextDetails = styled.p`
+  font-family: ${(props) => props.theme.fonts.quicksandBold};
+  color: ${(props) => props.theme.colors.white};
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+`;
+
+export const PowerUps = styled.span`
+  font-family: ${(props) => props.theme.fonts.gameFont};
+  color: white;
+`;
+
+export const UserIconContainer = styled.div`
+  .icon {
+    width: 2rem;
+    margin: 0;
+  }
+`;
+
 export const RightSide = styled.div`
   flex: 4;
   display: flex;

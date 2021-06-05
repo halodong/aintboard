@@ -1,6 +1,7 @@
 import Faqs from "~/components/Faqs";
 import Header from "~/components/Header";
 import Seo from "~/components/Common/Seo";
+import Footer from "~/components/Common/Footer";
 
 const FaqsPage = () => {
   return (
@@ -13,6 +14,7 @@ const FaqsPage = () => {
       />
       <Header homepage tagline="FAQs" />
       <Faqs />
+      <Footer />
     </>
   );
 };

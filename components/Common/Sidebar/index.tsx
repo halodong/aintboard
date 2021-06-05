@@ -74,14 +74,14 @@ const Sidebar = ({ menuOpen, closeMenu }: Props) => {
             links={[
               {
                 key: "see-reviews",
-                linkHref: "/",
+                linkHref: "/reviews",
                 linkName: "See Reviews",
               },
               {
                 key: "make-review",
-                button: true,
+                button: false,
                 type: MAKE_REVIEW_BUTTON,
-                linkHref: "/",
+                linkHref: "/review/new",
                 linkName: "Make a Review or Strategy",
               },
             ]}
@@ -91,7 +91,7 @@ const Sidebar = ({ menuOpen, closeMenu }: Props) => {
             links={[
               {
                 key: "see-challenges",
-                linkHref: "/",
+                linkHref: "/challenges",
                 linkName: "See Challenges",
               },
               {
@@ -108,7 +108,7 @@ const Sidebar = ({ menuOpen, closeMenu }: Props) => {
             links={[
               {
                 key: "see-ob",
-                linkHref: "/",
+                linkHref: "/online-battles",
                 linkName: "See Online Battles",
               },
               {

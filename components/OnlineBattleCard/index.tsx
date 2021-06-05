@@ -3,6 +3,8 @@ import dayjs from "dayjs";
 import Image from "next/image";
 import DOMPurify from "dompurify";
 
+import { useRouter } from "next/router";
+
 import PlayButton from "~/assets/img/PlayButton";
 import {
   OnlineBattleCardWrapper,
@@ -17,9 +19,16 @@ import {
 
 import { BattlesData } from "~/types/types";
 
+import GoldIcon from "~/assets/img/Gold";
+import BronzeIcon from "~/assets/img/Bronze";
+import SilverIcon from "~/assets/img/Silver";
+
 const OnlineBattleCard = ({ data }: Props) => {
+  const router = useRouter();
   return (
-    <OnlineBattleCardWrapper>
+    <OnlineBattleCardWrapper
+      onClick={() => router.push(`/online-battle/${data?.slug}`)}
+    >
       <BattleImage>
         {data?.bgImage && data?.bgImage.length > 0 ? (
           <Image alt="boardgame" src={data.bgImage} layout="fill" />
@@ -48,15 +57,21 @@ const OnlineBattleCard = ({ data }: Props) => {
         </BattleEnds>
         <div>
           <Rank>
-            <Place>Top 1</Place>
+            <Place>
+              <GoldIcon />
+            </Place>
             <Username>Username 1</Username>
           </Rank>
           <Rank>
-            <Place>Top 1</Place>
+            <Place>
+              <SilverIcon />
+            </Place>
             <Username>Username 1</Username>
           </Rank>
           <Rank>
-            <Place>Top 1</Place>
+            <Place>
+              <BronzeIcon />
+            </Place>
             <Username>Username 1</Username>
           </Rank>
         </div>

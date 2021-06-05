@@ -1,6 +1,7 @@
 import About from "~/components/About";
 import Header from "~/components/Header";
 import Seo from "~/components/Common/Seo";
+import Footer from "~/components/Common/Footer";
 
 const AboutPage = () => {
   return (
@@ -13,6 +14,7 @@ const AboutPage = () => {
       />
       <Header homepage tagline="About Us" />
       <About />
+      <Footer />
     </>
   );
 };

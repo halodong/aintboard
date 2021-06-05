@@ -1,4 +1,9 @@
-import { insertBattle, insertValidEntry, getBattles } from "../db/onlineBattle";
+import {
+  insertBattle,
+  insertValidEntry,
+  getBattles,
+  filterOnlineBattles,
+} from "../db/onlineBattle";
 import { insertUser } from "../db/user";
 import { nanoid } from "nanoid";
 import dayjs from "dayjs";
@@ -11,12 +16,8 @@ describe("Online Battles", () => {
   let db;
 
   before(async () => {
-    try {
-      db = await dbHandler.connect();
-      await dbHandler.clearDatabase();
-    } catch (e) {
-      throw e;
-    }
+    db = await dbHandler.connect();
+    await dbHandler.clearDatabase();
 
     user = await insertUser(db, {
       _id: nanoid(12),
@@ -89,5 +90,16 @@ describe("Online Battles", () => {
     expect(res.success).to.equal(true);
     expect(res.response.message).to.equal("1 Online Battle retrieved");
     expect(res.response.data.battles).to.an("array");
+  });
+
+  it("should filter online battles", async () => {
+    let res = await filterOnlineBattles(db, {
+      filter: "status",
+      field: "PENDING",
+      first: null,
+    });
+
+    expect(res.success).to.equal(true);
+    expect(res.response.data.onlineBattles[0].status).to.equal("PENDING");
   });
 });

@@ -57,8 +57,8 @@ type Props = {
 
 export const getStaticProps = async () => {
   const db = await database();
-  const challenges = await getAllChallenges(db, { first: 3 });
-  const reviews = await getReviews(db, { first: 5 });
+  const challenges = await getAllChallenges(db, { first: 3, offset: null });
+  const reviews = await getReviews(db, { first: 5, offset: null });
 
   return {
     props: {
