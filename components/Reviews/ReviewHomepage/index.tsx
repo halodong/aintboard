@@ -9,6 +9,8 @@ import { ReviewContainer, ReviewCardWrapper } from "./styled";
 import { ReviewApiResponse } from "~/types/types";
 
 const ReviewHomepage = ({ reviews }: Props) => {
+  const reviewsData = reviews?.response?.data?.reviews || [];
+
   return (
     <ReviewContainer>
       <Maze className="maze" />
@@ -16,13 +18,15 @@ const ReviewHomepage = ({ reviews }: Props) => {
       <WaterRight className="water-right" />
 
       <ReviewCardWrapper>
-        {reviews?.response?.data?.reviews?.map((r) => (
+        {reviewsData?.map((r) => (
           <ReviewCard key={r._id} data={r} />
         ))}
         <div className="mainButtonContainer">
-          <Link href="/reviews">
-            <button>See more Reviews</button>
-          </Link>
+          {reviewsData?.length > 0 && (
+            <Link href="/reviews">
+              <button>See more Reviews</button>
+            </Link>
+          )}
           <Link href="/review/new">
             <button>Make a Review or Strategy</button>
           </Link>

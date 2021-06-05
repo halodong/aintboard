@@ -52,6 +52,7 @@
     "react-redux": "^7.2.3",
     "react-select": "^4.3.0",
     "react-toastify": "^7.0.3",
+    "react-use": "^17.2.4",
     "styled-components": "^5.2.1",
     "superjson": "^1.7.4",
     "swr": "^0.5.2",

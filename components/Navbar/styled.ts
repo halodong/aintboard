@@ -25,12 +25,12 @@ export const NavbarContainer = styled.nav<NavbarContainerProps>`
   }
 
   @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    flex-direction: column;
-    min-height: 8rem;
-    padding: 0.3rem;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem;
 
     .logo {
-      margin-left: 0rem;
+      margin-left: 0;
       align-self: flex-start;
     }
   }
@@ -64,12 +64,7 @@ export const NavBarButtons = styled.div`
   }
 
   @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    flex-direction: column;
-
-    button {
-      margin: 0.8rem 1rem;
-      width: 10rem;
-    }
+    align-items: flex-end;
   }
 `;
 
@@ -169,6 +164,10 @@ export const Links = styled.div`
   right: 0;
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    display: none;
+  }
 
   a {
     padding: 0.625rem ${(props) => props.theme.spacing.md};

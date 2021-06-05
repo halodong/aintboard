@@ -14,7 +14,8 @@ export const Wrapper = styled.div`
   }
 
   @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    min-height: 62rem;
+    height: auto;
+    padding-bottom: 2rem;
 
     .slogan {
       padding: 0.2rem;
@@ -44,6 +45,7 @@ export const CardWrapper = styled.div`
 
   @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     width: 90%;
+    height: auto;
   }
 `;
 

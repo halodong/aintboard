@@ -1,6 +1,6 @@
 import Link from "next/link";
+import { useWindowSize } from "react-use";
 
-import React, { useState, useEffect } from "react";
 import ChallengeCard from "~/components/Challenges/ChallengesCard";
 import {
   GameFont,
@@ -14,11 +14,12 @@ import { ChallengesApiResponse } from "~/types/types";
 
 //Challenges section in homepage
 export default function ChallengesHomePage({ challenges }: Props) {
-  const [windowWidth, setWindowWidth] = useState(0);
+  const { width: windowWidth } = useWindowSize();
+  let challengesData = challenges?.response?.data?.challenges;
 
-  useEffect(() => {
-    setWindowWidth(window.innerWidth);
-  }, []);
+  if (windowWidth !== 0 && windowWidth <= 600) {
+    challengesData = challengesData?.slice(0, 2);
+  }
 
   return (
     <Wrapper>
@@ -28,18 +29,9 @@ export default function ChallengesHomePage({ challenges }: Props) {
       </p>
 
       <CardWrapper>
-        {windowWidth !== 0 && windowWidth <= 600 ? (
-          <>
-            <ChallengeCard data={challenges?.response?.data?.challenges?.[0]} />
-            <ChallengeCard />
-          </>
-        ) : (
-          <>
-            <ChallengeCard data={challenges?.response?.data?.challenges?.[0]} />
-            <ChallengeCard />
-            <ChallengeCard />
-          </>
-        )}
+        {challengesData?.map((challenge) => {
+          return <ChallengeCard data={challenge} />;
+        })}
         <Link href="/challenges">
           <CallToAction>
             <CallToActionFont>PARTICIPATE</CallToActionFont>
