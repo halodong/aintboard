@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { theme } from "~/styles/theme";
 
 export const ReviewContainer = styled.div`
   width: 100%;
@@ -27,6 +28,26 @@ export const ReviewContainer = styled.div`
     position: absolute;
     right: 0;
     top: 11rem;
+  }
+
+  @media (max-width: ${theme.breakpoints.sm}) {
+    min-height: 0;
+    height: auto;
+
+    .maze {
+      width: 100%;
+      top: 0;
+      height: auto;
+    }
+
+    .water-left {
+      width: 10%;
+      top: 10%;
+    }
+
+    .water-right {
+      width: 10%;
+    }
   }
 `;
 
@@ -60,6 +81,22 @@ export const ReviewCardWrapper = styled.div`
       cursor: pointer;
       outline: none;
       padding: 1rem;
+    }
+  }
+
+  @media (max-width: ${theme.breakpoints.sm}) {
+    width: 100%;
+    margin: 5rem auto auto;
+
+    .mainButtonContainer {
+      width: 80%;
+      justify-content: space-evenly;
+      align-items: center;
+
+      button {
+        min-width: 13.25rem;
+        height: 5rem;
+      }
     }
   }
 `;

@@ -16,12 +16,8 @@ describe("Online Battles", () => {
   let db;
 
   before(async () => {
-    try {
-      db = await dbHandler.connect();
-      await dbHandler.clearDatabase();
-    } catch (e) {
-      throw e;
-    }
+    db = await dbHandler.connect();
+    await dbHandler.clearDatabase();
 
     user = await insertUser(db, {
       _id: nanoid(12),

@@ -8,6 +8,9 @@ export const ChallengesCardWrapper = styled.div`
   display: flex;
   border-radius: ${(props) => props.theme.border["10px"]};
   cursor: pointer;
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    margin: 1rem auto 1rem;
+  }
 `;
 
 export const PowerUpAmount = styled.div`
@@ -23,6 +26,10 @@ export const PowerUpAmount = styled.div`
   height: 4rem;
   width: 4rem;
   border-radius: 100%;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    left: calc(100% - 10.5rem);
+  }
 `;
 
 export const ChallengeName = styled.div`

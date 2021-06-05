@@ -1,4 +1,5 @@
 import fetcher from "~/util/fetch";
+import { useState, useEffect } from "react";
 import useSWR from "swr";
 
 import Header from "~/components/Header";
@@ -13,8 +14,14 @@ import { getAllChallenges } from "db/challenges";
 import { ReviewApiResponse, ChallengesApiResponse } from "~/types/types";
 
 export default function Home({ reviews, challenges }: Props) {
+  const [windowWidth, setWindowWidth] = useState(0);
+
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+  }, []);
+
   const { data: reviewData } = useSWR<ReviewApiResponse>(
-    "/api/reviews?first=5",
+    `/api/reviews?first=${windowWidth !== 0 && windowWidth <= 600 ? 2 : 5}`,
     fetcher,
     { initialData: reviews, revalidateOnMount: true }
   );

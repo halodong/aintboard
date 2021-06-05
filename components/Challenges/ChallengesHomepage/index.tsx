@@ -1,6 +1,6 @@
 import Link from "next/link";
+import { useWindowSize } from "react-use";
 
-import React from "react";
 import ChallengeCard from "~/components/Challenges/ChallengesCard";
 import {
   GameFont,
@@ -10,11 +10,17 @@ import {
   CallToActionFont,
 } from "./styles";
 import RightArrow from "~/assets/img/rightArrow";
-
 import { ChallengesApiResponse } from "~/types/types";
 
 //Challenges section in homepage
 export default function ChallengesHomePage({ challenges }: Props) {
+  const { width: windowWidth } = useWindowSize();
+  let challengesData = challenges?.response?.data?.challenges;
+
+  if (windowWidth !== 0 && windowWidth <= 600) {
+    challengesData = challengesData?.slice(0, 2);
+  }
+
   return (
     <Wrapper>
       <GameFont>CHALLENGES</GameFont>
@@ -23,9 +29,9 @@ export default function ChallengesHomePage({ challenges }: Props) {
       </p>
 
       <CardWrapper>
-        <ChallengeCard data={challenges?.response?.data?.challenges?.[0]} />
-        <ChallengeCard />
-        <ChallengeCard />
+        {challengesData?.map((challenge) => {
+          return <ChallengeCard data={challenge} />;
+        })}
         <Link href="/challenges">
           <CallToAction>
             <CallToActionFont>PARTICIPATE</CallToActionFont>
