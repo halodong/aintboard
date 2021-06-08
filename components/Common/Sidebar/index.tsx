@@ -126,10 +126,10 @@ const Sidebar = ({ menuOpen, closeMenu }: Props) => {
 
         <UlSidebar>
           <SecondaryLinkSidebar>
-            {userData?.powerups || 0} <PowerUps>UP</PowerUps>
+            {userObj?.powerups || 0} <PowerUps>UP</PowerUps>
           </SecondaryLinkSidebar>
           <SecondaryLinkSidebar>
-            {userData?.stars || 0} <StarIcon className="icon" />
+            {userObj?.stars || 0} <StarIcon className="icon" />
           </SecondaryLinkSidebar>
           <SecondaryLinkSidebar>
             0 <GoldIcon className="icon" />

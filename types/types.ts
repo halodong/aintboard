@@ -212,7 +212,7 @@ export type UserAvatarsData = {
   createdAt: string;
 };
 
-export interface UserChallangesApiResponse {
+export interface UserChallengesApiResponse {
   success: boolean;
   response: {
     message: string;
