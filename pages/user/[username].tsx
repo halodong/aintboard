@@ -15,7 +15,7 @@ import {
   UserData,
   UserApiResponse,
   ChallengesApiResponse,
-  UserChallangesApiResponse,
+  UserChallengesApiResponse,
   ReviewApiResponse,
   OnlineBattlesApiResponse,
   UserTrophiesApiResponse,
@@ -59,7 +59,7 @@ type Props = {
   userData: UserApiResponse;
   challengeData: ChallengesApiResponse;
   reviewData: ReviewApiResponse;
-  userChallengeData: UserChallangesApiResponse;
+  userChallengeData: UserChallengesApiResponse;
   onlineBattleMade: OnlineBattlesApiResponse;
   userTrophies: UserTrophiesApiResponse;
 };

@@ -1,7 +1,8 @@
+import useSWR from "swr";
 import Link from "next/link";
+import { isEmpty } from "lodash";
 import { useWindowSize } from "react-use";
 
-import ChallengeCard from "~/components/Challenges/ChallengesCard";
 import {
   GameFont,
   Wrapper,
@@ -9,17 +10,51 @@ import {
   CallToAction,
   CallToActionFont,
 } from "./styles";
+import fetcher from "util/fetch";
 import RightArrow from "~/assets/img/rightArrow";
-import { ChallengesApiResponse } from "~/types/types";
+import useCurrentUser from "hooks/useCurrentUser";
+import ChallengesCard from "~/components/Challenges/ChallengesCard";
+import {
+  ChallengesApiResponse,
+  UserChallengesApiResponse,
+  ChallengesData,
+} from "~/types/types";
 
 //Challenges section in homepage
 export default function ChallengesHomePage({ challenges }: Props) {
+  const user = useCurrentUser();
   const { width: windowWidth } = useWindowSize();
   let challengesData = challenges?.response?.data?.challenges;
 
   if (windowWidth !== 0 && windowWidth <= 600) {
     challengesData = challengesData?.slice(0, 2);
   }
+
+  const userLoggedInData = user?.userData ? JSON.parse(user?.userData) : {};
+
+  const userLoggedInId = isEmpty(userLoggedInData)
+    ? null
+    : userLoggedInData._id;
+
+  const { data: userChallengeData } = useSWR<UserChallengesApiResponse>(
+    userLoggedInId !== null
+      ? `/api/userChallenges/filter/userId/${userLoggedInId}?first=1`
+      : null,
+    fetcher
+  );
+
+  const renderChallenges = () => {
+    return challengesData?.map((challenge: ChallengesData) => {
+      const achievedChallenges = userChallengeData?.response?.data?.challenge?.filter(
+        (userChallenge) => userChallenge?.challengeId === challenge?._id
+      );
+
+      const hasAchieved =
+        (achievedChallenges && achievedChallenges?.length > 0) || false;
+
+      return <ChallengesCard data={challenge} achieved={hasAchieved} />;
+    });
+  };
 
   return (
     <Wrapper>
@@ -29,9 +64,7 @@ export default function ChallengesHomePage({ challenges }: Props) {
       </p>
 
       <CardWrapper>
-        {challengesData?.map((challenge) => {
-          return <ChallengeCard data={challenge} />;
-        })}
+        {renderChallenges()}
         <Link href="/challenges">
           <CallToAction>
             <CallToActionFont>PARTICIPATE</CallToActionFont>
