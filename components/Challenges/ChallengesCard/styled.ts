@@ -28,7 +28,7 @@ export const PowerUpAmount = styled.div`
   border-radius: 100%;
 
   @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    left: calc(100% - 10.5rem);
+    left: calc(100% - 16rem);
   }
 `;
 
@@ -57,6 +57,11 @@ export const ImgWrapper = styled.div`
     object-fit: cover;
     border-top-left-radius: ${(props) => props.theme.border["10px"]};
     border-bottom-left-radius: ${(props) => props.theme.border["10px"]};
+  }
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    max-width: 7rem;
+    min-width: 7rem;
   }
 `;
 
