@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import OnlineBattleCard from "~/components/OnlineBattleCard";
-import { BattleCardWrapper } from "./styles";
+import { BattleCardContainer, BattleCardWrapper } from "./styles";
 
-import { BattlesApiResponse, BattlesData } from "~/types/types";
+import { OnlineBattlesApiResponse, OnlineBattlesData } from "~/types/types";
 import { useSelector } from "react-redux";
 import { FilterState } from "~/types/reduxTypes";
 import { useSWRInfinite } from "swr";
@@ -22,25 +22,37 @@ const OnlineBattle = () => {
     data: filteredApiData,
     size,
     setSize,
-  } = useSWRInfinite<BattlesApiResponse>((pageIndex: number) => {
+  } = useSWRInfinite<OnlineBattlesApiResponse>((pageIndex: number) => {
     const index = pageIndex + 1;
 
     return !isEmpty(filters?.secondSelected) && !firstRender
-      ? `/api/online-battles/filter/${
-          filters.firstSelected
-        }/${encodeURIComponent(filters.secondSelected || "")}?first=${
-          index * itemCount
-        }`
+      ? `/api/online-battles/filter/${filters.firstSelected}/${
+          filters.secondSelected
+        }?first=${index * itemCount}&offset=${pageIndex * itemCount}`
       : `/api/online-battles?first=${itemCount}&offset=${
           pageIndex * itemCount
         }`;
   }, fetcher);
 
   useEffect(() => {
-    setItems(
-      items.concat(filteredApiData?.[size - 1]?.response?.data?.battles || [])
+    if (filters.secondSelected) items.length = 0;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filters.secondSelected]);
+
+  useEffect(() => {
+    // Using .concat(), no wrapper function (not recommended)
+    //setItems(items.concat(query))
+
+    // Using .concat(), wrapper function (recommended)
+    //setItems(items => items.concat(query))
+    setItems((items: any[]) =>
+      items.concat(
+        filters.secondSelected
+          ? filteredApiData?.[size - 1]?.response?.data?.onlineBattles[0]
+              .battles || []
+          : filteredApiData?.[size - 1]?.response?.data?.onlineBattles || []
+      )
     );
-    console.log(filteredApiData);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filteredApiData]);
@@ -55,9 +67,11 @@ const OnlineBattle = () => {
         hasMore={filteredApiData?.[size - 1]?.response?.data?.hasMore || false}
         loader={<h3>Loading...</h3>}
       >
-        {items.map((b: BattlesData) => (
-          <OnlineBattleCard key={b._id} data={b} />
-        ))}
+        <BattleCardContainer className="box">
+          {items.map((b: OnlineBattlesData, index: number) => (
+            <OnlineBattleCard key={`${b._id}-${index}`} data={b} />
+          ))}
+        </BattleCardContainer>
       </InfiniteScroll>
     </BattleCardWrapper>
   );

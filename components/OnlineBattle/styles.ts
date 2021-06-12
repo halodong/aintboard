@@ -5,11 +5,12 @@ export const BattleCardWrapper = styled.div`
   background: ${theme.colors.darkGreen};
   display: flex;
   justify-content: center;
-  min-height: 100vh;
+  min-height: 60vh;
+`;
 
-  .infinite-scroll-component {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+export const BattleCardContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 80vw;
 `;

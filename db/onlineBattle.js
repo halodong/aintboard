@@ -130,7 +130,7 @@ export const getBattles = async (db, { first, offset }) => {
           ? `${battleCount} Online Battle retrieved`
           : `Online Battleretrieved`,
       data: {
-        battles: allBattles,
+        onlineBattles: allBattles,
         totalOnlineBattlesCount,
         hasMore: first + offset < totalOnlineBattlesCount,
       },
@@ -140,10 +140,14 @@ export const getBattles = async (db, { first, offset }) => {
   }
 };
 
-export const filterOnlineBattles = async (db, { first, filter, field }) => {
+export const filterOnlineBattles = async (
+  db,
+  { first, filter, field, offset }
+) => {
   try {
     let onlineBattles = null;
     first = first ? parseInt(first) : null;
+    offset = offset ? parseInt(offset) : 0;
 
     const lookup = {
       $lookup: {
@@ -163,33 +167,76 @@ export const filterOnlineBattles = async (db, { first, filter, field }) => {
       },
     };
 
-    if (filter && field) {
-      let aggregate = [
-        {
-          $match: {
-            [filter]: field,
+    let fieldType = dayjs(field);
+    if (filter === "slug") fieldType = dayjs("slug");
+
+    let aggregate = [
+      {
+        $match: {
+          [filter]: fieldType.isValid()
+            ? {
+                $gte: fieldType.toISOString(),
+                $lte: fieldType.add(1, "d").toISOString(),
+              }
+            : field,
+        },
+      },
+      lookup,
+      {
+        $project: { password: 0 },
+      },
+    ];
+
+    let count = [
+      ...aggregate,
+      {
+        $group: {
+          _id: `$${filter}`,
+          count: {
+            $sum: 1,
           },
         },
-        lookup,
+      },
+      {
+        $count: "count",
+      },
+    ];
+
+    if (filter && field) {
+      onlineBattles = await db.collection("online_battle").aggregate([
         {
-          $project: { password: 0 },
+          $facet: {
+            battles: aggregate,
+            count,
+          },
         },
-      ];
+      ]);
+    }
 
-      if (first) {
-        //with limit
-        aggregate.push({ $limit: first });
-      }
-
-      onlineBattles = await db.collection("online_battle").aggregate(aggregate);
+    if (first) {
+      //with limit
+      aggregate.push(
+        { $sort: { createdAt: -1 } },
+        { $skip: offset },
+        { $limit: first }
+      );
     }
 
     const onlineBattleArray = await onlineBattles.toArray();
+    count =
+      filter === "createdBy"
+        ? await db
+            .collection("online_battle")
+            .find({ createdBy: field })
+            .count()
+        : onlineBattleArray[0].count[0].count;
 
     return getSuccessResponse({
       message: "Filtered Online Battle",
       data: {
         onlineBattles: onlineBattleArray,
+        count,
+        hasMore: first + offset < count,
       },
     });
   } catch (err) {

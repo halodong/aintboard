@@ -10,10 +10,11 @@ import { FilterWrapper, Text } from "./styled";
 import { CHALLENGES_PAGE, REVIEWS_PAGE, ONLINE_BATTLES } from "util/constants";
 import useChallengeFilteredData from "~/hooks/useChallengeFilteredData";
 import {
-  BattlesApiResponse,
   ChallengesApiResponse,
+  OnlineBattlesApiResponse,
   ReviewApiResponse,
 } from "types/types";
+import _ from "lodash";
 
 const initialFilteredData = [
   {
@@ -40,7 +41,7 @@ const Filter = ({ type }: Props) => {
     fetcher
   );
 
-  const { data: onlineBattleData } = useSWR<BattlesApiResponse>(
+  const { data: onlineBattleData } = useSWR<OnlineBattlesApiResponse>(
     type === ONLINE_BATTLES ? `/api/online-battles` : null,
     fetcher
   );
@@ -162,10 +163,10 @@ const Filter = ({ type }: Props) => {
   };
 
   const onSecondDropdownChange = (selected: OptionItem) => {
-    const removeColon = selected?.value
-      ? selected?.value.replace(/:\s*/g, " ")
-      : null;
-    setSecondSelected(removeColon);
+    // const removeColon = selected?.value
+    //   ? selected?.value.replace(/:\s*/g, " ")
+    //   : null;
+    setSecondSelected(selected?.value);
   };
 
   return (
@@ -180,7 +181,7 @@ const Filter = ({ type }: Props) => {
       <DropDown
         placeholder=""
         onChange={onSecondDropdownChange}
-        options={filteredData}
+        options={_.sortBy(filteredData, (e) => e.value)}
         keyProp={filteredData?.[0]?.value || "first-key"}
       />
     </FilterWrapper>

@@ -6,8 +6,7 @@ import {
   ChallengesData,
   ReviewApiResponse,
   ReviewData,
-  BattlesApiResponse,
-  BattlesData,
+  OnlineBattlesApiResponse,
 } from "types/types";
 import dayjs from "dayjs";
 
@@ -61,13 +60,14 @@ export default function useChallengeFilteredData() {
 
       case ONLINE_BATTLES:
         filter =
-          onlineBattleApi?.response?.data?.battles
-            ?.map((val: BattlesData) => {
+          onlineBattleApi?.response?.data?.onlineBattles
+            ?.map((val: any) => {
               let label = val[firstSelected]?.toString() || "";
               let value = val[firstSelected]?.toString() || "";
 
               if (["eventEndDate"].includes(firstSelected)) {
                 label = dayjs(label).format("MMMM DD, YYYY");
+                value = dayjs(label).format("MM-DD-YYYY");
               }
 
               return {
@@ -90,7 +90,7 @@ export default function useChallengeFilteredData() {
 type Props = {
   challengeApi?: ChallengesApiResponse | undefined;
   reviewApi?: ReviewApiResponse | undefined;
-  onlineBattleApi?: BattlesApiResponse | undefined;
+  onlineBattleApi?: OnlineBattlesApiResponse | undefined;
   firstSelected: string;
   type: string;
 };

@@ -17,7 +17,7 @@ import {
   Username,
 } from "./styled";
 
-import { BattlesData } from "~/types/types";
+import { OnlineBattlesData } from "~/types/types";
 
 import GoldIcon from "~/assets/img/Gold";
 import BronzeIcon from "~/assets/img/Bronze";
@@ -81,7 +81,7 @@ const OnlineBattleCard = ({ data }: Props) => {
 };
 
 type Props = {
-  data: BattlesData;
+  data: OnlineBattlesData;
 };
 
 export default OnlineBattleCard;
