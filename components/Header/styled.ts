@@ -27,6 +27,10 @@ export const HeaderWrapper = styled.div<HeaderWrapperProps>`
       props.isSettingsPage
         ? "25rem"
         : "30rem"};
+
+    .tent {
+      display: ${(props) => (props.homepage ? "block" : "none")};
+    }
   }
 
   ${(props) => props.isUserPage && `justify-content: flex-start;`}

@@ -4,6 +4,10 @@ export const ReviewArticlePageWrapper = styled.div`
   background-color: ${(props) => props.theme.colors.darkGreen};
   color: ${(props) => props.theme.colors.white};
   padding: 0 10rem 10rem 10rem;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    padding: 1rem;
+  }
 `;
 
 export const LanguageContainer = styled.div`
@@ -25,6 +29,11 @@ export const RatingContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 4rem;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    flex-direction: column;
+    gap: 1rem;
+  }
 `;
 
 export const RatingName = styled.div`
@@ -41,6 +50,10 @@ export const ArticleName = styled.h1`
   font-size: 3rem;
   margin: 1rem;
   padding: 0 20rem;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    padding: 0;
+  }
 `;
 
 export const ArticleAuthor = styled.p`

@@ -11,6 +11,11 @@ export const RatingFormWrapper = styled.div<RatingFormWrapperProps>`
     height: ${(props) => (props.big ? "4rem" : "3rem")};
     margin-right: 1rem;
     cursor: pointer;
+
+    @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+      width: 2rem;
+      height: 2rem;
+    }
   }
 `;
 
