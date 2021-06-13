@@ -121,7 +121,7 @@ export async function getStaticProps({ params }: Params) {
 
 export async function getStaticPaths() {
   const db = await database();
-  const response = await getUsers(db, { first: 2 });
+  const response = await getUsers(db, { first: 1 });
 
   const pathsData =
     response?.success &&

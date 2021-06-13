@@ -1,6 +1,7 @@
 import useSWR from "swr";
 
 import Header from "components/Header";
+import Seo from "~/components/Common/Seo";
 import Footer from "components/Common/Footer";
 import BuyAvatar from "components/Avatar/BuyAvatar";
 
@@ -19,6 +20,13 @@ const BuyAvatarsPage = ({ specialAvatars }: Props) => {
 
   return (
     <>
+      <Seo
+        isHomepage={false}
+        title="Buy Avatars"
+        description="Buy Avatars"
+        noIndex="noindex"
+        noFollow="nofollow"
+      />
       <Header isBuyAvatarsPage centerTagline="Buy Avatars" />
       <BuyAvatar
         specialAvatars={specialAvatarsData?.response?.data?.avatars || []}

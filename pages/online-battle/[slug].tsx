@@ -5,21 +5,29 @@ import { OnlineBattlesApiResponse, OnlineBattlesData } from "~/types/types";
 import { FALLBACK } from "~/util/constants";
 
 import Header from "~/components/Header";
+import Seo from "~/components/Common/Seo";
+import Footer from "~/components/Common/Footer";
 import OnlineBattleHeader from "~/components/OnlineBattlePage/Header";
 import OnlineBattlePage from "~/components/OnlineBattlePage";
-import Footer from "~/components/Common/Footer";
 
 const OnlineBattleSlug = ({ onlineBattleData }: Props) => {
   const onlineBattle = onlineBattleData?.response?.data?.onlineBattles[0];
 
   return (
-    <div>
+    <>
+      <Seo
+        isHomepage={false}
+        title="Online Battles"
+        description={
+          onlineBattleData?.response?.data?.onlineBattles[0]?.battleName
+        }
+      />
       <Header isOnlineBattlePage>
         <OnlineBattleHeader onlineBattle={onlineBattle} />
       </Header>
       <OnlineBattlePage onlineBattle={onlineBattle} />
       <Footer />
-    </div>
+    </>
   );
 };
 
