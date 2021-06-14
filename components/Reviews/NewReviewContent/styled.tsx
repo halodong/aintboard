@@ -21,10 +21,10 @@ export const YoutubeContainer = styled.div`
   }
 
   @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    width: 20rem !important;
+    width: 100% !important;
 
     div {
-      width: 20rem !important;
+      width: 100% !important;
     }
   }
 `;

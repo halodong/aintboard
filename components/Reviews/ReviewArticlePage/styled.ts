@@ -23,6 +23,11 @@ export const ReviewContentContainer = styled.div`
 export const RatingWrapper = styled.div`
   padding: 3rem 0;
   margin: 0 7rem;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    padding: 0;
+    margin: 1rem 0;
+  }
 `;
 
 export const RatingContainer = styled.div`
@@ -32,7 +37,8 @@ export const RatingContainer = styled.div`
 
   @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     flex-direction: column;
-    gap: 1rem;
+    align-items: start;
+    gap: 0;
   }
 `;
 

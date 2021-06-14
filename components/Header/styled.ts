@@ -161,6 +161,14 @@ export const Tagline = styled(baseTaglineStyles)<TaglineProps>`
 
   @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     margin-top: 7rem;
+
+    ${(props) =>
+      !props.homepage &&
+      `
+      margin: 0;
+      left: 1rem;
+      text-align: left;
+    `}
   }
 `;
 
