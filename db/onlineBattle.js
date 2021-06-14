@@ -173,6 +173,9 @@ export const filterOnlineBattles = async (
     let aggregate = [
       {
         $match: {
+          // Check if field is a valid date
+          // if true filter the date
+          // if false just the field
           [filter]: fieldType.isValid()
             ? {
                 $gte: fieldType.toISOString(),

@@ -13,8 +13,6 @@ const OnlineBattleSlug = ({ onlineBattleData }: Props) => {
   const onlineBattle =
     onlineBattleData?.response?.data?.onlineBattles[0].battles[0];
 
-  console.log(onlineBattle);
-
   return (
     <div>
       <Header isOnlineBattlePage>

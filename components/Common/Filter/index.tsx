@@ -9,6 +9,8 @@ import DropDown from "~/components/Common/DropDown";
 import { FilterWrapper, Text } from "./styled";
 import { CHALLENGES_PAGE, REVIEWS_PAGE, ONLINE_BATTLES } from "util/constants";
 import useChallengeFilteredData from "~/hooks/useChallengeFilteredData";
+import useOnlineBattleFilteredData from "~/hooks/useOnlineBattleFilteredData";
+import useReviewFilteredData from "~/hooks/useReviewFilteredData";
 import {
   ChallengesApiResponse,
   OnlineBattlesApiResponse,
@@ -58,7 +60,9 @@ const Filter = ({ type }: Props) => {
     //eslint-disable-next-line
   }, [secondSelected]);
 
-  const handleFilter = useChallengeFilteredData();
+  const handleFilterChallenge = useChallengeFilteredData();
+  const handleFilterOnlineBattle = useOnlineBattleFilteredData();
+  const handleFilterReview = useReviewFilteredData();
 
   useEffect(() => {
     if (firstSelected !== null) {
@@ -66,20 +70,21 @@ const Filter = ({ type }: Props) => {
 
       switch (type) {
         case CHALLENGES_PAGE:
-          filter = handleFilter({
+          filter = handleFilterChallenge({
             challengeApi: challengeData,
             firstSelected,
-            type,
           });
           break;
         case REVIEWS_PAGE:
-          filter = handleFilter({ reviewApi: reviewData, firstSelected, type });
+          filter = handleFilterReview({
+            reviewApi: reviewData,
+            firstSelected,
+          });
           break;
         case ONLINE_BATTLES:
-          filter = handleFilter({
+          filter = handleFilterOnlineBattle({
             onlineBattleApi: onlineBattleData,
             firstSelected,
-            type,
           });
           break;
       }
@@ -163,9 +168,6 @@ const Filter = ({ type }: Props) => {
   };
 
   const onSecondDropdownChange = (selected: OptionItem) => {
-    // const removeColon = selected?.value
-    //   ? selected?.value.replace(/:\s*/g, " ")
-    //   : null;
     setSecondSelected(selected?.value);
   };
 
