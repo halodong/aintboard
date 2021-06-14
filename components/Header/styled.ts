@@ -27,6 +27,10 @@ export const HeaderWrapper = styled.div<HeaderWrapperProps>`
       props.isSettingsPage
         ? "25rem"
         : "30rem"};
+
+    .tent {
+      display: ${(props) => (props.homepage ? "block" : "none")};
+    }
   }
 
   ${(props) => props.isUserPage && `justify-content: flex-start;`}
@@ -157,6 +161,14 @@ export const Tagline = styled(baseTaglineStyles)<TaglineProps>`
 
   @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     margin-top: 7rem;
+
+    ${(props) =>
+      !props.homepage &&
+      `
+      margin: 0;
+      left: 1rem;
+      text-align: left;
+    `}
   }
 `;
 
