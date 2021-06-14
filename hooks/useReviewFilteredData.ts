@@ -1,5 +1,5 @@
 import { uniqBy, isEmpty, capitalize } from "lodash";
-import { ReviewApiResponse, ReviewData } from "../types/types";
+import { ReviewApiResponse, ReviewData } from "types/types";
 
 const initialFilteredData = [
   {

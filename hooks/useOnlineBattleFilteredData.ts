@@ -1,5 +1,5 @@
 import { uniqBy, isEmpty } from "lodash";
-import { OnlineBattlesApiResponse, OnlineBattlesData } from "../types/types";
+import { OnlineBattlesApiResponse, OnlineBattlesData } from "types/types";
 
 import dayjs from "dayjs";
 
