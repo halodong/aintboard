@@ -112,32 +112,6 @@ export type CommonData = {
   [key: string]: string | number;
 };
 
-export type BattlesData = {
-  _id: string;
-  battleName: string;
-  slug: string;
-  boardGameName: string;
-  bgImage: string;
-  details: string;
-  eventStartDate: string;
-  eventEndDate: string;
-  createdAt: string;
-};
-
-export interface BattlesApiResponse {
-  success: boolean;
-  response: {
-    message: string;
-    data: {
-      battles: BattlesData[];
-    };
-  };
-}
-
-export interface BattlesApiData {
-  battles: BattlesData[];
-}
-
 export type BggBoardgameApiData = {
   items: BggBoardgameApiDataItem[];
 };
@@ -240,10 +214,17 @@ export interface OnlineBattlesApiResponse {
 }
 
 export interface OnlineBattlesApiData {
-  onlineBattles: OnlineBattlesData[];
+  totalOnlineBattlesCount: number;
+  hasMore: boolean;
+  onlineBattles: battlesData[];
+}
+
+export interface battlesData {
+  battles: OnlineBattlesData[];
 }
 
 export type OnlineBattlesData = {
+  [key: string]: string | undefined | UserData[];
   _id: string;
   slug: string;
   battleName: string;
@@ -251,7 +232,7 @@ export type OnlineBattlesData = {
   bgImage: string;
   details: string;
   eventStartDate: string;
-  eventEndData: string;
+  eventEndDate: string;
   craetedBy: string;
   status: string;
   createdAt: string;

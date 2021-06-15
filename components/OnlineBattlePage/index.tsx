@@ -52,7 +52,7 @@ const OnlineBattlePage = ({ onlineBattle }: Props) => {
             </Styles.Ranks>
           </Styles.RanksContainer>
           <Styles.EntryDate>
-            Ends on {dayjs(onlineBattle?.eventEndData).format("MMM DD, YYYY")}
+            Ends on {dayjs(onlineBattle?.eventEndDate).format("MMM DD, YYYY")}
           </Styles.EntryDate>
         </Styles.EntryRightSide>
       </Styles.EntryContainer>

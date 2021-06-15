@@ -7,9 +7,16 @@ import { saveFilters } from "redux/slices/filterSlice";
 import DropDown from "~/components/Common/DropDown";
 
 import { FilterWrapper, Text } from "./styled";
-import { CHALLENGES_PAGE, REVIEWS_PAGE } from "util/constants";
+import { CHALLENGES_PAGE, REVIEWS_PAGE, ONLINE_BATTLES } from "util/constants";
 import useChallengeFilteredData from "~/hooks/useChallengeFilteredData";
-import { ChallengesApiResponse, ReviewApiResponse } from "types/types";
+import useOnlineBattleFilteredData from "~/hooks/useOnlineBattleFilteredData";
+import useReviewFilteredData from "~/hooks/useReviewFilteredData";
+import {
+  ChallengesApiResponse,
+  OnlineBattlesApiResponse,
+  ReviewApiResponse,
+} from "types/types";
+import _ from "lodash";
 
 const initialFilteredData = [
   {
@@ -36,6 +43,11 @@ const Filter = ({ type }: Props) => {
     fetcher
   );
 
+  const { data: onlineBattleData } = useSWR<OnlineBattlesApiResponse>(
+    type === ONLINE_BATTLES ? `/api/online-battles` : null,
+    fetcher
+  );
+
   useEffect(() => {
     if (secondSelected !== null) {
       dispatch(
@@ -48,7 +60,9 @@ const Filter = ({ type }: Props) => {
     //eslint-disable-next-line
   }, [secondSelected]);
 
-  const handleFilter = useChallengeFilteredData();
+  const handleFilterChallenge = useChallengeFilteredData();
+  const handleFilterOnlineBattle = useOnlineBattleFilteredData();
+  const handleFilterReview = useReviewFilteredData();
 
   useEffect(() => {
     if (firstSelected !== null) {
@@ -56,14 +70,22 @@ const Filter = ({ type }: Props) => {
 
       switch (type) {
         case CHALLENGES_PAGE:
-          filter = handleFilter({
+          filter = handleFilterChallenge({
             challengeApi: challengeData,
             firstSelected,
-            type,
           });
           break;
         case REVIEWS_PAGE:
-          filter = handleFilter({ reviewApi: reviewData, firstSelected, type });
+          filter = handleFilterReview({
+            reviewApi: reviewData,
+            firstSelected,
+          });
+          break;
+        case ONLINE_BATTLES:
+          filter = handleFilterOnlineBattle({
+            onlineBattleApi: onlineBattleData,
+            firstSelected,
+          });
           break;
       }
 
@@ -120,6 +142,22 @@ const Filter = ({ type }: Props) => {
         },
       ];
       break;
+    case ONLINE_BATTLES:
+      options = [
+        {
+          label: "Boardgame Name",
+          value: "boardGameName",
+        },
+        {
+          label: "Event End Date",
+          value: "eventEndDate",
+        },
+        {
+          label: "Created By Me",
+          value: "createdBy",
+        },
+      ];
+      break;
     default:
       options = [];
   }
@@ -130,10 +168,7 @@ const Filter = ({ type }: Props) => {
   };
 
   const onSecondDropdownChange = (selected: OptionItem) => {
-    const removeColon = selected?.value
-      ? selected?.value.replace(/:\s*/g, " ")
-      : null;
-    setSecondSelected(removeColon);
+    setSecondSelected(selected?.value);
   };
 
   return (
@@ -148,7 +183,7 @@ const Filter = ({ type }: Props) => {
       <DropDown
         placeholder=""
         onChange={onSecondDropdownChange}
-        options={filteredData}
+        options={_.sortBy(filteredData, (e) => e.value)}
         keyProp={filteredData?.[0]?.value || "first-key"}
       />
     </FilterWrapper>

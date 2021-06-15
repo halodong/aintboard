@@ -11,7 +11,8 @@ import OnlineBattleHeader from "~/components/OnlineBattlePage/Header";
 import OnlineBattlePage from "~/components/OnlineBattlePage";
 
 const OnlineBattleSlug = ({ onlineBattleData }: Props) => {
-  const onlineBattle = onlineBattleData?.response?.data?.onlineBattles[0];
+  const onlineBattle =
+    onlineBattleData?.response?.data?.onlineBattles[0].battles[0];
 
   return (
     <>
@@ -51,6 +52,7 @@ export const getStaticProps = async ({ params }: Params) => {
     filter: "slug",
     field: slug,
     first: null,
+    offset: null,
   });
 
   if (onlineBattleData?.response?.data?.onlineBattles < 1) {
@@ -68,7 +70,7 @@ export const getStaticProps = async ({ params }: Params) => {
 
 export const getStaticPaths = async () => {
   const db = await database();
-  const response = await getBattles(db, { first: 1 });
+  const response = await getBattles(db, { first: 1, offset: null });
 
   const pathsData =
     response?.success &&
