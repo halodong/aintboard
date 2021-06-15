@@ -113,9 +113,7 @@ export const filterChallenges = async (db, { filter, field, first }) => {
     first = first ? parseInt(first) : null;
 
     if (filter && field) {
-      field = ["bgId", "bgYear", "powerUpAmount"].includes(filter)
-        ? parseInt(field)
-        : field;
+      field = ["bgId", "bgYear"].includes(filter) ? parseInt(field) : field;
 
       let aggregate = [
         {

@@ -17,6 +17,7 @@ const ChallengesPage = () => {
   const [items, setItems] = useState<any>([]);
   const filters = useSelector((state: FilterState) => state.filter.filters);
   const ref = useRef(true);
+  const currentFilter = useRef(filters?.secondSelected);
   const firstRender = ref.current;
 
   const {
@@ -34,13 +35,21 @@ const ChallengesPage = () => {
   }, fetcher);
 
   useEffect(() => {
-    setItems(
-      items.concat(
-        filteredApiData?.[size - 1]?.response?.data?.challenges || []
-      )
-    );
+    if (currentFilter.current !== filters?.secondSelected) {
+      //overwrite new items, when filter has been changed
+      setItems(filteredApiData?.[size - 1]?.response?.data?.challenges || []);
+    } else {
+      //concat when infinite scrolling
+      setItems(
+        items.concat(
+          filteredApiData?.[size - 1]?.response?.data?.challenges || []
+        )
+      );
+    }
+
+    currentFilter.current = filters?.secondSelected;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filteredApiData]);
+  }, [filteredApiData, filters?.secondSelected]);
 
   ref.current = false;
 
