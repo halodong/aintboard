@@ -18,6 +18,8 @@ import {
 } from "types/types";
 import _ from "lodash";
 
+import useCurrentUser from "~/hooks/useCurrentUser";
+
 const initialFilteredData = [
   {
     label: "",
@@ -32,6 +34,9 @@ const Filter = ({ type }: Props) => {
   const [filteredData, setFilteredData] = useState<OptionProps>(
     initialFilteredData
   );
+
+  const user = useCurrentUser();
+  const userData = user?.userData ? JSON.parse(user?.userData) : {};
 
   const { data: challengeData } = useSWR<ChallengesApiResponse>(
     type === CHALLENGES_PAGE ? `/api/challenges` : null,
@@ -164,7 +169,7 @@ const Filter = ({ type }: Props) => {
 
   const onFirstDropdownChange = (selected: OptionItem) => {
     setFirstSelected(selected?.value || "");
-    setSecondSelected(null);
+    setSecondSelected(selected?.value === "createdBy" ? userData?._id : null);
   };
 
   const onSecondDropdownChange = (selected: OptionItem) => {
@@ -185,6 +190,7 @@ const Filter = ({ type }: Props) => {
         onChange={onSecondDropdownChange}
         options={_.sortBy(filteredData, (e) => e.value)}
         keyProp={filteredData?.[0]?.value || "first-key"}
+        isDisabled={firstSelected === "createdBy"}
       />
     </FilterWrapper>
   );

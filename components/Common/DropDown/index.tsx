@@ -10,6 +10,7 @@ const DropDown = ({
   selected,
   keyProp = "key",
   onChange,
+  isDisabled,
 }: Props) => {
   const emptyDefault = {
     label: placeholder || "Please choose" || "",
@@ -29,16 +30,19 @@ const DropDown = ({
         isSearchable={false}
         options={options}
         value={
-          (selected &&
-            selected.length > 0 &&
-            options?.filter((o) => o.value === selected)) ||
-          selectedState ||
-          emptyDefault
+          isDisabled
+            ? null
+            : (selected &&
+                selected.length > 0 &&
+                options?.filter((o) => o.value === selected)) ||
+              selectedState ||
+              emptyDefault
         }
         onChange={(selectedOption) => {
           onChange(selectedOption || emptyDefault);
           setSelectedState(selectedOption || emptyDefault);
         }}
+        isDisabled={isDisabled}
       />
     </DropDownContainer>
   );
@@ -56,6 +60,7 @@ type Props = {
   options?: OptionItem[];
   onChange: (selected: OptionItem) => void;
   keyProp?: string;
+  isDisabled?: boolean;
 };
 
 export default DropDown;
