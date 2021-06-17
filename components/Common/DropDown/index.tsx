@@ -18,6 +18,20 @@ const DropDown = ({
   };
   const [selectedState, setSelectedState] = useState(emptyDefault);
 
+  const value = () => {
+    if (isDisabled) {
+      return null;
+    }
+
+    return (
+      (selected &&
+        selected.length > 0 &&
+        options?.filter((o) => o.value === selected)) ||
+      selectedState ||
+      emptyDefault
+    );
+  };
+
   return (
     <DropDownContainer marginLeft={marginLeft}>
       <Select
@@ -29,15 +43,7 @@ const DropDown = ({
         isClearable={true}
         isSearchable={false}
         options={options}
-        value={
-          isDisabled
-            ? null
-            : (selected &&
-                selected.length > 0 &&
-                options?.filter((o) => o.value === selected)) ||
-              selectedState ||
-              emptyDefault
-        }
+        value={value()}
         onChange={(selectedOption) => {
           onChange(selectedOption || emptyDefault);
           setSelectedState(selectedOption || emptyDefault);
