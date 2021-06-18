@@ -1,16 +1,17 @@
-import { useState, useEffect, useRef } from "react";
-import OnlineBattleCard from "~/components/OnlineBattleCard";
-import { BattleCardContainer, BattleCardWrapper } from "./styles";
-
-import { OnlineBattlesApiResponse, OnlineBattlesData } from "~/types/types";
-import { useSelector } from "react-redux";
-import { FilterState } from "~/types/reduxTypes";
-import { useSWRInfinite } from "swr";
 import { isEmpty } from "lodash";
-import fetcher from "~/util/fetch";
+import { useSWRInfinite } from "swr";
+import { useSelector } from "react-redux";
+import { useState, useEffect, useRef } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-const itemCount = 6;
+import OnlineBattleCard from "~/components/OnlineBattleCard";
+import { OnlineBattlesApiResponse, OnlineBattlesData } from "~/types/types";
+import { BattleCardContainer, BattleCardWrapper } from "./styles";
+import { FilterState } from "~/types/reduxTypes";
+import fetcher from "~/util/fetch";
+import { ONLINE_BATTLE_ITEM_COUNT } from "util/constants";
+
+const itemCount = ONLINE_BATTLE_ITEM_COUNT;
 
 const OnlineBattle = () => {
   const [items, setItems] = useState<any>([]);
