@@ -216,11 +216,7 @@ export interface OnlineBattlesApiResponse {
 export interface OnlineBattlesApiData {
   totalOnlineBattlesCount: number;
   hasMore: boolean;
-  onlineBattles: battlesData[];
-}
-
-export interface battlesData {
-  battles: OnlineBattlesData[];
+  onlineBattles: OnlineBattlesData[];
 }
 
 export type OnlineBattlesData = {
@@ -233,10 +229,28 @@ export type OnlineBattlesData = {
   details: string;
   eventStartDate: string;
   eventEndDate: string;
-  craetedBy: string;
+  createdBy: string;
   status: string;
   createdAt: string;
   userData: UserData[];
+};
+
+export interface FilteredOnlineBattlesApiResponse {
+  success: boolean;
+  response: {
+    message: string;
+    data: FilteredOnlineBattlesApiData;
+  };
+}
+
+export interface FilteredOnlineBattlesApiData {
+  count: number;
+  hasMore: boolean;
+  onlineBattles: FilteredOnlineBattlesData[];
+}
+
+export type FilteredOnlineBattlesData = {
+  battles: OnlineBattlesData[];
 };
 
 export interface UserTrophiesApiResponse {

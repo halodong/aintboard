@@ -1,7 +1,10 @@
 import React from "react";
 import { filterOnlineBattles, getBattles } from "~/db/onlineBattle";
 import database from "middlewares/dbForFrontend";
-import { OnlineBattlesApiResponse, OnlineBattlesData } from "~/types/types";
+import {
+  FilteredOnlineBattlesApiResponse,
+  OnlineBattlesData,
+} from "~/types/types";
 import { FALLBACK } from "~/util/constants";
 
 import Header from "~/components/Header";
@@ -12,16 +15,14 @@ import OnlineBattlePage from "~/components/OnlineBattlePage";
 
 const OnlineBattleSlug = ({ onlineBattleData }: Props) => {
   const onlineBattle =
-    onlineBattleData?.response?.data?.onlineBattles[0].battles[0];
+    onlineBattleData?.response?.data?.onlineBattles[0]?.battles?.[0];
 
   return (
     <>
       <Seo
         isHomepage={false}
         title="Online Battles"
-        description={
-          onlineBattleData?.response?.data?.onlineBattles[0]?.battleName
-        }
+        description={onlineBattle?.battleName}
       />
       <Header isOnlineBattlePage>
         <OnlineBattleHeader onlineBattle={onlineBattle} />
@@ -33,7 +34,7 @@ const OnlineBattleSlug = ({ onlineBattleData }: Props) => {
 };
 
 type Props = {
-  onlineBattleData: OnlineBattlesApiResponse;
+  onlineBattleData: FilteredOnlineBattlesApiResponse;
 };
 
 export default OnlineBattleSlug;
