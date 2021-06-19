@@ -12,4 +12,11 @@ export const AboutWrapper = styled.div`
     width: 50%;
     display: block;
   }
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    p {
+      width: 90%;
+      padding-top: 1rem;
+    }
+  }
 `;

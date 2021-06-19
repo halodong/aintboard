@@ -155,10 +155,10 @@ const Sidebar = ({ menuOpen, closeMenu }: Props) => {
         <FooterSidebar>
           <UlSidebar>
             <TertiaryLinkSidebar>
-              <Link href="/">About Us</Link>
+              <Link href="/about">About Us</Link>
             </TertiaryLinkSidebar>
             <TertiaryLinkSidebar>
-              <Link href="/">FAQs</Link>
+              <Link href="/faqs">FAQs</Link>
             </TertiaryLinkSidebar>
             <TertiaryLinkSidebar>
               <Link href="/">Contact Us</Link>

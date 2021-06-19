@@ -113,7 +113,7 @@ export async function getStaticProps({ params }: Params) {
       userData,
       challengeData,
       reviewData,
-      userChallengeData,
+      userChallengeData: JSON.stringify(userChallengeData), // needed to stringify to make it work! dont know totaly why yet https://stackoverflow.com/questions/66106776/error-how-to-serialize-data-from-getstaticprops-next-js
       userTrophies,
     },
   };
