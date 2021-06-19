@@ -20,11 +20,13 @@ export const HeaderWrapper = styled.div<HeaderWrapperProps>`
 
   @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     min-height: ${(props) =>
-      props.isSearchPage ||
-      props.isChallengePage ||
-      props.isBoardGamePage ||
-      props.isReviewArticlePage ||
-      props.isSettingsPage
+      props.isBuyAvatarsPage || props.isStaticPage
+        ? "10rem"
+        : props.isSearchPage ||
+          props.isChallengePage ||
+          props.isBoardGamePage ||
+          props.isReviewArticlePage ||
+          props.isSettingsPage
         ? "25rem"
         : "30rem"};
 
@@ -72,7 +74,8 @@ export const HeaderWrapper = styled.div<HeaderWrapperProps>`
   .homepage-bg-container {
     .trees-1,
     .trees-2,
-    .tent {
+    .tent,
+    .ground {
       @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
         display: none;
       }
@@ -138,6 +141,7 @@ type HeaderWrapperProps = {
   isReviewArticlePage?: boolean;
   isUserPage?: boolean;
   isSettingsPage?: boolean;
+  isStaticPage?: boolean;
   isOnlineBattlePage?: boolean;
 };
 

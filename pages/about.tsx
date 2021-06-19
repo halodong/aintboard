@@ -12,7 +12,9 @@ const AboutPage = () => {
         description="Learn more about Ain't Board"
         canonical="/about"
       />
-      <Header homepage tagline="About Us" />
+      <Header homepage isStaticPage>
+        About Us
+      </Header>
       <About />
       <Footer />
     </>

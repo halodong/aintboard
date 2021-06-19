@@ -18,6 +18,12 @@ const GlobalStyle = createGlobalStyle`
     font-size: 16px;
   }
 
+  h1 {
+    margin: 0;
+    margin-block-end: 0;
+    margin-block-start: 0;
+  }
+
   a {
     color: inherit;
     text-decoration: none;
