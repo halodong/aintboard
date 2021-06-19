@@ -1,15 +1,15 @@
-name: discord message
-on: [push]
+name: Discord Webhook Messages
+on:
+  push:
+    branches: 
+      - '*'
 jobs:
-
-  build:
-    name: Build
+  run:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - name: send custom message with args
-      uses: appleboy/discord-action@master
-      with:
-        webhook_id: https://discord.com/api/webhooks/855687665231724554/D5id_zBxFtAK7zbxrEIpPsrFXbIutFy7qYjv0IZCWlqZ-I1pn1Mrg0ou6GnzJzH3zgHB
-        webhook_token: "NDk2NDU0ODc5Njc0NDk5MTIz.YM25tg.dfSRnjE11bBax2iZ8cS5NrvMTMA"
-        args: The ${{ github.event_name }} event triggered first step.
+      - uses: actions/checkout@v2
+      - name: Run Discord Webhook
+        uses: bythope/discord-webhook-messages@v1.1.0
+        with:
+          webhookUrl: https://discord.com/api/webhooks/855687665231724554/D5id_zBxFtAK7zbxrEIpPsrFXbIutFy7qYjv0IZCWlqZ-I1pn1Mrg0ou6GnzJzH3zgHB
+          handler: 'push'
