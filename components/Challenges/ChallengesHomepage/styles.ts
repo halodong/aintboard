@@ -53,7 +53,7 @@ export const CallToAction = styled.div`
   position: relative;
   background: rgba(53, 53, 53, 0.5);
   backdrop-filter: blur(40px);
-  height: 12rem;
+  height: 15rem;
   width: 30rem;
   display: flex;
   flex-direction: column;
@@ -64,6 +64,7 @@ export const CallToAction = styled.div`
 
   @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     margin-top: 1rem;
+    height: 12rem;
   }
 `;
 

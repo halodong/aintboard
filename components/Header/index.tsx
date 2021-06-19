@@ -13,6 +13,7 @@ import {
   CenterButtonContainer,
   Rubik,
 } from "./styled";
+import * as Styles from "./styled";
 import Tent from "assets/img/Tent";
 import PlayingBoardGameImg from "assets/img/PlayingBoardGame";
 import TreesGroup1 from "assets/img/TreesGroup1";
@@ -137,6 +138,13 @@ export default function Header({
       </Tagline>
 
       {isBuyAvatarsPage && <CenterTagline>{centerTagline}</CenterTagline>}
+
+      {homepage && (
+        <Styles.HomepageSubHeading>
+          Be a part of the best boardgame community. <br /> Make reviews and
+          strategies. Join challenges and online battles.
+        </Styles.HomepageSubHeading>
+      )}
 
       {isSearchPage && <LookingForText>Looking for "{name}"</LookingForText>}
 
