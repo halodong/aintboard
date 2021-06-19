@@ -16,7 +16,9 @@ import {
   OnlineBattlesApiResponse,
   ReviewApiResponse,
 } from "types/types";
-import _ from "lodash";
+import _, { isEmpty } from "lodash";
+
+import useCurrentUser from "~/hooks/useCurrentUser";
 
 const initialFilteredData = [
   {
@@ -32,6 +34,10 @@ const Filter = ({ type }: Props) => {
   const [filteredData, setFilteredData] = useState<OptionProps>(
     initialFilteredData
   );
+  const [showDropdown, setShowDropdown] = useState<boolean>(false);
+
+  const user = useCurrentUser();
+  const userData = user?.userData ? JSON.parse(user?.userData) : {};
 
   const { data: challengeData } = useSWR<ChallengesApiResponse>(
     type === CHALLENGES_PAGE ? `/api/challenges` : null,
@@ -164,12 +170,20 @@ const Filter = ({ type }: Props) => {
 
   const onFirstDropdownChange = (selected: OptionItem) => {
     setFirstSelected(selected?.value || "");
-    setSecondSelected(null);
+    setSecondSelected(selected?.value === "createdBy" ? userData?._id : null);
   };
 
   const onSecondDropdownChange = (selected: OptionItem) => {
     setSecondSelected(selected?.value);
   };
+
+  useEffect(() => {
+    if (firstSelected === "createdBy" || isEmpty(firstSelected)) {
+      setShowDropdown(false);
+    } else {
+      setShowDropdown(true);
+    }
+  }, [firstSelected, showDropdown]);
 
   return (
     <FilterWrapper>
@@ -180,12 +194,15 @@ const Filter = ({ type }: Props) => {
         options={options}
         onChange={onFirstDropdownChange}
       />
-      <DropDown
-        placeholder=""
-        onChange={onSecondDropdownChange}
-        options={_.sortBy(filteredData, (e) => e.value)}
-        keyProp={filteredData?.[0]?.value || "first-key"}
-      />
+
+      {showDropdown && (
+        <DropDown
+          placeholder="Please choose"
+          onChange={onSecondDropdownChange}
+          options={_.sortBy(filteredData, (e) => e.value)}
+          keyProp={filteredData?.[0]?.value || "first-key"}
+        />
+      )}
     </FilterWrapper>
   );
 };
