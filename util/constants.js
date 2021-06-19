@@ -34,6 +34,7 @@ export const REVIEWS_PAGE = "REVIEWS_PAGE";
 export const FALLBACK = "blocking";
 
 export const ONLINE_BATTLE_ITEM_COUNT = 6;
+export const CHALLENGES_ITEM_COUNT = 6;
 
 export const LANGUAGE_OPTIONS = [
   {

@@ -70,13 +70,17 @@ export const HeaderWrapper = styled.div<HeaderWrapperProps>`
   }
 
   .homepage-bg-container {
-    .trees-1 {
-      left: 0;
-      top: 5.8rem;
-
+    .trees-1,
+    .trees-2,
+    .tent {
       @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
         display: none;
       }
+    }
+
+    .trees-1 {
+      left: 0;
+      top: 5.8rem;
     }
 
     .trees-2 {
@@ -160,7 +164,8 @@ export const Tagline = styled(baseTaglineStyles)<TaglineProps>`
   `}
 
   @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    margin-top: 7rem;
+    padding: 0 0.5rem;
+    margin-top: 1rem;
 
     ${(props) =>
       !props.homepage &&
@@ -215,6 +220,16 @@ export const BattlesTagline = styled(baseTaglineStyles)`
   margin-top: 0;
   margin-bottom: 0;
   text-transform: none;
+`;
+
+export const HomepageSubHeading = styled(baseTaglineStyles)`
+  font-size: 1rem;
+  text-transform: none;
+  font-family: ${(props) => props.theme.fonts.quicksandReg};
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    padding: 0.5rem;
+  }
 `;
 
 export const BoardGameName = styled(baseTaglineStyles)`
