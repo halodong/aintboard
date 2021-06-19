@@ -4,14 +4,15 @@ import { useSWRInfinite } from "swr";
 import { isEmpty } from "lodash";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import fetcher from "util/fetch";
-import { ChallengesPageWrapper, ChallengesCardContainer } from "./styled";
 import ChallengesCard from "~/components/Challenges/ChallengesCard";
 
-import { ChallengesApiResponse, ChallengesData } from "types/types";
+import fetcher from "util/fetch";
 import { FilterState } from "types/reduxTypes";
+import { CHALLENGES_ITEM_COUNT } from "util/constants";
+import { ChallengesApiResponse, ChallengesData } from "types/types";
+import { ChallengesPageWrapper, ChallengesCardContainer } from "./styled";
 
-const itemCount = 6;
+const itemCount = CHALLENGES_ITEM_COUNT;
 //Challenges page - where filters are
 const ChallengesPage = () => {
   const [items, setItems] = useState<any>([]);
