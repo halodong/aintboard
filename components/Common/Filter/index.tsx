@@ -16,7 +16,7 @@ import {
   OnlineBattlesApiResponse,
   ReviewApiResponse,
 } from "types/types";
-import _ from "lodash";
+import _, { isEmpty } from "lodash";
 
 import useCurrentUser from "~/hooks/useCurrentUser";
 
@@ -34,6 +34,7 @@ const Filter = ({ type }: Props) => {
   const [filteredData, setFilteredData] = useState<OptionProps>(
     initialFilteredData
   );
+  const [showDropdown, setShowDropdown] = useState<boolean>(false);
 
   const user = useCurrentUser();
   const userData = user?.userData ? JSON.parse(user?.userData) : {};
@@ -176,6 +177,14 @@ const Filter = ({ type }: Props) => {
     setSecondSelected(selected?.value);
   };
 
+  useEffect(() => {
+    if (firstSelected === "createdBy" || isEmpty(firstSelected)) {
+      setShowDropdown(false);
+    } else {
+      setShowDropdown(true);
+    }
+  }, [firstSelected, showDropdown]);
+
   return (
     <FilterWrapper>
       <Text>Filter by</Text>
@@ -185,13 +194,15 @@ const Filter = ({ type }: Props) => {
         options={options}
         onChange={onFirstDropdownChange}
       />
-      <DropDown
-        placeholder=""
-        onChange={onSecondDropdownChange}
-        options={_.sortBy(filteredData, (e) => e.value)}
-        keyProp={filteredData?.[0]?.value || "first-key"}
-        isDisabled={firstSelected === "createdBy"}
-      />
+
+      {showDropdown && (
+        <DropDown
+          placeholder="Please choose"
+          onChange={onSecondDropdownChange}
+          options={_.sortBy(filteredData, (e) => e.value)}
+          keyProp={filteredData?.[0]?.value || "first-key"}
+        />
+      )}
     </FilterWrapper>
   );
 };
