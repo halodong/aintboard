@@ -1,10 +1,13 @@
 import { Provider } from "react-redux";
-import "./../fonts/fonts.css";
+import { ThemeProvider, createGlobalStyle } from "styled-components";
+import Router from "next/router";
+import NProgress from "nprogress";
 
 import store from "redux/store";
 import { Toast } from "components/Common/Toast";
 
-import { ThemeProvider, createGlobalStyle } from "styled-components";
+import "./../fonts/fonts.css";
+import "nprogress/nprogress.css";
 import { theme } from "styles/theme";
 
 const GlobalStyle = createGlobalStyle`
@@ -104,7 +107,16 @@ const GlobalStyle = createGlobalStyle`
   .react-datepicker__current-month {
     font-size: 1rem;
   }
+
+  #nprogress .bar {
+    background: ${theme.colors.lightGreen} !important;
+  }
 `;
+
+NProgress.configure({ showSpinner: false });
+Router.events.on("routeChangeStart", () => NProgress.start());
+Router.events.on("routeChangeComplete", () => NProgress.done());
+Router.events.on("routeChangeError", () => NProgress.done());
 
 function MyApp({ Component, pageProps }) {
   return (

@@ -1,6 +1,5 @@
-import fetcher from "~/util/fetch";
-import { useState, useEffect } from "react";
 import useSWR from "swr";
+import { useState, useEffect } from "react";
 
 import Header from "~/components/Header";
 import Seo from "~/components/Common/Seo";
@@ -8,6 +7,7 @@ import Footer from "~/components/Common/Footer";
 import ReviewHomepage from "~/components/Reviews/ReviewHomepage";
 import ChallengesHomepage from "~/components/Challenges/ChallengesHomepage";
 
+import fetcher from "~/util/fetch";
 import { getReviews } from "db/reviews";
 import database from "middlewares/dbForFrontend";
 import { getAllChallenges } from "db/challenges";
