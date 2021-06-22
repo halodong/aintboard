@@ -163,7 +163,7 @@ export default function Header({
       {isChallengesPage && (
         <>
           <Tent className="tent" />
-          <GameFont>CHALLENGES</GameFont>\
+          <GameFont>CHALLENGES</GameFont>
           <ChallengesTagline>
             Achieve challenges to get PowerUps!
           </ChallengesTagline>

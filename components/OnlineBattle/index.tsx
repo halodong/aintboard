@@ -4,20 +4,21 @@ import { useSelector } from "react-redux";
 import { useState, useEffect, useRef } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
+import fetcher from "~/util/fetch";
+import { ONLINE_BATTLE_ITEM_COUNT } from "util/constants";
 import OnlineBattleCard from "~/components/OnlineBattleCard";
 import { OnlineBattlesApiResponse, OnlineBattlesData } from "~/types/types";
 import { BattleCardContainer, BattleCardWrapper } from "./styles";
 import { FilterState } from "~/types/reduxTypes";
-import fetcher from "~/util/fetch";
-import { ONLINE_BATTLE_ITEM_COUNT } from "util/constants";
 
 const itemCount = ONLINE_BATTLE_ITEM_COUNT;
 
 const OnlineBattle = () => {
-  const [items, setItems] = useState<any>([]);
-  const filters = useSelector((state: FilterState) => state.filter.filters);
   const ref = useRef(true);
   const firstRender = ref.current;
+  const [items, setItems] = useState<any>([]);
+  const filters = useSelector((state: FilterState) => state.filter.filters);
+  const currentFilter = useRef(filters?.secondSelected);
 
   const {
     data: filteredApiData,
@@ -36,27 +37,22 @@ const OnlineBattle = () => {
   }, fetcher);
 
   useEffect(() => {
-    if (filters.secondSelected) items.length = 0;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filters.secondSelected]);
-
-  useEffect(() => {
-    // Using .concat(), no wrapper function (not recommended)
-    //setItems(items.concat(query))
-
-    // Using .concat(), wrapper function (recommended)
-    //setItems(items => items.concat(query))
-    setItems((items: any[]) =>
-      items.concat(
-        filters.secondSelected
-          ? filteredApiData?.[size - 1]?.response?.data?.onlineBattles[0]
-              .battles || []
-          : filteredApiData?.[size - 1]?.response?.data?.onlineBattles || []
-      )
-    );
+    if (currentFilter.current !== filters?.secondSelected) {
+      //overwrite new items, when filter has been changed
+      setItems(
+        filteredApiData?.[size - 1]?.response?.data?.onlineBattles || []
+      );
+    } else {
+      //concat when infinite scrolling
+      setItems((items: any[]) =>
+        items.concat(
+          filteredApiData?.[size - 1]?.response?.data?.onlineBattles || []
+        )
+      );
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filteredApiData]);
+  }, [filteredApiData, filters?.secondSelected]);
 
   ref.current = false;
 

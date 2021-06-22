@@ -10,7 +10,7 @@ const initialFilteredData = [
   },
 ];
 
-export default function userOnlineBattleFilteredData() {
+export default function useOnlineBattleFilteredData() {
   let filter = initialFilteredData;
 
   const handleFilter = ({ onlineBattleApi, firstSelected }: Props) => {

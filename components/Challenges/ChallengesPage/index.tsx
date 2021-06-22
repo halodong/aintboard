@@ -15,11 +15,11 @@ import { ChallengesPageWrapper, ChallengesCardContainer } from "./styled";
 const itemCount = CHALLENGES_ITEM_COUNT;
 //Challenges page - where filters are
 const ChallengesPage = () => {
+  const ref = useRef(true);
+  const firstRender = ref.current;
   const [items, setItems] = useState<any>([]);
   const filters = useSelector((state: FilterState) => state.filter.filters);
-  const ref = useRef(true);
   const currentFilter = useRef(filters?.secondSelected);
-  const firstRender = ref.current;
 
   const {
     data: filteredApiData,
