@@ -190,32 +190,6 @@ export const filterOnlineBattles = async (
       },
     ];
 
-    let count = [
-      ...aggregate,
-      {
-        $group: {
-          _id: `$${filter}`,
-          count: {
-            $sum: 1,
-          },
-        },
-      },
-      {
-        $count: "count",
-      },
-    ];
-
-    if (filter && field) {
-      onlineBattles = await db.collection("online_battle").aggregate([
-        {
-          $facet: {
-            battles: aggregate,
-            count,
-          },
-        },
-      ]);
-    }
-
     if (first) {
       //with limit
       aggregate.push(
@@ -225,24 +199,27 @@ export const filterOnlineBattles = async (
       );
     }
 
+    if (filter && field) {
+      onlineBattles = await db.collection("online_battle").aggregate(aggregate);
+    }
+
     const onlineBattleArray = await onlineBattles.toArray();
-    count =
-      filter === "createdBy"
-        ? await db
-            .collection("online_battle")
-            .find({ createdBy: field })
-            .count()
-        : onlineBattleArray[0].count[0].count;
+
+    let count = onlineBattleArray.length;
 
     return getSuccessResponse({
       message: "Filtered Online Battle",
       data: {
         onlineBattles: onlineBattleArray,
-        count,
+        totalOnlineBattlesCount: count,
         hasMore: first + offset < count,
       },
     });
   } catch (err) {
-    return getFailedResponse(err, "db/user.js", "Filter Online Battle error");
+    return getFailedResponse(
+      err,
+      "db/onlineBattle.js",
+      "Filter Online Battle error"
+    );
   }
 };
