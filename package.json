@@ -39,6 +39,7 @@
     "next": "^10.2.2",
     "next-connect": "^0.10.0",
     "next-seo": "^4.24.0",
+    "nprogress": "^0.2.0",
     "promise-path": "^1.4.0",
     "prop-types": "^15.7.2",
     "react": "17.0.1",
