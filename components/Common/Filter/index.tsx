@@ -126,6 +126,10 @@ const Filter = ({ type }: Props) => {
           label: "PowerUp Amount",
           value: "powerUpAmount",
         },
+        {
+          label: "Created By Me",
+          value: "createdBy",
+        },
       ];
       break;
     case REVIEWS_PAGE:
