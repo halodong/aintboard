@@ -181,7 +181,7 @@ export const filterOnlineBattles = async (
                 $gte: fieldType.toISOString(),
                 $lte: fieldType.add(1, "d").toISOString(),
               }
-            : field,
+            : new RegExp(field, "i"),
         },
       },
       lookup,

@@ -158,7 +158,7 @@ export const filterReviews = async (db, { first, filter, field }) => {
       let aggregate = [
         {
           $match: {
-            [filter]: field,
+            [filter]: new RegExp(field, "i"),
           },
         },
         lookup,

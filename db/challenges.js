@@ -118,7 +118,7 @@ export const filterChallenges = async (db, { filter, field, first }) => {
       let aggregate = [
         {
           $match: {
-            [filter]: field,
+            [filter]: new RegExp(field, "i"),
           },
         },
       ];
