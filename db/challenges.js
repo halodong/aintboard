@@ -107,7 +107,10 @@ export const getAllChallenges = async (db, { first, offset }) => {
   }
 };
 
-export const filterChallenges = async (db, { filter, field, first }) => {
+export const filterChallenges = async (
+  db,
+  { filter, field, first, approved }
+) => {
   try {
     let challenges = null;
     first = first ? parseInt(first) : null;
@@ -115,13 +118,19 @@ export const filterChallenges = async (db, { filter, field, first }) => {
     if (filter && field) {
       field = ["bgId", "bgYear"].includes(filter) ? parseInt(field) : field;
 
-      let aggregate = [
-        {
-          $match: {
-            [filter]: field,
-          },
+      // default - get all data regardless of status
+      let match = {
+        $match: {
+          [filter]: field,
+          status: { $in: ["APPROVED", "PENDING", "REJECTED"] },
         },
-      ];
+      };
+
+      if (approved === "true") {
+        match = { $match: { [filter]: field, status: "APPROVED" } };
+      }
+
+      let aggregate = [match];
 
       if (first) {
         //with limit

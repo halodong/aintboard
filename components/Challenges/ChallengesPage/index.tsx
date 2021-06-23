@@ -31,8 +31,10 @@ const ChallengesPage = () => {
     return !isEmpty(filters?.secondSelected) && !firstRender
       ? `/api/challenge/filter/${filters.firstSelected}/${
           filters.secondSelected
-        }?first=${index * itemCount}`
-      : `/api/challenges?first=${itemCount}&offset=${pageIndex * itemCount}`;
+        }?first=${index * itemCount}&approved=true`
+      : `/api/challenges?first=${itemCount}&offset=${
+          pageIndex * itemCount
+        }&approved=true`;
   }, fetcher);
 
   useEffect(() => {
