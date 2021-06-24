@@ -25,6 +25,7 @@ describe("Reviews", () => {
   let db;
 
   before(async () => {
+    // eslint-disable-next-line no-useless-catch
     try {
       db = await dbHandler.connect();
       await dbHandler.clearDatabase();
@@ -164,13 +165,24 @@ describe("Reviews", () => {
   });
 
   it("should update PENDING review to APPROVED of REJECTED", async () => {
+    let reviews = await getReviews(db, { first: 1 });
+
     let res = await reviewStatus(db, {
-      id: "123",
+      id: reviews.response.data.reviews[0]._id,
       status: REVIEW_STATUS.APPROVED,
     });
 
     expect(res.success).to.equal(true);
     expect(res.response.message).to.equal("Review Updated");
+  });
+
+  it("should get approved reviews", async () => {
+    let res = await getReviews(db, { first: 1, approved: "true" });
+
+    expect(res.success).to.equal(true);
+    expect(res.response.data.reviews[0].reviewStatus).to.equal(
+      REVIEW_STATUS.APPROVED
+    );
   });
 
   it("should delete the review", async () => {
