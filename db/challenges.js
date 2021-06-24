@@ -39,7 +39,10 @@ export const insertChallenge = async (
   }
 };
 
-export const getAllChallenges = async (db, { first, offset, approved }) => {
+export const getAllChallenges = async (
+  db,
+  { first, offset, approved = null }
+) => {
   try {
     let challenges = null;
     first = first ? parseInt(first) : null;
@@ -123,7 +126,7 @@ export const getAllChallenges = async (db, { first, offset, approved }) => {
 
 export const filterChallenges = async (
   db,
-  { filter, field, first, approved }
+  { filter, field, first, approved = null }
 ) => {
   try {
     let challenges = null;
