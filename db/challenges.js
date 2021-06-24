@@ -39,7 +39,7 @@ export const insertChallenge = async (
   }
 };
 
-export const getAllChallenges = async (db, { first, offset }) => {
+export const getAllChallenges = async (db, { first, offset, approved }) => {
   try {
     let challenges = null;
     first = first ? parseInt(first) : null;
@@ -64,24 +64,38 @@ export const getAllChallenges = async (db, { first, offset }) => {
     };
 
     let totalChallengesCount = 0;
+    let aggregate = [];
 
     if (first) {
-      challenges = await db
-        .collection("challenges")
-        .aggregate([
-          { $sort: { createdAt: -1 } },
-          { $skip: offset },
-          { $limit: first },
-          lookup,
-        ]);
+      aggregate = [
+        { $sort: { createdAt: -1 } },
+        { $skip: offset },
+        { $limit: first },
+        lookup,
+      ];
+
       const totalChallenges = await db.collection("challenges");
 
       totalChallengesCount = await totalChallenges.count();
     } else {
-      challenges = await db
-        .collection("challenges")
-        .aggregate([{ $sort: { createdAt: -1 } }, lookup]);
+      aggregate = [{ $sort: { createdAt: -1 } }, lookup];
     }
+
+    // default - get all data regardless of status
+    let match = {
+      $match: {
+        status: { $in: ["APPROVED", "PENDING", "REJECTED"] },
+      },
+    };
+
+    if (approved === "true") {
+      match = { $match: { status: "APPROVED" } };
+    }
+
+    aggregate.push(match);
+
+    challenges = await db.collection("challenges").aggregate(aggregate);
+
     const challengeArray = await challenges.toArray();
     const challengesCount = challengeArray.length;
 

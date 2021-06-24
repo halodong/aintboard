@@ -40,7 +40,7 @@ const Filter = ({ type }: Props) => {
   const userData = user?.userData ? JSON.parse(user?.userData) : {};
 
   const { data: challengeData } = useSWR<ChallengesApiResponse>(
-    type === CHALLENGES_PAGE ? `/api/challenges?approved=true` : null,
+    type === CHALLENGES_PAGE ? `/api/challenges` : null,
     fetcher
   );
 
