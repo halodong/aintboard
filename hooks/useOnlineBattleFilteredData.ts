@@ -25,7 +25,7 @@ export default function userOnlineBattleFilteredData() {
             value = dayjs(label).format("MM-DD-YYYY");
           }
 
-          if (["boardGameName"].includes(firstSelected)) {
+          if (firstSelected === "boardGameName") {
             label = label.replace(/\w+/g, capitalize);
             value = capitalize(value);
           }

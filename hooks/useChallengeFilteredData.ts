@@ -18,7 +18,7 @@ export default function useChallengeFilteredData() {
           let label = val[firstSelected]?.toString() || "";
           let value = val[firstSelected]?.toString() || "";
 
-          if (["bgName"].includes(firstSelected)) {
+          if (firstSelected === "bgName") {
             label = label.replace(/\w+/g, capitalize);
             value = capitalize(value);
           }
