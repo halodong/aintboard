@@ -51,8 +51,6 @@ const OnlineBattle = () => {
       );
     }
 
-    console.log(items);
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filteredApiData, filters?.secondSelected]);
 
