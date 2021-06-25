@@ -1,4 +1,4 @@
-import { uniqBy, isEmpty } from "lodash";
+import { isEmpty, capitalize, uniqWith } from "lodash";
 import { OnlineBattlesApiResponse, OnlineBattlesData } from "types/types";
 
 import dayjs from "dayjs";
@@ -25,6 +25,11 @@ export default function useOnlineBattleFilteredData() {
             value = dayjs(label).format("MM-DD-YYYY");
           }
 
+          if (firstSelected === "boardGameName") {
+            label = label.replace(/\w+/g, capitalize);
+            value = capitalize(value);
+          }
+
           return {
             label,
             value,
@@ -33,7 +38,10 @@ export default function useOnlineBattleFilteredData() {
         .filter((v) => !isEmpty(v.value) || initialFilteredData) ||
       initialFilteredData;
 
-    return uniqBy(filter, "value");
+    return uniqWith(
+      filter,
+      (a, b) => a.value.toLowerCase() === b.value.toLowerCase()
+    );
   };
 
   return handleFilter;

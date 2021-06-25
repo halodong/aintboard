@@ -1,4 +1,4 @@
-import { uniqBy, isEmpty } from "lodash";
+import { capitalize, isEmpty, uniqWith } from "lodash";
 import { ChallengesApiResponse, ChallengesData } from "types/types";
 
 const initialFilteredData = [
@@ -15,15 +15,26 @@ export default function useChallengeFilteredData() {
     filter =
       challengeApi?.response?.data?.challenges
         ?.map((val: ChallengesData) => {
+          let label = val[firstSelected]?.toString() || "";
+          let value = val[firstSelected]?.toString() || "";
+
+          if (firstSelected === "bgName") {
+            label = label.replace(/\w+/g, capitalize);
+            value = capitalize(value);
+          }
+
           return {
-            label: val[firstSelected]?.toString() || "",
-            value: val[firstSelected]?.toString() || "",
+            label,
+            value,
           };
         })
         .filter((v) => !isEmpty(v.value)) || initialFilteredData;
 
     // only get the unique values
-    return uniqBy(filter, "value");
+    return uniqWith(
+      filter,
+      (a, b) => a.value.toLowerCase() === b.value.toLowerCase()
+    );
   };
 
   return handleFilter;

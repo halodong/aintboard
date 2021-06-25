@@ -1,4 +1,4 @@
-import { uniqBy, isEmpty, capitalize } from "lodash";
+import { isEmpty, uniqWith, capitalize } from "lodash";
 import { ReviewApiResponse, ReviewData } from "types/types";
 
 const initialFilteredData = [
@@ -16,20 +16,25 @@ export default function useReviewFilteredData() {
       reviewApi?.response?.data?.reviews
         ?.map((val: ReviewData) => {
           let label = val[firstSelected]?.toString() || "";
+          let value = val[firstSelected]?.toString() || "";
 
           // capitalize labels under these filter categories
-          if (["language", "reviewType"].includes(firstSelected)) {
-            label = capitalize(label);
+          if (["language", "reviewType", "bgName"].includes(firstSelected)) {
+            label = label.replace(/\w+/g, capitalize); // capitalize every word in labels without removing the special chars
+            value = capitalize(value); // for sorting
           }
 
           return {
             label,
-            value: val[firstSelected]?.toString() || "",
+            value,
           };
         })
         .filter((v) => !isEmpty(v.value)) || initialFilteredData;
 
-    return uniqBy(filter, "value");
+    return uniqWith(
+      filter,
+      (a, b) => a.value.toLowerCase() === b.value.toLowerCase()
+    );
   };
   return handleFilter;
 }
