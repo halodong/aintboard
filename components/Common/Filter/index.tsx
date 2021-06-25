@@ -45,7 +45,7 @@ const Filter = ({ type }: Props) => {
   );
 
   const { data: reviewData } = useSWR<ReviewApiResponse>(
-    type === REVIEWS_PAGE ? `/api/reviews` : null,
+    type === REVIEWS_PAGE ? `/api/reviews?approved=true` : null,
     fetcher
   );
 
@@ -125,6 +125,10 @@ const Filter = ({ type }: Props) => {
         {
           label: "PowerUp Amount",
           value: "powerUpAmount",
+        },
+        {
+          label: "Created By Me",
+          value: "createdBy",
         },
       ];
       break;

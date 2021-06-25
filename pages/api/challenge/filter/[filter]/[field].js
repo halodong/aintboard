@@ -8,9 +8,14 @@ const handler = nc();
 handler.use(all);
 
 handler.get(async (req, res) => {
-  const { filter, field, first = null } = req.query;
+  const { filter, field, first = null, approved = null } = req.query;
 
-  const challenges = await filterChallenges(req.db, { filter, field, first });
+  const challenges = await filterChallenges(req.db, {
+    filter,
+    field,
+    first,
+    approved,
+  });
 
   return res.json(challenges);
 });

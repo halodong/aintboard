@@ -61,7 +61,7 @@ export async function insertReview(
   }
 }
 
-export async function getReviews(db, { first, offset }) {
+export async function getReviews(db, { first, offset, approved = null }) {
   try {
     let reviews = null;
     first = first ? parseInt(first) : null;
@@ -87,27 +87,39 @@ export async function getReviews(db, { first, offset }) {
     };
 
     let totalReviewsCount = 0;
+    let aggregate = [];
 
     if (first) {
-      reviews = await db
-        .collection("reviews")
-        .aggregate([
-          { $sort: { createdAt: -1 } },
-          { $skip: offset },
-          { $limit: first },
-          lookup,
-        ]);
+      aggregate = [
+        { $sort: { createdAt: -1 } },
+        { $skip: offset },
+        { $limit: first },
+        lookup,
+      ];
 
       const totalReviews = await db.collection("reviews");
-
-      totalReviewsCount = await totalReviews.count();
+      totalReviewsCount = await totalReviews.countDocuments();
     } else {
-      reviews = await db
-        .collection("reviews")
-        .aggregate([{ $sort: { createdAt: -1 } }, lookup]);
+      aggregate = [{ $sort: { createdAt: -1 } }, lookup];
     }
-    const reviewArray = await reviews.toArray();
 
+    let match = {
+      $match: { reviewStatus: { $in: ["APPROVED", "PENDING", "REJECTED"] } },
+    };
+
+    if (approved === "true") {
+      match = {
+        $match: {
+          reviewStatus: "APPROVED",
+        },
+      };
+    }
+
+    aggregate.push(match);
+
+    reviews = await db.collection("reviews").aggregate(aggregate);
+
+    const reviewArray = await reviews.toArray();
     const reviewsCount = reviewArray.length;
 
     return getSuccessResponse({
@@ -128,7 +140,10 @@ export async function getReviews(db, { first, offset }) {
   }
 }
 
-export const filterReviews = async (db, { first, filter, field }) => {
+export const filterReviews = async (
+  db,
+  { first, filter, field, approved = null }
+) => {
   try {
     let reviews = null;
     first = first ? parseInt(first) : null;
@@ -155,14 +170,19 @@ export const filterReviews = async (db, { first, filter, field }) => {
     if (filter && field) {
       field = filter === "bgId" ? parseInt(field) : field;
 
-      let aggregate = [
-        {
-          $match: {
-            [filter]: new RegExp(field, "i"),
-          },
+      // default - get all data regardless of status
+      let match = {
+        $match: {
+          [filter]: field,
+          reviewStatus: { $in: ["APPROVED", "PENDING", "REJECTED"] },
         },
-        lookup,
-      ];
+      };
+
+      if (approved === "true") {
+        match = { $match: { [filter]: field, reviewStatus: "APPROVED" } };
+      }
+
+      let aggregate = [match, lookup];
 
       if (first) {
         //with limit

@@ -11,6 +11,7 @@ const dbHandler = require("./db-handler");
 describe("Challenge routes", () => {
   let db;
   before(async () => {
+    // eslint-disable-next-line no-useless-catch
     try {
       db = await dbHandler.connect();
       await dbHandler.clearDatabase();

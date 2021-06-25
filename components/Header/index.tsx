@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { useWindowSize } from "react-use";
 import { useSelector, useDispatch } from "react-redux";
 
 import {
@@ -52,6 +53,7 @@ const modalCta = [
 
 export default function Header({
   homepage,
+  isStaticPage = false,
   isSearchPage = false,
   isChallengesPage = false,
   tagline,
@@ -71,6 +73,7 @@ export default function Header({
   const router = useRouter();
   const { name } = router.query;
   const dispatch = useDispatch();
+  const { width: windowWidth } = useWindowSize();
 
   const modalClicked = useSelector(
     (state: ModalState) => state.modal.modalChosen
@@ -96,6 +99,7 @@ export default function Header({
   return (
     <HeaderWrapper
       homepage={homepage}
+      isStaticPage={isStaticPage}
       isSearchPage={isSearchPage}
       isChallengePage={isChallengesPage}
       isBoardGamePage={isBoardGamePage}
@@ -113,7 +117,7 @@ export default function Header({
 
       {/* <Searchbar /> obsolete for now */}
 
-      {(isUserPage || isSettingsPage) && (
+      {(isUserPage || isSettingsPage || isStaticPage) && (
         <CenterTagline isUserPage>{children}</CenterTagline>
       )}
 
@@ -127,19 +131,21 @@ export default function Header({
         </div>
       )}
 
-      <Tagline homepage={homepage}>
-        {tagline ? (
-          tagline
-        ) : (
-          <>
-            Interactive Boardgame <br /> Community{" "}
-          </>
-        )}
-      </Tagline>
+      {!isStaticPage && (
+        <Tagline homepage={homepage}>
+          {tagline ? (
+            tagline
+          ) : (
+            <>
+              Interactive Boardgame <br /> Community{" "}
+            </>
+          )}
+        </Tagline>
+      )}
 
       {isBuyAvatarsPage && <CenterTagline>{centerTagline}</CenterTagline>}
 
-      {homepage && (
+      {((homepage && !isStaticPage) || (isStaticPage && windowWidth > 600)) && (
         <Styles.HomepageSubHeading>
           Be a part of the best boardgame community. <br /> Make reviews and
           strategies. Join challenges and online battles.
@@ -157,7 +163,7 @@ export default function Header({
       {isChallengesPage && (
         <>
           <Tent className="tent" />
-          <GameFont>CHALLENGES</GameFont>\
+          <GameFont>CHALLENGES</GameFont>
           <ChallengesTagline>
             Achieve challenges to get PowerUps!
           </ChallengesTagline>
@@ -232,6 +238,7 @@ export default function Header({
 
 type Props = {
   homepage?: boolean;
+  isStaticPage?: boolean;
   isSearchPage?: boolean;
   isChallengesPage?: boolean;
   tagline?: string;
