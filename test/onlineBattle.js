@@ -89,7 +89,7 @@ describe("Online Battles", () => {
     let res = await getBattles(db, {});
     expect(res.success).to.equal(true);
     expect(res.response.message).to.equal("1 Online Battle retrieved");
-    expect(res.response.data.battles).to.an("array");
+    expect(res.response.data.onlineBattles).to.an("array");
   });
 
   it("should filter online battles", async () => {

@@ -34,7 +34,6 @@ export const ReviewCardContainer = styled.div`
   border-radius: 10px;
   overflow: hidden;
   position: relative;
-  cursor: pointer;
 
   &:hover {
     ${BgImgWrapper} {
@@ -88,8 +87,19 @@ export const BottomRight = styled.div`
     text-align: right;
   }
 
-  .socials {
+  .heart-wrapper {
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 0.3rem;
+    cursor: pointer;
+
     svg {
+      margin-left: 0.1rem;
       width: 1rem;
     }
 

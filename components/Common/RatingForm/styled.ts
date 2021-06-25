@@ -10,7 +10,7 @@ export const RatingFormWrapper = styled.div<RatingFormWrapperProps>`
     width: ${(props) => (props.big ? "4rem" : "3rem")};
     height: ${(props) => (props.big ? "4rem" : "3rem")};
     margin-right: 1rem;
-    cursor: pointer;
+    cursor: ${(props) => (props.noPointer ? "auto" : "pointer")};
 
     @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
       width: 2rem;
@@ -22,6 +22,7 @@ export const RatingFormWrapper = styled.div<RatingFormWrapperProps>`
 type RatingFormWrapperProps = {
   paddingBottom?: string;
   big?: boolean;
+  noPointer?: boolean;
 };
 
 export const RatingLabel = styled.label`
