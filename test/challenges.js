@@ -32,6 +32,7 @@ describe("Challenge routes", () => {
       bgName: "Chess",
       bgYear: 2018,
       powerUpAmount: 4,
+      status: "PENDING",
     });
 
     expect(res.success).to.equal(true);
