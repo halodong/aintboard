@@ -14,6 +14,8 @@ import useCurrentUser from "hooks/useCurrentUser";
 import ConfirmAchieveModal from "./../ConfirmAchieveModal";
 import { ChallengesData, UserApiResponse } from "types/types";
 
+import FadeIn from "~/components/Common/FadeIn";
+
 const ChallengesCard = ({ data, achieved }: Props) => {
   const user = useCurrentUser();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -43,7 +45,7 @@ const ChallengesCard = ({ data, achieved }: Props) => {
   };
 
   return (
-    <>
+    <FadeIn duration={450} delay={100}>
       <Styles.ChallengesCardWrapper onClick={() => setIsModalOpen(true)}>
         <Styles.ImgWrapper>
           {data && data?.bgImage?.length > 0 ? (
@@ -96,7 +98,7 @@ const ChallengesCard = ({ data, achieved }: Props) => {
         handleConfirm={handleConfirm}
         closeModal={() => setIsModalOpen(false)}
       />
-    </>
+    </FadeIn>
   );
 };
 

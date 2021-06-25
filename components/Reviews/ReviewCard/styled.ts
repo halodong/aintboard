@@ -1,6 +1,12 @@
 import styled from "styled-components";
 import { REVIEW_TYPE } from "util/constants";
 
+export const UpperPartLink = styled.a`
+  display: block;
+  min-width: 13.25rem;
+  cursor: pointer;
+`;
+
 export const BgImgWrapper = styled.div`
   position: relative;
   height: 6.5rem;

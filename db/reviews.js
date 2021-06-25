@@ -173,13 +173,18 @@ export const filterReviews = async (
       // default - get all data regardless of status
       let match = {
         $match: {
-          [filter]: field,
+          [filter]: new RegExp(field, "i"),
           reviewStatus: { $in: ["APPROVED", "PENDING", "REJECTED"] },
         },
       };
 
       if (approved === "true") {
-        match = { $match: { [filter]: field, reviewStatus: "APPROVED" } };
+        match = {
+          $match: {
+            [filter]: new RegExp(field, "i"),
+            reviewStatus: "APPROVED",
+          },
+        };
       }
 
       let aggregate = [match, lookup];

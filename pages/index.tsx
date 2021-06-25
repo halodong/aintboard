@@ -21,7 +21,9 @@ export default function Home({ reviews, challenges }: Props) {
   }, []);
 
   const { data: reviewData } = useSWR<ReviewApiResponse>(
-    `/api/reviews?first=${windowWidth !== 0 && windowWidth <= 600 ? 2 : 5}`,
+    `/api/reviews?first=${
+      windowWidth !== 0 && windowWidth <= 600 ? 2 : 5
+    }&approved=true`,
     fetcher,
     { initialData: reviews, revalidateOnMount: true }
   );
@@ -58,7 +60,11 @@ type Props = {
 export const getStaticProps = async () => {
   const db = await database();
   const challenges = await getAllChallenges(db, { first: 3, offset: null });
-  const reviews = await getReviews(db, { first: 5, offset: null });
+  const reviews = await getReviews(db, {
+    first: 5,
+    offset: null,
+    approved: "true",
+  });
 
   return {
     props: {
