@@ -5,6 +5,7 @@ import fetcher from "util/fetch";
 import { useState } from "react";
 import DOMPurify from "dompurify";
 import useSWR, { mutate } from "swr";
+import { useRouter } from "next/router";
 
 import * as Styles from "./styled";
 import Muscle from "~/assets/img/Muscle";
@@ -13,10 +14,13 @@ import PlayButton from "~/assets/img/PlayButton";
 import useCurrentUser from "hooks/useCurrentUser";
 import ConfirmAchieveModal from "./../ConfirmAchieveModal";
 import { ChallengesData, UserApiResponse } from "types/types";
+import useContextualRouting from "hooks/useContextualRouting";
 
 import FadeIn from "~/components/Common/FadeIn";
 
 const ChallengesCard = ({ data, achieved }: Props) => {
+  const router = useRouter();
+  const { makeContextualHref, returnHref } = useContextualRouting();
   const user = useCurrentUser();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { data: userApiData } = useSWR<UserApiResponse>(
@@ -44,9 +48,27 @@ const ChallengesCard = ({ data, achieved }: Props) => {
     }
   };
 
+  const handleModalOpen = () => {
+    router.push(
+      makeContextualHref({ id: data?._id }),
+      `/challenge/${data?._id}`,
+      {
+        shallow: true,
+      }
+    );
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    if (typeof returnHref === "string") {
+      router.push(returnHref, undefined, { shallow: true });
+    }
+    setIsModalOpen(false);
+  };
+
   return (
     <FadeIn duration={450} delay={100}>
-      <Styles.ChallengesCardWrapper onClick={() => setIsModalOpen(true)}>
+      <Styles.ChallengesCardWrapper onClick={handleModalOpen}>
         <Styles.ImgWrapper>
           {data && data?.bgImage?.length > 0 ? (
             <Image
@@ -96,7 +118,7 @@ const ChallengesCard = ({ data, achieved }: Props) => {
             : data?.challengeName || ""
         }
         handleConfirm={handleConfirm}
-        closeModal={() => setIsModalOpen(false)}
+        closeModal={handleModalClose}
       />
     </FadeIn>
   );
