@@ -42,6 +42,7 @@
     "nprogress": "^0.2.0",
     "promise-path": "^1.4.0",
     "prop-types": "^15.7.2",
+    "qs-stringify": "^1.2.1",
     "react": "17.0.1",
     "react-animate-height": "^2.0.23",
     "react-awesome-slider": "^4.1.0",
