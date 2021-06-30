@@ -19,8 +19,12 @@ const ChallengeIdPage = ({ challengeData }: Props) => {
         title={capitalize(challenge?.challengeName)}
         description={`Win ${challenge?.powerUpAmount} powerups when you achieve this challenge`}
       />
-      <Header />
-      {challenge?.challengeName}
+      <Header
+        homepage
+        isStaticPage
+        isAchieveChallengePage
+        challenge={challenge}
+      />
       <Footer />
     </>
   );

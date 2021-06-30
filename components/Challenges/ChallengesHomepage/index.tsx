@@ -14,6 +14,7 @@ import fetcher from "util/fetch";
 import RightArrow from "~/assets/img/rightArrow";
 import useCurrentUser from "hooks/useCurrentUser";
 import ChallengesCard from "~/components/Challenges/ChallengesCard";
+import checkChallengeIfHasAchieved from "util/checkChallengeIfHasAchieved";
 import {
   ChallengesApiResponse,
   UserChallengesApiResponse,
@@ -38,19 +39,17 @@ export default function ChallengesHomePage({ challenges }: Props) {
 
   const { data: userChallengeData } = useSWR<UserChallengesApiResponse>(
     userLoggedInId !== null
-      ? `/api/userChallenges/filter/userId/${userLoggedInId}?first=1`
+      ? `/api/userChallenges/filter/userId/${userLoggedInId}`
       : null,
     fetcher
   );
 
   const renderChallenges = () => {
     return challengesData?.map((challenge: ChallengesData, i: number) => {
-      const achievedChallenges = userChallengeData?.response?.data?.challenge?.filter(
-        (userChallenge) => userChallenge?.challengeId === challenge?._id
-      );
-
-      const hasAchieved =
-        (achievedChallenges && achievedChallenges?.length > 0) || false;
+      const hasAchieved = checkChallengeIfHasAchieved({
+        userChallengeData,
+        challenge,
+      });
 
       return (
         <ChallengesCard

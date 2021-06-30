@@ -1,22 +1,21 @@
-import axios from "axios";
 import Image from "next/image";
 import { isEmpty } from "lodash";
 import fetcher from "util/fetch";
 import { useState } from "react";
 import DOMPurify from "dompurify";
-import useSWR, { mutate } from "swr";
+import useSWR from "swr";
 import { useRouter } from "next/router";
 
 import * as Styles from "./styled";
 import Muscle from "~/assets/img/Muscle";
 import Avatar from "~/components/Avatar";
+import FadeIn from "~/components/Common/FadeIn";
 import PlayButton from "~/assets/img/PlayButton";
 import useCurrentUser from "hooks/useCurrentUser";
 import ConfirmAchieveModal from "./../ConfirmAchieveModal";
 import { ChallengesData, UserApiResponse } from "types/types";
 import useContextualRouting from "hooks/useContextualRouting";
-
-import FadeIn from "~/components/Common/FadeIn";
+import confirmAchieveChallenge from "util/confirmAchieveChallenge";
 
 const ChallengesCard = ({ data, achieved }: Props) => {
   const router = useRouter();
@@ -32,23 +31,11 @@ const ChallengesCard = ({ data, achieved }: Props) => {
   const userLoggedInData = user?.userData ? JSON.parse(user?.userData) : {};
   const userLoggedInId = isEmpty(userLoggedInData) ? "" : userLoggedInData._id;
 
-  const handleConfirm = async () => {
-    const response = await axios.post("/api/user/challenge", {
-      userId: userLoggedInId,
-      challengeId: data?._id,
-      powerups: data?.powerUpAmount,
-    });
-
-    if (response.data?.success) {
-      // revalidate user challenges data to show achieved status in card
-      mutate(`/api/userChallenges/filter/userId/${userLoggedInId}?first=1`);
-      // revalidate userdata to fetch updated powerups
-      mutate(`/api/user/filter/_id/${userLoggedInId}`);
-      setIsModalOpen(false);
-    }
-  };
-
   const handleModalOpen = () => {
+    if (achieved) {
+      return;
+    }
+
     router.push(
       makeContextualHref({ id: data?._id }),
       `/challenge/${data?._id}`,
@@ -117,7 +104,9 @@ const ChallengesCard = ({ data, achieved }: Props) => {
             ? DOMPurify.sanitize(data?.challengeName || "")
             : data?.challengeName || ""
         }
-        handleConfirm={handleConfirm}
+        handleConfirm={() =>
+          confirmAchieveChallenge({ data, userLoggedInId, setIsModalOpen })
+        }
         closeModal={handleModalClose}
       />
     </FadeIn>

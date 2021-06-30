@@ -25,8 +25,10 @@ import Modal from "~/components/Common/Modal";
 import Filter from "~/components/Common/Filter";
 import Button from "~/components/Common/Button";
 // import Searchbar from "~/components/Searchbar"; obsolete for now
+import GameNightsHeader from "~/components/GameNights/GameNightsHeader";
 import OnlineBattleForm from "~/components/OnlineBattle/OnlineBattleForm";
 import CreateChallengeForm from "~/components/Challenges/CreateChallengeForm";
+import AchieveChallengeHeader from "~/components/Challenges/AchieveChallengeHeader";
 
 import { chooseModal, setPopup } from "redux/slices/modalSlice";
 import {
@@ -36,6 +38,7 @@ import {
   CREATE_CHALLENGE_BUTTON,
   CREATE_ONLINE_BATTLE_BUTTON,
 } from "util/constants";
+import { ChallengesData } from "types/types";
 import { ModalState } from "types/reduxTypes";
 
 const modalCta = [
@@ -55,6 +58,7 @@ export default function Header({
   homepage,
   isStaticPage = false,
   isGameNightsPage = false,
+  isAchieveChallengePage = false,
   isSearchPage = false,
   isChallengesPage = false,
   tagline,
@@ -69,6 +73,7 @@ export default function Header({
   isUserPage = false,
   isSettingsPage = false,
   isOnlineBattlePage = false,
+  challenge,
   children,
 }: Props) {
   const router = useRouter();
@@ -147,28 +152,17 @@ export default function Header({
       {isBuyAvatarsPage && <CenterTagline>{centerTagline}</CenterTagline>}
 
       {((homepage && !isStaticPage) || (isStaticPage && windowWidth > 600)) &&
-        !isGameNightsPage && (
+        !isGameNightsPage &&
+        !isAchieveChallengePage && (
           <Styles.HomepageSubHeading>
             Be a part of the best boardgame community. <br /> Make reviews and
             strategies. Join challenges and online battles.
           </Styles.HomepageSubHeading>
         )}
 
-      {isGameNightsPage && (
-        <>
-          <Styles.HomepageSubHeading>
-            Join online boardgamers on Tabletop Gateway PH, <br /> join their
-            Discord server below!
-          </Styles.HomepageSubHeading>
-          <br />
-          <br />
-          <Styles.GameNightLink
-            href="https://discord.gg/cAWX6PPs"
-            target="_blank"
-          >
-            Tabletop Gateway PH Discord
-          </Styles.GameNightLink>
-        </>
+      {isGameNightsPage && <GameNightsHeader />}
+      {isAchieveChallengePage && (
+        <AchieveChallengeHeader challenge={challenge} />
       )}
 
       {isSearchPage && <LookingForText>Looking for "{name}"</LookingForText>}
@@ -257,8 +251,10 @@ export default function Header({
 
 type Props = {
   homepage?: boolean;
+  challenge?: ChallengesData;
   isStaticPage?: boolean;
   isGameNightsPage?: boolean;
+  isAchieveChallengePage?: boolean;
   isSearchPage?: boolean;
   isChallengesPage?: boolean;
   tagline?: string;
