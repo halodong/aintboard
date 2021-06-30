@@ -14,7 +14,6 @@ const GameNights = () => {
       <Header homepage isStaticPage isGameNightsPage>
         Game Nights
       </Header>
-      {/* <About /> */}
       <Footer />
     </>
   );
