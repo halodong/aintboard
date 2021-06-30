@@ -145,7 +145,7 @@ type HeaderWrapperProps = {
   isOnlineBattlePage?: boolean;
 };
 
-const baseTaglineStyles = styled.h1`
+export const baseTaglineStyles = styled.h1`
   color: ${(props) => props.theme.colors.white};
   font-family: ${(props) => props.theme.fonts.rubikBold};
   font-size: 1.75rem;
@@ -234,13 +234,6 @@ export const HomepageSubHeading = styled(baseTaglineStyles)`
   @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     padding: 0.5rem;
   }
-`;
-
-export const GameNightLink = styled.a`
-  display: block;
-  color: white;
-  text-align: center;
-  text-decoration: underline;
 `;
 
 export const BoardGameName = styled(baseTaglineStyles)`

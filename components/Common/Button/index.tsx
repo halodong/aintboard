@@ -1,14 +1,21 @@
 import { ButtonStyled } from "./styled";
 
-export default function Button({ bg, children, onClick, type }: Props) {
+export default function Button({
+  bg,
+  children,
+  onClick,
+  type,
+  className,
+}: Props) {
   return (
-    <ButtonStyled bg={bg} onClick={onClick} type={type}>
+    <ButtonStyled className={className} bg={bg} onClick={onClick} type={type}>
       {children}
     </ButtonStyled>
   );
 }
 
 type Props = {
+  className?: string;
   bg: string;
   children: React.ReactNode;
   onClick?: () => void;

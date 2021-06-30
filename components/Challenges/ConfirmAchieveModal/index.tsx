@@ -20,7 +20,7 @@ const ConfirmAchieveModal = ({
       <span>{challengeName}</span> <br />
       <span>Have you achieved this challenge? &nbsp;</span>
       <span>
-        You will get {powerups} <Styles.PowerUpText>UP</Styles.PowerUpText>{" "}
+        You will get {powerups} <Styles.PowerUpText>UP</Styles.PowerUpText>
       </span>
       <br />
       <br />
