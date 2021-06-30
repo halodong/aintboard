@@ -54,6 +54,7 @@ const modalCta = [
 export default function Header({
   homepage,
   isStaticPage = false,
+  isGameNightsPage = false,
   isSearchPage = false,
   isChallengesPage = false,
   tagline,
@@ -145,11 +146,29 @@ export default function Header({
 
       {isBuyAvatarsPage && <CenterTagline>{centerTagline}</CenterTagline>}
 
-      {((homepage && !isStaticPage) || (isStaticPage && windowWidth > 600)) && (
-        <Styles.HomepageSubHeading>
-          Be a part of the best boardgame community. <br /> Make reviews and
-          strategies. Join challenges and online battles.
-        </Styles.HomepageSubHeading>
+      {((homepage && !isStaticPage) || (isStaticPage && windowWidth > 600)) &&
+        !isGameNightsPage && (
+          <Styles.HomepageSubHeading>
+            Be a part of the best boardgame community. <br /> Make reviews and
+            strategies. Join challenges and online battles.
+          </Styles.HomepageSubHeading>
+        )}
+
+      {isGameNightsPage && (
+        <>
+          <Styles.HomepageSubHeading>
+            Join online boardgamers on Tabletop Gateway PH, <br /> join their
+            Discord server below!
+          </Styles.HomepageSubHeading>
+          <br />
+          <br />
+          <Styles.GameNightLink
+            href="https://discord.gg/cAWX6PPs"
+            target="_blank"
+          >
+            Tabletop Gateway PH Discord
+          </Styles.GameNightLink>
+        </>
       )}
 
       {isSearchPage && <LookingForText>Looking for "{name}"</LookingForText>}
@@ -239,6 +258,7 @@ export default function Header({
 type Props = {
   homepage?: boolean;
   isStaticPage?: boolean;
+  isGameNightsPage?: boolean;
   isSearchPage?: boolean;
   isChallengesPage?: boolean;
   tagline?: string;
