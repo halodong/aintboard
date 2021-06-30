@@ -236,6 +236,13 @@ export const HomepageSubHeading = styled(baseTaglineStyles)`
   }
 `;
 
+export const GameNightLink = styled.a`
+  display: block;
+  color: white;
+  text-align: center;
+  text-decoration: underline;
+`;
+
 export const BoardGameName = styled(baseTaglineStyles)`
   text-transform: none;
 `;

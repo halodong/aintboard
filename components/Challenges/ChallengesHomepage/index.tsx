@@ -44,7 +44,7 @@ export default function ChallengesHomePage({ challenges }: Props) {
   );
 
   const renderChallenges = () => {
-    return challengesData?.map((challenge: ChallengesData) => {
+    return challengesData?.map((challenge: ChallengesData, i: number) => {
       const achievedChallenges = userChallengeData?.response?.data?.challenge?.filter(
         (userChallenge) => userChallenge?.challengeId === challenge?._id
       );
@@ -52,7 +52,13 @@ export default function ChallengesHomePage({ challenges }: Props) {
       const hasAchieved =
         (achievedChallenges && achievedChallenges?.length > 0) || false;
 
-      return <ChallengesCard data={challenge} achieved={hasAchieved} />;
+      return (
+        <ChallengesCard
+          key={`${i}-${challenge._id}`}
+          data={challenge}
+          achieved={hasAchieved}
+        />
+      );
     });
   };
 
