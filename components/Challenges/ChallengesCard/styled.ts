@@ -10,6 +10,8 @@ export const ChallengesCardWrapper = styled.div`
   cursor: pointer;
   @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     margin: 1rem auto 1rem;
+    height: auto;
+    width: auto;
   }
 `;
 
@@ -28,7 +30,7 @@ export const PowerUpAmount = styled.div`
   border-radius: 100%;
 
   @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    left: calc(100% - 16rem);
+    left: 25%;
   }
 `;
 
@@ -79,6 +81,9 @@ export const RightSide = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    gap: 0;
+  }
 `;
 
 export const UserContainer = styled.div`
