@@ -10,8 +10,8 @@ export const ChallengesCardWrapper = styled.div`
   cursor: pointer;
   @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     margin: 1rem auto 1rem;
-    height: auto;
-    width: auto;
+    height: 100%;
+    width: 100%;
   }
 `;
 
