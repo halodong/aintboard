@@ -80,6 +80,7 @@ const AdminOnlineBattles = () => {
               )}
 
               <Button
+                className="delete"
                 bg="errorRed"
                 onClick={() => {
                   deleteOnlineBattle(o._id);

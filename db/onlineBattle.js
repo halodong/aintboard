@@ -107,21 +107,9 @@ export const getBattles = async (db, { first, offset, approved = null }) => {
         { $limit: first },
         lookup,
       ];
-      // battles = await db
-      //   .collection("online_battle")
-      //   .aggregate([
-      //     { $sort: { createdAt: -1 } },
-      //     { $skip: offset },
-      //     { $limit: first },
-      //     lookup,
-      //   ]);
-
       const totalOnlineBattles = await db.collection("online_battle");
       totalOnlineBattlesCount = await totalOnlineBattles.countDocuments();
     } else {
-      // battles = await db
-      //   .collection("online_battle")
-      //   .aggregate([{ $sort: { createdAt: -1 } }, lookup]);
       aggregate = [{ $sort: { createdAt: -1 } }, lookup];
     }
 

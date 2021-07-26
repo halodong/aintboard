@@ -35,6 +35,7 @@ export const OnlineBattleImage = styled.div`
 `;
 
 export const OnlineBattleContent = styled.div`
+  flex: 2;
   padding: 0.5rem 1rem;
 `;
 
@@ -46,10 +47,15 @@ export const OnlineBattleTitle = styled.h3`
 `;
 
 export const OnlieBattleCTA = styled.div`
-  flex: 2;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
   gap: 1rem;
+  grid-template-areas:
+    ". ."
+    ". delete";
+
+  .delete {
+    grid-area: delete;
+  }
 `;
