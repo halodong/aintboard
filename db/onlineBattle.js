@@ -73,7 +73,7 @@ export async function insertValidEntry(
   }
 }
 
-export const getBattles = async (db, { first, offset }) => {
+export const getBattles = async (db, { first, offset, approved = null }) => {
   try {
     let battles = null;
     first = first ? parseInt(first) : null;
@@ -98,25 +98,35 @@ export const getBattles = async (db, { first, offset }) => {
     };
 
     let totalOnlineBattlesCount = 0;
+    let aggregate = [];
 
     if (first) {
-      battles = await db
-        .collection("online_battle")
-        .aggregate([
-          { $sort: { createdAt: -1 } },
-          { $skip: offset },
-          { $limit: first },
-          lookup,
-        ]);
-
+      aggregate = [
+        { $sort: { createdAt: -1 } },
+        { $skip: offset },
+        { $limit: first },
+        lookup,
+      ];
       const totalOnlineBattles = await db.collection("online_battle");
-
-      totalOnlineBattlesCount = await totalOnlineBattles.count();
+      totalOnlineBattlesCount = await totalOnlineBattles.countDocuments();
     } else {
-      battles = await db
-        .collection("online_battle")
-        .aggregate([{ $sort: { createdAt: -1 } }, lookup]);
+      aggregate = [{ $sort: { createdAt: -1 } }, lookup];
     }
+
+    let match = {
+      $match: { status: { $in: ["APPROVED", "PENDING", "REJECTED"] } },
+    };
+
+    if (approved === "true") {
+      match = {
+        $match: {
+          status: "APPROVED",
+        },
+      };
+    }
+
+    aggregate.push(match);
+    battles = await db.collection("online_battle").aggregate(aggregate);
 
     const allBattles = await battles.toArray();
 
@@ -220,6 +230,40 @@ export const filterOnlineBattles = async (
       err,
       "db/onlineBattle.js",
       "Filter Online Battle error"
+    );
+  }
+};
+
+export const OnlineBattleStatus = async (db, { status, id }) => {
+  try {
+    await db
+      .collection("online_battle")
+      .updateOne({ _id: id }, { $set: { status: status } });
+
+    return getSuccessResponse({
+      message: "OnlineBattle Updated",
+    });
+  } catch (err) {
+    return getFailedResponse(
+      err,
+      "db/onlineBattle.js",
+      "Filter OnlineBattle error"
+    );
+  }
+};
+
+export const deleteOnlineBattle = async (db, { id }) => {
+  try {
+    await db.collection("online_battle").deleteOne({ _id: id });
+
+    return getSuccessResponse({
+      message: "OnlineBattle Deleted",
+    });
+  } catch (err) {
+    return getFailedResponse(
+      err,
+      "db/onlineBattle.js",
+      "Filter OnlineBattle error"
     );
   }
 };
