@@ -12,6 +12,12 @@ export const ChallengesCardWrapper = styled.div`
     margin: 1rem auto 1rem;
     width: 20rem;
   }
+
+  @media (min-width: ${(props) =>
+      props.theme.breakpoints.sm}) and (max-width: ${(props) =>
+      props.theme.breakpoints.md}) {
+    width: 25rem;
+  }
 `;
 
 export const PowerUpAmount = styled.div`
