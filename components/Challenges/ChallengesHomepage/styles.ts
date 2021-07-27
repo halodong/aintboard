@@ -2,9 +2,12 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
   background: #234c4c;
-  height: 51.875rem;
+  min-height: 51.875rem;
+  padding-bottom: 2rem;
 
   .slogan {
     text-align: center;
@@ -15,7 +18,6 @@ export const Wrapper = styled.div`
 
   @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     height: auto;
-    padding-bottom: 2rem;
 
     .slogan {
       padding: 0.2rem;
@@ -37,16 +39,21 @@ export const GameFont = styled.h1`
 export const CardWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-self: center;
+  gap: 2rem;
+  justify-content: center;
   align-items: center;
   height: 70%;
-  width: 70%;
+  width: 75%;
 
   @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    width: 90%;
-    height: auto;
+    width: 100%;
   }
+
+  /* display: flex;
+  flex-wrap: wrap;
+  justify-items: center;
+  align-items: center;
+  gap: 3rem; */
 `;
 
 export const CallToAction = styled.div`
@@ -65,6 +72,13 @@ export const CallToAction = styled.div`
   @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     margin-top: 1rem;
     height: 12rem;
+    width: 20rem;
+  }
+
+  @media (min-width: ${(props) =>
+      props.theme.breakpoints.sm}) and (max-width: ${(props) =>
+      props.theme.breakpoints.md}) {
+    width: 25rem;
   }
 `;
 
