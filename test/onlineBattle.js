@@ -3,10 +3,14 @@ import {
   insertValidEntry,
   getBattles,
   filterOnlineBattles,
+  OnlineBattleStatus,
+  deleteOnlineBattle,
 } from "../db/onlineBattle";
 import { insertUser } from "../db/user";
 import { nanoid } from "nanoid";
 import dayjs from "dayjs";
+
+import { OB_STATUS } from "../util/constants";
 const dbHandler = require("./db-handler");
 const chai = require("chai");
 const expect = chai.expect;
@@ -40,6 +44,7 @@ describe("Online Battles", () => {
     const eventEndDate = new Date(2021, 5, 6).toLocaleString();
 
     let res = await insertBattle(db, {
+      _id: "123",
       battleName: "Battle of the legends",
       boardGameName: "Boardie",
       details: "This is a battle for the legends",
@@ -101,5 +106,33 @@ describe("Online Battles", () => {
 
     expect(res.success).to.equal(true);
     expect(res.response.data.onlineBattles[0].status).to.equal("PENDING");
+  });
+
+  it("should update PENDING review to APPROVED or REJECTED", async () => {
+    let onlineBattles = await getBattles(db, { first: 1 });
+
+    let res = await OnlineBattleStatus(db, {
+      id: onlineBattles.response.data.onlineBattles[0]._id,
+      status: OB_STATUS.APPROVED,
+    });
+
+    expect(res.success).to.equal(true);
+    expect(res.response.message).to.equal("OnlineBattle Updated");
+  });
+
+  it("should get approved online battles", async () => {
+    let res = await getBattles(db, { first: 1, approved: "true" });
+
+    expect(res.success).to.equal(true);
+    expect(res.response.data.onlineBattles[0].status).to.equal(
+      OB_STATUS.APPROVED
+    );
+  });
+
+  it("should delete the review", async () => {
+    let res = await deleteOnlineBattle(db, { id: "123" });
+
+    expect(res.success).to.equal(true);
+    expect(res.response.message).to.equal("OnlineBattle Deleted");
   });
 });
