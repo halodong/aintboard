@@ -154,6 +154,10 @@ export const baseTaglineStyles = styled.h1`
   z-index: ${(props) => props.theme.zIndex["8th"]};
   text-align: center;
   margin-top: 4rem;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    font-size: ${(props) => props.theme.fontSizes.xl2};
+  } ;
 `;
 
 export const Tagline = styled(baseTaglineStyles)<TaglineProps>`
@@ -203,6 +207,10 @@ export const GameFont = styled.h1`
   text-align: center;
   margin-top: 2rem;
   margin-bottom: 0;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    font-size: ${(props) => props.theme.fontSizes.xxl};
+  }
 `;
 
 export const Rubik = styled.h1`

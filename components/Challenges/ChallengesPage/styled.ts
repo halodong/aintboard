@@ -15,4 +15,10 @@ export const ChallengesCardContainer = styled.div`
   flex-wrap: wrap;
   gap: 3rem;
   justify-content: center;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    width: 100%;
+    margin: 3rem auto 5rem;
+    gap: 1rem;
+  }
 `;
