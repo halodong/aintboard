@@ -87,10 +87,6 @@ export const Rank = styled.div`
 
 export const Place = styled.div`
   width: 3rem;
-
-  /* @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    width: 2.5rem;
-  } */
 `;
 
 export const Username = styled.div`
