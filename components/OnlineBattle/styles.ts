@@ -9,8 +9,9 @@ export const BattleCardWrapper = styled.div`
 `;
 
 export const BattleCardContainer = styled.div`
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  width: 80vw;
+  width: 100%;
 `;

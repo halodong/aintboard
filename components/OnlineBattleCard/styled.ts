@@ -14,6 +14,21 @@ export const OnlineBattleCardWrapper = styled.div`
     left: 35%;
     margin-top: 1rem;
   }
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    width: 20rem;
+    margin: 2rem 0;
+
+    .play {
+      left: 22%;
+    }
+  }
+
+  @media (min-width: ${(props) =>
+      props.theme.breakpoints.sm}) and (max-width: ${(props) =>
+      props.theme.breakpoints.md}) {
+    width: 30rem;
+  }
 `;
 
 export const BattleImage = styled.div`
@@ -27,6 +42,10 @@ export const BattleImage = styled.div`
     width: 100%;
     object-fit: cover;
   }
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    width: 30%;
+  }
 `;
 
 export const BattleCard = styled.div`
@@ -36,12 +55,21 @@ export const BattleCard = styled.div`
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    width: 70%;
+    padding: 0 2rem;
+  }
 `;
 
 export const BattleName = styled.h2`
   color: ${(props) => props.theme.colors.darkGreen};
   font-family: ${(props) => props.theme.fonts.quicksandBold};
   margin: 0;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    font-size: ${(props) => props.theme.fontSizes.xl};
+  }
 `;
 
 export const BattleEnds = styled.p`
@@ -54,7 +82,7 @@ export const Rank = styled.div`
   display: flex;
   flex-direction: row;
   margin: 1rem 0;
-  gap: 0.5rem;
+  gap: 1rem;
 `;
 
 export const Place = styled.div`
@@ -63,6 +91,11 @@ export const Place = styled.div`
 
 export const Username = styled.div`
   font-family: ${(props) => props.theme.fonts.quicksandBold};
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
 
-  padding: 1rem;
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    font-size: ${(props) => props.theme.fontSizes.sm};
+  }
 `;
