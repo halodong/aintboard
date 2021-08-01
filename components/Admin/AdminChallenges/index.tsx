@@ -1,12 +1,12 @@
-import React from "react";
+import useSWR, { mutate } from "swr";
+import axios from "axios";
+
 import * as Styles from "./styles";
 import AdminSidebar from "~/components/Admin/AdminSidebar";
 import Button from "~/components/Common/Button";
-import useSWR, { mutate } from "swr";
 import { ChallengesApiResponse } from "~/types/types";
-import fetcher from "~/util/fetch";
 import { CHALLENGE_STATUS } from "~/util/constants";
-import axios from "axios";
+import fetcher from "~/util/fetch";
 
 const AdminChallenges = () => {
   const { data: challengesData } = useSWR<ChallengesApiResponse>(
