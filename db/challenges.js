@@ -169,3 +169,37 @@ export const filterChallenges = async (
     return getFailedResponse(err, "db/challenges.js");
   }
 };
+
+export const challengeStatus = async (db, { status, id }) => {
+  try {
+    await db
+      .collection("challenges")
+      .updateOne({ _id: id }, { $set: { status } });
+
+    return getSuccessResponse({
+      message: "Challenge Updated",
+    });
+  } catch (err) {
+    return getFailedResponse(
+      err,
+      "db/challenges.js",
+      "Challenge Failed to update"
+    );
+  }
+};
+
+export const deleteChallenge = async (db, { id }) => {
+  try {
+    await db.collection("challenges").deleteOne({ _id: id });
+
+    return getSuccessResponse({
+      message: "Challenge Deleted",
+    });
+  } catch (err) {
+    return getFailedResponse(
+      err,
+      "db/.challenges.js",
+      "Challenge Failed to delete"
+    );
+  }
+};
