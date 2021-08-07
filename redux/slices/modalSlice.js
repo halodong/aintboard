@@ -9,6 +9,7 @@ export const modalSlice = createSlice({
       header: "",
       content: "",
     },
+    preloader: false,
   },
   reducers: {
     chooseModal: (state, action) => {
@@ -17,9 +18,12 @@ export const modalSlice = createSlice({
     setPopup: (state, action) => {
       state.popup = action.payload;
     },
+    setPreloader: (state, action) => {
+      state.preloader = action.payload;
+    },
   },
 });
 
-export const { chooseModal, setPopup } = modalSlice.actions;
+export const { chooseModal, setPopup, setPreloader } = modalSlice.actions;
 
 export default modalSlice.reducer;

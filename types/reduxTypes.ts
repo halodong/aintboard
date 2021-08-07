@@ -12,10 +12,11 @@ export type ModalState = {
   modal: {
     modalChosen: string;
     popup: {
-      open: false;
+      open: boolean;
       header: "";
       content: "";
     };
+    preloader: boolean;
   };
 };
 

@@ -3,6 +3,7 @@ import "./../fonts/fonts.css";
 
 import store from "redux/store";
 import { Toast } from "components/Common/Toast";
+import ScreenPreloader from "components/Common/ScreenPreloader";
 
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { theme } from "styles/theme";
@@ -106,6 +107,7 @@ function MyApp({ Component, pageProps }) {
       <GlobalStyle />
       <Toast />
       <Provider store={store}>
+        <ScreenPreloader />
         <Component {...pageProps} />
       </Provider>
     </ThemeProvider>
