@@ -126,7 +126,7 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
           </Label>
           <Label>
             Images from any website is prohibited. Please upload your own
-            images. Make sure it's good quality too :)
+            images. Make sure it's good quality too
           </Label>
 
           <ImageUpload
@@ -183,7 +183,7 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
 
           <ButtonContainer>
             <Button bg="lightYellow" type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Submiting" : "Submit"}
+              {isSubmitting ? "Submitting" : "Submit"}
             </Button>
           </ButtonContainer>
         </Form>
