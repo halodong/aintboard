@@ -89,20 +89,7 @@ export async function getReviews(db, { first, offset, approved = null }) {
     let totalReviewsCount = 0;
     let aggregate = [];
 
-    if (first) {
-      aggregate = [
-        { $sort: { createdAt: -1 } },
-        { $skip: offset },
-        { $limit: first },
-        lookup,
-      ];
-
-      const totalReviews = await db.collection("reviews");
-      totalReviewsCount = await totalReviews.countDocuments();
-    } else {
-      aggregate = [{ $sort: { createdAt: -1 } }, lookup];
-    }
-
+    // $match should be before $sort or $limit - refer to https://jira.mongodb.org/browse/SERVER-29647
     let match = {
       $match: { reviewStatus: { $in: ["APPROVED", "PENDING", "REJECTED"] } },
     };
@@ -116,6 +103,20 @@ export async function getReviews(db, { first, offset, approved = null }) {
     }
 
     aggregate.push(match);
+
+    if (first) {
+      aggregate.push(
+        { $sort: { createdAt: -1 } },
+        { $skip: offset },
+        { $limit: first },
+        lookup
+      );
+
+      const totalReviews = await db.collection("reviews");
+      totalReviewsCount = await totalReviews.countDocuments();
+    } else {
+      aggregate.push({ $sort: { createdAt: -1 } }, lookup);
+    }
 
     reviews = await db.collection("reviews").aggregate(aggregate);
 

@@ -24,7 +24,6 @@ export const AdminCard = styled.div`
   padding: 2rem;
   border-radius: 1.875rem;
   width: 18.75rem;
-  height: 12.5rem;
   margin: 2rem;
 
   h3 {

@@ -25,7 +25,7 @@ const AdminSidebar = () => {
           links={[
             {
               key: "Manage Users",
-              linkHref: "/",
+              linkHref: "/admin/users",
               linkName: "Manage Users",
             },
             {
@@ -41,8 +41,8 @@ const AdminSidebar = () => {
           links={[
             {
               key: "Manage Challenges",
-              linkHref: "/",
-              linkName: "Manage Users",
+              linkHref: "/admin/challenges",
+              linkName: "Manage Challenges",
             },
             {
               key: "Approve Challenges",
@@ -57,8 +57,8 @@ const AdminSidebar = () => {
           links={[
             {
               key: "Manage Reviews",
-              linkHref: "/",
-              linkName: "Manage Users",
+              linkHref: "/admin/reviews",
+              linkName: "Manage Reviews",
             },
             {
               key: "Approve Reviews",
@@ -73,7 +73,7 @@ const AdminSidebar = () => {
           links={[
             {
               key: "Manage Online Battles",
-              linkHref: "/",
+              linkHref: "/admin/online-battles",
               linkName: "Manage Online Battles",
             },
             {
