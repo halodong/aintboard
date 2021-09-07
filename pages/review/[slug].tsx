@@ -1,5 +1,6 @@
-import React from "react";
+import { capitalize } from "lodash";
 import Header from "~/components/Header";
+import Seo from "~/components/Common/Seo";
 import Footer from "~/components/Common/Footer";
 import ReviewArticlePage from "~/components/Reviews/ReviewArticlePage";
 import ReviewArticleHeader from "~/components/Reviews/ReviewArticlePage/Header";
@@ -14,13 +15,18 @@ const Slug = ({ reviewData }: Props) => {
   const review = reviewData?.response?.data?.reviews[0];
 
   return (
-    <div>
+    <>
+      <Seo
+        isHomepage={false}
+        title={capitalize(reviewData?.response?.data?.reviews[0]?.reviewType)}
+        description={reviewData?.response?.data?.reviews[0]?.title}
+      />
       <Header isReviewArticlePage>
         <ReviewArticleHeader review={review} />
       </Header>
       <ReviewArticlePage review={review} />
       <Footer />
-    </div>
+    </>
   );
 };
 
@@ -61,7 +67,7 @@ export const getStaticProps = async ({ params }: Params) => {
 
 export const getStaticPaths = async () => {
   const db = await database();
-  const response = await getReviews(db, { first: 1 });
+  const response = await getReviews(db, { first: 1, offset: null });
 
   const pathsData =
     response?.success &&

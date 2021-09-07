@@ -20,11 +20,21 @@ const dices = [
   { comp: <DiceSix className="dice dice-6" /> },
 ];
 
-const OverallRating = ({ label, rating, paddingBottom, big }: Props) => {
+const OverallRating = ({
+  label,
+  rating,
+  paddingBottom,
+  big,
+  noPointer,
+}: Props) => {
   let ratingNum = Math.floor(parseFloat(rating));
 
   return (
-    <RatingFormWrapper paddingBottom={paddingBottom} big={big}>
+    <RatingFormWrapper
+      paddingBottom={paddingBottom}
+      big={big}
+      noPointer={noPointer}
+    >
       <DiceContainer hovered>{dices[ratingNum - 1]?.comp}</DiceContainer>
 
       {label && <FloatRating>{rating} / 6</FloatRating>}
@@ -37,6 +47,7 @@ type Props = {
   paddingBottom?: string;
   rating: string;
   big?: boolean;
+  noPointer?: boolean;
 };
 
 export default OverallRating;

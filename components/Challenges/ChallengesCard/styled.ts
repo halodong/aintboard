@@ -8,6 +8,16 @@ export const ChallengesCardWrapper = styled.div`
   display: flex;
   border-radius: ${(props) => props.theme.border["10px"]};
   cursor: pointer;
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    margin: 1rem auto 1rem;
+    width: 20rem;
+  }
+
+  @media (min-width: ${(props) =>
+      props.theme.breakpoints.sm}) and (max-width: ${(props) =>
+      props.theme.breakpoints.md}) {
+    width: 25rem;
+  }
 `;
 
 export const PowerUpAmount = styled.div`
@@ -23,6 +33,10 @@ export const PowerUpAmount = styled.div`
   height: 4rem;
   width: 4rem;
   border-radius: 100%;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    left: 25%;
+  }
 `;
 
 export const ChallengeName = styled.div`
@@ -51,6 +65,11 @@ export const ImgWrapper = styled.div`
     border-top-left-radius: ${(props) => props.theme.border["10px"]};
     border-bottom-left-radius: ${(props) => props.theme.border["10px"]};
   }
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    max-width: 7rem;
+    min-width: 7rem;
+  }
 `;
 
 export const Achieved = styled.p`
@@ -67,6 +86,9 @@ export const RightSide = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    gap: 0;
+  }
 `;
 
 export const UserContainer = styled.div`
@@ -78,7 +100,11 @@ export const UserContainer = styled.div`
 
   .avatar-icon {
     margin: 0;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  p {
+    font-size: 0.8rem;
   }
 `;

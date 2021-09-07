@@ -18,6 +18,7 @@ const ReviewsPage = () => {
   const filters = useSelector((state: FilterState) => state.filter.filters);
   const ref = useRef(true);
   const firstRender = ref.current;
+  const currentFilter = useRef(filters?.secondSelected);
 
   const {
     data: filteredApiData,
@@ -29,19 +30,29 @@ const ReviewsPage = () => {
     return !isEmpty(filters?.secondSelected) && !firstRender
       ? `/api/review/filter/${filters.firstSelected}/${
           filters.secondSelected
-        }?first=${index * itemCount}`
-      : `/api/reviews?first=${itemCount}&offset=${pageIndex * itemCount}`;
+        }?first=${index * itemCount}&approved=true`
+      : `/api/reviews?first=${itemCount}&offset=${
+          pageIndex * itemCount
+        }&approved=true`;
   }, fetcher);
 
   useEffect(() => {
     // size-1 is the last index of the fetched data
     // note: we need to concat to the array state instead of updating it entirely,
     // for the infinite scroll to work, and not jump to the top
-    setItems(
-      items.concat(filteredApiData?.[size - 1]?.response?.data?.reviews || [])
-    );
+    if (currentFilter.current !== filters?.secondSelected) {
+      //overwrite new items, when filter has been changed
+      setItems(filteredApiData?.[size - 1]?.response?.data?.reviews || []);
+    } else {
+      //concat when infinite scrolling
+      setItems(
+        items.concat(filteredApiData?.[size - 1]?.response?.data?.reviews || [])
+      );
+    }
+
+    currentFilter.current = filters?.secondSelected;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filteredApiData]);
+  }, [filteredApiData, filters?.secondSelected]);
 
   ref.current = false;
 

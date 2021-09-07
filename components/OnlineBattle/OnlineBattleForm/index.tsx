@@ -1,10 +1,12 @@
 import axios from "axios";
 import dayjs from "dayjs";
 import * as Yup from "yup";
+import { mutate } from "swr";
 import { useState } from "react";
 import { isEmpty } from "lodash";
 import { Formik, Form } from "formik";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 import RTE from "components/Common/RTE";
 import Input from "components/Common/Input";
@@ -20,12 +22,13 @@ import {
 } from "components/Common/inputStyled";
 import useCurrentUser from "hooks/useCurrentUser";
 import { upload } from "util/cloudinary";
-import { OB_STATUS } from "util/constants";
+import { OB_STATUS, ONLINE_BATTLE_ITEM_COUNT } from "util/constants";
 
 import "react-datepicker/dist/react-datepicker.css";
 
 const OnlineBattleForm = ({ closeModal }: Props) => {
   const user = useCurrentUser();
+  const router = useRouter();
   const [images, setImages] = useState<string[]>([]);
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
@@ -107,6 +110,15 @@ const OnlineBattleForm = ({ closeModal }: Props) => {
           closeModal();
           resetForm();
           toast.success("New online battle added!");
+          mutate(
+            `/api/online-battles?first=${ONLINE_BATTLE_ITEM_COUNT}&offset=${
+              1 * ONLINE_BATTLE_ITEM_COUNT
+            }`
+          );
+
+          if (router.pathname === "/online-battles") {
+            router.reload();
+          }
         } catch (err) {
           console.error("Online battle creation error: ", err);
           toast.error("Something went wrong");

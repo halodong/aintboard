@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { useWindowSize } from "react-use";
 import { useSelector, useDispatch } from "react-redux";
 
 import {
@@ -13,6 +14,7 @@ import {
   CenterButtonContainer,
   Rubik,
 } from "./styled";
+import * as Styles from "./styled";
 import Tent from "assets/img/Tent";
 import PlayingBoardGameImg from "assets/img/PlayingBoardGame";
 import TreesGroup1 from "assets/img/TreesGroup1";
@@ -23,8 +25,10 @@ import Modal from "~/components/Common/Modal";
 import Filter from "~/components/Common/Filter";
 import Button from "~/components/Common/Button";
 // import Searchbar from "~/components/Searchbar"; obsolete for now
+import GameNightsHeader from "~/components/GameNights/GameNightsHeader";
 import OnlineBattleForm from "~/components/OnlineBattle/OnlineBattleForm";
 import CreateChallengeForm from "~/components/Challenges/CreateChallengeForm";
+import AchieveChallengeHeader from "~/components/Challenges/AchieveChallengeHeader";
 
 import { chooseModal, setPopup } from "redux/slices/modalSlice";
 import {
@@ -34,6 +38,7 @@ import {
   CREATE_CHALLENGE_BUTTON,
   CREATE_ONLINE_BATTLE_BUTTON,
 } from "util/constants";
+import { ChallengesData } from "types/types";
 import { ModalState } from "types/reduxTypes";
 
 const modalCta = [
@@ -51,6 +56,9 @@ const modalCta = [
 
 export default function Header({
   homepage,
+  isStaticPage = false,
+  isGameNightsPage = false,
+  isAchieveChallengePage = false,
   isSearchPage = false,
   isChallengesPage = false,
   tagline,
@@ -64,11 +72,14 @@ export default function Header({
   isReviewArticlePage = false,
   isUserPage = false,
   isSettingsPage = false,
+  isOnlineBattlePage = false,
+  challenge,
   children,
 }: Props) {
   const router = useRouter();
   const { name } = router.query;
   const dispatch = useDispatch();
+  const { width: windowWidth } = useWindowSize();
 
   const modalClicked = useSelector(
     (state: ModalState) => state.modal.modalChosen
@@ -94,6 +105,7 @@ export default function Header({
   return (
     <HeaderWrapper
       homepage={homepage}
+      isStaticPage={isStaticPage}
       isSearchPage={isSearchPage}
       isChallengePage={isChallengesPage}
       isBoardGamePage={isBoardGamePage}
@@ -105,12 +117,13 @@ export default function Header({
       isReviewArticlePage={isReviewArticlePage}
       isUserPage={isUserPage}
       isSettingsPage={isSettingsPage}
+      isOnlineBattlePage={isOnlineBattlePage}
     >
       <Navbar />
 
       {/* <Searchbar /> obsolete for now */}
 
-      {(isUserPage || isSettingsPage) && (
+      {(isUserPage || isSettingsPage || isStaticPage) && (
         <CenterTagline isUserPage>{children}</CenterTagline>
       )}
 
@@ -124,29 +137,46 @@ export default function Header({
         </div>
       )}
 
-      <Tagline homepage={homepage}>
-        {tagline ? (
-          tagline
-        ) : (
-          <>
-            Interactive Boardgame <br /> Community{" "}
-          </>
-        )}
-      </Tagline>
+      {!isStaticPage && (
+        <Tagline homepage={homepage}>
+          {tagline ? (
+            tagline
+          ) : (
+            <>
+              Interactive Boardgame <br /> Community{" "}
+            </>
+          )}
+        </Tagline>
+      )}
 
       {isBuyAvatarsPage && <CenterTagline>{centerTagline}</CenterTagline>}
+
+      {((homepage && !isStaticPage) || (isStaticPage && windowWidth > 600)) &&
+        !isGameNightsPage &&
+        !isAchieveChallengePage && (
+          <Styles.HomepageSubHeading>
+            Be a part of the best boardgame community. <br /> Make reviews and
+            strategies. Join challenges and online battles.
+          </Styles.HomepageSubHeading>
+        )}
+
+      {isGameNightsPage && <GameNightsHeader />}
+      {isAchieveChallengePage && (
+        <AchieveChallengeHeader challenge={challenge} />
+      )}
 
       {isSearchPage && <LookingForText>Looking for "{name}"</LookingForText>}
 
       {(isChallengesPage ||
         isOnlineBattles ||
         isBuyAvatarsPage ||
-        isReviewArticlePage) && <Tent className="tent" />}
+        isReviewArticlePage ||
+        isOnlineBattlePage) && <Tent className="tent" />}
 
       {isChallengesPage && (
         <>
           <Tent className="tent" />
-          <GameFont>CHALLENGES</GameFont>\
+          <GameFont>CHALLENGES</GameFont>
           <ChallengesTagline>
             Achieve challenges to get PowerUps!
           </ChallengesTagline>
@@ -174,6 +204,7 @@ export default function Header({
 
       {isBoardGamePage && <BoardGameName>{children}</BoardGameName>}
       {isReviewArticlePage && <Rubik>{children}</Rubik>}
+      {isOnlineBattlePage && <Rubik>{children}</Rubik>}
 
       {modalCta.map((mdl) => (
         <Modal
@@ -220,6 +251,10 @@ export default function Header({
 
 type Props = {
   homepage?: boolean;
+  challenge?: ChallengesData;
+  isStaticPage?: boolean;
+  isGameNightsPage?: boolean;
+  isAchieveChallengePage?: boolean;
   isSearchPage?: boolean;
   isChallengesPage?: boolean;
   tagline?: string;
@@ -233,5 +268,6 @@ type Props = {
   isReviewArticlePage?: boolean;
   isUserPage?: boolean;
   isSettingsPage?: boolean;
+  isOnlineBattlePage?: boolean;
   children?: any;
 };

@@ -8,26 +8,22 @@ describe("Users", () => {
   let db;
 
   before(async () => {
-    try {
-      db = await dbHandler.connect();
-      await dbHandler.clearDatabase();
+    db = await dbHandler.connect();
+    await dbHandler.clearDatabase();
 
-      await insertUser(db, {
-        _id: "123",
-        username: "bt",
-        email: "faith+test@gmail.com",
-        password: "1234aaaa",
-      });
+    await insertUser(db, {
+      _id: "123",
+      username: "bt",
+      email: "faith+test@gmail.com",
+      password: "1234aaaa",
+    });
 
-      await insertUser(db, {
-        _id: "1234",
-        username: "bt2",
-        email: "faith+test2@gmail.com",
-        password: "1234aaaa",
-      });
-    } catch (e) {
-      throw e;
-    }
+    await insertUser(db, {
+      _id: "1234",
+      username: "bt2",
+      email: "faith+test2@gmail.com",
+      password: "1234aaaa",
+    });
   });
 
   after(async () => {

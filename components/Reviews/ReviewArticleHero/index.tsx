@@ -1,6 +1,4 @@
-import axios from "axios";
-import useSWR, { mutate } from "swr";
-import { toast } from "react-toastify";
+import useSWR from "swr";
 import AwesomeSlider from "react-awesome-slider";
 import "react-awesome-slider/dist/styles.css";
 import "react-awesome-slider/dist/custom-animations/cube-animation.css";
@@ -9,6 +7,7 @@ import Button from "~/components/Common/Button";
 import OverallRating from "~/components/Common/OverallRating";
 
 import fetcher from "util/fetch";
+import likeReview from "util/likeReview";
 import useCurrentUser from "hooks/useCurrentUser";
 import Heart from "assets/img/Heart";
 import {
@@ -35,43 +34,6 @@ const ReviewArticleHero = ({ review }: Props) => {
 
   const userObj = userApiData?.response?.data?.users?.[0];
 
-  const likeReview = async () => {
-    const userId = userObj?._id;
-
-    if (userId === review?.userData?.[0]?._id) {
-      toast.error("You can't like your own review");
-      return;
-    }
-
-    mutate(
-      `/api/review/like?reviewId=${review?._id}`,
-      () => {
-        return {
-          success: true,
-          response: {
-            message: "",
-            totalLikes: reviewLikesApiData?.response?.totalLikes
-              ? reviewLikesApiData?.response?.totalLikes + 1
-              : 0,
-          },
-        };
-      },
-      false // dont revalidate cache yet
-    );
-
-    const res = await axios.post("/api/review/like", {
-      userId,
-      reviewId: review?._id,
-    });
-
-    if (!res.data.success) {
-      toast.error(res.data.message);
-    }
-
-    //revalidate cache
-    mutate(`/api/review/like?reviewId=${review?._id}`);
-  };
-
   return (
     <Styles.ReviewHeader>
       <Styles.ReviewHeaderLeft>
@@ -80,7 +42,9 @@ const ReviewArticleHero = ({ review }: Props) => {
           <OverallRating rating={review.overallRating} big />
           <span>{review.overallRating}</span>
         </Styles.OverallRating>
-        <Styles.HeartWrapper onClick={likeReview}>
+        <Styles.HeartWrapper
+          onClick={() => likeReview({ userObj, review, reviewLikesApiData })}
+        >
           <span>{reviewLikesApiData?.response?.totalLikes || 0}</span>
           <Heart />
         </Styles.HeartWrapper>

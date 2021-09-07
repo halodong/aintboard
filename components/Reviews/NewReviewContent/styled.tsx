@@ -19,6 +19,14 @@ export const YoutubeContainer = styled.div`
     text-align: center;
     top: 5rem;
   }
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    width: 100% !important;
+
+    div {
+      width: 100% !important;
+    }
+  }
 `;
 
 export const Title = styled.h1<TitleProps>`

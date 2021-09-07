@@ -18,6 +18,23 @@ export const HeaderWrapper = styled.div<HeaderWrapperProps>`
   flex-direction: column;
   justify-content: space-between;`}
 
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    min-height: ${(props) =>
+      props.isBuyAvatarsPage || props.isStaticPage
+        ? "10rem"
+        : props.isSearchPage ||
+          props.isChallengePage ||
+          props.isBoardGamePage ||
+          props.isReviewArticlePage ||
+          props.isSettingsPage
+        ? "25rem"
+        : "30rem"};
+
+    .tent {
+      display: ${(props) => (props.homepage ? "block" : "none")};
+    }
+  }
+
   ${(props) => props.isUserPage && `justify-content: flex-start;`}
 
   .trees-1,
@@ -55,6 +72,15 @@ export const HeaderWrapper = styled.div<HeaderWrapperProps>`
   }
 
   .homepage-bg-container {
+    .trees-1,
+    .trees-2,
+    .tent,
+    .ground {
+      @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+        display: none;
+      }
+    }
+
     .trees-1 {
       left: 0;
       top: 5.8rem;
@@ -69,6 +95,10 @@ export const HeaderWrapper = styled.div<HeaderWrapperProps>`
       left: 15rem;
       top: 16.4rem;
       width: 15rem;
+
+      @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+        left: 2rem;
+      }
     }
 
     .playing-icon {
@@ -76,6 +106,10 @@ export const HeaderWrapper = styled.div<HeaderWrapperProps>`
       left: 17rem;
       width: 10rem;
       z-index: ${(props) => props.theme.zIndex["9th"]};
+
+      @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+        display: none;
+      }
     }
 
     .ground {
@@ -107,9 +141,11 @@ type HeaderWrapperProps = {
   isReviewArticlePage?: boolean;
   isUserPage?: boolean;
   isSettingsPage?: boolean;
+  isStaticPage?: boolean;
+  isOnlineBattlePage?: boolean;
 };
 
-const baseTaglineStyles = styled.h1`
+export const baseTaglineStyles = styled.h1`
   color: ${(props) => props.theme.colors.white};
   font-family: ${(props) => props.theme.fonts.rubikBold};
   font-size: 1.75rem;
@@ -118,6 +154,10 @@ const baseTaglineStyles = styled.h1`
   z-index: ${(props) => props.theme.zIndex["8th"]};
   text-align: center;
   margin-top: 4rem;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    font-size: ${(props) => props.theme.fontSizes.xl2};
+  } ;
 `;
 
 export const Tagline = styled(baseTaglineStyles)<TaglineProps>`
@@ -130,6 +170,19 @@ export const Tagline = styled(baseTaglineStyles)<TaglineProps>`
     margin: 0;
     left: 3.4rem;
   `}
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    padding: 0 0.5rem;
+    margin-top: 1rem;
+
+    ${(props) =>
+      !props.homepage &&
+      `
+      margin: 0;
+      left: 1rem;
+      text-align: left;
+    `}
+  }
 `;
 
 type TaglineProps = {
@@ -154,6 +207,10 @@ export const GameFont = styled.h1`
   text-align: center;
   margin-top: 2rem;
   margin-bottom: 0;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    font-size: ${(props) => props.theme.fontSizes.xxl};
+  }
 `;
 
 export const Rubik = styled.h1`
@@ -175,6 +232,16 @@ export const BattlesTagline = styled(baseTaglineStyles)`
   margin-top: 0;
   margin-bottom: 0;
   text-transform: none;
+`;
+
+export const HomepageSubHeading = styled(baseTaglineStyles)`
+  font-size: 1rem;
+  text-transform: none;
+  font-family: ${(props) => props.theme.fonts.quicksandReg};
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    padding: 0.5rem;
+  }
 `;
 
 export const BoardGameName = styled(baseTaglineStyles)`

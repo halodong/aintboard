@@ -14,6 +14,10 @@ export const SidebarContainer = styled.div<SidebarContainerProps>`
   z-index: ${(props) => props.theme.zIndex["4th"]};
   transition: 300ms all ease-in;
   color: white;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    width: 100%;
+  }
 `;
 
 type SidebarContainerProps = {

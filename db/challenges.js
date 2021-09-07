@@ -39,56 +39,115 @@ export const insertChallenge = async (
   }
 };
 
-export const getAllChallenges = async (db, { first }) => {
+export const getAllChallenges = async (
+  db,
+  { first, offset, approved = null }
+) => {
   try {
     let challenges = null;
     first = first ? parseInt(first) : null;
+    offset = offset ? parseInt(offset) : 0;
+
+    const lookup = {
+      $lookup: {
+        from: "users",
+        let: { createdBy: "$createdBy" },
+        pipeline: [
+          {
+            $match: {
+              $expr: {
+                $and: [{ $eq: ["$$createdBy", "$_id"] }],
+              },
+            },
+          },
+          { $project: { password: 0 } },
+        ],
+        as: "userData",
+      },
+    };
+
+    let totalChallengesCount = 0;
+    let aggregate = [];
 
     if (first) {
-      challenges = await db
-        .collection("challenges")
-        .aggregate([{ $limit: first }]);
+      aggregate = [
+        { $sort: { createdAt: -1 } },
+        { $skip: offset },
+        { $limit: first },
+        lookup,
+      ];
+
+      const totalChallenges = await db.collection("challenges");
+
+      totalChallengesCount = await totalChallenges.count();
     } else {
-      challenges = await db.collection("challenges").find();
+      aggregate = [{ $sort: { createdAt: -1 } }, lookup];
     }
 
-    const allChallenge = await challenges.toArray();
+    // default - get all data regardless of status
+    let match = {
+      $match: {
+        status: { $in: ["APPROVED", "PENDING", "REJECTED"] },
+      },
+    };
 
-    const challengeCount = allChallenge.length;
+    if (approved === "true") {
+      match = { $match: { status: "APPROVED" } };
+    }
+
+    aggregate.push(match);
+
+    challenges = await db.collection("challenges").aggregate(aggregate);
+
+    const challengeArray = await challenges.toArray();
+    const challengesCount = challengeArray.length;
 
     return getSuccessResponse({
       message:
-        challengeCount === 1
+        challengesCount === 1
           ? "1 Challenge retrieved"
-          : challengeCount > 1
-          ? `${challengeCount} Challenges retrieved`
-          : `No Challenges retrieved`,
+          : challengesCount > 1
+          ? `${challengesCount} Challenges retrieved`
+          : "No Challenges retrieved",
       data: {
-        challenges: allChallenge,
+        challenges: challengeArray,
+        totalChallengesCount,
+        hasMore: first + offset < totalChallengesCount,
       },
     });
   } catch (err) {
-    return getFailedResponse(err, "db/challenges.js");
+    return getFailedResponse(
+      err,
+      "db/challenges.js",
+      "Couldn't get challenges"
+    );
   }
 };
 
-export const filterChallenges = async (db, { filter, field, first }) => {
+export const filterChallenges = async (
+  db,
+  { filter, field, first, approved = null }
+) => {
   try {
     let challenges = null;
     first = first ? parseInt(first) : null;
 
     if (filter && field) {
-      field = ["bgId", "bgYear", "powerUpAmount"].includes(filter)
-        ? parseInt(field)
-        : field;
+      field = ["bgId", "bgYear"].includes(filter) ? parseInt(field) : field;
 
-      let aggregate = [
-        {
-          $match: {
-            [filter]: field,
-          },
+      // default - get all data regardless of status
+      let match = {
+        $match: {
+          [filter]: field,
+          status: { $in: ["APPROVED", "PENDING", "REJECTED"] },
         },
-      ];
+      };
+
+      if (approved === "true") {
+        match = { $match: { [filter]: field, status: "APPROVED" } };
+      }
+
+      let aggregate = [match];
 
       if (first) {
         //with limit
@@ -108,5 +167,39 @@ export const filterChallenges = async (db, { filter, field, first }) => {
     });
   } catch (err) {
     return getFailedResponse(err, "db/challenges.js");
+  }
+};
+
+export const challengeStatus = async (db, { status, id }) => {
+  try {
+    await db
+      .collection("challenges")
+      .updateOne({ _id: id }, { $set: { status } });
+
+    return getSuccessResponse({
+      message: "Challenge Updated",
+    });
+  } catch (err) {
+    return getFailedResponse(
+      err,
+      "db/challenges.js",
+      "Challenge Failed to update"
+    );
+  }
+};
+
+export const deleteChallenge = async (db, { id }) => {
+  try {
+    await db.collection("challenges").deleteOne({ _id: id });
+
+    return getSuccessResponse({
+      message: "Challenge Deleted",
+    });
+  } catch (err) {
+    return getFailedResponse(
+      err,
+      "db/.challenges.js",
+      "Challenge Failed to delete"
+    );
   }
 };

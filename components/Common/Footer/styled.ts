@@ -45,6 +45,30 @@ export const FooterWrapper = styled.div`
       width: 6rem;
     }
   }
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    height: 20rem;
+    flex-direction: column;
+
+    .left,
+    .right,
+    .bottom {
+      display: none;
+    }
+
+    .logo-copy {
+      margin-right: 0rem;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      svg {
+        margin-top: 0rem;
+      }
+    }
+  }
 `;
 
 export const LinksWrapper = styled.div`

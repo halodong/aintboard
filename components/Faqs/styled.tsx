@@ -27,4 +27,8 @@ export const FaqLinkContainer = styled.div`
   p {
     padding: 0.5rem;
   }
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    width: 90%;
+  }
 `;

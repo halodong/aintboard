@@ -2,15 +2,24 @@ import {
   insertChallenge,
   getAllChallenges,
   filterChallenges,
+  challengeStatus,
+  deleteChallenge,
 } from "../db/challenges";
 
 const chai = require("chai");
 const expect = chai.expect;
 const dbHandler = require("./db-handler");
 
+const CHALLENGE_STATUS = {
+  PENDING: "PENDING",
+  APPROVED: "APPROVED",
+  REJECTED: "REJECTED",
+};
+
 describe("Challenge routes", () => {
   let db;
   before(async () => {
+    // eslint-disable-next-line no-useless-catch
     try {
       db = await dbHandler.connect();
       await dbHandler.clearDatabase();
@@ -26,11 +35,13 @@ describe("Challenge routes", () => {
 
   it("should create a challenge", async () => {
     let res = await insertChallenge(db, {
+      _id: "123",
       challengeName: "Score 170 VP in a 4-Player match in Brass Lancashire",
       bgId: 2,
       bgName: "Chess",
       bgYear: 2018,
       powerUpAmount: 4,
+      status: "PENDING",
     });
 
     expect(res.success).to.equal(true);
@@ -124,5 +135,24 @@ describe("Challenge routes", () => {
     expect(res.response.data.challenges.map((e) => e.bgName)).to.include(
       "Chess"
     );
+  });
+
+  it("should update PENDING challenge to APPROVED or REJECTED", async () => {
+    let challenges = await getAllChallenges(db, { first: 1 });
+
+    let res = await challengeStatus(db, {
+      id: challenges.response.data.challenges[0]._id,
+      status: CHALLENGE_STATUS.APPROVED,
+    });
+
+    expect(res.success).to.equal(true);
+    expect(res.response.message).to.equal("Challenge Updated");
+  });
+
+  it("should delete the challenge", async () => {
+    let res = await deleteChallenge(db, { id: "123" });
+
+    expect(res.success).to.equal(true);
+    expect(res.response.message).to.equal("Challenge Deleted");
   });
 });

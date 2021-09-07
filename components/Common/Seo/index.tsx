@@ -28,6 +28,8 @@ const Seo = (props: SeoDataProps) => {
         title={parsedTitle}
         description={props?.description || "Interactive Boardgame Community"}
         canonical={parsedCanonical}
+        noindex={"noindex" === props.noIndex}
+        nofollow={"nofollow" === props.noFollow}
         openGraph={{
           url: parsedCanonical,
           title: parsedTitle,

@@ -34,9 +34,9 @@ handler.post(async (req, res) => {
 });
 
 handler.get(async (req, res) => {
-  const { first = null } = req.query;
+  const { first = null, offset = null } = req.query;
 
-  const battles = await getBattles(req.db, { first });
+  const battles = await getBattles(req.db, { first, offset });
 
   return res.json(battles);
 });

@@ -64,7 +64,7 @@ const Navbar = () => {
           <Link href="/reviews">Reviews</Link>
           <Link href="/online-battles">Online Battles</Link>
           <Link href="/challenges">Challenges</Link>
-          <Link href="/">Game Nights</Link>
+          <Link href="/game-nights">Game Nights</Link>
         </Links>
 
         {/* {navbar && <Searchbar scrolling={navbar} />} obsolete for now */}

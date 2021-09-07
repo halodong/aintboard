@@ -17,6 +17,14 @@ const DropDown = ({
   };
   const [selectedState, setSelectedState] = useState(emptyDefault);
 
+  const getValue = () => {
+    const optionsValue = options?.filter((o) => o.value === selected);
+
+    if (selected && selected?.length > 0 && optionsValue) {
+      return selectedState || emptyDefault;
+    }
+  };
+
   return (
     <DropDownContainer marginLeft={marginLeft}>
       <Select
@@ -28,13 +36,7 @@ const DropDown = ({
         isClearable={true}
         isSearchable={false}
         options={options}
-        value={
-          (selected &&
-            selected.length > 0 &&
-            options?.filter((o) => o.value === selected)) ||
-          selectedState ||
-          emptyDefault
-        }
+        value={getValue()}
         onChange={(selectedOption) => {
           onChange(selectedOption || emptyDefault);
           setSelectedState(selectedOption || emptyDefault);

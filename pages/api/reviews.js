@@ -53,11 +53,12 @@ handler.post(async (req, res) => {
 });
 
 handler.get(async (req, res) => {
-  const { first = null, offset = null } = req.query;
+  const { first = null, offset = null, approved = null } = req.query;
 
   const reviews = await getReviews(req.db, {
     first,
     offset,
+    approved,
   });
 
   return res.json(reviews);

@@ -33,20 +33,23 @@ Now if you have your SSH key installed check it here: C:\Users\admin\.ssh
 
 ## Cloning
 
-1. create a folder or directory in your C: drive.
+1. Create a folder or directory in your C: drive.
 2. Open Gitbash and type`"cd" then your created folder or directory`
 3. Go to Github search for the repository.
 4. Click "CODE" then select "SSH" on the tab selection.
 5. Copy the link and go back to Gitbash.
-6. type`git clone` and the link you copy from Github.
+6. Type `git clone` and the link you copied from Github.
 
 ## Running with Localhost
 
 First, run the development server in this order:
 
 1. Open `CMD` then `cd` then repository directory.
-2. type `mongod`
-3. type `npm install` then `npm run dev`
+2. Create .env file by using the command 'touch .env'.
+3. Now open .env.example file using command 'open .env.example'.
+4. Copy all the content of .env.example and paste it into .env file.
+5. Type `mongod`.
+6. Type `npm install` then `npm run dev`.
 
 ```bash
 docker-compose up -d
@@ -80,7 +83,7 @@ To test a single file run `npm run test <relative path>`
 
 # Migrations
 
-To create migrations you have to have migrate-mongo installed globally
+To create migrations you need to have migrate-mongo installed globally.
 
 To create a migration run `migrate-mongo create <file_name>`
 

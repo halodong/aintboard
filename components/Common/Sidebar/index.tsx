@@ -126,10 +126,10 @@ const Sidebar = ({ menuOpen, closeMenu }: Props) => {
 
         <UlSidebar>
           <SecondaryLinkSidebar>
-            {userData?.powerups || 0} <PowerUps>UP</PowerUps>
+            {userObj?.powerups || 0} <PowerUps>UP</PowerUps>
           </SecondaryLinkSidebar>
           <SecondaryLinkSidebar>
-            {userData?.stars || 0} <StarIcon className="icon" />
+            {userObj?.stars || 0} <StarIcon className="icon" />
           </SecondaryLinkSidebar>
           <SecondaryLinkSidebar>
             0 <GoldIcon className="icon" />
@@ -155,10 +155,10 @@ const Sidebar = ({ menuOpen, closeMenu }: Props) => {
         <FooterSidebar>
           <UlSidebar>
             <TertiaryLinkSidebar>
-              <Link href="/">About Us</Link>
+              <Link href="/about">About Us</Link>
             </TertiaryLinkSidebar>
             <TertiaryLinkSidebar>
-              <Link href="/">FAQs</Link>
+              <Link href="/faqs">FAQs</Link>
             </TertiaryLinkSidebar>
             <TertiaryLinkSidebar>
               <Link href="/">Contact Us</Link>

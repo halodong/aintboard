@@ -82,6 +82,7 @@ export interface ChallengesApiResponse {
 }
 
 export interface ChallengesApiData {
+  hasMore: boolean;
   challenges: ChallengesData[];
 }
 
@@ -110,31 +111,6 @@ export interface ReviewLikesApiResponse {
 export type CommonData = {
   [key: string]: string | number;
 };
-
-export type BattlesData = {
-  _id: string;
-  battleName: string;
-  boardGameName: string;
-  bgImage: string;
-  details: string;
-  eventStartDate: string;
-  eventEndDate: string;
-  createdAt: string;
-};
-
-export interface BattlesApiResponse {
-  success: boolean;
-  response: {
-    message: string;
-    data: {
-      battles: BattlesData[];
-    };
-  };
-}
-
-export interface BattlesApiData {
-  battles: BattlesData[];
-}
 
 export type BggBoardgameApiData = {
   items: BggBoardgameApiDataItem[];
@@ -210,7 +186,7 @@ export type UserAvatarsData = {
   createdAt: string;
 };
 
-export interface UserChallangesApiResponse {
+export interface UserChallengesApiResponse {
   success: boolean;
   response: {
     message: string;
@@ -238,10 +214,13 @@ export interface OnlineBattlesApiResponse {
 }
 
 export interface OnlineBattlesApiData {
+  totalOnlineBattlesCount: number;
+  hasMore: boolean;
   onlineBattles: OnlineBattlesData[];
 }
 
 export type OnlineBattlesData = {
+  [key: string]: string | undefined | UserData[];
   _id: string;
   slug: string;
   battleName: string;
@@ -249,10 +228,29 @@ export type OnlineBattlesData = {
   bgImage: string;
   details: string;
   eventStartDate: string;
-  eventEndData: string;
-  craetedBy: string;
+  eventEndDate: string;
+  createdBy: string;
   status: string;
   createdAt: string;
+  userData: UserData[];
+};
+
+export interface FilteredOnlineBattlesApiResponse {
+  success: boolean;
+  response: {
+    message: string;
+    data: FilteredOnlineBattlesApiData;
+  };
+}
+
+export interface FilteredOnlineBattlesApiData {
+  count: number;
+  hasMore: boolean;
+  onlineBattles: FilteredOnlineBattlesData[];
+}
+
+export type FilteredOnlineBattlesData = {
+  battles: OnlineBattlesData[];
 };
 
 export interface UserTrophiesApiResponse {

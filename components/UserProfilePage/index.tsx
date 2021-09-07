@@ -32,7 +32,7 @@ import {
   OnlineBattlesApiResponse,
   ReviewApiResponse,
   UserApiResponse,
-  UserChallangesApiResponse,
+  UserChallengesApiResponse,
   UserTrophiesApiResponse,
 } from "~/types/types";
 import {
@@ -239,7 +239,7 @@ type Props = {
   user?: UserApiResponse;
   reviews?: ReviewApiResponse;
   challenges?: ChallengesApiResponse;
-  userChallenges?: UserChallangesApiResponse;
+  userChallenges?: UserChallengesApiResponse;
   reviewMade?: ReviewApiResponse;
   challengeMade?: ChallengesApiResponse;
   onlineBattleMade?: OnlineBattlesApiResponse;

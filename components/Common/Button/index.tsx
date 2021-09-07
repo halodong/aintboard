@@ -6,15 +6,23 @@ export default function Button({
   onClick,
   type,
   disabled = false,
+  className,
 }: Props) {
   return (
-    <ButtonStyled bg={bg} onClick={onClick} type={type} disabled={disabled}>
+    <ButtonStyled
+      bg={bg}
+      className={className}
+      onClick={onClick}
+      type={type}
+      disabled={disabled}
+    >
       {children}
     </ButtonStyled>
   );
 }
 
 type Props = {
+  className?: string;
   bg: string;
   children: React.ReactNode;
   onClick?: () => void;
