@@ -144,7 +144,7 @@ const StrategyForm = () => {
         }
       }}
     >
-      {({ errors, touched, values, setFieldValue }) => {
+      {({ errors, touched, values, setFieldValue, isSubmitting }) => {
         const onSubmitValidationError = () => {
           toast.error("Please review field errors in the form.");
         };
@@ -188,7 +188,7 @@ const StrategyForm = () => {
             <Label>Upload your own images related to your strategy</Label>
             <Label marginTop="1rem" fontSize="0.8rem">
               Images from any website is prohibited. Please upload your own
-              images. Make sure it's good quality too :)
+              images. Make sure it's good quality too
             </Label>
 
             <ImageUpload
@@ -254,8 +254,8 @@ const StrategyForm = () => {
             </YoutubeContainer>
 
             <ButtonContainer justifyContent="flex-start" marginTop="2rem">
-              <Button bg="lightYellow" type="submit">
-                Submit Strategy
+              <Button bg="lightYellow" type="submit" disabled={isSubmitting}>
+                {isSubmitting ? "Submitting" : "Submit Strategy"}
               </Button>
             </ButtonContainer>
 

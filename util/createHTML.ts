@@ -15,4 +15,3 @@ export const createHTMLExcerpt = (html: string) => {
     __html: sanitizedHTML,
   };
 };
- 

@@ -1,9 +1,10 @@
-import useSWR, { mutate } from "swr";
 import axios from "axios";
 import * as Yup from "yup";
 import { useState } from "react";
+import useSWR, { mutate } from "swr";
 import { Formik, Form } from "formik";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
 
 import Input from "components/Common/Input";
 import Label from "components/Common/Label";
@@ -20,9 +21,11 @@ import { upload } from "util/cloudinary";
 import { UserApiResponse } from "types/types";
 import useCurrentUser from "hooks/useCurrentUser";
 import { CHALLENGE_STATUS } from "util/constants";
+import { setPreloader } from "redux/slices/modalSlice";
 
 const CreateChallengeForm = ({ closeModal }: Props) => {
   const user = useCurrentUser();
+  const dispatch = useDispatch();
   const [images, setImages] = useState<string[]>([]);
 
   const formSchema = Yup.object().shape({
@@ -58,8 +61,10 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
       validationSchema={formSchema}
       onSubmit={async (values, { resetForm }) => {
         try {
+          dispatch(setPreloader(true));
           if (images.length < 1) {
             toast.error("You need to upload an image");
+            dispatch(setPreloader(false));
             return;
           }
 
@@ -68,6 +73,7 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
 
           if (userObj?.role === "guest" && powerUpAmount > 2) {
             toast.error("You're not allowed to assign more than 2 PowerUps");
+            dispatch(setPreloader(false));
             return;
           }
 
@@ -76,6 +82,7 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
             powerUpAmount > 5
           ) {
             toast.error("Max is 5 PowerUps");
+            dispatch(setPreloader(false));
             return;
           }
 
@@ -93,21 +100,24 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
 
           if (!response.data.success) {
             toast.error(response.data.message);
+            dispatch(setPreloader(false));
             return;
           }
           closeModal();
           resetForm();
+          dispatch(setPreloader(false));
           mutate(`/api/review/filter/userId/${userObj?._id}`);
           mutate(`/api/challenge/filter/createdBy/${userObj?._id}`);
           mutate(`/api/online-battles/filter/createdBy/${userObj?._id}`);
           toast.success("New challenge added!");
         } catch (err) {
+          console.log(err);
           console.error("Challenge creation error: ", err);
           toast.error("Something went wrong");
         }
       }}
     >
-      {({ errors, touched }) => (
+      {({ errors, touched, isSubmitting }) => (
         <Form>
           <Label>Challenges are meant to be achievable and challenging.</Label>
           <Label>
@@ -116,7 +126,7 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
           </Label>
           <Label>
             Images from any website is prohibited. Please upload your own
-            images. Make sure it's good quality too :)
+            images. Make sure it's good quality too
           </Label>
 
           <ImageUpload
@@ -172,8 +182,8 @@ const CreateChallengeForm = ({ closeModal }: Props) => {
           </InputContainer>
 
           <ButtonContainer>
-            <Button bg="lightYellow" type="submit">
-              Submit
+            <Button bg="lightYellow" type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "Submitting" : "Submit"}
             </Button>
           </ButtonContainer>
         </Form>

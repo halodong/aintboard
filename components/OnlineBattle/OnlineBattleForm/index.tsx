@@ -125,7 +125,7 @@ const OnlineBattleForm = ({ closeModal }: Props) => {
         }
       }}
     >
-      {({ errors, touched }) => (
+      {({ errors, touched, isSubmitting }) => (
         <Form>
           <Label>
             Online Battles are joined by users to play a particular boardgame
@@ -134,7 +134,7 @@ const OnlineBattleForm = ({ closeModal }: Props) => {
           </Label>
           <Label>
             Images from any website is prohibited. Please upload your own
-            images. Make sure it's good quality too :)
+            images. Make sure it's good quality too
           </Label>
 
           <ImageUpload
@@ -183,8 +183,8 @@ const OnlineBattleForm = ({ closeModal }: Props) => {
           <InputDatePicker passDateToParent={(val) => setEndDate(val)} />
 
           <ButtonContainer>
-            <Button bg="lightYellow" type="submit">
-              Submit
+            <Button bg="lightYellow" type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "Submitting" : "Submit"}
             </Button>
           </ButtonContainer>
         </Form>

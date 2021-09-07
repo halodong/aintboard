@@ -5,6 +5,7 @@ import NProgress from "nprogress";
 
 import store from "redux/store";
 import { Toast } from "components/Common/Toast";
+import ScreenPreloader from "components/Common/ScreenPreloader";
 
 import "./../fonts/fonts.css";
 import "nprogress/nprogress.css";
@@ -124,6 +125,7 @@ function MyApp({ Component, pageProps }) {
       <GlobalStyle />
       <Toast />
       <Provider store={store}>
+        <ScreenPreloader />
         <Component {...pageProps} />
       </Provider>
     </ThemeProvider>

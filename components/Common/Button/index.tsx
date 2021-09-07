@@ -5,10 +5,17 @@ export default function Button({
   children,
   onClick,
   type,
+  disabled = false,
   className,
 }: Props) {
   return (
-    <ButtonStyled className={className} bg={bg} onClick={onClick} type={type}>
+    <ButtonStyled
+      bg={bg}
+      className={className}
+      onClick={onClick}
+      type={type}
+      disabled={disabled}
+    >
       {children}
     </ButtonStyled>
   );
@@ -20,4 +27,5 @@ type Props = {
   children: React.ReactNode;
   onClick?: () => void;
   type?: "button" | "submit" | "reset" | undefined;
+  disabled?: boolean | false;
 };
