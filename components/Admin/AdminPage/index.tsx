@@ -16,7 +16,10 @@ import {
 const AdminPage = () => {
   const user = useCurrentUser();
 
-  if (user.accessToken) Router.push("/admin/dashboard");
+  if (user.accessToken) {
+    Router.push("/admin/dashboard");
+    return null; // dont show anything while redirecting to dashboard
+  }
 
   return (
     <AdminPageWrapper>
