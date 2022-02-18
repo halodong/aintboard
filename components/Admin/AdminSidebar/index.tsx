@@ -1,11 +1,10 @@
 import React from "react";
-import * as Styles from "./styles";
-
-import PrimaryLinkSidebar from "components/Common/PrimaryLinkSidebar";
-
 import Link from "next/link";
 
-import LogoGray from "~/assets/img/LogoGray";
+import PrimaryLinkSidebar from "components/Common/PrimaryLinkSidebar";
+import LogoGray from "assets/img/LogoGray";
+
+import * as Styles from "./styles";
 
 const AdminSidebar = () => {
   return (
@@ -30,7 +29,7 @@ const AdminSidebar = () => {
             },
             {
               key: "Create a User",
-              linkHref: "/",
+              linkHref: "/admin",
               linkName: "Create a User",
             },
           ]}
@@ -46,7 +45,7 @@ const AdminSidebar = () => {
             },
             {
               key: "Approve Challenges",
-              linkHref: "/",
+              linkHref: "/admin",
               linkName: "Approve Challenges",
             },
           ]}
@@ -62,7 +61,7 @@ const AdminSidebar = () => {
             },
             {
               key: "Approve Reviews",
-              linkHref: "/",
+              linkHref: "/admin",
               linkName: "Approve Reviews",
             },
           ]}
@@ -78,12 +77,12 @@ const AdminSidebar = () => {
             },
             {
               key: "Approve Online Battles",
-              linkHref: "/",
+              linkHref: "/admin",
               linkName: "Approve Online Battles",
             },
             {
               key: "Online Battles Awarding",
-              linkHref: "/",
+              linkHref: "/admin",
               linkName: "Online Battles Awarding",
             },
           ]}
