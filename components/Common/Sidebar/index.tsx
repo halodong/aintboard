@@ -163,7 +163,7 @@ const Sidebar = ({ menuOpen, closeMenu }: Props) => {
             <TertiaryLinkSidebar>
               <Link href="/">Contact Us</Link>
             </TertiaryLinkSidebar>
-            <Copyright>Copyright &copy;2021</Copyright>
+            <Copyright>Copyright &copy; {new Date().getFullYear()}</Copyright>
           </UlSidebar>
         </FooterSidebar>
       </SidebarContainer>

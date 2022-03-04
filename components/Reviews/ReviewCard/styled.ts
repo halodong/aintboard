@@ -29,6 +29,12 @@ export const ReviewContent = styled.div`
   font-size: 0.7rem;
   text-align: center;
   font-family: ${(props) => props.theme.fonts.rubikReg} !important;
+
+  ol,
+  ul {
+    padding: 0;
+    list-style-position: inside;
+  }
 `;
 
 export const ReviewCardContainer = styled.div`
