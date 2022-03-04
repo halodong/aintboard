@@ -75,7 +75,7 @@ const ReviewArticleHero = ({ review }: Props) => {
         {review?.images.length ? (
           <AwesomeSlider
             animation="cubeAnimation"
-            style={{ width: "667px", height: "337px" }}
+            style={{ width: "43.563rem", height: "21.063rem" }}
           >
             {review.images?.map((r, i) => (
               <div key={`awesome-slider-${i}`} data-src={r} />

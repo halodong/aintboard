@@ -56,6 +56,8 @@ export const HeartWrapper = styled.div`
 
 export const DefaultImageWrapper = styled.div`
   position: relative;
-  width: 697px;
-  height: 337px;
+  /* 697px */
+  width: 43.563rem;
+  /* 337px */
+  height: 21.063rem;
 `;
