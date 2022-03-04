@@ -111,7 +111,7 @@ type Props = {
   onRatingClick: (rating: number) => void;
   rating?: number;
   defaultRating?: number | null;
-  noPointer: boolean;
+  noPointer?: boolean;
 };
 
 type DiceProps = {

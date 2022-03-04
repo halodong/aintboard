@@ -47,7 +47,7 @@ const BottomPart = ({ data }: Props) => {
 
           <button
             className="heart-wrapper"
-            onClick={() => likeReview({ userObj, review, reviewLikesApiData })}
+            onClick={() => likeReview({ userObj, review })}
           >
             <span>{reviewLikesApiData?.response?.totalLikes || 0}</span>
             <HeartIcon />
