@@ -31,7 +31,7 @@ const Footer = () => {
             <LogoGray />
           </a>
         </Link>
-        <h6>Copyright &copy; 2021</h6>
+        <h6>Copyright &copy; {new Date().getFullYear()}</h6>
       </div>
       <FooterLeft className="left" />
       <FooterRight className="right" />

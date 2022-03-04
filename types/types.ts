@@ -104,6 +104,12 @@ export interface ReviewLikesApiResponse {
   success: boolean;
   response: {
     totalLikes: number;
+    usersWhoLiked: [
+      {
+        _id: string;
+        userId: string | null;
+      }
+    ];
     message: string;
   };
 }

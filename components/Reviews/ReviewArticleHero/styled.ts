@@ -53,3 +53,11 @@ export const HeartWrapper = styled.div`
     justify-content: start;
   }
 `;
+
+export const DefaultImageWrapper = styled.div`
+  position: relative;
+  /* 697px */
+  width: 43.563rem;
+  /* 337px */
+  height: 21.063rem;
+`;

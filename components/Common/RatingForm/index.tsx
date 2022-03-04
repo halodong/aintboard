@@ -35,6 +35,7 @@ const RatingForm = ({
   defaultRating,
   onRatingClick,
   rating = 0,
+  noPointer = false,
 }: Props) => {
   const [diceList, setDiceList] = useState<DiceProps[]>(initialDices);
   const [diceListClicked, setDiceListClicked] = useState<DiceProps[]>(
@@ -74,7 +75,7 @@ const RatingForm = ({
   }, []);
 
   return (
-    <RatingFormWrapper>
+    <RatingFormWrapper noPointer={noPointer}>
       {!rating && <RatingLabel>{ratingType}</RatingLabel>}
       {diceList.map((dice: DiceProps, i: number) => (
         <>
@@ -110,6 +111,7 @@ type Props = {
   onRatingClick: (rating: number) => void;
   rating?: number;
   defaultRating?: number | null;
+  noPointer?: boolean;
 };
 
 type DiceProps = {

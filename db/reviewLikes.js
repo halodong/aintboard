@@ -8,8 +8,14 @@ export async function getLikes(db, { reviewId }) {
       .collection("review_likes")
       .countDocuments({ reviewId: { $eq: reviewId } });
 
+    const usersWhoLiked = await db
+      .collection("review_likes")
+      .aggregate([{ $project: { userId: 1 } }])
+      .toArray();
+
     return getSuccessResponse({
       totalLikes,
+      usersWhoLiked,
       message: "Likes count retrieved",
     });
   } catch (err) {

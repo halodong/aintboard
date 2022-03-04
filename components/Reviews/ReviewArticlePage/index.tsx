@@ -34,12 +34,12 @@ const ReviewArticlePage = ({ review }: Props) => {
       <Styles.RatingWrapper>
         <Styles.RatingContainer>
           <Styles.RatingName>Overall Rating</Styles.RatingName>
-          <OverallRating rating={review.overallRating} label />
+          <OverallRating rating={review.overallRating} label noPointer />
         </Styles.RatingContainer>
         {ratingData.map((r, i) => (
           <Styles.RatingContainer key={`${r.name}-${i}`}>
             <Styles.RatingName>{r.name}</Styles.RatingName>
-            <RatingForm onRatingClick={() => {}} rating={r.rating} />
+            <RatingForm noPointer onRatingClick={() => {}} rating={r.rating} />
           </Styles.RatingContainer>
         ))}
       </Styles.RatingWrapper>
