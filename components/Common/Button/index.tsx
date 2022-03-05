@@ -7,6 +7,7 @@ export default function Button({
   type,
   disabled = false,
   className,
+  noPointer = false,
 }: Props) {
   return (
     <ButtonStyled
@@ -15,6 +16,7 @@ export default function Button({
       onClick={onClick}
       type={type}
       disabled={disabled}
+      noPointer={noPointer}
     >
       {children}
     </ButtonStyled>
@@ -28,4 +30,5 @@ type Props = {
   onClick?: () => void;
   type?: "button" | "submit" | "reset" | undefined;
   disabled?: boolean | false;
+  noPointer?: boolean;
 };

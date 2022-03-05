@@ -10,7 +10,7 @@ export const SidebarContainer = styled.div<SidebarContainerProps>`
   width: 30rem;
   height: 100vh;
   top: 0;
-  right: ${(props) => (props.menuOpen ? "0" : "-30rem")};
+  right: ${(props) => (props.menuOpen ? "0" : "calc(-100vw)")};
   z-index: ${(props) => props.theme.zIndex["4th"]};
   transition: 300ms all ease-in;
   color: white;
@@ -18,6 +18,11 @@ export const SidebarContainer = styled.div<SidebarContainerProps>`
   @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     width: 100%;
   }
+
+  /* @media (max-width: ${(props) => props.theme.breakpoints.sm2}) {
+    width: 30rem;
+    right: ${(props) => (props.menuOpen ? "0" : "calc(-100vw)")};
+  } */
 `;
 
 type SidebarContainerProps = {

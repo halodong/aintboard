@@ -13,6 +13,14 @@ export const CardButtonContainer = styled.div`
   margin: 1rem;
   padding: 2rem;
   cursor: pointer;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    height: 5rem;
+
+    svg {
+      display: none;
+    }
+  }
 `;
 
 export const CardTitle = styled.h4`

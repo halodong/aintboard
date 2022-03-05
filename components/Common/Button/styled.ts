@@ -13,7 +13,8 @@ export const ButtonStyled = styled.button<ButtonStyledProps>`
   padding: 0.5rem;
   outline: none;
   border: none;
-  cursor: ${(props) => (props.disabled ? "auto" : "pointer")};
+  cursor: ${(props) =>
+    props.disabled || props.noPointer ? "auto" : "pointer"};
   text-transform: capitalize;
 
   &:hover {
@@ -26,4 +27,5 @@ type ButtonStyledProps = {
   bg: string;
   type?: "button" | "submit" | "reset" | undefined;
   disabled?: boolean;
+  noPointer?: boolean;
 };

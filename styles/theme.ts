@@ -29,6 +29,7 @@ declare module "styled-components" {
     breakpoints: {
       xs: string;
       sm: string;
+      sm2: string;
       md: string;
       lg: string;
     };
@@ -101,6 +102,7 @@ export const theme: DefaultTheme = {
   breakpoints: {
     xs: "360px",
     sm: "600px",
+    sm2: "782px",
     md: "992px",
     lg: "1200px",
   },

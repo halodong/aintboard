@@ -61,7 +61,11 @@ const ReviewArticleHero = ({ review }: Props) => {
   return (
     <Styles.ReviewHeader>
       <Styles.ReviewHeaderLeft>
-        {review?.language && <Button bg="white">{review.language}</Button>}
+        {review?.language && (
+          <Button bg="white" noPointer>
+            {review.language}
+          </Button>
+        )}
         <Styles.OverallRating>
           <OverallRating rating={review.overallRating} big noPointer />
           <span>{review.overallRating}</span>

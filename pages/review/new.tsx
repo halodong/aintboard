@@ -8,8 +8,8 @@ const NewReviewPage = () => {
     <>
       <Seo
         isHomepage={false}
-        title="About Us"
-        description="Learn more about Ain't Board"
+        title="Create Review or Strategy"
+        description="Create a boardgame review or a strategy"
         noIndex="noindex"
         noFollow="nofollow"
       />

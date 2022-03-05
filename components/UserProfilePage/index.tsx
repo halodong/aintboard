@@ -4,27 +4,14 @@ import { useDispatch } from "react-redux";
 import {
   UserProfilePageWrapper,
   LeftSide,
-  RightSide,
-  ReviewsSection,
-  ReviewsCardWrapper,
-  H1GameFont,
-  H1Rubik,
-  ChallengesCardWrapper,
-  ChallengesSection,
-  OnlineBattleCardWrapper,
-  OnlineBattlesSection,
-  NoReviews,
   TextDetails,
   UserDetails,
   UserIconContainer,
   PowerUps,
 } from "./styled";
 
+import RightSideDetails from "./RightSideDetails";
 import CardButton from "~/components/Common/SideButton";
-import Button from "~/components/Common/Button";
-import ChallengesCard from "~/components/Challenges/ChallengesCard";
-// import OnlineBattleCard from "~/components/OnlineBattleCard";
-import { ReviewCard } from "~/components/Reviews/ReviewCard";
 
 import { chooseModal } from "redux/slices/modalSlice";
 import {
@@ -125,29 +112,32 @@ const UserProfilePage = ({
   const userIcon = [
     {
       name: <StarIcon className="icon" />,
-      detail: user?.response?.data?.users[0]?.stars,
+      detail: user?.response?.data?.users[0]?.stars ?? 0,
     },
     {
-      name: <PowerUps className="icon">UP</PowerUps>,
-      detail: user?.response?.data?.users[0]?.powerups,
+      name: <PowerUps>UP</PowerUps>,
+      detail: user?.response?.data?.users[0]?.powerups ?? 0,
     },
     {
       name: <GoldIcon className="icon" />,
-      detail: userTrophies?.response?.data?.champions?.filter(
-        (trophy) => trophy.trophyType === "gold"
-      )?.length,
+      detail:
+        userTrophies?.response?.data?.champions?.filter(
+          (trophy) => trophy.trophyType === "gold"
+        )?.length ?? 0,
     },
     {
       name: <SilverIcon className="icon" />,
-      detail: userTrophies?.response?.data?.champions?.filter(
-        (trophy) => trophy.trophyType === "silver"
-      )?.length,
+      detail:
+        userTrophies?.response?.data?.champions?.filter(
+          (trophy) => trophy.trophyType === "silver"
+        )?.length ?? 0,
     },
     {
       name: <BronzeIcon className="icon" />,
-      detail: userTrophies?.response?.data?.champions?.filter(
-        (trophy) => trophy.trophyType === "bronze"
-      )?.length,
+      detail:
+        userTrophies?.response?.data?.champions?.filter(
+          (trophy) => trophy.trophyType === "bronze"
+        )?.length ?? 0,
     },
   ];
 
@@ -156,13 +146,13 @@ const UserProfilePage = ({
       <LeftSide>
         <UserDetails>
           {userMade.map((detail, index) => (
-            <TextDetails key={index}>
+            <TextDetails key={`user-made-${index}`}>
               {detail.name}: {detail.detail}
             </TextDetails>
           ))}
           <br />
           {userIcon.map((detail, index) => (
-            <TextDetails key={index}>
+            <TextDetails key={`user-icon-${index}`}>
               {detail.detail}
               <UserIconContainer>{detail.name}</UserIconContainer>
             </TextDetails>
@@ -178,59 +168,11 @@ const UserProfilePage = ({
           </CardButton>
         ))}
       </LeftSide>
-      <RightSide>
-        <ReviewsSection>
-          <H1Rubik>REVIEWS</H1Rubik>
-          <ReviewsCardWrapper>
-            {reviews && reviews?.response?.data?.reviews.length > 0 ? (
-              reviews?.response?.data?.reviews?.map((r) => (
-                <ReviewCard key={r._id} data={r} />
-              ))
-            ) : (
-              <NoReviews>User has no Reviews yet</NoReviews>
-            )}
-          </ReviewsCardWrapper>
-        </ReviewsSection>
-
-        <ChallengesSection>
-          <H1GameFont>CHALLENGES</H1GameFont>
-          <ChallengesCardWrapper>
-            {challenges &&
-            challenges?.response?.data?.challenges?.length > 0 ? (
-              <>
-                <ChallengesCard
-                  key={challenges?.response?.data?.challenges[0]?._id}
-                  data={challenges?.response?.data?.challenges[0]}
-                />
-                {challenges?.response?.data?.challenges
-                  ?.filter(
-                    (c) =>
-                      c._id ===
-                      userChallenges?.response?.data?.challenge[0]?.challengeId
-                  )
-                  .map((c) => (
-                    <ChallengesCard key={c._id} data={c} achieved />
-                  ))}
-              </>
-            ) : (
-              <NoReviews>User has no Challenges yet</NoReviews>
-            )}
-          </ChallengesCardWrapper>
-          <Button bg="white" onClick={() => {}}>
-            See more Challenges
-          </Button>
-        </ChallengesSection>
-
-        <OnlineBattlesSection>
-          <H1GameFont>ONLINE BATTLES</H1GameFont>
-          <OnlineBattleCardWrapper>
-            {/* <OnlineBattleCard /> */}
-          </OnlineBattleCardWrapper>
-          <Button bg="white" onClick={() => {}}>
-            See more Online Battles
-          </Button>
-        </OnlineBattlesSection>
-      </RightSide>
+      <RightSideDetails
+        reviews={reviews}
+        challenges={challenges}
+        userChallenges={userChallenges}
+      />
     </UserProfilePageWrapper>
   );
 };
