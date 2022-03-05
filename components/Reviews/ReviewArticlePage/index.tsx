@@ -1,6 +1,7 @@
 import ReactPlayer from "react-player";
 
 import { ReviewData } from "~/types/types";
+import { REVIEW_TYPE } from "util/constants";
 import { createHTML } from "~/util/createHTML";
 
 import RatingForm from "~/components/Common/RatingForm";
@@ -31,18 +32,24 @@ const ReviewArticlePage = ({ review }: Props) => {
         ></div>
       </Styles.ReviewContentContainer>
 
-      <Styles.RatingWrapper>
-        <Styles.RatingContainer>
-          <Styles.RatingName>Overall Rating</Styles.RatingName>
-          <OverallRating rating={review.overallRating} label noPointer />
-        </Styles.RatingContainer>
-        {ratingData.map((r, i) => (
-          <Styles.RatingContainer key={`${r.name}-${i}`}>
-            <Styles.RatingName>{r.name}</Styles.RatingName>
-            <RatingForm noPointer onRatingClick={() => {}} rating={r.rating} />
+      {review?.reviewType !== REVIEW_TYPE.STRATEGY && (
+        <Styles.RatingWrapper>
+          <Styles.RatingContainer>
+            <Styles.RatingName>Overall Rating</Styles.RatingName>
+            <OverallRating rating={review.overallRating} label noPointer />
           </Styles.RatingContainer>
-        ))}
-      </Styles.RatingWrapper>
+          {ratingData.map((r, i) => (
+            <Styles.RatingContainer key={`${r.name}-${i}`}>
+              <Styles.RatingName>{r.name}</Styles.RatingName>
+              <RatingForm
+                noPointer
+                onRatingClick={() => {}}
+                rating={r.rating}
+              />
+            </Styles.RatingContainer>
+          ))}
+        </Styles.RatingWrapper>
+      )}
 
       <YoutubeContainer>
         {review?.youtubeUrl &&

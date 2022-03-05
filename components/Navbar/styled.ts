@@ -165,7 +165,7 @@ export const Links = styled.div`
   display: flex;
   justify-content: space-between;
 
-  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+  @media (max-width: ${(props) => props.theme.breakpoints.lg}) {
     display: none;
   }
 

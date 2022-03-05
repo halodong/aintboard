@@ -3,6 +3,10 @@ import styled from "styled-components";
 export const UserProfilePageWrapper = styled.div`
   display: flex;
   background-color: ${(props) => props.theme.colors.dark};
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm2}) {
+    flex-direction: column;
+  }
 `;
 
 export const LeftSide = styled.div`
@@ -23,7 +27,7 @@ export const UserDetails = styled.div`
   padding: 0 2rem;
 `;
 
-export const TextDetails = styled.p`
+export const TextDetails = styled.div`
   font-family: ${(props) => props.theme.fonts.quicksandBold};
   color: ${(props) => props.theme.colors.white};
   display: flex;
@@ -35,9 +39,14 @@ export const TextDetails = styled.p`
 export const PowerUps = styled.span`
   font-family: ${(props) => props.theme.fonts.gameFont};
   color: white;
+  font-size: 1rem;
+  line-height: 2rem;
 `;
 
 export const UserIconContainer = styled.div`
+  display: flex;
+  align-items: center;
+
   .icon {
     width: 2rem;
     margin: 0;
@@ -49,6 +58,10 @@ export const RightSide = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm2}) {
+    margin-top: 2rem;
+  }
 `;
 
 export const ReviewsSection = styled.div`
