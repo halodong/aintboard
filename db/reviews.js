@@ -53,7 +53,7 @@ export async function insertReview(
     return getSuccessResponse({
       message: "Review added",
       data: {
-        review: review.ops[0],
+        reviewId: review?.insertedId, //mongo v4, returns acknowledged and insertedId - https://docs.mongodb.com/manual/reference/method/db.collection.insertOne/
       },
     });
   } catch (err) {

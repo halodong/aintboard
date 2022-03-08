@@ -54,7 +54,7 @@ const ReviewForm = () => {
     playingTimeRating,
     componentsRating,
     reviewContent,
-  } = formValuesState?.reviewFormValues;
+  } = formValuesState?.reviewFormValues ?? {};
 
   const formSchema = Yup.object().shape({
     reviewTitle: Yup.string().required("Review Title required"),
