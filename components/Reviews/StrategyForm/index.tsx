@@ -75,12 +75,8 @@ const StrategyForm = () => {
     ),
   });
 
-  const {
-    strategyTitle,
-    language,
-    youtubeUrl,
-    bgName,
-  } = formValuesState?.strategyFormValues;
+  const { strategyTitle, language, youtubeUrl, bgName } =
+    formValuesState?.strategyFormValues ?? {};
 
   return (
     <Formik

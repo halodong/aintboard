@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { useSWRInfinite } from "swr";
+import useSWRInfinite from "swr/infinite";
 import { isEmpty } from "lodash";
 import InfiniteScroll from "react-infinite-scroll-component";
 

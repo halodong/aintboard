@@ -83,22 +83,22 @@ export async function getStaticProps({ params }: Params) {
   });
   const challengeData = await filterChallenges(db, {
     filter: "createdBy",
-    field: userData.response.data.users[0]._id,
+    field: userData.response?.data?.users[0]?._id,
     first: null,
   });
   const reviewData = await filterReviews(db, {
     filter: "userId",
-    field: userData.response.data.users[0]._id,
+    field: userData.response?.data?.users[0]?._id,
     first: 2,
   });
   const userChallengeData = await filterUserChallenges(db, {
     filter: "userId",
-    field: userData.response.data.users[0]._id,
+    field: userData.response?.data?.users[0]?._id,
     first: 1,
   });
   const userTrophies = await filterChampions(db, {
     filter: "userId",
-    field: userData.response.data.users[0]._id,
+    field: userData.response?.data?.users[0]?._id,
     first: null,
   });
 

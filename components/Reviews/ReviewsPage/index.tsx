@@ -1,4 +1,4 @@
-import { useSWRInfinite } from "swr";
+import useSWRInfinite from "swr/infinite";
 import { isEmpty } from "lodash";
 import { useRef, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
