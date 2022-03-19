@@ -15,7 +15,7 @@ const BuyAvatarsPage = ({ specialAvatars }: Props) => {
   const { data: specialAvatarsData } = useSWR<SpecialAvatarsApiResponse>(
     "/api/special-avatars",
     fetcher,
-    { initialData: specialAvatars, revalidateOnMount: true }
+    { fallbackData: specialAvatars, revalidateOnMount: true }
   );
 
   return (

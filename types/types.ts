@@ -250,9 +250,9 @@ export interface FilteredOnlineBattlesApiResponse {
 }
 
 export interface FilteredOnlineBattlesApiData {
-  count: number;
+  totalOnlineBattlesCount: number;
   hasMore: boolean;
-  onlineBattles: FilteredOnlineBattlesData[];
+  onlineBattles: OnlineBattlesData[];
 }
 
 export type FilteredOnlineBattlesData = {

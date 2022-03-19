@@ -67,7 +67,11 @@ export const getStaticProps = async ({ params }: Params) => {
 
 export const getStaticPaths = async () => {
   const db = await database();
-  const response = await getReviews(db, { first: 1, offset: null });
+  const response = await getReviews(db, {
+    first: 1,
+    offset: null,
+    approved: null,
+  });
 
   const pathsData =
     response?.success &&

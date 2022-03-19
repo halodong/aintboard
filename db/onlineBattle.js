@@ -38,7 +38,7 @@ export async function insertBattle(
     return getSuccessResponse({
       message: "Online Battle created",
       data: {
-        onlineBattle: onlineBattle.ops[0],
+        onlineBattle: onlineBattle?.insertedId,
       },
     });
   } catch (err) {
@@ -65,7 +65,7 @@ export async function insertValidEntry(
     return getSuccessResponse({
       message: "User submitted an entry",
       data: {
-        entry: entry.ops[0],
+        entry: entry?.insertedId,
       },
     });
   } catch (err) {

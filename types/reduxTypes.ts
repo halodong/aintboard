@@ -11,6 +11,7 @@ export type FilterState = {
 export type ModalState = {
   modal: {
     modalChosen: string;
+    battleEntryId: string;
     popup: {
       open: boolean;
       header: "";
