@@ -4,7 +4,7 @@ import { OnlineBattlesData } from "~/types/types";
 import * as Styles from "./styled";
 import Avatar from "~/components/Avatar";
 
-const Header = ({ onlineBattle }: Props) => {
+const OnlineBattleHeader = ({ onlineBattle }: Props) => {
   return (
     <Styles.HeaderContainer>
       <Styles.HeaderBattleName>
@@ -26,4 +26,4 @@ type Props = {
   onlineBattle: OnlineBattlesData;
 };
 
-export default Header;
+export default OnlineBattleHeader;

@@ -14,9 +14,7 @@ import OnlineBattleHeader from "~/components/OnlineBattlePage/Header";
 import OnlineBattlePage from "~/components/OnlineBattlePage";
 
 const OnlineBattleSlug = ({ onlineBattleData }: Props) => {
-  const onlineBattle =
-    onlineBattleData?.response?.data?.onlineBattles[0]?.battles?.[0];
-
+  const onlineBattle = onlineBattleData?.response?.data?.onlineBattles[0] ?? {};
   return (
     <>
       <Seo

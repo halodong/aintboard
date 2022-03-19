@@ -25,13 +25,13 @@ export default function Home({ reviews, challenges }: Props) {
       windowWidth !== 0 && windowWidth <= 600 ? 2 : 5
     }&approved=true`,
     fetcher,
-    { initialData: reviews, revalidateOnMount: true }
+    { fallbackData: reviews, revalidateOnMount: true }
   );
 
   const { data: challengesData } = useSWR<ChallengesApiResponse>(
     "/api/challenges?first=3",
     fetcher,
-    { initialData: challenges, revalidateOnMount: true }
+    { fallbackData: challenges, revalidateOnMount: true }
   );
 
   return (

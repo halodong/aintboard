@@ -26,6 +26,7 @@ import Filter from "~/components/Common/Filter";
 import Button from "~/components/Common/Button";
 // import Searchbar from "~/components/Searchbar"; obsolete for now
 import GameNightsHeader from "~/components/GameNights/GameNightsHeader";
+import SubmitEntryForm from "~/components/OnlineBattle/SubmitEntryForm";
 import OnlineBattleForm from "~/components/OnlineBattle/OnlineBattleForm";
 import CreateChallengeForm from "~/components/Challenges/CreateChallengeForm";
 import AchieveChallengeHeader from "~/components/Challenges/AchieveChallengeHeader";
@@ -37,6 +38,7 @@ import {
   REVIEWS_PAGE,
   CREATE_CHALLENGE_BUTTON,
   CREATE_ONLINE_BATTLE_BUTTON,
+  SUBMIT_ENTRY_BUTTON,
 } from "util/constants";
 import { ChallengesData } from "types/types";
 import { ModalState } from "types/reduxTypes";
@@ -51,6 +53,11 @@ const modalCta = [
     id: 2,
     name: "Create an Online Battle",
     type: CREATE_ONLINE_BATTLE_BUTTON,
+  },
+  {
+    id: 3,
+    name: "Submit an Entry",
+    type: SUBMIT_ENTRY_BUTTON,
   },
 ];
 
@@ -223,6 +230,8 @@ export default function Header({
                 return <CreateChallengeForm closeModal={closeModal} />;
               case CREATE_ONLINE_BATTLE_BUTTON:
                 return <OnlineBattleForm closeModal={closeModal} />;
+              case SUBMIT_ENTRY_BUTTON:
+                return <SubmitEntryForm closeModal={closeModal} />;
               default:
                 return null;
             }

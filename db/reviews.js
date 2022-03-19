@@ -61,7 +61,7 @@ export async function insertReview(
   }
 }
 
-export async function getReviews(db, { first, offset, approved = null }) {
+export async function getReviews(db, { first, offset, approved }) {
   try {
     let reviews = null;
     first = first ? parseInt(first) : null;
