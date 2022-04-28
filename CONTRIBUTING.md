@@ -1,11 +1,13 @@
-# Tech Stack
+# Contributing Guidelines
+
+## Tech Stack
 
 - NextJS
 - MongoDB
 - Redux Toolkit
 - Chai
 
-# Backend
+## Backend
 
 For backend we are using Next Connect through NextJS API Routes
 
@@ -15,13 +17,13 @@ To test all files run `npm run test`
 
 To test a single file run `npm run test <relative path>`
 
-# Migrations
+## Migrations
 
 To create migrations you need to have migrate-mongo installed globally.
 
 To create a migration run `migrate-mongo create <file_name>`
 
-# SVGS
+## SVGS
 
 To convert svgs to React components
 
