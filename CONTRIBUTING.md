@@ -1,5 +1,7 @@
 # Contributing Guidelines
 
+- Copy .env.example to .env and use appropriate values
+
 ## Tech Stack
 
 - NextJS
