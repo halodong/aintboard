@@ -28,7 +28,7 @@ const OnlineBattleCard = ({ data }: Props) => {
   const battleIsOver =
     data.eventEndDate === ""
       ? false
-      : dayjs().valueOf() > dayjs(data.eventEndDate).valueOf();
+      : dayjs().valueOf() >= dayjs(data.eventEndDate).valueOf();
   return (
     <FadeIn duration={450} delay={100}>
       <Link href={`/online-battle/${data?.slug}`}>
