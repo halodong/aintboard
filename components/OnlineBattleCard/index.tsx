@@ -25,6 +25,10 @@ import SilverIcon from "~/assets/img/Silver";
 import FadeIn from "~/components/Common/FadeIn";
 
 const OnlineBattleCard = ({ data }: Props) => {
+  const battleIsOver =
+    data.eventEndDate === ""
+      ? false
+      : dayjs().valueOf() > dayjs(data.eventEndDate).valueOf();
   return (
     <FadeIn duration={450} delay={100}>
       <Link href={`/online-battle/${data?.slug}`}>
@@ -61,19 +65,19 @@ const OnlineBattleCard = ({ data }: Props) => {
                   <Place>
                     <GoldIcon />
                   </Place>
-                  <Username>Username 1</Username>
+                  <Username>{battleIsOver ? "Username 1" : "TBA"}</Username>
                 </Rank>
                 <Rank>
                   <Place>
                     <SilverIcon />
                   </Place>
-                  <Username>Username 1</Username>
+                  <Username>{battleIsOver ? "Username 1" : "TBA"}</Username>
                 </Rank>
                 <Rank>
                   <Place>
                     <BronzeIcon />
                   </Place>
-                  <Username>Username 1</Username>
+                  <Username>{battleIsOver ? "Username 1" : "TBA"}</Username>
                 </Rank>
               </div>
             </BattleCard>
